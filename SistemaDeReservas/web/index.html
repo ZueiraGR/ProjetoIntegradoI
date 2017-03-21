@@ -11,7 +11,7 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <nav class="orange darken-1" role="navigation">
+  <nav class="orange" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">INICIO</a></li>
@@ -28,12 +28,12 @@
         <li><a data-target="modal1">ENTRAR</a></li>
       </ul>
 
-      <ul id="nav-mobile" class="side-nav  orange lighten-5">
+      <ul id="nav-mobile" class="side-nav  orange">
         <li><a href="#">INICIO</a></li>
         <li><a href="#">PROMOÇÕES</a></li>
         <li><a href="#">PACOTES</a></li>
         <li><a href="#">RESERVE SUA MESA</a></li>
-        <li><a href="#">ENTRAR</a></li>
+        <li><a href="#" data-target="modal1">ENTRAR</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -44,19 +44,19 @@
       <div class="row center">
         <div class="carousel carousel-slider center" data-indicators="true">
           <div class="carousel-fixed-item center">
-            <a class="btn waves-effect white grey-text darken-text-2">PROMOÇÕES</a>
+            <a class="btn waves-effect yellow red-text darken-text-4">PROMOÇÕES</a>
           </div>
           <div class="carousel-item red white-text" href="#one!">
             <h2>Primeira promoção</h2>
-            <p class="white-text">This is your first panel</p>
+            <p class="white-text">Colocar a primeira promoção</p>
           </div>
-          <div class="carousel-item amber white-text" href="#two!">
+          <div class="carousel-item black white-text" href="#two!">
             <h2>Segunda promoção</h2>
-            <p class="white-text">This is your second panel</p>
+            <p class="white-text">Colocar a segunda promoção</p>
           </div>
           <div class="carousel-item green white-text" href="#three!">
             <h2>Terceira promoção</h2>
-            <p class="white-text">This is your third panel</p>
+            <p class="white-text">Colocar a terceira promoção</p>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
   <div class="container">
     <div class="section">
 
-      <!--   Icon Section   ->
+      <!--   Icon Section   -->
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
@@ -98,7 +98,7 @@
             <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
           </div>
         </div>
-      </div-->
+      </div>
 
     </div>
     <br><br>
@@ -112,8 +112,9 @@
   <div id="modal1" class="modal">
     <div class="modal-content">
      <div class="row">
-      <div class="col s12 right">
-        <ul class="tabs">
+
+      <div class="col s12">
+        <ul class="tabs tabs-fixed-width z-depth-1">
           <li class="tab col s6"><a href="#formLogin">LOGIN</a></li>
           <li class="tab col s6"><a href="#formCadastro">CADASTRE-SE</a></li>
         </ul>
@@ -123,16 +124,20 @@
         <form class="form col s12" name="formularioDeLogin" action="" method="POST">
           <br>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="col s3"></div>
+            <div class="input-field col s6">
               <input placeholder="Digite seu login ou email" id="loginOuEmail" type="text" class="validate" required>
               <label for="loginOuEmail" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">LOGIN</label>
             </div>
+            <div class="col s3"></div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="col s3"></div>
+            <div class="input-field col s6">
               <input placeholder="Digite sua senha" id="senha" type="password" class="validate" required>
               <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">SENHA</label>
             </div>
+            <div class="col s3"></div>
           </div>
           <div class="row">
             <div class="col s3"></div>
@@ -163,8 +168,6 @@
               <input placeholder="Digite seu email" id="email" type="email" class="validate" required>
               <label for="email" data-error="Digite um e-mail válido!" data-success="Ok">EMAIL</label>
             </div>
-          </div>
-          <div class="row">
             <div class="input-field col s6">
               <input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required>
               <label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="Ok">CONFIRME O EMAIL</label>
@@ -175,16 +178,18 @@
               <input placeholder="Digite sua senha" id="senha" type="password" class="validate">
               <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">SENHA</label>
             </div>
-          </div>
-          <div class="row">
             <div class="input-field col s6">
               <input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate">
               <label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">CONFIRME A SENHA</label>
             </div>
           </div>
           <div class="row">
-            <button class="btn green waves-effect waves-green" type="submit">ENTRAR</button>
-            <button class="btn red modal-action modal-close waves-effect waves-red" type="reset">CANCELAR</button>
+            <div class="input-field col l3"></div>
+            <div class="input-field col l6 m12 s12 center">
+              <button class="btn green waves-effect waves-green" type="submit">ENTRAR</button>
+              <button class="btn red modal-action modal-close waves-effect waves-red" type="reset">CANCELAR</button>
+            </div>
+            <div class="input-field col l3"></div>
           </div>
         </form>
       </div>
@@ -212,8 +217,6 @@
           <ul>
             <li><a class="white-text" href="#!">Link 1</a></li>
             <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
@@ -221,8 +224,6 @@
           <ul>
             <li><a class="white-text" href="#!">Link 1</a></li>
             <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
           </ul>
         </div>
       </div>
