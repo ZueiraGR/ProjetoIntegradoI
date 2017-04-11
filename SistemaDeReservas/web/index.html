@@ -7,30 +7,28 @@
 
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/materialize.css" type="text/css" rel="stylesheet"/>
+        <link href="css/style.css" type="text/css" rel="stylesheet"/>
+        <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <nav class="grey darken-1" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="index.html">INICIO</a></li>
-                    <li><a href="#">PROMOÇÕES</a></li>
-                    <li><a href="#">PACOTES</a></li>
-                    <li><a href='reserva.html'>RESERVE SUA MESA</a>                    </li>
-                    <li><a data-target="modal1">ENTRAR</a></li>
+                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+                    <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+                    <li><a href='reserva.html'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+                    <li><a data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a href="#">INICIO</a></li>
-                    <div class="divider"></div>
-                    <li><a href="#">PROMOÇÕES</a></li>
-                    <div class="divider"></div>
-                    <li><a href="#">PACOTES</a></li>
-                    <div class="divider"></div>
-                    <li><a href="reserva.html">RESERVE SUA MESA</a></li>
-                    <div class="divider"></div>
-                    <li><a href="#" data-target="modal1">ENTRAR</a></li>
+                    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+                    <li class="divider"></li>
+                    <li><a href="reserva.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
@@ -153,7 +151,7 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input placeholder="Digite seu nome" id="nome" type="text" class="validate" required>
-                                    <label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok"required>NOME</label>
+                                    <label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME</label>
                                 </div>
                                 <div class="input-field col s6">
                                     <input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required>
