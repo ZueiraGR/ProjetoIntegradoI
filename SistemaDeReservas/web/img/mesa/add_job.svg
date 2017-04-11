@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW X8 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="22.6244mm" height="16.0172mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 529 374"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.2358mm" height="15.9979mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 478 360"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .str0 {stroke:#FEFEFE;stroke-width:9.34678}
-    .str1 {stroke:#FEFEFE;stroke-width:2.3367}
+    .str0 {stroke:#FEFEFE;stroke-width:8.99824}
+    .str1 {stroke:#FEFEFE;stroke-width:2.24956}
     .fil1 {fill:#FEFEFE}
     .fil0 {fill:#8AD647}
    ]]>
@@ -16,44 +16,13 @@ viewBox="0 0 529 374"
  </defs>
  <g id="Camada_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <g id="_673626140624">
+  <g id="_708571784352">
    <g>
-    <g id="Layer_8_4_">
-     <path class="fil0" d="M114 173l0 14 195 0 0 -14 51 0 0 14 33 0c22,0 41,-16 44,-37l0 -80 -145 0 0 -35c0,-5 -4,-9 -9,-9l-128 0c-5,0 -8,4 -8,9l0 35 -147 0 0 87c6,17 23,30 42,30l22 0 0 -14 50 0 0 0zm49 -130l112 0 0 27 -112 0 0 -27zm197 190l0 -35 33 0c18,0 34,-9 44,-22l0 198 -437 0 0 -195c10,11 25,19 42,19l22 0 0 35 50 0 0 -35 195 0 0 35 51 0z"/>
-    </g>
+    <path class="fil0" d="M352 204l-37 0 0 31 -43 0 0 -31 -173 0 0 31 -42 0 0 -31c-39,0 -30,2 -57,-16l0 172 385 0 0 -175c-5,3 -19,19 -33,19z"/>
+    <path class="fil0" d="M144 71l97 0 0 22 -97 0 0 -22zm-16 -9l0 31 -128 0 0 75c0,15 20,29 43,29l14 0 0 -12 42 0 0 12 173 0 0 -12 43 0 0 12c23,0 51,3 64,-21 9,-15 6,-58 6,-83l-129 0c0,-20 4,-38 -6,-38l-115 0c-4,0 -7,3 -7,7z"/>
    </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
-   <g>
-   </g>
+   <circle class="fil0 str0" cx="385" cy="93" r="89"/>
+   <path class="fil1 str1" d="M459 93l0 0c0,10 -8,18 -18,18l-38 0 0 39c0,10 -8,18 -18,18l0 0c-10,0 -18,-8 -18,-18l0 -39 -39 0c-10,0 -18,-8 -18,-18l0 0c0,-10 8,-18 18,-18l39 0 0 -39c0,-10 8,-18 18,-18l0 0c10,0 18,8 18,18l0 39 38 0c10,0 18,8 18,18z"/>
   </g>
-  <circle class="fil0 str0" cx="437" cy="91" r="87"/>
-  <path class="fil1 str1" d="M510 91l0 0c0,10 -8,18 -17,18l-38 0 0 38c0,9 -8,17 -18,17l0 0c-9,0 -17,-8 -17,-17l0 -38 -38 0c-10,0 -18,-8 -18,-18l0 0c0,-9 8,-17 18,-17l38 0 0 -38c0,-10 8,-18 17,-18l0 0c10,0 18,8 18,18l0 38 38 0c9,0 17,8 17,17z"/>
  </g>
 </svg>
