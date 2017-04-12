@@ -1,0 +1,179 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema reserva
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema reserva
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `reserva` DEFAULT CHARACTER SET latin1 ;
+USE `reserva` ;
+
+-- -----------------------------------------------------
+-- Table `reserva`.`pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`pedido` (
+  `chavepedido` INT(11) NOT NULL AUTO_INCREMENT,
+  `cpfcliente` INT(11) NOT NULL,
+  `token` CHAR(10) NULL DEFAULT NULL,
+  `horaprevista` DATETIME NOT NULL,
+  `quantidadecadeiras` INT(11) NOT NULL,
+  `telefone` INT(11) NOT NULL,
+  PRIMARY KEY (`chavepedido`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `reserva`.`funcionario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`funcionario` (
+  `nome` CHAR(15) NOT NULL,
+  `sobrenome` CHAR(15) NOT NULL,
+  `cpf` CHAR(12) NOT NULL,
+  `chavecargo` INT(11) NOT NULL,
+  `datainclusao` DATETIME NOT NULL,
+  `pedido_chavepedido` INT(11) NOT NULL,
+  PRIMARY KEY (`chavecargo`),
+  INDEX `fk_funcionario_pedido1_idx` (`pedido_chavepedido` ASC),
+  CONSTRAINT `fk_funcionario_pedido1`
+    FOREIGN KEY (`pedido_chavepedido`)
+    REFERENCES `reserva`.`pedido` (`chavepedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `reserva`.`mesas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`mesas` (
+  `chavemesa` INT(11) NOT NULL AUTO_INCREMENT,
+  `numero` DECIMAL(10,0) NOT NULL,
+  `totalcadeiras` DECIMAL(10,0) NOT NULL,
+  `localizacao` CHAR(30) NOT NULL,
+  `funcionario_chavecargo` INT(11) NOT NULL,
+  PRIMARY KEY (`chavemesa`, `funcionario_chavecargo`),
+  INDEX `fk_mesas_funcionario1_idx` (`funcionario_chavecargo` ASC),
+  CONSTRAINT `fk_mesas_funcionario1`
+    FOREIGN KEY (`funcionario_chavecargo`)
+    REFERENCES `reserva`.`funcionario` (`chavecargo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `reserva`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`cliente` (
+  `nome` CHAR(15) NOT NULL,
+  `sobrenome` CHAR(15) NOT NULL,
+  `telefone` CHAR(8) NOT NULL,
+  `cpf` CHAR(12) NOT NULL,
+  `email` CHAR(30) NOT NULL,
+  `pedido_chavepedido` INT(11) NOT NULL,
+  `mesas_chavemesa` INT(11) NOT NULL,
+  PRIMARY KEY (`telefone`),
+  INDEX `fk_cliente_pedido_idx` (`pedido_chavepedido` ASC),
+  INDEX `fk_cliente_mesas1_idx` (`mesas_chavemesa` ASC),
+  CONSTRAINT `fk_cliente_pedido`
+    FOREIGN KEY (`pedido_chavepedido`)
+    REFERENCES `reserva`.`pedido` (`chavepedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cliente_mesas1`
+    FOREIGN KEY (`mesas_chavemesa`)
+    REFERENCES `reserva`.`mesas` (`chavemesa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `reserva`.`cargos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`cargos` (
+  `chavecargo` DECIMAL(1,0) NOT NULL primary key,
+  `nome` CHAR(15) NOT NULL,
+  `nivelacesso` DECIMAL(1,0) NOT NULL,
+  `funcionario_chavecargo` INT(11) NOT NULL,
+  `cliente_telefone` CHAR(8) NOT NULL,
+  PRIMARY KEY (`chavecargo`),
+  INDEX `fk_cargos_funcionario1_idx` (`funcionario_chavecargo` ASC),
+  INDEX `fk_cargos_cliente1_idx` (`cliente_telefone` ASC),
+  CONSTRAINT `fk_cargos_funcionario1`
+    FOREIGN KEY (`funcionario_chavecargo`)
+    REFERENCES `reserva`.`funcionario` (`chavecargo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cargos_cliente1`
+    FOREIGN KEY (`cliente_telefone`)
+    REFERENCES `reserva`.`cliente` (`telefone`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `reserva`.`itens_de_pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`itens_de_pedido` (
+ `id_itenspedido int` (11)not null primary key,  
+`chavepedido` INT(11) NOT NULL ,
+  `chaveproduto` INT(11) NOT NULL,
+  `quantidade` DECIMAL(4,0) NULL DEFAULT NULL,
+  `funcionario_chavecargo` INT(11) NOT NULL,
+  FULLTEXT INDEX `iditens_pedido` (`chavepedido` ASC),
+  INDEX `fk_itens_de_pedido_funcionario1_idx` (`funcionario_chavecargo` ASC),
+  CONSTRAINT `fk_itens_de_pedido_funcionario1`
+    FOREIGN KEY (`funcionario_chavecargo`)
+    REFERENCES `reserva`.`funcionario` (`chavecargo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `reserva`.`reservas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `reserva`.`reservas` (
+  `chavemesa` INT(11) NOT NULL primary key, 
+  `token` CHAR(10) NULL DEFAULT NULL,
+  `horarioprevisto` DATETIME NOT NULL,
+  `quantidadecadeiras` DECIMAL(4,0) NOT NULL,
+  `cliente_telefone` CHAR(8) NOT NULL,
+  `funcionario_chavecargo` INT(11) NOT NULL,
+  INDEX `chavemesa` (`chavemesa` ASC),
+  INDEX `fk_reservas_cliente1_idx` (`cliente_telefone` ASC),
+  INDEX `fk_reservas_funcionario1_idx` (`funcionario_chavecargo` ASC),
+  CONSTRAINT `fk_reservas_cliente1`
+    FOREIGN KEY (`cliente_telefone`)
+    REFERENCES `reserva`.`cliente` (`telefone`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reservas_funcionario1`
+    FOREIGN KEY (`funcionario_chavecargo`)
+    REFERENCES `reserva`.`funcionario` (`chavecargo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
