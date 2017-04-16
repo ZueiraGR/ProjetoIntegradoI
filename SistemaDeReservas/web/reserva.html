@@ -80,11 +80,15 @@
                                     <label for="qtdCadeiras">QUANTIDADE DE CADEIRAS</label>
                                 </div>
                                 <div class="input-field col s12 l6 m6">
-                                    <input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
-                                    <label for="horarioDefinido">HORÁRIO DEFINIDO</label>
+                                    <input placeholder="Digite aqui o código token fornecido pelo atendente." id="token" type="text" required maxlength="10" minlength="10" class="validate">
+                                    <label for="qtdCadeiras" data-sucess='OK' data-error='Este campo deve ser preenchido com o código de 10 dígitos fornecido pelo atendente.'>TOKEN</label>
                                 </div>
                             </div>
                             <div class="row hiddendiv" id="campoHoraInicio">
+                                <div class="input-field col s12 l6 m6">
+                                    <input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
+                                    <label for="horarioDefinido">HORÁRIO DEFINIDO</label>
+                                </div>
                                 <div class="input-field col s12 l6 m6">
                                     <input placeholder="hh:mm" id="horaInicio" name="horaInicio" type="text" maxlength="5" onchange="validaHora()">
                                     <label for="horaInicio">HORA</label>
