@@ -20,3 +20,11 @@
 .largura-personalizada{
     width: 180px;
 }
+
+.calendario{
+    min-height: 300px;
+}
+
+.fc-header-toolbar > .fc-center > h2{
+    font-size: 2.2em;
+}

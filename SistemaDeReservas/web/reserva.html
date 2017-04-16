@@ -12,15 +12,17 @@
         <link href="css/style.css" type="text/css" rel="stylesheet" />
         <link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
         <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+        <!--CSS UTILZADO PARA CRIAR A AGENDA-->
+        <link href='css/fullcalendar.min.css' rel='stylesheet' />
+        <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
     </head>
 
-    <body>
+    <body onload="agendaStart('10:00', '22:00')"><!--FUNCAO agendaStart SETA O HORARIO DE FUNCIONAMENTO E INICIA A AGENDA-->
         <nav class="grey darken-1" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+                    <li><a href="index.html" name="home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
                     <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
-                    <li><a href='reserva.html'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
                         <ul id="dropdown-usuario" class="dropdown-content">
                             <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
@@ -48,16 +50,71 @@
             </div>
         </nav>
 
-        <div>
-            <!--filtros-->
+        <!-- INICIO ESTRUTURA DA AGENDA-->
+        <div class="section hiddendiv" id="agenda">
+            <div class="container">
+                <div class="row">
+                    <div class="btn-block">
+                        <a class="btn grey " onclick="fecharAgenda()"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;&nbsp;Voltar</a>
+                        <a class="btn grey " onclick="abrirFormularioDeAgendamento();"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Agendar para hoje</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="calendario" class="calendario"></div>
+                </div>
+            </div>
         </div>
-
+        <!-- FIM ESTRUTURA DA AGENDA-->
         <div class="section">
             <div class="container">
-                <br>
+                <a class="btn grey col s4 m2 l2" data-target="modalAgendamento"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Reserva rápida</a>
+                <div id="modalAgendamento" class="modal">
+                    <div class="modal-content">
+                        <div class="row center-align">
+                            <h5>Formulário para reserva rápida para ser atendido hoje</h5>
+                        </div>
+                        <form id="agendamentoRapidoForm" name="agendamentoRapidoForm" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="input-field col s12 l6 m6">
+                                    <input placeholder="1" id="qtdCadeiras" type="number" required max="20" min="1" value="1">
+                                    <label for="qtdCadeiras">QUANTIDADE DE CADEIRAS</label>
+                                </div>
+                                <div class="input-field col s12 l6 m6">
+                                    <input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
+                                    <label for="horarioDefinido">HORÁRIO DEFINIDO</label>
+                                </div>
+                            </div>
+                            <div class="row hiddendiv" id="campoHoraInicio">
+                                <div class="input-field col s12 l6 m6">
+                                    <input placeholder="hh:mm" id="horaInicio" name="horaInicio" type="text" maxlength="5" onchange="validaHora()">
+                                    <label for="horaInicio">HORA</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l3"></div>
+                                <div class="input-field col l3 m12 s12 center">
+                                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CONFIRMAR</button>
+                                </div>
+                                <div class="input-field col l3 m12 s12 center">
+                                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                                </div>
+                                <div class="input-field col l3"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="mesas">
+            <div class="container">
                 <div class="row">
                     <div class="col l2 m4 s6">
-                        <div class="center-align"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></div>
+                        <div class="center-align">
+                            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" alt="Mesa 1"></p>
+                        </div>
                     </div>
                     <div class="col l2 m4 s6">
                         <p class="center-align"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
@@ -141,27 +198,11 @@
                 </div>
             </div>
         </div>
-
-
-        <div id="modal-horarios" class="modal" style="width: max-content">
-            <div class="modal-content">
-                <div class="row">
-                    <div class="col">
-                        <ul class="col">
-                            <li class="row"><a href="#" style="border-bottom: rgba(0,0,0,0.1) solid">Horários diponivéis</a></li>
-                            <li class="row">Horário 1 - hh/mm</li>
-                            <li class="row">Horário 2 - hh/mm</li>
-                            <li class="row">Horário 3 - hh/mm</li>
-                            <li class="row">Horário 4 - hh/mm</li>
-                            <li class="row">Horário 5 - hh/mm</li>
-                            <li class="row">Horário 6 - hh/mm</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large grey" href="#home">
+                <i class="fa fa-chevron-up"></i>
+            </a>
         </div>
-
-
 
         <footer class="page-footer grey darken-1">
             <div class="container">
@@ -203,6 +244,11 @@
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script>
         <script src="js/slide.js"></script>
+        <!--JS UTILIZADOS PARA CRIA E MANUPULAR A AGENDA-->
+        <script src='js/lib/moment.min.js'></script>
+        <script src='js/fullcalendar.min.js'></script>
+        <script src='js/locale-all.js'></script>
+        <script src='js/agendaScripts.js'></script>
     </body>
 
 </html>
