@@ -37,10 +37,10 @@
                             <li><a href="#!"><i class="fa fa-clock-o"
                                                 aria-hidden="true"></i>  HORÁRIO DE ATENDIMENTO</a></li>
                             <li class="divider"></li>
-                            <li><a href="#!"><i class="fa fa-pencil-square-o"
+                            <li><a href="gerenciar_mesas.html"><i class="fa fa-pencil-square-o"
                                                 aria-hidden="true"></i>  MESAS</a></li>
                             <li class="divider"></li>
-                            <li><a href="gerenciar_promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>  PROMOÇÕES</a></li>
+                            <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i>  PROMOÇÕES</a></li>
                         </ul></li>
 <!--                    <li><a class="center-align" href="#!"><i
                                 class="fa fa-bar-chart" aria-hidden="true"></i>  RELATÓRIOS</a></li>-->
@@ -72,10 +72,8 @@
                             <li><a href="#!"><i class="fa fa-clock-o"
                                                 aria-hidden="true"></i> HORÁRIO DE ATENDIMENTO</a></li>
                             <li class="divider"></li>
-                            <li><a href="#!"><i class="fa fa-pencil-square-o"
+                            <li><a href="gerenciar_mesas.html"><i class="fa fa-pencil-square-o"
                                                 aria-hidden="true"></i> MESAS</a></li>
-                                                <li class="divider"></li>
-                            <li><a href="gerenciar_promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>  PROMOÇÕES</a></li>
                         </ul></li>
 <!--                    <li class="divider"></li>
                     <li><a href="#!"><i class="fa fa-bar-chart"
@@ -103,8 +101,8 @@
 
                 <div class="row s16" >
                     <ul class="tabs tabs-fixed-width z-depth-1">
-                        <li class="tab col"><a href="#adm-view">MESAS</a></li>
-                        <li class="tab col"><a href="#adm-add">CADASTRO DE MESAS</a></li>
+                        <li class="tab col"><a href="#adm-view">PROMOCÕES</a></li>
+                        
                     </ul>
                 </div>
 
@@ -113,8 +111,8 @@
                         <thead>
                             <tr><th/>
                                 
-                                <th>Número da mesa</th>
-                                <th>QT. cadeiras</th>
+                                <th>Número da promoção</th>
+                                <th>Nome da promoção</th>
                                 <th>Adicional</th>
                             </tr>
                         </thead>
@@ -127,8 +125,8 @@
                                     </form>
                                 </td>
                                 
-                                <td>MESA 1</td>
-                                <td>4</td>
+                                <td>PROMO 1</td>
+                                <td>NOME PROMO 1</td>
                                 <td>INFORMAÇÃO 1</td>
                             </tr>
                             <tr>
@@ -139,8 +137,8 @@
                                     </form>
                                 </td>
                                 
-                                <td>MESA 2</td>
-                                <td>6</td>
+                                <td>PROMO 2</td>
+                                <td>NOME PROMO 2</td>
                                 <td>INFORMAÇÃO 2</td>
                             </tr>
                             <tr>
@@ -151,8 +149,8 @@
                                     </form>
                                 </td>
                                 
-                                <td>MESA 3</td>
-                                <td>2</td>
+                                <td>PROMO 3</td>
+                                <td>NOME PROMO 3</td>
                                 <td>INFORMAÇÃO 3</td>
                             </tr>
                         </tbody>
@@ -160,54 +158,17 @@
                     <div class="row"></br>
                         <div class="input-field col l3"></div>
                         <div class="col l6 m12 s12 center">
+                            
                             <button class="btn green waves-effect waves-green col l6"
-                                    data-target="alterardados">ALTERAR</button>
+                                    data-target="add-promo">ADICIONAR</button>
                             <button class="btn red col l6"
                                     type="submit">EXClUIR</button>
                         </div>
                     </div>
+                    <div class="input-field col l3"></div>
                 </div>
                 <div id="adm-add" class="row z-depth-1">
-                    <div class="col s12">
-                        <form class="form col s12" name="CadastroDeMesa" action="" method="POST">
-                            <br>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input placeholder="12" id="numero" type="number"
-                                           class="validate" required> <label for="numero"
-                                           data-error="Prenchimento deste campo é obrigatório!"
-                                           data-success="Ok">NUMERO DA MESA</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input placeholder="4"
-                                           id="cadeiras" type="number" class="validate" required> <label
-                                           for="cadeiras"
-                                           data-error="Prenchimento deste campo é obrigatório!"
-                                           data-success="Ok">QUANTIDADE DE CADEIRAS</label>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input placeholder="Adicional" id="adicional" type="text"
-                                           class="validate"><label for="adicional"
-                                           data-error="Digite um login válido!" data-success="Ok">INFORMAÇÃO ADICIONAL(OPCIONAL)</label>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="input-field col l3"></div>
-                                <div class="input-field col l6 m12 s12 center">
-                                    <button class="btn green waves-effect waves-green col l6"
-                                            type="submit">ENTRAR</button>
-                                    <button
-                                        class="btn red modal-action modal-close waves-effect waves-red col l6"
-                                        type="reset">LIMPAR</button>
-                                </div>
-                                <div class="input-field col l3"></div>
-                            </div>
-                        </form>
-                    </div>
+                    
 
                 </div>
             </div>
@@ -246,24 +207,24 @@
                 </div>
             </div>
         </footer>
-        <div class="modal" id="alterardados">
+        <div class="modal" id="add-promo">
             <div class="modal-content">
                 <div class="col s12">
-                        <form class="form col s12" name="CadastroDeMesa" action="" method="POST">
+                        <form class="form col s12" name="CadastroDePromocoes" action="" method="POST">
                             <br>
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input placeholder="12" id="numero" type="number"
                                            class="validate" required> <label for="numero"
                                            data-error="Prenchimento deste campo é obrigatório!"
-                                           data-success="Ok">NUMERO DA MESA</label>
+                                           data-success="Ok">NUMERO DA PROMOÇÃO</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input placeholder="4"
-                                           id="cadeiras" type="number" class="validate" required> <label
-                                           for="cadeiras"
+                                    <input placeholder="SUPER COMBO"
+                                           id="cadeiras" type="text" class="validate" required> <label
+                                           for="NOME"
                                            data-error="Prenchimento deste campo é obrigatório!"
-                                           data-success="Ok">QUANTIDADE DE CADEIRAS</label>
+                                           data-success="Ok">NOME DA PROMOÇÃO</label>
                                 </div>
                             </div>
                             
@@ -275,7 +236,7 @@
                                 </div>
                             </div>
                             
-                            <div class="row">
+                            <div class="row center">
                                 <div class="input-field col l3"></div>
                                 <div class="input-field col l6 m12 s12 center">
                                     <button class="btn green waves-effect waves-green col l6"
@@ -287,12 +248,13 @@
                                 <div class="input-field col l3"></div>
                             </div>
                         </form>
-                    </div>               
+                    </div>
+                
                 
             </div>                
         </div>
-
-
+        
+      
         <!--  Scripts-->
         <script src="js/jquery-2.1.1.js"></script>
         <script src="js/materialize.js"></script>
