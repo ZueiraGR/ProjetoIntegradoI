@@ -1,11 +1,13 @@
 function abrirAgenda(chaveMesa) {
     $("#mesas").addClass("hiddendiv");
+    $("#mudar").addClass("hiddendiv");
     $("#agenda").removeClass("hiddendiv");
     $(".fc-agendaDay-button").trigger("click");
 }
 
 function fecharAgenda() {
     $("#mesas").removeClass("hiddendiv");
+    $("#mudar").removeClass("hiddendiv");
     $("#agenda").addClass("hiddendiv");
 }
 
