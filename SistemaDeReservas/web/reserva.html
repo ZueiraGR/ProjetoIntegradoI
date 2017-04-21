@@ -1,258 +1,258 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-        <title>Sistema de reserva</title>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Sistema de reserva</title>
 
-        <!-- CSS  -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="css/materialize.css" type="text/css" rel="stylesheet" />
-        <link href="css/style.css" type="text/css" rel="stylesheet" />
-        <link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
-        <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
-        <!--CSS UTILZADO PARA CRIAR A AGENDA-->
-        <link href='css/fullcalendar.min.css' rel='stylesheet' />
-        <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-    </head>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
+    <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+    <!--CSS UTILZADO PARA CRIAR A AGENDA-->
+    <link href='css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+  </head>
 
-    <body onload="agendaStart('10:00', '22:00')"><!--FUNCAO agendaStart SETA O HORARIO DE FUNCIONAMENTO E INICIA A AGENDA-->
-        <nav class="grey darken-1" role="navigation">
-            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="index.html" name="home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
-                    <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
-                    <li><a class="dropdown-button" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
-                        <ul id="dropdown-usuario" class="dropdown-content">
-                            <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
-                            <li class="divider"></li>
-                            <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul id="nav-mobile" class="side-nav">
-                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
-                    <li class="divider"></li>
-                    <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
-                    <li class="divider"></li>
-                    <li><a href="reserva.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
-                    <li class="divider"></li>
-                    <li><a class="dropdown-button" data-activates="dropdown-usuario-m" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
-                        <ul id="dropdown-usuario-m" class="dropdown-content">
-                            <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
-                            <li class="divider"></li>
-                            <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            </div>
-        </nav>
+  <body onload="agendaStart('10:00', '22:00')"><!--FUNCAO agendaStart SETA O HORARIO DE FUNCIONAMENTO E INICIA A AGENDA-->
+    <nav class="grey darken-1" role="navigation">
+      <div class="nav-wrapper container"><div class="logo brand-logo"></div>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html" name="home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+          <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
+            <ul id="dropdown-usuario" class="dropdown-content">
+              <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
+              <li class="divider"></li>
+              <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+          <li class="divider"></li>
+          <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+          <li class="divider"></li>
+          <li><a href="reserva.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+          <li class="divider"></li>
+          <li><a class="dropdown-button" data-activates="dropdown-usuario-m" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
+            <ul id="dropdown-usuario-m" class="dropdown-content">
+              <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
+              <li class="divider"></li>
+              <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
 
-        <!-- INICIO ESTRUTURA DA AGENDA-->
-        <div class="section hiddendiv" id="agenda">
-            <div class="container">
-                <div class="row">
-                    <div class="btn-block">
-                        <a class="btn grey " onclick="fecharAgenda()"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;&nbsp;Voltar</a>
-                        <a class="btn grey " onclick="abrirFormularioDeAgendamento();"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Agendar para hoje</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="calendario" class="calendario"></div>
-                </div>
-            </div>
+    <!-- INICIO ESTRUTURA DA AGENDA-->
+    <div class="section hiddendiv" id="agenda">
+      <div class="container">
+        <div class="row">
+          <div class="btn-block">
+            <a class="btn grey " onclick="fecharAgenda()"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;&nbsp;Voltar</a>
+            <a class="btn grey " onclick="abrirFormularioDeAgendamento();"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Agendar para hoje</a>
+          </div>
         </div>
-        <!-- FIM ESTRUTURA DA AGENDA-->
-        <div class="section" id="mudar">
-            <div class="container">
-                <a class="btn grey col s4 m2 l2" data-target="modalAgendamento" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Reserva rápida</a>
-                <div id="modalAgendamento" class="modal">
-                    <div class="modal-content">
-                        <div class="row center-align">
-                            <h5>Formulário para reserva rápida para ser atendido hoje</h5>
-                        </div>
-                        <form id="agendamentoRapidoForm" name="agendamentoRapidoForm" method="POST" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="input-field col s12 l6 m6">
-                                    <input placeholder="1" id="qtdCadeiras" type="number" required max="20" min="1" value="1">
-                                    <label for="qtdCadeiras">QUANTIDADE DE CADEIRAS</label>
-                                </div>
-                                <div class="input-field col s12 l6 m6">
-                                    <input placeholder="Digite aqui o código token fornecido pelo atendente." id="token" type="text" required maxlength="10" minlength="10" class="validate">
-                                    <label for="qtdCadeiras" data-sucess='OK' data-error='Este campo deve ser preenchido com o código de 10 dígitos fornecido pelo atendente.'>TOKEN</label>
-                                </div>
-                            </div>
-                            <div class="row hiddendiv" id="campoHoraInicio">
-                                <div class="input-field col s12 l6 m6">
-                                    <input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
-                                    <label for="horarioDefinido">HORÁRIO DEFINIDO</label>
-                                </div>
-                                <div class="input-field col s12 l6 m6">
-                                    <input placeholder="hh:mm" id="horaInicio" name="horaInicio" type="text" maxlength="5" onchange="validaHora()">
-                                    <label for="horaInicio">HORA</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col l3"></div>
-                                <div class="input-field col l3 m12 s12 center">
-                                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CONFIRMAR</button>
-                                </div>
-                                <div class="input-field col l3 m12 s12 center">
-                                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
-                                </div>
-                                <div class="input-field col l3"></div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                </div>
-            </div>
+        <div class="row">
+          <div id="calendario" class="calendario"></div>
         </div>
-        <div class="section" id="mesas">
-            <div class="container">
-                <div class="row">
-                    <div class="col l2 m4 s6">
-                        <div class="center-align">
-                            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" alt="Mesa 1"></p>
-                        </div>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
-                    </div>
-                    <div class="col l2 m4 s6">
-                        <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <!-- FIM ESTRUTURA DA AGENDA-->
+    <div class="section" id="mudar">
+      <div class="container">
+        <a class="btn grey col s4 m2 l2" data-target="modalAgendamento" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Reserva rápida</a>
+        <div id="modalAgendamento" class="modal">
+          <div class="modal-content">
+            <div class="row center-align">
+              <h5>Formulário para reserva rápida para ser atendido hoje</h5>
             </div>
+            <form id="agendamentoRapidoForm" name="agendamentoRapidoForm" method="POST" enctype="multipart/form-data">
+              <div class="row">
+                <div class="input-field col s12 l6 m6">
+                  <input placeholder="1" id="qtdCadeiras" type="number" required max="20" min="1" value="1">
+                  <label for="qtdCadeiras">QUANTIDADE DE CADEIRAS</label>
+                </div>
+                <div class="input-field col s12 l6 m6">
+                  <input placeholder="Digite aqui o código token fornecido pelo atendente." id="token" type="text" required maxlength="10" minlength="10" class="validate">
+                  <label for="qtdCadeiras" data-sucess='OK' data-error='Este campo deve ser preenchido com o código de 10 dígitos fornecido pelo atendente.'>TOKEN</label>
+                </div>
+              </div>
+              <div class="row hiddendiv" id="campoHoraInicio">
+                <div class="input-field col s12 l6 m6">
+                  <input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
+                  <label for="horarioDefinido">HORÁRIO DEFINIDO</label>
+                </div>
+                <div class="input-field col s12 l6 m6">
+                  <input placeholder="hh:mm" id="horaInicio" name="horaInicio" type="text" maxlength="5" onchange="validaHora()">
+                  <label for="horaInicio">HORA</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col l3"></div>
+                <div class="input-field col l3 m12 s12 center">
+                  <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CONFIRMAR</button>
+                </div>
+                <div class="input-field col l3 m12 s12 center">
+                  <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                </div>
+                <div class="input-field col l3"></div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+
+          </div>
         </div>
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large grey" href="#home">
-                <i class="fa fa-chevron-up"></i>
-            </a>
+      </div>
+    </div>
+    <div class="section" id="mesas">
+      <div class="container">
+        <div class="row">
+          <div class="col l2 m4 s6">
+            <div class="center-align">
+              <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" alt="Mesa 1"></p>
+            </div>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
         </div>
+        <br>
+        <div class="row">
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
 
-        <footer class="page-footer grey darken-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Sistema de reserva</h5>
-                        <p class="grey-text text-lighten-4">
-                            Explicar alguma coisa.
-                        </p>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-verde.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-vermelha.svg" data-target="modal-horarios"></p>
+          </div>
+          <div class="col l2 m4 s6">
+            <p class="center-align" onclick="abrirAgenda(1)"><img src="img/mesa/mesa-amarela.svg" data-target="modal-horarios"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large grey" href="#home">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+    <footer class="page-footer grey darken-1">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Sistema de reserva</h5>
+            <p class="grey-text text-lighten-4">
+              Explicar alguma coisa.
+            </p>
 
 
-                    </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Áreas de site</h5>
-                        <ul>
-                            <li><a class="white-text" href="#!">Link 1</a></li>
-                            <li><a class="white-text" href="#!">Link 2</a></li>
-                        </ul>
-                    </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Áreas de site</h5>
-                        <ul>
-                            <li><a class="white-text" href="#!">Link 1</a></li>
-                            <li><a class="white-text" href="#!">Link 2</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright grey darken-2">
-                <div class="container">
-                    Criado pelo <a class="grey-text" href="#">Grupo 9</a>
-                </div>
-            </div>
-        </footer>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Áreas de site</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Áreas de site</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Link 1</a></li>
+              <li><a class="white-text" href="#!">Link 2</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright grey darken-2">
+        <div class="container">
+          Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+        </div>
+      </div>
+    </footer>
 
 
-        <!--  Scripts-->
-        <script src="js/jquery-2.1.1.js"></script>
-        <script src="js/materialize.js"></script>
-        <script src="js/init.js"></script>
-        <script src="js/slide.js"></script>
-        <!--JS UTILIZADOS PARA CRIA E MANUPULAR A AGENDA-->
-        <script src='js/lib/moment.min.js'></script>
-        <script src='js/fullcalendar.min.js'></script>
-        <script src='js/locale-all.js'></script>
-        <script src='js/agendaScripts.js'></script>
-    </body>
+    <!--  Scripts-->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/slide.js"></script>
+    <!--JS UTILIZADOS PARA CRIA E MANUPULAR A AGENDA-->
+    <script src='js/lib/moment.min.js'></script>
+    <script src='js/fullcalendar.min.js'></script>
+    <script src='js/locale-all.js'></script>
+    <script src='js/agendaScripts.js'></script>
+  </body>
 
 </html>
