@@ -45,7 +45,7 @@
           <h4>Primeira promoção</h4>
           <p class="">Colocar a primeira promoção</p>
         </div>
-        <a class="waves-effect waves-light btn" style="bottom: -8em;">SAIBA MAIS</a>
+        <a class="waves-effect waves-light btn" style="bottom: -8em;" data-target="promo">SAIBA MAIS</a>
       </div>
       <div class="l12 m12 s12 row red promo2 z-depth-2" style="height: 300px">
         <br/>
@@ -53,7 +53,7 @@
           <h4>Segunda promoção</h4>
           <p class="">Colocar a segunda promoção</p>
         </div>
-        <a class="waves-effect waves-light btn" style="bottom: -8em;">SAIBA MAIS</a>
+        <a class="waves-effect waves-light btn" style="bottom: -8em;" data-target="promo">SAIBA MAIS</a>
       </div>
       <div class="l12 m12 s12 row orange promo3 z-depth-2" style="height: 300px">
         <br/>
@@ -61,7 +61,7 @@
           <h4>Terceira promoção</h4>
           <p class="">Colocar a terceira promoção</p>
         </div>
-        <a class="waves-effect waves-light btn" style="bottom: -8em;">SAIBA MAIS</a>
+        <a class="waves-effect waves-light btn" style="bottom: -8em;" data-target="promo">SAIBA MAIS</a>
       </div>
     </div>
     <div class="section">
@@ -101,6 +101,57 @@
         </div>
       </div>
     </footer>
+
+    <div class="modal" id="promo">
+      <ul class="row tabs tabs-fixed-width z-depth-1">
+        <li class="tab col"><a>PROMOCÕES</a></li>
+      </ul>
+      <div class="row center">
+        <br/>
+        Coloque aqui o detalhamento da promoção...
+      </div>
+      
+        <ul class="collapsible" style="margin-bottom: 0px" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header center"><a>Reserva rápida</a></div>
+            <div class="collapsible-body">
+              <form id="agendamentoRapidoForm" name="agendamentoRapidoForm" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="input-field col s12 l6 m6">
+                    <input placeholder="1" id="qtdCadeiras" type="number" required max="20" min="1" value="1">
+                    <label for="qtdCadeiras">QUANTIDADE DE CADEIRAS</label>
+                  </div>
+                  <div class="input-field col s12 l6 m6">
+                    <input placeholder="Digite aqui o código token fornecido pelo atendente." id="token" type="text" required maxlength="10" minlength="10" class="validate">
+                    <label for="qtdCadeiras" data-sucess='OK' data-error='Este campo deve ser preenchido com o código de 10 dígitos fornecido pelo atendente.'>TOKEN</label>
+                  </div>
+                </div>
+                <div class="row hiddendiv" id="campoHoraInicio">
+                  <div class="input-field col s12 l6 m6">
+                    <input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
+                    <label for="horarioDefinido">HORÁRIO DEFINIDO</label>
+                  </div>
+                  <div class="input-field col s12 l6 m6">
+                    <input placeholder="hh:mm" id="horaInicio" name="horaInicio" type="text" maxlength="5" onchange="validaHora()">
+                    <label for="horaInicio">HORA</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col l3"></div>
+                  <div class="input-field col l3 m12 s12 center">
+                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CONFIRMAR</button>
+                  </div>
+                  <div class="input-field col l3 m12 s12 center">
+                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                  </div>
+                  <div class="input-field col l3"></div>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    
 
 
     <!--  Scripts-->
