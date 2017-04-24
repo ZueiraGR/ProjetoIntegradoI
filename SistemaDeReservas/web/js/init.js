@@ -1,7 +1,7 @@
 var eventos = [
     {
         id: 1,
-        title: 'Adriano',
+        title: 'Adriano da Silva Santos | (61) 9999-9999',
         start: '2017-04-16T11:00:00',
         end: '2017-04-16T13:00:00'
     },
@@ -15,7 +15,7 @@ var eventos = [
         id: 3,
         title: 'Maria',
         start: '2017-04-16T14:00:00',
-        end: '2017-04-16T14:30:00'
+        end: '2017-04-16T14:45:00'
     },
     {
         id: 3,
@@ -48,7 +48,6 @@ $(document).ready(function () {
     $('.modal').modal();
 });
 
-
 function agendaStart(horaInicio, horaFim) {
     var initialLocaleCode = 'pt-br';
 
@@ -68,6 +67,7 @@ function agendaStart(horaInicio, horaFim) {
         allDaySlot: false,
         navLinks: true, // can click day/week names to navigate views
         editable: false,
+        selectable: true,
         eventLimit: true, // allow "more" link when too many events
         events: eventos,
         dayClick: function (date, jsEvent, view, resourceObj) {
@@ -76,14 +76,32 @@ function agendaStart(horaInicio, horaFim) {
 
         },
         eventClick: function (calEvent, jsEvent, view) {
-
-            alert('Event: ' + calEvent.title);
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            alert('View: ' + view.name);
-
-            // change the border color just for fun
-//            $(this).css('border-color', 'red');
-
+            var html;
+            html =  '<h5 class="center-align">DADOS DO AGENDAMENTO</h5>';
+            html += '<p class="cen"><b>Cliente:</b> '+calEvent.title;
+            html += '<br>';
+            html += '<b>Telefone:</b> (61)99999-9999';
+            html += '<br>';
+            html += '<b>Login:</b> teste.teste';
+            html += '<br>';
+            html += '<b>Mesa: </b> 1A';
+            html += '<br>';
+            html += '<b>Horário marcado para o inicio do atendimento:</b> '+calEvent.start.format('HH:mm');
+            html += '<br>';
+            html += '<b>Horário previsto para o fim do atendimento:</b> '+calEvent.end.format('HH:mm');
+            html += '</p>';
+            $("#corpoModalMostrarDadosAgendamento").html(html);
+            $("#modalMostrarDadosAgendamento").modal('open');
+        },
+        select: function (time) {
+            var hora = time.format('HH:mm');
+            var data = time.format('DD/MM/YYYY');
+            $("#horaInicioH").val(hora);
+            $("#dataReservada").val(data);
+            $("#chaveMesa").val(mesaSelecionada.chave);
+            $("#qtdCadeirasH").val(mesaSelecionada.qtdCadeiras);
+            $("#mesaH").val(mesaSelecionada.numero);
+            $("#modalFormAgendamentoHorario").modal('open');
         }
     });
 
