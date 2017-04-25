@@ -57,37 +57,42 @@
                 </ul>
             </div>
         </div>
-
-        <div class="row s12 fast-reserv" style="background: rgba(0,0,0,0.5)">
-            <div class="row s12 center-align white-text"><h4>Faça uma reserva rápida!!!</h4></div>
-            <div class="col s2"></div>
-            <div class="col s8">
-                <form>
-                    <div class="row black-text s12 fast-reserv-bg z-depth-1 no-padding">
-                        <div class="col s4" style="margin-left: 1em"><input placeholder="Usuário" type="text"></div>
-                        <div class="col s2"><input placeholder="Data" id="date" type="text" class="datepicker picker__input"></div>
-
-                        <select class="col s2">
-                            <option value="" disabled selected>Horário</option>
-                            <option value="1">12:00</option>
-                            <option value="2">17:00</option>
-                            <option value="3">20:00</option>
-                        </select>
-
-
-                        <select class="col s2">
-                            <option value="" disabled selected>Qt.Pessoas</option>
-                            <option value="1">2</option>
-                            <option value="2">4</option>
-                            <option value="3">8</option>
-                            <option value="3">+8</option>
-                        </select>
-
-                        <div class=" col s1"><a class="waves-effect black-text waves-light btn" style="height: 3.1em; padding-top: 10%">Enviar</a></div>
+        <div class="container fast-reserv">
+            <div>
+                <div class="row center-align white-text"><h4>Faça uma reserva rápida!!!</h4></div>
+                <div class="row">
+                    <div class="col s2"></div>
+                    <div class="col black-text s8 z-depth-1">
+                        <form class="">
+                            <div class="col s12 m4 bg-color">
+                                <input placeholder="Usuário" type="text">
+                            </div>
+                            <div class="col s3 m2 bg-color">
+                                <input placeholder="Data" id="date" type="text" class="datepicker picker__input">
+                            </div>
+                            <div class="col s3 m2 bg-color">
+                                <select>
+                                    <option value="" disabled selected>Horário</option>
+                                    <option value="1">12:00</option>
+                                    <option value="2">17:00</option>
+                                    <option value="3">20:00</option>
+                                </select>
+                            </div>
+                            <div class="col s3 m2 bg-color">
+                                <select>
+                                    <option value="" disabled selected>Qt.Pessoas</option>
+                                    <option value="1">2</option>
+                                    <option value="2">4</option>
+                                    <option value="3">8</option>
+                                    <option value="3">+8</option>
+                                </select>
+                            </div>
+                            <input type="submit" class=" col s3 m2 btn" style="height: 3.1em">
+                        </form>
                     </div>
-                </form>
+                    <div class="col s2"></div>
+                </div>
             </div>
-            <div class="col s2"></div>
         </div>
         <br/>
 
