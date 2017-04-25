@@ -23,10 +23,6 @@ function confirmarAgendamento(){
     var qtdCadeiras = $("#qtdCadeirasH").val();
     Materialize.toast('Mesa ' + mesa + ' com '+ qtdCadeiras +' cadeiras reservada para o dia '+ data +' hora '+ horario, 5000);      
 }
-function adicionarEventoNaAgenda(titulo, inicio, fim) {
-
-}
-
 
 $("#agendamentoRapidoForm").submit(function (event) {
     event.preventDefault();
