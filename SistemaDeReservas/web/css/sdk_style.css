@@ -37,7 +37,7 @@ and open the template in the editor.
     width: 100%;
     position: absolute;
     top: 18em;
-    z-index: 1000;
+    z-index: 500;
 }
 .fast-reserv-bg{
     padding: 10px;
