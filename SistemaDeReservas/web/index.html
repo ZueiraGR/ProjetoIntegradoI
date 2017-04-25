@@ -1,215 +1,217 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Sistema de reserva</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <title>Sistema de reserva</title>
 
-    <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" />
-    <link href="css/style.css" type="text/css" rel="stylesheet" />
-    <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
-    <link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
-</head>
+        <!-- CSS  -->
+        <link href="css/material-icons.css" rel="stylesheet">
+        <link href="css/materialize.css" type="text/css" rel="stylesheet" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" />
+        <link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
+        <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+    </head>
 
-<body>
-    <nav class="grey darken-1" role="navigation">
-        <div class="nav-wrapper container">
-            <div class="logo brand-logo"></div>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
-                <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
-                <li><a href='reserva.html'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
-                <li><a data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
-            </ul>
+    <body>
+        <nav class="grey darken-1" role="navigation">
+            <div class="nav-wrapper container">
+                <div class="logo brand-logo"></div>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="index.html" name="home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+                    <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+                    <li><a href='reserva.html'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+                    <li><a data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
+                </ul>
 
-            <ul id="nav-mobile" class="side-nav">
-                <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
-                <li class="divider"></li>
-                <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
-                <li class="divider"></li>
-                <li><a href="reserva.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
-                <li class="divider"></li>
-                <li><a href="#" data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
-    <div class="section no-pad-bot" id="index-banner">
-        <div class="container">
-            <div class="row center">
-                <div class="carousel carousel-slider center z-depth-2 white-text" data-indicators="true">
-                    <div class="carousel-fixed-item center">
-                        <a class="btn" href="promocoes.html">PROMOÇÕES</a>
-                    </div>
-                    <div class="carousel-item" style="background: url(img/promo1.jpg), no-repeat, center;  background-size: 100% 100%;">
-                        <div class="container-text promo">
-                            <h2>Jantar Romântico</h2>
-                            <p class="">Promoção especial para surpreender a sua amada.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item" style="background: url(img/promo2.jpg), no-repeat, center;  background-size: 100% 100%;">
-                        <div class="container-text promo">
-                            <h2>Almoço de negócios</h2>
-                            <p class="">Promoção válida por tempo limitado.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item" style="background: url(img/promo3.jpg), no-repeat, center;  background-size: 100% 100%;">
-                        <div class="container-text promo">
-                            <h2>Jantar tamanho família</h2>
-                            <p class="">Promoção para reunir toda a família.</p>
-                        </div>
-                    </div>
-                </div>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+                    <li class="divider"></li>
+                    <li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+                    <li class="divider"></li>
+                    <li><a href="reserva.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal estrutura -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <div class="row">
-
-                <div class="col s12">
-                    <ul class="tabs tabs-fixed-width z-depth-1">
-                        <li class="tab col s6"><a class="active" href="#formLogin">LOGIN</a></li>
-                        <li class="tab col s6"><a href="#formCadastro">CADASTRE-SE</a></li>
-                    </ul>
-                </div>
-
-                <div id="formLogin" class="col s12 active">
-                    <form class="col s12" name="formularioDeLogin" action="reserva.html" method="POST">
-                        <br>
-                        <div class="row">
-                            <div class="col s3"></div>
-                            <div class="input-field col s6">
-                                <input placeholder="Digite seu login ou email" id="loginOuEmail" type="text" class="validate" required>
-                                <label for="loginOuEmail" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">LOGIN</label>
-                            </div>
-                            <div class="col s3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col s3"></div>
-                            <div class="input-field col s6">
-                                <input placeholder="Digite sua senha" id="senhaL" type="password" class="validate" required>
-                                <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
-                            </div>
-                            <div class="col s3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col l3 m3 s3"></div>
-                            <div class="col l3 m3 s3">
-                                <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
-                            </div>
-                            <div class="col l3 m3 s3">
-                                <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
-                            </div>
-                            <div class="col l3 m3 s3"></div>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="formCadastro" class="col s12">
-                    <form class="col s12" name="formularioDeCadastro" action="" method="POST">
-                        <br>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Digite seu nome" id="nome" type="text" class="validate" required>
-                                <label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required>
-                                <label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Digite um login" id="login" type="text" class="validate" required>
-                                <label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Digite seu email" id="email" type="email" class="validate" required>
-                                <label for="email" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required>
-                                <label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="OK">CONFIRME O EMAIL</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input placeholder="Digite sua senha" id="senha" type="password" class="validate">
-                                <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate">
-                                <label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col l3"></div>
-                            <div class="input-field col l3 m12 s12 center">
-                                <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
-                            </div>
-                            <div class="input-field col l3 m12 s12 center">
-                                <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
-                            </div>
-                            <div class="input-field col l3"></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-        <!--div class="modal-footer">
-              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">FECHAR</a>
-            </div-->
-    </div>
-
-    <footer class="page-footer grey darken-1">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Sistema de reserva</h5>
-                    <p class="grey-text text-lighten-4">
-                        Explicar alguma coisa.
-                    </p>
-
-
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Áreas de site</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                    </ul>
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Áreas de site</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright grey darken-2">
+        </nav>
+        <div class="section no-pad-bot" id="index-banner">
             <div class="container">
-                Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+                <div class="row center">
+                    <div class="carousel carousel-slider center z-depth-2 white-text" data-indicators="true">
+                        <div class="carousel-fixed-item center">
+                            <a class="btn" href="promocoes.html">PROMOÇÕES</a>
+                        </div>
+                        <div class="carousel-item" style="background: url(img/promo1.jpg), no-repeat, center;  background-size: 100% 100%;">
+                            <div class="container-text promo">
+                                <h2>Jantar Romântico</h2>
+                                <p class="">Promoção especial para surpreender a sua amada.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="background: url(img/promo2.jpg), no-repeat, center;  background-size: 100% 100%;">
+                            <div class="container-text promo">
+                                <h2>Almoço de negócios</h2>
+                                <p class="">Promoção válida por tempo limitado.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="background: url(img/promo3.jpg), no-repeat, center;  background-size: 100% 100%;">
+                            <div class="container-text promo">
+                                <h2>Jantar tamanho família</h2>
+                                <p class="">Promoção para reunir toda a família.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+
+        <!-- Modal estrutura -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <div class="row">
+
+                    <div class="col s12">
+                        <ul class="tabs tabs-fixed-width z-depth-1">
+                            <li class="tab col s6"><a class="active" href="#formLogin">LOGIN</a></li>
+                            <li class="tab col s6"><a href="#formCadastro">CADASTRE-SE</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="formLogin" class="col s12 active">
+                        <form class="col s12" name="formularioDeLogin" action="reserva.html" method="POST">
+                            <br>
+                            <div class="row">
+                                <div class="col s3"></div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu login ou email" id="loginOuEmail" type="text" class="validate" required>
+                                    <label for="loginOuEmail" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">LOGIN</label>
+                                </div>
+                                <div class="col s3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col s3"></div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite sua senha" id="senhaL" type="password" class="validate" required>
+                                    <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+                                </div>
+                                <div class="col s3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col l3 m3 s3"></div>
+                                <div class="col l3 m3 s3">
+                                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
+                                </div>
+                                <div class="col l3 m3 s3">
+                                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                                </div>
+                                <div class="col l3 m3 s3"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="formCadastro" class="col s12">
+                        <form class="col s12" name="formularioDeCadastro" action="" method="POST">
+                            <br>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu nome" id="nome" type="text" class="validate" required>
+                                    <label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required>
+                                    <label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite um login" id="login" type="text" class="validate" required>
+                                    <label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu email" id="email" type="email" class="validate" required>
+                                    <label for="email" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required>
+                                    <label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="OK">CONFIRME O EMAIL</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite sua senha" id="senha" type="password" class="validate">
+                                    <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate">
+                                    <label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l3"></div>
+                                <div class="input-field col l3 m12 s12 center">
+                                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
+                                </div>
+                                <div class="input-field col l3 m12 s12 center">
+                                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                                </div>
+                                <div class="input-field col l3"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large grey" href="#home">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </div>
+        
+        <footer class="page-footer grey darken-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Sistema de reserva</h5>
+                        <p class="grey-text text-lighten-4">
+                            Explicar alguma coisa.
+                        </p>
 
 
-    <!--  Scripts-->
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/slide.js"></script>
-</body>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Áreas de site</h5>
+                        <ul>
+                            <li><a class="white-text" href="#!">Link 1</a></li>
+                            <li><a class="white-text" href="#!">Link 2</a></li>
+                        </ul>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Áreas de site</h5>
+                        <ul>
+                            <li><a class="white-text" href="#!">Link 1</a></li>
+                            <li><a class="white-text" href="#!">Link 2</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright grey darken-2">
+                <div class="container">
+                    Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+                </div>
+            </div>
+        </footer>
+
+
+        <!--  Scripts-->
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script>
+        <script src="js/slide.js"></script>
+    </body>
 
 </html>
