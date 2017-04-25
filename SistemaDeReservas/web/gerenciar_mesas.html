@@ -3,9 +3,9 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
         <title>Sistema de reserva</title>
+
         <!-- CSS  -->
         <link href="css/material-icons.css" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" />
@@ -19,7 +19,7 @@
             <div class="nav-wrapper container">
                 <div class="brand-logo logo"></div>
                 <ul class="right hide-on-med-and-down">
-                    <li><a class="center-align" href="index.html"><i class="fa fa-home" aria-hidden="true"></i>  INICIO</a></li>
+                    <li><a class="center-align" href="index.html" name="home"><i class="fa fa-home" aria-hidden="true"></i>  INICIO</a></li>
                     <li>
                         <a class="dropdown-button largura-personalizada center-align" href="#!" data-activates="dropdownGerenciar"><i class="fa fa-cogs" aria-hidden="true"></i>  GERENCIAR</a>
                         <ul id="dropdownGerenciar" class="dropdown-content">
@@ -37,9 +37,9 @@
                     <li><a class="center-align" href="relatorios.html"><i class="fa fa-bar-chart" aria-hidden="true"></i>  RELATÓRIOS</a></li>
                     <li><a class="dropdown-button center-align" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i>  Nome</a>
                         <ul id="dropdown-usuario" class="dropdown-content">
-                            <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>  Perfil</a></li>
+                            <li><a href="perfil.html"><i class="fa fa-id-card-o" aria-hidden="true"></i>  Perfil</a></li>
                             <li class="divider"></li>
-                            <li><a href="#!"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</a></li>
+                            <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -65,9 +65,9 @@
                     <li class="divider"></li>
                     <li><a class="dropdown-button" data-activates="dropdown-usuario-m" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>  Nome</a>
                         <ul id="dropdown-usuario-m" class="dropdown-content">
-                            <li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>  Perfil</a></li>
+                            <li><a href="perfil.html"><i class="fa fa-id-card-o" aria-hidden="true"></i>  Perfil</a></li>
                             <li class="divider"></li>
-                            <li><a href="#!"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</a></li>
+                            <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -77,13 +77,15 @@
         <div class="section">
             <div class="container row">
                 <div class="row s12 z-depth-2">
-                    <ul class="tabs tabs-fixed-width z-depth-1">
-                        <li class="tab col"><a href="#adm-view">MESAS</a></li>
-                        <li class="tab col"><a href="#adm-add">CADASTRO DE MESAS</a></li>
-                    </ul>
+                    <div class="container">
+                        <ul class="tabs tabs-fixed-width z-depth-1">
+                            <li class="tab col"><a href="#adm-view">MESAS</a></li>
+                            <li class="tab col"><a href="#adm-add">CADASTRO DE MESAS</a></li>
+                        </ul>
+                    </div>
                     <div id="adm-view" class="col s12">
                         <div class="col s12">
-                            <table class="bordered">
+                            <table class="bordered responsive-table">
                                 <thead>
                                     <tr>
                                         <th>Identificação</th>
@@ -100,8 +102,8 @@
                                         <td>Mesa próxima ao bar.</td>
                                         <td><a href="#" onclick="mostrarImagemMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
                                         <td>
-                                            <a href="#" onclick="editarMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a href="#" onclick="excluirMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" onclick="editarMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Editar"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="#" onclick="excluirMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Excluir"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -110,8 +112,8 @@
                                         <td>Mesa próxima ao bar.</td>
                                         <td><a href="#" onclick="mostrarImagemMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
                                         <td>
-                                            <a href="#" onclick="editarMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a href="#" onclick="excluirMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" onclick="editarMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Editar"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="#" onclick="excluirMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Excluir"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -120,8 +122,8 @@
                                         <td>Mesa próxima ao bar.</td>
                                         <td><a href="#" onclick="mostrarImagemMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
                                         <td>
-                                            <a href="#" onclick="editarMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a href="#" onclick="excluirMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Imagem da Mesa 1A"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" onclick="editarMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Editar"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="#" onclick="excluirMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})" title="Excluir"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
