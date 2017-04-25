@@ -1,32 +1,32 @@
 var eventos = [
     {
         id: 1,
-        title: 'Adriano da Silva Santos | (61) 9999-9999',
+        title: 'Nome do cliente: Adriano da Silva Santos \nTelefone:(61) 9999-9999',
         start: '2017-04-16T11:00:00',
         end: '2017-04-16T13:00:00'
     },
     {
         id: 2,
-        title: 'Kleber',
+        title: 'Nome do cliente: Kleber Silveira Santos \nTelefone:(61) 9999-9999',
         start: '2017-04-16T13:00:00',
         end: '2017-04-16T14:00:00'
     },
     {
         id: 3,
-        title: 'Maria',
+        title: 'Nome do cliente: Maria Cristina da Silva \nTelefone:(61) 9999-9999',
         start: '2017-04-16T14:00:00',
         end: '2017-04-16T14:45:00'
     },
     {
         id: 3,
-        title: 'Maria',
+        title: 'Nome do cliente: José Antonio da Costa \nTelefone:(61) 9999-9999',
         start: '2017-04-18T19:00:00',
         end: '2017-04-18T20:30:00'
     },
     {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: '2017-04-28'
+        title: 'Nome do cliente: Carlos Eduardo Pinheiro \nTelefone:(61) 9999-9999',
+        start: '2017-04-18T20:30:00',
+        end: '2017-04-18T21:30:00'
     }
 ];
 
@@ -78,7 +78,7 @@ function agendaStart(horaInicio, horaFim) {
         eventClick: function (calEvent, jsEvent, view) {
             var html;
             html =  '<h5 class="center-align">DADOS DO AGENDAMENTO</h5>';
-            html += '<p class="cen"><b>Cliente:</b> '+calEvent.title;
+            html += '<p class="cen"><b>Cliente:</b> '+calEvent.title.substring(15,40);
             html += '<br>';
             html += '<b>Telefone:</b> (61)99999-9999';
             html += '<br>';
