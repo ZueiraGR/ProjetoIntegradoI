@@ -7425,7 +7425,7 @@ DatePicker.defaults = (function( prefix ) {
 
 
             // Materialize Added klasses
-            date_display: prefix + 'date-display',
+            date_display: prefix + 'date-display hide',
             day_display: prefix + 'day-display',
             month_display: prefix + 'month-display',
             year_display: prefix + 'year-display',
