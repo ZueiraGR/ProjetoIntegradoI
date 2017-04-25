@@ -154,6 +154,104 @@
                 </li>
             </ul>
         </div>
+        <!-- Modal estrutura -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <div class="row">
+
+                    <div class="col s12">
+                        <ul class="tabs tabs-fixed-width z-depth-1">
+                            <li class="tab col s6"><a class="active" href="#formLogin">LOGIN</a></li>
+                            <li class="tab col s6"><a href="#formCadastro">CADASTRE-SE</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="formLogin" class="col s12 active">
+                        <form class="col s12" name="formularioDeLogin" action="reserva.html" method="POST">
+                            <br>
+                            <div class="row">
+                                <div class="col s3"></div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu login ou email" id="loginOuEmail" type="text" class="validate" required>
+                                    <label for="loginOuEmail" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">LOGIN</label>
+                                </div>
+                                <div class="col s3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col s3"></div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite sua senha" id="senhaL" type="password" class="validate" required>
+                                    <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+                                </div>
+                                <div class="col s3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col l3 m3 s3"></div>
+                                <div class="col l3 m3 s3">
+                                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
+                                </div>
+                                <div class="col l3 m3 s3">
+                                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                                </div>
+                                <div class="col l3 m3 s3"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="formCadastro" class="col s12">
+                        <form class="col s12" name="formularioDeCadastro" action="" method="POST">
+                            <br>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu nome" id="nome" type="text" class="validate" required>
+                                    <label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required>
+                                    <label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite um login" id="login" type="text" class="validate" required>
+                                    <label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu email" id="email" type="email" class="validate" required>
+                                    <label for="email" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required>
+                                    <label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="OK">CONFIRME O EMAIL</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite sua senha" id="senha" type="password" class="validate">
+                                    <label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate">
+                                    <label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l3"></div>
+                                <div class="input-field col l3 m12 s12 center">
+                                    <button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
+                                </div>
+                                <div class="input-field col l3 m12 s12 center">
+                                    <button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+                                </div>
+                                <div class="input-field col l3"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--  Scripts-->
         <script src="js/jquery-2.1.1.js "></script>
         <script src="js/materialize.js "></script>
