@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>Sistema de reserva</title>
+
+<!-- CSS  -->
+<link href="css/material-icons.css" rel="stylesheet">
+<link href="css/materialize.css" type="text/css" rel="stylesheet" />
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
+<link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="grey darken-1" role="navigation">
+		<div class="nav-wrapper container">
+			<div class="brand-logo logo"></div>
+			<ul class="right hide-on-med-and-down">
+				<li><a class="center-align" href="index.html"><i
+						class="fa fa-home" aria-hidden="true"></i> INICIO</a></li>
+				<li><a
+					class="dropdown-button largura-personalizada center-align"
+					href="#!" data-activates="dropdownGerenciar"><i
+						class="fa fa-cogs" aria-hidden="true"></i> GERENCIAR</a>
+					<ul id="dropdownGerenciar" class="dropdown-content">
+						<li><a href="gerenciar_clientes.html"><i
+								class="fa fa-users" aria-hidden="true"></i> CLIENTES</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_funcionarios.html"><i
+								class="fa fa-address-card-o" aria-hidden="true"></i>
+								FUNCIONÁRIOS</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_horarios.html"><i
+								class="fa fa-clock-o" aria-hidden="true"></i> HORÁRIO DE
+								ATENDIMENTO</a></li>
+						<li class="divider"></li>
+						<li><a href="#!"><i class="fa fa-pencil-square-o"
+								aria-hidden="true"></i> MESAS</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_promocoes.html"><i
+								class="fa fa-tags" aria-hidden="true"></i> PROMOÇÕES</a></li>
+					</ul></li>
+				<li><a class="center-align" href="relatorios.html"><i
+						class="fa fa-bar-chart" aria-hidden="true"></i> RELATÓRIOS</a></li>
+				<li><a class="dropdown-button center-align" href="#!"
+					data-activates="dropdown-usuario"><i class="fa fa-user-circle"
+						aria-hidden="true"></i> Nome</a>
+					<ul id="dropdown-usuario" class="dropdown-content">
+						<li><a href="perfil.html"><i class="fa fa-id-card-o"
+								aria-hidden="true"></i> Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="index.html"><i class="fa fa-sign-out"
+								aria-hidden="true"></i> Sair</a></li>
+					</ul></li>
+			</ul>
+			<ul id="nav-mobile" class="side-nav">
+				<li><a href="index.html"><i class="fa fa-home"
+						aria-hidden="true"></i> INICIO</a></li>
+				<li class="divider"></li>
+				<li><a class="dropdown-button" href="#!"
+					data-activates="dropdownGerenciar-m"><i class="fa fa-cogs"
+						aria-hidden="true"></i> GERENCIAR</a>
+					<ul id="dropdownGerenciar-m" class="dropdown-content">
+						<li><a href="gerenciar_clientes.html"><i
+								class="fa fa-users" aria-hidden="true"></i> CLIENTES</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_funcionarios.html"><i
+								class="fa fa-address-card-o" aria-hidden="true"></i>
+								FUNCIONÁRIOS</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_horarios.html"><i
+								class="fa fa-clock-o" aria-hidden="true"></i> HORÁRIO DE
+								ATENDIMENTO</a></li>
+						<li class="divider"></li>
+						<li><a href="#!"><i class="fa fa-pencil-square-o"
+								aria-hidden="true"></i> MESAS</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_promocoes.html"><i
+								class="fa fa-tags" aria-hidden="true"></i> PROMOÇÕES</a></li>
+					</ul></li>
+				<li class="divider"></li>
+				<li><a href="relatorios.html"><i class="fa fa-bar-chart"
+						aria-hidden="true"></i> RELATÓRIOS</a></li>
+				<li class="divider"></li>
+				<li><a class="dropdown-button"
+					data-activates="dropdown-usuario-m" href="#"><i
+						class="fa fa-user-circle" aria-hidden="true"></i> Nome</a>
+					<ul id="dropdown-usuario-m" class="dropdown-content">
+						<li><a href="perfil.html"><i class="fa fa-id-card-o"
+								aria-hidden="true"></i> Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="index.html"><i class="fa fa-sign-out"
+								aria-hidden="true"></i> Sair</a></li>
+					</ul></li>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i
+				class="material-icons">menu</i></a>
+		</div>
+	</nav>
+	<div class="section">
+		<div class="container row">
+			<div class="row s12 z-depth-2">
+				<div>
+					<ul class="tabs tabs-fixed-width z-depth-1">
+						<li class="tab col"><a href="#adm-view">MESAS</a></li>
+						<li class="tab col"><a href="#adm-add">CADASTRO DE MESAS</a></li>
+					</ul>
+				</div>
+				<div id="adm-view" class="col s12">
+					<div class="col s12">
+						<table class="bordered responsive-table">
+							<thead>
+								<tr>
+									<th>Identificação</th>
+									<th>Qtd. cadeiras</th>
+									<th>Descricao</th>
+									<th>Imagem</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1A</td>
+									<td>6</td>
+									<td>Mesa próxima ao bar.</td>
+									<td><a href="#"
+										onclick="mostrarImagemMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
+									<td><a href="#"
+										onclick="editarMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Editar"><i class="fa fa-pencil-square-o"></i></a> <a
+										href="#"
+										onclick="excluirMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Excluir"><i class="fa fa-trash-o"></i></a></td>
+								</tr>
+								<tr>
+									<td>1B</td>
+									<td>4</td>
+									<td>Mesa próxima ao bar.</td>
+									<td><a href="#"
+										onclick="mostrarImagemMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
+									<td><a href="#"
+										onclick="editarMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Editar"><i class="fa fa-pencil-square-o"></i></a> <a
+										href="#"
+										onclick="excluirMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Excluir"><i class="fa fa-trash-o"></i></a></td>
+								</tr>
+								<tr>
+									<td>1C</td>
+									<td>8</td>
+									<td>Mesa próxima ao bar.</td>
+									<td><a href="#"
+										onclick="mostrarImagemMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
+									<td><a href="#"
+										onclick="editarMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Editar"><i class="fa fa-pencil-square-o"></i></a> <a
+										href="#"
+										onclick="excluirMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
+										title="Excluir"><i class="fa fa-trash-o"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="adm-add" class="col s12">
+
+					<form class="col s12" name="CadastroDeMesa" action="" method="POST">
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="12" id="numero" type="text" class="validate"
+									required> <label for="numero"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="Ok">IDENTIFICAÇÃO</label>
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="4" id="cadeiras" type="number"
+									class="validate" required> <label for="cadeiras"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="Ok">QUANTIDADE DE CADEIRAS</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<textarea id="textarea1" class="materialize-textarea"
+									maxlength="50" required></textarea>
+								<label for="textarea1"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="Ok">DESCRIÇÃO</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="file-field input-field col s12">
+								<div class="btn grey">
+									<span>SELECIONAR IMAGEM</span> <input type="file">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col l3"></div>
+							<div class="input-field col l3">
+								<button class="btn grey waves-effect waves-green col l12"
+									type="submit">CADASTRAR</button>
+							</div>
+							<div class="input-field col l3">
+								<button class="btn grey waves-effect waves-red col l12"
+									type="reset">CANCELAR</button>
+							</div>
+							<div class="input-field col l3"></div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--JANELAS MODAIS =================================================-->
+	<div id="modalMostrarImagemMesa" class="modal">
+		<div class="modal-content" id="corpoMostrarImagemMesa"></div>
+		<div class="modal-footer">
+			<div class="row">
+				<div
+					class="center-align modal-close waves-effect waves-red col l12 m12 s12">
+					<i class="fa fa-close" aria-hidden="true"></i>&nbsp;&nbsp;FECHAR
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="modalFormEdicaoMesa" class="modal">
+		<div class="modal-content" id="corpoFormEdicaoMesa">
+			<form class="col s12" name="EdicaoDeMesa" action="" method="POST">
+				<input type="hidden" name="chaveMesa" id="chaveMesa"> <br>
+				<div class="row">
+					<div class="input-field col s6">
+						<input placeholder="12" id="numeroMesa" type="text"
+							class="validate" required> <label for="numeroMesa"
+							data-error="Prenchimento deste campo é obrigatório!"
+							data-success="Ok">IDENTIFICAÇÃO</label>
+					</div>
+					<div class="input-field col s6">
+						<input placeholder="4" id="qtdCadeirasMesa" type="number"
+							class="validate" required> <label for="qtdCadeirasMesa"
+							data-error="Prenchimento deste campo é obrigatório!"
+							data-success="Ok">QUANTIDADE DE CADEIRAS</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea id="descricaoMesa" class="materialize-textarea"
+							maxlength="50" required></textarea>
+						<label for="descricaoMesa"
+							data-error="Prenchimento deste campo é obrigatório!"
+							data-success="Ok">DESCRIÇÃO</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="file-field input-field col s12">
+						<div class="btn grey">
+							<span>SELECIONAR IMAGEM</span> <input type="file">
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col l3"></div>
+					<div class="input-field col l3">
+						<button class="btn grey waves-effect waves-green col l12"
+							type="submit">SALVAR ALTERAÇÕES</button>
+					</div>
+					<div class="input-field col l3">
+						<button
+							class="btn grey modal-action modal-close waves-effect waves-red col l12"
+							type="reset">CANCELAR</button>
+					</div>
+					<div class="input-field col l3"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="modalExcluirMesa" class="modal">
+		<div class="modal-content" id="corpoExcluirMesa"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col l6 m6 s6 center">
+					<a class="btn grey modal-close waves-effect waves-green">CONFIRMAR</a>
+				</div>
+				<div class="col l6 m6 s6 center">
+					<a class="btn grey modal-close waves-effect waves-red">CANCELAR</a>
+				</div>
+			</div>
+			<div class="row"></div>
+		</div>
+	</div>
+	<!--FIM JANELAS MODAIS =================================================-->
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large grey" id="scrollToTop"
+			style="display: none;"> <i class="fa fa-chevron-up"></i>
+		</a>
+	</div>
+	<footer class="page-footer grey darken-1">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Sistema de reserva</h5>
+					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Áreas de site</h5>
+					<ul>
+						<li><a class="white-text" href="#!">HOME</a></li>
+						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
+						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright grey darken-2">
+			<div class="container">
+				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+			</div>
+		</div>
+	</footer>
+
+	<!--  Scripts-->
+	<script src="js/jquery-2.1.1.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script src="js/slide.js"></script>
+	<script src="js/mesaScripts.js"></script>
+
+</body>
+
+</html>

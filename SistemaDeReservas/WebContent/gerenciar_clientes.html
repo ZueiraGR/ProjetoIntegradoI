@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>Sistema de reserva</title>
+
+<!-- CSS  -->
+<link href="css/material-icons.css" rel="stylesheet">
+<link href="css/materialize.css" type="text/css" rel="stylesheet" />
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
+<link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="grey darken-1" role="navigation">
+		<div class="nav-wrapper container">
+			<div class="brand-logo logo"></div>
+			<ul class="right hide-on-med-and-down">
+				<li><a class="center-align" href="index.html"><i
+						class="fa fa-home" aria-hidden="true"></i> INICIO</a></li>
+				<li><a
+					class="dropdown-button largura-personalizada center-align"
+					href="#!" data-activates="dropdownGerenciar"><i
+						class="fa fa-cogs" aria-hidden="true"></i> GERENCIAR</a>
+					<ul id="dropdownGerenciar" class="dropdown-content">
+						<li><a href="gerenciar_clientes.html"><i
+								class="fa fa-users" aria-hidden="true"></i> CLIENTES</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_funcionarios.html"><i
+								class="fa fa-address-card-o" aria-hidden="true"></i>
+								FUNCIONÁRIOS</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_horarios.html"><i
+								class="fa fa-clock-o" aria-hidden="true"></i> HORÁRIO DE
+								ATENDIMENTO</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_mesas.html"><i
+								class="fa fa-pencil-square-o" aria-hidden="true"></i> MESAS</a></li>
+						<li class="divider"></li>
+						<li><a href="#!"><i class="fa fa-tags" aria-hidden="true"></i>
+								PROMOÇÕES</a></li>
+					</ul></li>
+				<li><a class="center-align" href="relatorios.html"><i
+						class="fa fa-bar-chart" aria-hidden="true"></i> RELATÓRIOS</a></li>
+				<li><a class="dropdown-button center-align" href="#!"
+					data-activates="dropdown-usuario"><i class="fa fa-user-circle"
+						aria-hidden="true"></i> Nome</a>
+					<ul id="dropdown-usuario" class="dropdown-content">
+						<li><a href="perfil.html"><i class="fa fa-id-card-o"
+								aria-hidden="true"></i> Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="index.html"><i class="fa fa-sign-out"
+								aria-hidden="true"></i> Sair</a></li>
+					</ul></li>
+			</ul>
+			<ul id="nav-mobile" class="side-nav">
+				<li><a href="index.html"><i class="fa fa-home"
+						aria-hidden="true"></i> INICIO</a></li>
+				<li class="divider"></li>
+				<li><a class="dropdown-button" href="#!"
+					data-activates="dropdownGerenciar-m"><i class="fa fa-cogs"
+						aria-hidden="true"></i> GERENCIAR</a>
+					<ul id="dropdownGerenciar-m" class="dropdown-content">
+						<li><a href="gerenciar_clientes.html"><i
+								class="fa fa-users" aria-hidden="true"></i> CLIENTES</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_funcionarios.html"><i
+								class="fa fa-address-card-o" aria-hidden="true"></i>
+								FUNCIONÁRIOS</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_horarios.html"><i
+								class="fa fa-clock-o" aria-hidden="true"></i> HORÁRIO DE
+								ATENDIMENTO</a></li>
+						<li class="divider"></li>
+						<li><a href="gerenciar_mesas.html"><i
+								class="fa fa-pencil-square-o" aria-hidden="true"></i> MESAS</a></li>
+						<li class="divider"></li>
+						<li><a href="#!"><i class="fa fa-tags" aria-hidden="true"></i>
+								PROMOÇÕES</a></li>
+					</ul></li>
+				<li class="divider"></li>
+				<li><a href="relatorios.html"><i class="fa fa-bar-chart"
+						aria-hidden="true"></i> RELATÓRIOS</a></li>
+				<li class="divider"></li>
+				<li><a class="dropdown-button"
+					data-activates="dropdown-usuario-m" href="#"><i
+						class="fa fa-user-circle" aria-hidden="true"></i> Nome</a>
+					<ul id="dropdown-usuario-m" class="dropdown-content">
+						<li><a href="perfil.html"><i class="fa fa-id-card-o"
+								aria-hidden="true"></i> Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="index.html"><i class="fa fa-sign-out"
+								aria-hidden="true"></i> Sair</a></li>
+					</ul></li>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i
+				class="material-icons">menu</i></a>
+		</div>
+	</nav>
+
+	<div class="section">
+		<div class="container">
+			<div class="row s12 z-depth-2">
+				<div class="">
+					<ul class="tabs tabs-fixed-width z-depth-1">
+						<li class="tab col s12"><a href="#adm-view">CLIENTES</a></li>
+					</ul>
+				</div>
+				<div id="adm-view" class="col s12">
+					<table class="bordered responsive-table">
+						<thead>
+							<tr>
+								<th>Login</th>
+								<th>Nome</th>
+								<th>Sobrenome</th>
+								<th>CPF</th>
+								<th>telefone</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>maria.jose</td>
+								<td>Maria José</td>
+								<td>Vieira</td>
+								<td>123.123.123-12</td>
+								<td>(61)99999-9999</td>
+								<td><a href="#" onclick="abrirInformacoes()"
+									title="Mais informações"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></a> <a href="#" onclick="editar()"
+									title="Editar"><i class="fa fa-pencil-square-o"
+										aria-hidden="true"></i></a> <a href="#"
+									onclick="bloquearOuDesbloquear('bloquear')" title="Bloquear"><i
+										class="fa fa-ban" aria-hidden="true"></i></a> <a href="#"
+									onclick="excluir()" title="Excluir"><i
+										class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+							</tr>
+							<tr>
+								<td>james.bond</td>
+								<td>James</td>
+								<td>Bond</td>
+								<td>123.123.123-12</td>
+								<td>(61)99999-9999</td>
+								<td><a href="#" onclick="abrirInformacoes()"
+									title="Mais informações"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></a> <a href="#" onclick="editar()"
+									title="Editar"><i class="fa fa-pencil-square-o"
+										aria-hidden="true"></i></a> <a href="#"
+									onclick="bloquearOuDesbloquear('desbloquear')" title="Bloquear"><i
+										class="fa fa-unlock" aria-hidden="true"></i></a> <a href="#"
+									onclick="excluir()" title="Excluir"><i
+										class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+							</tr>
+							<tr>
+								<td>victor.santos</td>
+								<td>Victor</td>
+								<td>Santos Andrade</td>
+								<td>123.123.123-12</td>
+								<td>(61)99999-9999</td>
+								<td><a href="#" onclick="abrirInformacoes()"
+									title="Mais informações"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></a> <a href="#" onclick="editar()"
+									title="Editar"><i class="fa fa-pencil-square-o"
+										aria-hidden="true"></i></a> <a href="#"
+									onclick="bloquearOuDesbloquear('bloquear')" title="Bloquear"><i
+										class="fa fa-ban" aria-hidden="true"></i></a> <a href="#"
+									onclick="excluir()" title="Excluir"><i
+										class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--JANELAS MODAIS=========================================-->
+	<div class="modal" id="confirmarBloqueioOuDesbloqueio">
+		<div class="modal-content" id="mesagemBloqueio"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col l6 m6 s6 center">
+					<a class="btn grey modal-close waves-effect waves-green">CONFIRMAR</a>
+				</div>
+				<div class="col l6 m6 s6 center">
+					<a class="btn grey modal-close waves-effect waves-red">CANCELAR</a>
+				</div>
+			</div>
+			<div class="row"></div>
+		</div>
+	</div>
+	<div class="modal" id="confirmarExclusao">
+		<div class="modal-content">
+			<p class="center-align">Deseja realmente excluir o cliente Maria
+				José Vieira?</p>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col l6 m6 s6 center">
+					<a class="btn grey modal-close waves-effect waves-green">CONFIRMAR</a>
+				</div>
+				<div class="col l6 m6 s6 center">
+					<a class="btn grey modal-close waves-effect waves-red">CANCELAR</a>
+				</div>
+			</div>
+			<div class="row"></div>
+		</div>
+	</div>
+	<div class="modal" id="informacoesCliente">
+		<div class="modal-content">
+			<div class="container">
+				<div class="row">
+					<div class="col s6 l6 m6">
+						<b>Nome:</b>&nbsp;Maria José
+					</div>
+					<div class="col s6 l6 m6">
+						<b>Sobrenome:</b>&nbsp;Vieira
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s6 l6 m6">
+						<b>cpf</b>&nbsp;123.123.123-12
+					</div>
+					<div class="col s6 l6 m6">
+						<b>login</b>&nbsp;maria.jose
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s6 l6 m6">
+						<b>Telefone:</b>&nbsp;(61)99999-9999
+					</div>
+					<div class="col s6 l6 m6">
+						<b>E-mail:</b>&nbsp;maria.jose@teste.com
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s6 l6 m6">
+						<b>Status:</b>&nbsp;Ativo
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div class="row">
+				<div
+					class="center-align modal-close waves-effect waves-red col l12 m12 s12">
+					<i class="fa fa-close" aria-hidden="true"></i>&nbsp;&nbsp;FECHAR
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="alterardados">
+		<div class="modal-content">
+			<div class="col s12">
+				<form class="form col s12" name="AlterarDadosDeFuncionario"
+					action="" method="POST">
+					<br>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="João" id="nome" type="text" class="validate"
+								required> <label for="nome"
+								data-error="Prenchimento deste campo é obrigatório!"
+								data-success="Ok">NOME</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="Silva" id="sobrenome" type="text"
+								class="validate" required> <label for="sobrenome"
+								data-error="Prenchimento deste campo é obrigatório!"
+								data-success="Ok">SOBRENOME</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input maxlength="12" placeholder="61 98899-7755" id="telefone"
+								type="tel" class="validate" required> <label
+								for="telefone" data-error="Insira um telefone!"
+								data-success="Ok">TELEFONE</label>
+						</div>
+						<div class="input-field col s6">
+							<input maxlength="14" placeholder="123.123.123-12" id="cpf"
+								type="text" class="validate" required> <label for="cpf"
+								data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="joaosilva" id="login" type="text"
+								class="validate" required> <label for="login"
+								data-error="Digite um login válido!" data-success="Ok">LOGIN</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="joaos@email.com" id="email" type="email"
+								class="validate" required> <label for="email"
+								data-error="Digite um e-mail válido!" data-success="Ok">EMAIL</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="joaos@email.com" id="confirmaEmail"
+								type="email" class="validate" required> <label
+								for="confirmaEmail" data-error="Digite um e-mail válido!"
+								data-success="Ok">CONFIRME O EMAIL</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="*******" id="senha" type="password"
+								class="validate"> <label for="senha"
+								data-error="Prenchimento deste campo é obrigatório!"
+								data-success="Ok">SENHA</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="*******" id="confirmaSenha" type="password"
+								class="validate"> <label for="confirmaSenha"
+								data-error="Prenchimento deste campo é obrigatório!"
+								data-success="Ok">CONFIRME A SENHA</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l3"></div>
+						<div class="input-field col l3">
+							<button
+								class="btn grey waves-effect waves-green col l6 modal-action modal-close col s12 l12 m12"
+								type="submit">CONFIRMAR</button>
+						</div>
+						<div class="input-field col l3">
+							<button
+								class="btn grey waves-effect waves-green col l6 modal-action modal-close col s12 l12 m12"
+								type="reset">CANCELAR</button>
+						</div>
+						<div class="input-field col l3"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!--FIM JANELAS MODAIS===========================================-->
+
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large grey" id="scrollToTop"
+			style="display: none;"> <i class="fa fa-chevron-up"></i>
+		</a>
+	</div>
+
+	<footer class="page-footer grey darken-1">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Sistema de reserva</h5>
+					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Áreas de site</h5>
+					<ul>
+						<li><a class="white-text" href="#!">HOME</a></li>
+						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
+						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright grey darken-2">
+			<div class="container">
+				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+			</div>
+		</div>
+	</footer>
+
+	<!--  Scripts-->
+	<script src="js/jquery-2.1.1.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script src="js/slide.js"></script>
+	<script src="js/clientesScripts.js"></script>
+
+</body>
+
+</html>

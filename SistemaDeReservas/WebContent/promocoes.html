@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>Sistema de reserva</title>
+
+<!-- CSS  -->
+<link href="css/material-icons.css" rel="stylesheet">
+<link href="css/materialize.css" type="text/css" rel="stylesheet" />
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
+<link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="grey darken-1" role="navigation">
+		<div class="nav-wrapper container">
+			<div class="logo brand-logo"></div>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="index.html"><i class="fa fa-home"
+						aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+				<li><a href="#!"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+				<li><a href='reserva.html'><i class="fa fa-pencil-square-o"
+						aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+				<li><a data-target="modal1"><i class="fa fa-sign-in"
+						aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
+			</ul>
+
+			<ul id="nav-mobile" class="side-nav">
+				<li><a href="index.html"><i class="fa fa-home"
+						aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+				<li class="divider"></li>
+				<li><a href="#!"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+				<li class="divider"></li>
+				<li><a href="reserva.html"><i class="fa fa-pencil-square-o"
+						aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+				<li class="divider"></li>
+				<li><a href="#" data-target="modal1"><i
+						class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;ENTRAR</a></li>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i
+				class="material-icons">menu</i></a>
+		</div>
+	</nav>
+	<br />
+	<div class="row container center">
+
+		<div class="l12 m12 s12 row z-depth-2 white-text"
+			style="background: url(img/promo1.jpg), no-repeat, center; background-size: 100% 100%; height: 400px;">
+			<br>
+			<div class="container-text promo">
+				<h4>Jantar Romântico</h4>
+				<p class="">Promoção especial para surpreender a sua amada.</p>
+			</div>
+			<a class="waves-effect waves-light btn" style="bottom: -14em;"
+				data-target="promo">SAIBA MAIS</a>
+		</div>
+		<div class="l12 m12 s12 row z-depth-2 white-text"
+			style="background: url(img/promo2.jpg), no-repeat, center; background-size: 100% 100%; height: 400px;">
+			<br>
+			<div class="container-text promo">
+				<h4>Almoço de negócios</h4>
+				<p class="">Promoção válida por tempo limitado.</p>
+			</div>
+			<a class="waves-effect waves-light btn" style="bottom: -14em;"
+				data-target="promo">SAIBA MAIS</a>
+		</div>
+		<div class="l12 m12 s12 row z-depth-2 white-text"
+			style="background: url(img/promo3.jpg), no-repeat, center; background-size: 100% 100%; height: 400px;">
+			<br>
+			<div class="container-text promo">
+				<h4>Jantar tamanho família</h4>
+				<p class=" ">Promoção para reunir toda a família.</p>
+			</div>
+			<a class="waves-effect waves-light btn " style="bottom: -14em;"
+				data-target="promo">SAIBA MAIS</a>
+		</div>
+	</div>
+
+	<div class="modal" id="promo">
+		<ul class="row tabs tabs-fixed-width z-depth-1 ">
+			<li class="tab col "><a>PROMOCÕES</a></li>
+		</ul>
+		<div class="row center ">
+			<br /> Coloque aqui o detalhamento da promoção...
+		</div>
+
+		<ul class="collapsible " style="margin-bottom: 0px"
+			data-collapsible="accordion ">
+			<li>
+				<div class="collapsible-header center ">
+					<a>Reserva rápida</a>
+				</div>
+				<div class="collapsible-body ">
+					<form id="agendamentoRapidoForm" name="agendamentoRapidoForm"
+						method="POST" enctype="multipart/form-data">
+						<div class="row ">
+							<div class="input-field col s12 l6 m6 ">
+								<input placeholder="1" id="qtdCadeiras" type="number" required
+									max="20" min="1" value="1"> <label for="qtdCadeiras">QUANTIDADE
+									DE CADEIRAS</label>
+							</div>
+							<div class="input-field col s12 l6 m6 ">
+								<input
+									placeholder="Digite aqui o código token fornecido pelo atendente. "
+									id="token" type="text" required maxlength="10" minlength="10"
+									class="validate"> <label for="qtdCadeiras"
+									data-sucess='OK'
+									data-error='Este campo deve ser preenchido com o código de 10 dígitos fornecido pelo atendente.'>TOKEN</label>
+							</div>
+						</div>
+						<div class="row hiddendiv" id="campoHoraInicio">
+							<div class="input-field col s12 l6 m6 ">
+								<input type="checkbox" id="horarioDefinido"
+									name="horarioDefinido"> <label for="horarioDefinido">HORÁRIO
+									DEFINIDO</label>
+							</div>
+							<div class="input-field col s12 l6 m6 ">
+								<input placeholder="hh:mm" id="horaInicio" name="horaInicio"
+									type="text" maxlength="5" onchange="validaHora()"> <label
+									for="horaInicio">HORA</label>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="input-field col l3 "></div>
+							<div class="input-field col l3 m12 s12 center ">
+								<button
+									class="btn grey waves-effect waves-green col l12 m12 s12"
+									type="submit">CONFIRMAR</button>
+							</div>
+							<div class="input-field col l3 m12 s12 center ">
+								<button
+									class="btn grey modal-close waves-effect waves-red col l12 m12 s12"
+									type="reset">CANCELAR</button>
+							</div>
+							<div class="input-field col l3 "></div>
+						</div>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!-- Modal estrutura -->
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+			<div class="row">
+
+				<div class="col s12">
+					<ul class="tabs tabs-fixed-width z-depth-1">
+						<li class="tab col s6"><a class="active" href="#formLogin">LOGIN</a></li>
+						<li class="tab col s6"><a href="#formCadastro">CADASTRE-SE</a></li>
+					</ul>
+				</div>
+
+				<div id="formLogin" class="col s12 active">
+					<form class="col s12" name="formularioDeLogin"
+						action="reserva.html" method="POST">
+						<br>
+						<div class="row">
+							<div class="col s3"></div>
+							<div class="input-field col s6">
+								<input placeholder="Digite seu login ou email" id="loginOuEmail"
+									type="text" class="validate" required> <label
+									for="loginOuEmail"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="OK">LOGIN</label>
+							</div>
+							<div class="col s3"></div>
+						</div>
+						<div class="row">
+							<div class="col s3"></div>
+							<div class="input-field col s6">
+								<input placeholder="Digite sua senha" id="senhaL"
+									type="password" class="validate" required> <label
+									for="email"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="OK">SENHA</label>
+							</div>
+							<div class="col s3"></div>
+						</div>
+						<div class="row">
+							<div class="col l3 m3 s3"></div>
+							<div class="col l3 m3 s3">
+								<button
+									class="btn grey waves-effect waves-green col l12 m12 s12"
+									type="submit">ENTRAR</button>
+							</div>
+							<div class="col l3 m3 s3">
+								<button
+									class="btn grey modal-close waves-effect waves-red col l12 m12 s12"
+									type="reset">CANCELAR</button>
+							</div>
+							<div class="col l3 m3 s3"></div>
+						</div>
+					</form>
+				</div>
+
+				<div id="formCadastro" class="col s12">
+					<form class="col s12" name="formularioDeCadastro" action=""
+						method="POST">
+						<br>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite seu nome" id="nome" type="text"
+									class="validate" required> <label for="nome"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="OK">NOME</label>
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite seu sobrenome nome" id="sobrenome"
+									type="text" class="validate" required> <label
+									for="sobrenome"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="OK">SOBRENOME</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite um login" id="login" type="text"
+									class="validate" required> <label for="login"
+									data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite seu email" id="email" type="email"
+									class="validate" required> <label for="email"
+									data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite seu email" id="confirmaEmail"
+									type="email" class="validate" required> <label
+									for="confirmaEmail" data-error="Digite um e-mail válido!"
+									data-success="OK">CONFIRME O EMAIL</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite sua senha" id="senha" type="password"
+									class="validate"> <label for="email"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="OK">SENHA</label>
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite sua senha" id="confirmaSenha"
+									type="password" class="validate"> <label
+									for="confirmaSenha"
+									data-error="Prenchimento deste campo é obrigatório!"
+									data-success="OK">CONFIRME A SENHA</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col l3"></div>
+							<div class="input-field col l3 m12 s12 center">
+								<button
+									class="btn grey waves-effect waves-green col l12 m12 s12"
+									type="submit">ENTRAR</button>
+							</div>
+							<div class="input-field col l3 m12 s12 center">
+								<button
+									class="btn grey modal-close waves-effect waves-red col l12 m12 s12"
+									type="reset">CANCELAR</button>
+							</div>
+							<div class="input-field col l3"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large grey" id="scrollToTop"
+			style="display: none;"> <i class="fa fa-chevron-up"></i>
+		</a>
+	</div>
+
+	<footer class="page-footer grey darken-1">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Sistema de reserva</h5>
+					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Áreas de site</h5>
+					<ul>
+						<li><a class="white-text" href="#!">HOME</a></li>
+						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
+						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright grey darken-2">
+			<div class="container">
+				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+			</div>
+		</div>
+	</footer>
+	<!--  Scripts-->
+	<script src="js/jquery-2.1.1.js "></script>
+	<script src="js/materialize.js "></script>
+	<script src="js/init.js "></script>
+	<script src="js/slide.js "></script>
+</body>
+
+</html>

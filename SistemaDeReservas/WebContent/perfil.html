@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<title>Sistema de reserva</title>
+
+	<!-- CSS  -->
+	<link href="css/material-icons.css" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" />
+	<link href="css/style.css" type="text/css" rel="stylesheet" />
+	<link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
+	<link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<nav class="grey darken-1" role="navigation">
+		<div class="nav-wrapper container">
+			<div class="logo brand-logo"></div>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+				<li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+				<li><a href='reserva.html'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
+					<ul id="dropdown-usuario" class="dropdown-content">
+						<li><a href="#!"><i class="fa fa-id-card-o"	aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul id="nav-mobile" class="side-nav">
+				<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;INICIO</a></li>
+				<li class="divider"></li>
+				<li><a href="promocoes.html"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;PROMOÇÕES</a></li>
+				<li class="divider"></li>
+				<li><a href="reserva.html"><i class="fa fa-pencil-square-o"	aria-hidden="true"></i>&nbsp;&nbsp;RESERVE SUA MESA</a></li>
+				<li class="divider"></li>
+				<li><a class="dropdown-button" data-activates="dropdown-usuario-m" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Nome</a>
+					<ul id="dropdown-usuario-m" class="dropdown-content">
+						<li><a href="#!"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;Perfil</a></li>
+						<li class="divider"></li>
+						<li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a></li>
+					</ul>
+				</li>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		</div>
+	</nav>
+	<div class="section">
+		<div class="container row s12 z-depth-1">
+			<div class="col m12 l4">
+				<div class="col m12">
+					<div class="perfil-img row">
+						<img src="" alt="">
+					</div>
+					<div class="row">
+						<a href="#!" data-target="select-img"><i class="fa fa-picture-o"></i></a>
+						<a href="#!" data-target="delete-img"><i class="fa fa-trash-o"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="col m12 l8">
+				<form name="perfil">
+					<div class="row">
+						<div class="col s12 m6 input-field">
+							<input class="disabled" id="nome" type="text" value="João">
+							<label for="nome">Nome</label>
+						</div>
+						<div class="col s12 m6 input-field">
+							<input id="sobrenome" type="text" value="Silva">
+							<label for="sobrenome">Sobrenome</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12 input-field">
+							<input id="endereco" type="text" value="Cidade1/R.15/Ed.14/Ap.301">
+							<label for="endereco">Endereço</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12 m6 input-field">
+							<input id="telefone" type="tel" value="(99) 9999-9999">
+							<label for="telefone">Telefone</label>
+						</div>
+						<div class="col s12 m6 input-field">
+							<input id="email" type="email" value="joaosil@email.com">
+							<label for="email">Email</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12 m6 input-field">
+							<input id="old-pass" type="password" placeholder="******">
+							<label for="old-pass">Senha antiga</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12 m6 input-field">
+							<input id="new-pass" type="password" placeholder="******">
+							<label for="new-pass">Nova senha</label>
+						</div>
+						<div class="col s12 m6 input-field">
+							<input id="rep-new-pass" type="password" placeholder="******">
+							<label for="rep-new-pass">Repetir nova senha</label>
+						</div>
+					</div>
+
+					<div class="row input-field">
+						<div class="col s12 m6">
+							<input class="btn" type="submit">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL -->
+	<div class="modal" id="select-img">
+		<div class="modal-content">
+			<div class="file-field input-field col s12">
+				<div class="btn grey">
+					<span>SELECIONAR IMAGEM</span>
+					<input type="file">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="delete-img">
+		<div class="modal-content">
+			<p class="center-align">Deseja remover a imagem?</p>
+			<div class="container">
+				<div class="row">
+					<div class="col s6 center">
+						<a class="btn grey modal-close">CONFIRMAR</a>
+					</div>
+					<div class="col s6 center">
+						<a class="btn grey modal-close">CANCELAR</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- FIM-MODAL -->
+
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large grey" id="scrollToTop" style="display: none;"><i class="fa fa-chevron-up"></i>
+		</a>
+	</div>
+
+	<footer class="page-footer grey darken-1">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Sistema de reserva</h5>
+					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Áreas de site</h5>
+					<ul>
+						<li><a class="white-text" href="#!">HOME</a></li>
+						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
+						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright grey darken-2">
+			<div class="container">
+				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
+			</div>
+		</div>
+	</footer>
+	<!--  Scripts-->
+	<script src="js/jquery-2.1.1.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script src="js/slide.js"></script>
+
+
+</body>
+
+</html>
