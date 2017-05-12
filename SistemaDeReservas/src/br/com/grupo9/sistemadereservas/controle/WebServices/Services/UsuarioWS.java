@@ -20,11 +20,12 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 @RequestScoped
 @Path("/usuariows")
-@Produces({ "application/xml", "application/json" })
-@Consumes({ "application/xml", "application/json" })
+@Produces("application/json")
+@Consumes("application/json")
 public class UsuarioWS {
 
 	@POST
+	@Path("/cadastrar")
 	public Response create(final UsuarioPO usuariopo) {
 		//TODO: process the given usuariopo 
 		//you may want to use the following return statement, assuming that UsuarioPO#getId() or a similar method 

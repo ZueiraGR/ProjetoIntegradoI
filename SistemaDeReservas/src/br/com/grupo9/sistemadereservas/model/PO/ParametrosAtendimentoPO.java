@@ -1,8 +1,7 @@
 package br.com.grupo9.sistemadereservas.model.PO;
 
 import java.io.Serializable;
-import java.util.Calendar;
-
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -20,9 +19,9 @@ public class ParametrosAtendimentoPO implements Serializable {
 	@Column(name="chave_funcionario")
 	private int chaveFuncionario;
 	@Temporal(TemporalType.TIME)
-	private Calendar inicio;
+	private Date inicio;
 	@Temporal(TemporalType.TIME)
-	private Calendar fim;
+	private Date fim;
 	
 
 	public ParametrosAtendimentoPO() {
@@ -41,16 +40,16 @@ public class ParametrosAtendimentoPO implements Serializable {
 	public void setChaveFuncionario(int chaveFuncionario) {
 		this.chaveFuncionario = chaveFuncionario;
 	}
-	public Calendar getInicio() {
+	public Date getInicio() {
 		return inicio;
 	}
-	public void setInicio(Calendar inicio) {
+	public void setInicio(Date inicio) {
 		this.inicio = inicio;
 	}
-	public Calendar getFim() {
+	public Date getFim() {
 		return fim;
 	}
-	public void setFim(Calendar fim) {
+	public void setFim(Date fim) {
 		this.fim = fim;
 	}
 	public static long getSerialversionuid() {

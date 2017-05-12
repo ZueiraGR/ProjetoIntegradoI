@@ -19,8 +19,8 @@ import br.com.grupo9.sistemadereservas.model.PO.ReservaPO;
 
 @RequestScoped
 @Path("/reservaws")
-@Produces({ "application/xml", "application/json" })
-@Consumes({ "application/xml", "application/json" })
+@Produces("application/json")
+@Consumes("application/json")
 public class ReservaWS {
 
 	@POST

@@ -1,7 +1,7 @@
 package br.com.grupo9.sistemadereservas.model.DAO;
 
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
-import br.com.grupo9.sistemadereservas.model.util.PersistenceUtil;
+import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 
 import java.util.List;
 
