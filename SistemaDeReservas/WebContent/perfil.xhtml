@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
 	<title>Sistema de reserva</title>
 
-	<!-- CSS  -->
-	<link href="css/material-icons.css" rel="stylesheet">
-	<link href="css/materialize.css" type="text/css" rel="stylesheet" />
-	<link href="css/style.css" type="text/css" rel="stylesheet" />
-	<link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
-	<link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+	<ui:insert>
+		<ui:include src="/templates/css_padrao.xhtml" />
+	</ui:insert>
 </head>
 
 <body>
@@ -146,41 +148,14 @@
 		</div>
 	</div>
 	<!-- FIM-MODAL -->
-
-	<div class="fixed-action-btn">
-		<a class="btn-floating btn-large grey" id="scrollToTop" style="display: none;"><i class="fa fa-chevron-up"></i>
-		</a>
-	</div>
-
-	<footer class="page-footer grey darken-1">
-		<div class="container">
-			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">Sistema de reserva</h5>
-					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Áreas de site</h5>
-					<ul>
-						<li><a class="white-text" href="#!">HOME</a></li>
-						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
-						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright grey darken-2">
-			<div class="container">
-				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
-			</div>
-		</div>
-	</footer>
-	<!--  Scripts-->
-	<script src="js/jquery-2.1.1.js"></script>
-	<script src="js/materialize.js"></script>
-	<script src="js/init.js"></script>
-	<script src="js/slide.js"></script>
-
+	
+	<ui:insert name="footer">
+		<ui:include src="/templates/rodape.xhtml" />
+	</ui:insert>
+	
+	<ui:insert>
+		<ui:include src="/templates/js_padrao.xhtml" />
+	</ui:insert>
 
 </body>
 

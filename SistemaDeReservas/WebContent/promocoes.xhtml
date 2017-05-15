@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,12 +12,9 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
 <title>Sistema de reserva</title>
 
-<!-- CSS  -->
-<link href="css/material-icons.css" rel="stylesheet">
-<link href="css/materialize.css" type="text/css" rel="stylesheet" />
-<link href="css/style.css" type="text/css" rel="stylesheet" />
-<link href="css/sdk_style.css" type="text/css" rel="stylesheet" />
-<link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+<ui:insert>
+	<ui:include src="/templates/css_padrao.xhtml" />
+</ui:insert>
 </head>
 
 <body>
