@@ -30,6 +30,7 @@ var eventos = [
     }
 ];
 
+$('.carousel.carousel-slider').carousel({fullWidth: true});
 
 (function ($) {
     $(function () {

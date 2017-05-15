@@ -1,12 +1,12 @@
 package br.com.grupo9.sistemadereservas.model.DAO;
 
-import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
-import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
+import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 
 public class UsuarioDAO {
 	
