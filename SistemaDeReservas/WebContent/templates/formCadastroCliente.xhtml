@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition>
+	<form class="col s12" name="formularioDeCadastro" action=""	method="POST">
+		<br/>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Digite seu nome" id="nome" type="text" class="validate" required="required"/>
+				<label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required="required"/>
+				<label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Digite um login" id="login" type="text"	class="validate" required="required"/>
+				<label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Digite seu email" id="email" type="email" class="validate" required="required"/>
+				<label for="email" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required="required"/>
+				<label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="OK">CONFIRME O EMAIL</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Digite sua senha" id="senha" type="password" class="validate" />
+				<label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate" />
+				<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col l3"></div>
+			<div class="input-field col l3 m12 s12 center">
+				<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CADASTRAR</button>
+			</div>
+			<div class="input-field col l3 m12 s12 center">
+				<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12"	type="reset">CANCELAR</button>
+			</div>
+			<div class="input-field col l3"></div>
+		</div>
+	</form>
+</ui:composition>
+
+</html>

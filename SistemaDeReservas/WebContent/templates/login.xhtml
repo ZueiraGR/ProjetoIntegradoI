@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition>
+	<form class="col s12" name="formularioDeLogin" action="autenticar.do" method="POST">
+		<div class="row">
+			<div class="col s3"></div>
+			<div class="input-field col s6">
+				<input placeholder="Digite seu login ou email" id="loginOuEmail" type="text" class="validate" required="required"/>
+				<label for="loginOuEmail" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">LOGIN</label>
+			</div>
+			<div class="col s3"></div>
+		</div>
+		<div class="row">
+			<div class="col s3"></div>
+			<div class="input-field col s6">
+				<input placeholder="Digite sua senha" id="senhaL" type="password" class="validate" required="required"/>
+				<label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+			</div>
+			<div class="col s3"></div>
+		</div>
+		<div class="row">
+			<div class="col l3 m3 s3"></div>
+			<div class="col l3 m3 s3">
+				<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
+			</div>
+			<div class="col l3 m3 s3">
+				<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+			</div>
+			<div class="col l3 m3 s3"></div>
+		</div>
+	</form>
+</ui:composition>
+
+</html>
