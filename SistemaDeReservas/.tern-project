@@ -12,8 +12,6 @@
   },
   "libs": [
     "ecma5",
-    "browser",
-    "jquery"
-  ],
-  "ecmaVersion": 5
+    "browser"
+  ]
 }

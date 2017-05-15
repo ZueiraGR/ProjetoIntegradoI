@@ -2,7 +2,7 @@
     <wb-module deploy-name="SistemaDeReservas">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="SistemaDeReservas"/>
         <property name="java-output-path" value="/SistemaDeReservas/bin"/>
+        <property name="context-root" value="SistemaDeReservas"/>
     </wb-module>
 </project-modules>
