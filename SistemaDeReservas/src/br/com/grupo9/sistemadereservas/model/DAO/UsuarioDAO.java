@@ -32,7 +32,13 @@ public class UsuarioDAO {
 	
 	public UsuarioPO getUsuarioByLogin(UsuarioPO usuarioPO){
 		try{
-			return this.manager.find(UsuarioPO.class, usuarioPO);
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+				 .append("FROM UsuarioPO u ")
+				 .append("WHERE u.login = :login");
+			TypedQuery<UsuarioPO> typedQuery = this.manager.createQuery(query.toString(),UsuarioPO.class);
+				typedQuery.setParameter("login", usuarioPO.getLogin());
+				return (UsuarioPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o usuario pelo login. Causa:\n");
 //			e.printStackTrace();

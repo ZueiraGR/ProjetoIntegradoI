@@ -6,11 +6,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition>
-	<form class="col s12" name="formularioDeLogin" action="autenticar.do" method="POST">
+	<form class="col s12" id="formularioDeLogin" name="formularioDeLogin" method="POST">
 		<div class="row">
 			<div class="col s3"></div>
 			<div class="input-field col s6">
-				<input placeholder="Digite seu login ou email" id="loginOuEmail" type="text" class="validate" required="required"/>
+				<input placeholder="Digite seu login ou email" name="login" id="loginOuEmail" type="text" class="validate" required="required"/>
 				<label for="loginOuEmail" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">LOGIN</label>
 			</div>
 			<div class="col s3"></div>
@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col s3"></div>
 			<div class="input-field col s6">
-				<input placeholder="Digite sua senha" id="senhaL" type="password" class="validate" required="required"/>
+				<input placeholder="Digite sua senha" name="senha" id="senhaL" type="password" class="validate" required="required"/>
 				<label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
 			</div>
 			<div class="col s3"></div>

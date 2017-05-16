@@ -12,11 +12,16 @@ public class UsuarioBO {
 	private UsuarioPO usuarioPO;
 	private UsuarioDAO usuarioDAO;
 	
-	public boolean autenticarUsuario(){
-		boolean retorno = false;
-		
-		
-		return retorno;
+	
+	public UsuarioPO capturarUsuarioValido(){
+		UsuarioPO usuarioCapturado = null;
+		if(getUsuarioDAO().getUsuarioByLogin(getUsusarioPO()) != null){
+			usuarioCapturado = getUsuarioDAO().getUsuarioByLogin(getUsusarioPO());
+			if(!getUsusarioPO().getLogin().equals(usuarioCapturado.getLogin())){
+				usuarioCapturado = null;
+			}
+		}
+		return usuarioCapturado;
 	}
 
 	public UsuarioPO getUsusarioPO(){
