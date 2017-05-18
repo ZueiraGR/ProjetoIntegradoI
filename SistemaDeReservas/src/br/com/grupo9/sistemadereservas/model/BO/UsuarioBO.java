@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
+import br.com.grupo9.sistemadereservas.interfaces.DAO;
 import br.com.grupo9.sistemadereservas.model.DAO.UsuarioDAO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
@@ -10,13 +11,13 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 public class UsuarioBO {
 	private UsuarioPO usuarioPO;
-	private UsuarioDAO usuarioDAO;
+	private DAO<UsuarioPO> usuarioDAO;
 	
 	
 	public UsuarioPO capturarUsuarioValido(){
 		UsuarioPO usuarioCapturado = null;
-		if(getUsuarioDAO().getUsuarioByLogin(getUsusarioPO()) != null){
-			usuarioCapturado = getUsuarioDAO().getUsuarioByLogin(getUsusarioPO());
+		if(getUsuarioDAO().capturarPorId(getUsusarioPO()) != null){
+			usuarioCapturado = getUsuarioDAO().capturarPorId(getUsusarioPO());
 			if(!getUsusarioPO().getLogin().equals(usuarioCapturado.getLogin())){
 				usuarioCapturado = null;
 			}
@@ -31,7 +32,7 @@ public class UsuarioBO {
 		return this.usuarioPO;
 	}
 	
-	public UsuarioDAO getUsuarioDAO(){
+	public DAO<UsuarioPO> getUsuarioDAO(){
 		if(this.usuarioDAO == null){
 			this.usuarioDAO = new UsuarioDAO();
 		}

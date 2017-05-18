@@ -50,7 +50,7 @@ public class UsuarioWS {
 	public List<UsuarioPO> listAll(@QueryParam("start") final Integer startPosition,
 			@QueryParam("max") final Integer maxResult) {
 		//TODO: retrieve the usuariopoes 
-		final List<UsuarioPO> usuariopoes = new UsuarioDAO().getUsuarios();
+		final List<UsuarioPO> usuariopoes = new UsuarioDAO().listar();
 		return usuariopoes;
 	}
 
