@@ -3,8 +3,6 @@ package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

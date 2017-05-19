@@ -8,9 +8,9 @@ import br.com.grupo9.sistemadereservas.model.PO.ReservaPO;
 public class ReservaDAO implements DAO<ReservaPO>{
 
 	@Override
-	public void cadastrar(ReservaPO entidade) {
+	public boolean cadastrar(ReservaPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -20,9 +20,9 @@ public class ReservaDAO implements DAO<ReservaPO>{
 	}
 
 	@Override
-	public void atualizar(ReservaPO entidade) {
+	public boolean atualizar(ReservaPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -32,8 +32,9 @@ public class ReservaDAO implements DAO<ReservaPO>{
 	}
 
 	@Override
-	public void excluir(ReservaPO entidade) {
+	public boolean excluir(ReservaPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
+
 }

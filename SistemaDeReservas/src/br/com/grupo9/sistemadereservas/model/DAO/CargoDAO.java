@@ -8,9 +8,9 @@ import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 public class CargoDAO implements DAO<CargoPO>{
 
 	@Override
-	public void cadastrar(CargoPO entidade) {
+	public boolean cadastrar(CargoPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -20,9 +20,9 @@ public class CargoDAO implements DAO<CargoPO>{
 	}
 
 	@Override
-	public void atualizar(CargoPO entidade) {
+	public boolean atualizar(CargoPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class CargoDAO implements DAO<CargoPO>{
 	}
 
 	@Override
-	public void excluir(CargoPO entidade) {
+	public boolean excluir(CargoPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

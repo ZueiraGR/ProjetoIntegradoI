@@ -8,9 +8,9 @@ import br.com.grupo9.sistemadereservas.model.PO.ParametrosAtendimentoPO;
 public class ParametrosAtendimentoDAO implements DAO<ParametrosAtendimentoPO> {
 
 	@Override
-	public void cadastrar(ParametrosAtendimentoPO entidade) {
+	public boolean cadastrar(ParametrosAtendimentoPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -20,9 +20,9 @@ public class ParametrosAtendimentoDAO implements DAO<ParametrosAtendimentoPO> {
 	}
 
 	@Override
-	public void atualizar(ParametrosAtendimentoPO entidade) {
+	public boolean atualizar(ParametrosAtendimentoPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class ParametrosAtendimentoDAO implements DAO<ParametrosAtendimentoPO> {
 	}
 
 	@Override
-	public void excluir(ParametrosAtendimentoPO entidade) {
+	public boolean excluir(ParametrosAtendimentoPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

@@ -17,15 +17,17 @@ public class MesaDAO implements DAO<MesaPO> {
 	}
 
 	@Override
-	public void cadastrar(MesaPO entidade) {
+	public boolean cadastrar(MesaPO entidade) {
 		this.manager.getTransaction().begin();
 		try{
 			this.manager.persist(entidade);
 			this.manager.getTransaction().commit();
+			return true;
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o usuario. Causa:\n");
 //			e.printStackTrace();
+			return false;
 		}
 
 	}
@@ -48,7 +50,7 @@ public class MesaDAO implements DAO<MesaPO> {
 	} // TODO Auto-generated method stub
 
 	@Override
-	public void atualizar(MesaPO entidade) {
+	public boolean atualizar(MesaPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ").append("FROM MesaPO u").append("WHERE u.chave = :chave");
 		TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
@@ -60,10 +62,12 @@ public class MesaDAO implements DAO<MesaPO> {
 				this.manager.merge(entidade);
 			}
 			this.manager.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o usuario. Causa:\n");
 			// e.printStackTrace();
+			return false;
 		}
 
 	}
@@ -83,7 +87,7 @@ public class MesaDAO implements DAO<MesaPO> {
 	}
 
 	@Override
-	public void excluir(MesaPO entidade) {
+	public boolean excluir(MesaPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ").append("FROM MesaPO u ").append("WHERE u.chave = :chave");
 		TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
@@ -94,8 +98,11 @@ public class MesaDAO implements DAO<MesaPO> {
 			if (mesa != null && mesa.getChave() == entidade.getChave()) {
 				this.manager.remove(entidade);
 			}
+			this.manager.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
-
+			this.manager.getTransaction().rollback();
+			return false;
 		}
 	}
 

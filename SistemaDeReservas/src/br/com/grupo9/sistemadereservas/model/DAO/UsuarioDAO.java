@@ -36,15 +36,17 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 	}
 	
 	@Override
-	public void cadastrar(UsuarioPO entidade) {
+	public boolean cadastrar(UsuarioPO entidade) {
 		this.manager.getTransaction().begin();
 		try{
 			this.manager.persist(entidade);
 			this.manager.getTransaction().commit();
+			return true;
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o usuario. Causa:\n");
 //			e.printStackTrace();
+			return false;
 		}
 		
 	}
@@ -67,7 +69,7 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 	}
 	
 	@Override
-	public void atualizar(UsuarioPO entidade) {
+	public boolean atualizar(UsuarioPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
 			 .append("FROM UsuarioPO u")
@@ -81,10 +83,12 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 				this.manager.merge(entidade);
 			}
 			this.manager.getTransaction().commit();
+			return true;
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o usuario. Causa:\n");
 //			e.printStackTrace();
+			return false;
 		}
 	}
 
@@ -104,7 +108,7 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 	}
 
 	@Override
-	public void excluir(UsuarioPO entidade) {
+	public boolean excluir(UsuarioPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
 			 .append("FROM UsuarioPO u ")
@@ -118,11 +122,12 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 				this.manager.remove(entidade);
 			}
 			this.manager.getTransaction().commit();
-
+			return true;
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar excluir o usuario. Causa:\n");
 //			e.printStackTrace();
+			return false;
 		}
 		
 	}

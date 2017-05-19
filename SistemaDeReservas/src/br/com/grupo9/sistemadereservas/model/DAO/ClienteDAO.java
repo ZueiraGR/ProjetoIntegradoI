@@ -8,9 +8,9 @@ import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 public class ClienteDAO implements DAO<ClientePO> {
 
 	@Override
-	public void cadastrar(ClientePO entidade) {
+	public boolean cadastrar(ClientePO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -20,9 +20,9 @@ public class ClienteDAO implements DAO<ClientePO> {
 	}
 
 	@Override
-	public void atualizar(ClientePO entidade) {
+	public boolean atualizar(ClientePO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class ClienteDAO implements DAO<ClientePO> {
 	}
 
 	@Override
-	public void excluir(ClientePO entidade) {
+	public boolean excluir(ClientePO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

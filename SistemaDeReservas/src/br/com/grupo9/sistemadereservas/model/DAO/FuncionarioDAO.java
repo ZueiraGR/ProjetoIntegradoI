@@ -8,9 +8,9 @@ import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 public class FuncionarioDAO implements DAO<FuncionarioPO> {
 
 	@Override
-	public void cadastrar(FuncionarioPO entidade) {
+	public boolean cadastrar(FuncionarioPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -20,9 +20,9 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	}
 
 	@Override
-	public void atualizar(FuncionarioPO entidade) {
+	public boolean atualizar(FuncionarioPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
@@ -32,9 +32,8 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	}
 
 	@Override
-	public void excluir(FuncionarioPO entidade) {
+	public boolean excluir(FuncionarioPO entidade) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
-
 }
