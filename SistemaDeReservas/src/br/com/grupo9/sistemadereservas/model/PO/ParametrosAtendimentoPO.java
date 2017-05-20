@@ -19,9 +19,9 @@ public class ParametrosAtendimentoPO implements Serializable {
 	@Column(name="chave_funcionario")
 	private int chaveFuncionario;
 	@Temporal(TemporalType.TIME)
-	private Date inicio;
+	private Date horario_inicio;
 	@Temporal(TemporalType.TIME)
-	private Date fim;
+	private Date horario_fim;
 	
 
 	public ParametrosAtendimentoPO() {
@@ -41,16 +41,16 @@ public class ParametrosAtendimentoPO implements Serializable {
 		this.chaveFuncionario = chaveFuncionario;
 	}
 	public Date getInicio() {
-		return inicio;
+		return horario_inicio;
 	}
-	public void setInicio(Date inicio) {
-		this.inicio = inicio;
+	public void setInicio(Date horario_inicio) {
+		this.horario_inicio = horario_inicio;
 	}
 	public Date getFim() {
-		return fim;
+		return horario_fim;
 	}
-	public void setFim(Date fim) {
-		this.fim = fim;
+	public void setFim(Date horario_fim) {
+		this.horario_fim = horario_fim;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

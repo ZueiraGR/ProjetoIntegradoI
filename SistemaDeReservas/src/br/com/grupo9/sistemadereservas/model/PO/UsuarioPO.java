@@ -41,7 +41,7 @@ public class UsuarioPO implements Serializable {
 	@Column(name="data_inativacao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataInativacao;
-	@Column(name="data_exclucao")
+	@Column(name="data_exclusao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataExclusao;
 	
