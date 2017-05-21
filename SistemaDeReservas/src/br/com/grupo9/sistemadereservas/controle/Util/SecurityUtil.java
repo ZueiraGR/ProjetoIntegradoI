@@ -1,4 +1,4 @@
-package br.com.grupo9.sistemadereservas.model.Util;
+package br.com.grupo9.sistemadereservas.controle.Util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
