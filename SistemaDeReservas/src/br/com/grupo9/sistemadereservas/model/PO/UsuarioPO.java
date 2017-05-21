@@ -24,17 +24,15 @@ public class UsuarioPO implements Serializable {
 	private String login;
 	
 	@Column(name="chave_cliente", nullable= true)
-	//@OneToOne
-	//@JoinColumn(name="chave_cliente")
 	private Integer chaveCliente;
+	
 	@Column(name="chave_funcionario", nullable= true)
-	//@OneToOne
-	//@JoinColumn(name="chave_funcionario")
 	private Integer chaveFuncionario;
 	
 	private String senha;
 	private char status;
 	private char tipo;
+	
 	@Column(name="data_criacao", nullable= false)
         @Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCriacao;
@@ -53,23 +51,20 @@ public class UsuarioPO implements Serializable {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
+	public String getSenha() {
+		return senha;
+	}
 	public Integer getChaveCliente() {
 		return chaveCliente;
 	}
 	public void setChaveCliente(Integer chaveCliente) {
 		this.chaveCliente = chaveCliente;
 	}
-	
 	public Integer getChaveFuncionario() {
 		return chaveFuncionario;
 	}
 	public void setChaveFuncionario(Integer chaveFuncionario) {
 		this.chaveFuncionario = chaveFuncionario;
-	}
-	
-	public String getSenha() {
-		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;

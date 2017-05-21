@@ -3,11 +3,15 @@ var SENHA_INCORRETA = "Senha Incorreta";
 
 $('#formularioDeLogin').submit(function (event) {
 	//event.preventDefault();
-	var formData = $('#formularioDeLogin').serialize();
+	var form = {"login":$("#login").val(),"senha":$("#senhaL").val()};
+	var formData = JSON.stringify(form);
     $.ajax({
         url: "autenticar.do",
         type: 'POST',
         data: formData,
+        progress: function(){
+        	
+        },
         success: function (data) {
             if(data.loginValido==0 && data.senhaValida==0){
 	            alert(LOGIN_INVALIDO);

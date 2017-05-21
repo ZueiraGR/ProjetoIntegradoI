@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -24,7 +25,7 @@ public class PageFilter implements Filter{
    
          String newCurrentPage = ((HttpServletRequest) request).getServletPath();
          System.out.println(newCurrentPage);
-   
+            
          if (sess.getAttribute("currentPage") == null) {
              sess.setAttribute("lastPage", newCurrentPage);
              sess.setAttribute("currentPage", newCurrentPage);
@@ -35,6 +36,11 @@ public class PageFilter implements Filter{
                sess.setAttribute("lastPage", oldCurrentPage);
                sess.setAttribute("currentPage", newCurrentPage);
              }
+         }
+         
+         if(sess.getAttribute("currentPage") != null && sess.getAttribute("currentPage").equals("/reserva.do") && sess.getAttribute("login") == null){
+        	 RequestDispatcher dispacher = request.getRequestDispatcher("login.do");
+             dispacher.forward(request, response);
          }
    
          chain.doFilter(request, response);

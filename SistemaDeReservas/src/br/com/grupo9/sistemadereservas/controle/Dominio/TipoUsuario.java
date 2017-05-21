@@ -2,7 +2,7 @@ package br.com.grupo9.sistemadereservas.controle.Dominio;
 
 public enum TipoUsuario {
 	CLIENTE('C',"Cliente"),
-	FUNCIONARIO('F',"Funcion�rio");
+	FUNCIONARIO('F',"Funcionario");
 	
 	private char codigo;
 	private String descricao;
