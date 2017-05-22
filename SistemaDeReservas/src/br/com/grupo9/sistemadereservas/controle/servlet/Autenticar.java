@@ -52,15 +52,14 @@ public class Autenticar extends HttpServlet {
 					if(getUsuarioCapturado().getTipo() == TipoUsuario.CLIENTE.getCodigo()){
 						getClienteBO().setUsuarioPO(getUsuarioCapturado());
 						getClienteBO().comporCliente();
-						getSessao().setAttribute("login", getUsuarioCapturado().getLogin());
+						getSessao().setAttribute("usuario", getClienteBO());
 						getSessao().setAttribute("tipo", getUsuarioCapturado().getTipo());
-						getSessao().setAttribute("nome", getClienteBO().getClientePO().getNome());
+						System.out.println("\n\n\n\nautenticou!\n\n\n\n");
 					}else if(getUsuarioCapturado().getTipo() == TipoUsuario.FUNCIONARIO.getCodigo()){
 						getFuncionarioBO().setUsuarioPO(getUsuarioCapturado());
 						getFuncionarioBO().comporFuncionario();
-						getSessao().setAttribute("login", getUsuarioCapturado().getLogin());
+						getSessao().setAttribute("usuario", getFuncionarioBO());
 						getSessao().setAttribute("tipo", getUsuarioCapturado().getTipo());
-						getSessao().setAttribute("nome", getFuncionarioBO().getFuncionarioPO().getNome());
 					}
 					retorno.println("{\"loginValido\":1,\"senhaValida\":1}");
 				}else{

@@ -8,7 +8,7 @@ public class ClienteBO extends UsuarioBO {
 	private ClienteDAO clienteDAO;
 	
 	public void comporCliente(){
-		getClienteDAO().compor(getUsusarioPO(),getClientePO());
+		this.clientePO = getClienteDAO().compor(getUsusarioPO(),getClientePO());
 	}
 	
 	public ClientePO getClientePO() {

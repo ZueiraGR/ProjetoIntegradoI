@@ -48,7 +48,7 @@ public class ClienteDAO implements DAO<ClientePO> {
 		return false;
 	}
 
-	public void compor(UsuarioPO entidade, ClientePO clientePO) {
+	public ClientePO compor(UsuarioPO entidade, ClientePO clientePO) {
 		try {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT p ")
@@ -56,10 +56,11 @@ public class ClienteDAO implements DAO<ClientePO> {
 				.append("WHERE chave = :chave");
 			TypedQuery<ClientePO> typedQuery = this.manager.createQuery(query.toString(), ClientePO.class);
 			typedQuery.setParameter("chave", entidade.getChaveCliente().intValue());
-			clientePO = (ClientePO) typedQuery.getSingleResult();
+			return (ClientePO) typedQuery.getSingleResult();
 		} catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o usuario pelo login. Causa:\n");
 			e.printStackTrace();
+			return null;
 		}
 	}
 
