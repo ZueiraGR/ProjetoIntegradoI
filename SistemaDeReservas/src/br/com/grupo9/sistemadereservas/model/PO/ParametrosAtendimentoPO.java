@@ -18,19 +18,16 @@ public class ParametrosAtendimentoPO implements Serializable {
 	private int diaDaSemana;
 	@Column(name="chave_funcionario")
 	private int chaveFuncionario;
+	@Column(name="horario_inicio", nullable=false)
 	@Temporal(TemporalType.TIME)
-	private Date horario_inicio;
+	private Date horarioInicio;
+	@Column(name="horario_fim", nullable=false)
 	@Temporal(TemporalType.TIME)
-	private Date horario_fim;
-	
-
-	public ParametrosAtendimentoPO() {
-		super();
-	}   
+	private Date horarioFim;
+	  
 	public int getDiaDaSemana() {
 		return this.diaDaSemana;
 	}
-
 	public void setDiaDaSemana(int diaDaSemana) {
 		this.diaDaSemana = diaDaSemana;
 	}   
@@ -40,20 +37,19 @@ public class ParametrosAtendimentoPO implements Serializable {
 	public void setChaveFuncionario(int chaveFuncionario) {
 		this.chaveFuncionario = chaveFuncionario;
 	}
-	public Date getInicio() {
-		return horario_inicio;
+	public Date getHorarioInicio() {
+		return horarioInicio;
 	}
-	public void setInicio(Date horario_inicio) {
-		this.horario_inicio = horario_inicio;
+	public void setHorarioInicio(Date horarioInicio) {
+		this.horarioInicio = horarioInicio;
 	}
-	public Date getFim() {
-		return horario_fim;
+	public Date getHorarioFim() {
+		return horarioFim;
 	}
-	public void setFim(Date horario_fim) {
-		this.horario_fim = horario_fim;
+	public void setHorarioFim(Date horarioFim) {
+		this.horarioFim = horarioFim;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}   
+	
+	
 	   
 }
