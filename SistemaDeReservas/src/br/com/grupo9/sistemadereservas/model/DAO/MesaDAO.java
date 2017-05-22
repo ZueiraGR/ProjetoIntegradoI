@@ -47,7 +47,7 @@ public class MesaDAO implements DAO<MesaPO> {
 			// e.printStackTrace();
 			return null;
 		}
-	} // TODO Auto-generated method stub
+	}
 
 	@Override
 	public boolean atualizar(MesaPO entidade) {
