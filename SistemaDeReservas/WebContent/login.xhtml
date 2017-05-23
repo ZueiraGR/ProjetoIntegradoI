@@ -19,7 +19,22 @@
 <h:body onload="alterarUrl()">
 	<ui:insert>
 		<ui:include src="/templates/menu.xhtml"/>
-		<ui:include src="/templates/login.xhtml"/>
+	</ui:insert>
+	<br/>
+	<div class="container">
+		<div class="row">
+			<div class="col l2"></div>
+			<div class="col l8 z-depth-1">
+				<ui:insert>
+					<ui:include src="/templates/login.xhtml"/>
+				</ui:insert>
+				<br/>
+			</div>
+			<div class="col l2"></div>
+		</div>
+		<br/>
+	</div>
+	<ui:insert>
 		<ui:include src="/templates/rodape.xhtml" />
 		<ui:include src="/templates/js_padrao.xhtml"/>
 	</ui:insert>
