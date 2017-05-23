@@ -7,6 +7,30 @@
 
 <ui:composition>
 	<form class="col s12" id="formularioDeLogin" name="formularioDeLogin" method="POST">
+		<!-- div class="progress hiddendiv" id="barraCarregando">
+			<div class="indeterminate"></div>
+		</div-->
+		<div class="row">
+			<div class="col s3"></div>
+			<div class="col s6 hiddendiv" id="retornoServidor">
+				<div class="card-panel red lighten-2 white-text center-align" id="mensagemRetorno"></div>
+			</div>
+			<div class="col s3"></div>
+			
+			<div class="fixed-action-btn hiddendiv" id="barraCarregando">
+				<div class="preloader-wrapper small active">
+				    <div class="spinner-layer spinner-grey-only">
+				      <div class="circle-clipper left">
+				        <div class="circle"></div>
+				      </div><div class="gap-patch">
+				        <div class="circle"></div>
+				      </div><div class="circle-clipper right">
+				        <div class="circle"></div>
+				      </div>
+				    </div>
+		  		</div>
+	  		</div>
+  		</div>
 		<div class="row">
 			<div class="col s3"></div>
 			<div class="input-field col s6">
@@ -33,6 +57,7 @@
 			</div>
 			<div class="col l3 m3 s3"></div>
 		</div>
+		
 	</form>
 </ui:composition>
 
