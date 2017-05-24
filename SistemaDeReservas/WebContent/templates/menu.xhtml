@@ -8,22 +8,17 @@
 <ui:composition>
 	<nav class="grey darken-1" role="navigation">
 	<div class="nav-wrapper container">
-		<div class="logo brand-logo"></div>
+		<a href="index.do" title="Inicio"><div class="logo brand-logo"></div></a>
 		<ul class="right hide-on-med-and-down">
-			<li><a href="index.do"><i class="fa fa-home" aria-hidden="true"></i> INICIO</a></li>
-			<li><a href="promocoes.do"><i class="fa fa-tags" aria-hidden="true"></i> PROMOÇÕES</a></li>
-			<li><a href='reserva.do'><i class="fa fa-pencil-square-o" aria-hidden="true"></i> RESERVE SUA MESA</a></li>
-			<li><a data-target="modal1"><i class="fa fa-sign-in" aria-hidden="true"></i> ENTRAR</a></li>
+			<ui:insert>
+				<ui:include src="/templates/menu_itens.xhtml" />
+			</ui:insert>
 		</ul>
 
 		<ul id="nav-mobile" class="side-nav">
-			<li><a href="index.do"><i class="fa fa-home" aria-hidden="true"></i> INICIO</a></li>
-			<li class="divider"></li>
-			<li><a href="promocoes.do"><i class="fa fa-tags" aria-hidden="true"></i> PROMOÇÕES</a></li>
-			<li class="divider"></li>
-			<li><a href="reserva.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> RESERVE SUA MESA</a></li>
-			<li class="divider"></li>
-			<li><a href="#" data-target="modal1"><i	class="fa fa-sign-in" aria-hidden="true"></i> ENTRAR</a></li>
+			<ui:insert>
+				<ui:include src="/templates/menu_itens_m.xhtml" />
+			</ui:insert>
 		</ul>
 		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 	</div>

@@ -18,91 +18,9 @@
 </head>
 
 <body>
-	<nav class="grey darken-1" role="navigation">
-		<div class="nav-wrapper container">
-			<div class="brand-logo logo"></div>
-			<ul class="right hide-on-med-and-down">
-				<li><a class="center-align" href="index.html"><i
-						class="fa fa-home" aria-hidden="true"></i> INICIO</a></li>
-				<li><a
-					class="dropdown-button largura-personalizada center-align"
-					href="#!" data-activates="dropdownGerenciar"><i
-						class="fa fa-cogs" aria-hidden="true"></i> GERENCIAR</a>
-					<ul id="dropdownGerenciar" class="dropdown-content">
-						<li><a href="gerenciar_clientes.html"><i
-								class="fa fa-users" aria-hidden="true"></i> CLIENTES</a></li>
-						<li class="divider"></li>
-						<li><a href="gerenciar_funcionarios.html"><i
-								class="fa fa-address-card-o" aria-hidden="true"></i>
-								FUNCIONÁRIOS</a></li>
-						<li class="divider"></li>
-						<li><a href="gerenciar_horarios.html"><i
-								class="fa fa-clock-o" aria-hidden="true"></i> HORÁRIO DE
-								ATENDIMENTO</a></li>
-						<li class="divider"></li>
-						<li><a href="#!"><i class="fa fa-pencil-square-o"
-								aria-hidden="true"></i> MESAS</a></li>
-						<li class="divider"></li>
-						<li><a href="gerenciar_promocoes.html"><i
-								class="fa fa-tags" aria-hidden="true"></i> PROMOÇÕES</a></li>
-					</ul></li>
-				<li><a class="center-align" href="relatorios.html"><i
-						class="fa fa-bar-chart" aria-hidden="true"></i> RELATÓRIOS</a></li>
-				<li><a class="dropdown-button center-align" href="#!"
-					data-activates="dropdown-usuario"><i class="fa fa-user-circle"
-						aria-hidden="true"></i> Nome</a>
-					<ul id="dropdown-usuario" class="dropdown-content">
-						<li><a href="perfil.html"><i class="fa fa-id-card-o"
-								aria-hidden="true"></i> Perfil</a></li>
-						<li class="divider"></li>
-						<li><a href="index.html"><i class="fa fa-sign-out"
-								aria-hidden="true"></i> Sair</a></li>
-					</ul></li>
-			</ul>
-			<ul id="nav-mobile" class="side-nav">
-				<li><a href="index.html"><i class="fa fa-home"
-						aria-hidden="true"></i> INICIO</a></li>
-				<li class="divider"></li>
-				<li><a class="dropdown-button" href="#!"
-					data-activates="dropdownGerenciar-m"><i class="fa fa-cogs"
-						aria-hidden="true"></i> GERENCIAR</a>
-					<ul id="dropdownGerenciar-m" class="dropdown-content">
-						<li><a href="gerenciar_clientes.html"><i
-								class="fa fa-users" aria-hidden="true"></i> CLIENTES</a></li>
-						<li class="divider"></li>
-						<li><a href="gerenciar_funcionarios.html"><i
-								class="fa fa-address-card-o" aria-hidden="true"></i>
-								FUNCIONÁRIOS</a></li>
-						<li class="divider"></li>
-						<li><a href="gerenciar_horarios.html"><i
-								class="fa fa-clock-o" aria-hidden="true"></i> HORÁRIO DE
-								ATENDIMENTO</a></li>
-						<li class="divider"></li>
-						<li><a href="#!"><i class="fa fa-pencil-square-o"
-								aria-hidden="true"></i> MESAS</a></li>
-						<li class="divider"></li>
-						<li><a href="gerenciar_promocoes.html"><i
-								class="fa fa-tags" aria-hidden="true"></i> PROMOÇÕES</a></li>
-					</ul></li>
-				<li class="divider"></li>
-				<li><a href="relatorios.html"><i class="fa fa-bar-chart"
-						aria-hidden="true"></i> RELATÓRIOS</a></li>
-				<li class="divider"></li>
-				<li><a class="dropdown-button"
-					data-activates="dropdown-usuario-m" href="#"><i
-						class="fa fa-user-circle" aria-hidden="true"></i> Nome</a>
-					<ul id="dropdown-usuario-m" class="dropdown-content">
-						<li><a href="perfil.html"><i class="fa fa-id-card-o"
-								aria-hidden="true"></i> Perfil</a></li>
-						<li class="divider"></li>
-						<li><a href="index.html"><i class="fa fa-sign-out"
-								aria-hidden="true"></i> Sair</a></li>
-					</ul></li>
-			</ul>
-			<a href="#" data-activates="nav-mobile" class="button-collapse"><i
-				class="material-icons">menu</i></a>
-		</div>
-	</nav>
+	<ui:insert name="navbar">
+		<ui:include src="/templates/menu.xhtml" />
+	</ui:insert>
 	<div class="section">
 		<div class="container row">
 			<div class="row s12 z-depth-2">

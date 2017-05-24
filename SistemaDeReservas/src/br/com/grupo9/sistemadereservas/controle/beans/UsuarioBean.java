@@ -17,11 +17,13 @@ public class UsuarioBean {
 	public UsuarioBean(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		this.tipo = (char) session.getAttribute("tipo");
-		if(this.tipo == TipoUsuario.CLIENTE.getCodigo()){
-			this.clienteBO = (ClienteBO) session.getAttribute("usuario");
-		}else if(this.tipo == TipoUsuario.FUNCIONARIO.getCodigo()){
-			this.funcionarioBO = (FuncionarioBO) session.getAttribute("usuario");
+		if(session.getAttribute("tipo") != null){
+			this.tipo = (char) session.getAttribute("tipo");
+			if(this.tipo == TipoUsuario.CLIENTE.getCodigo()){
+				this.clienteBO = (ClienteBO) session.getAttribute("usuario");
+			}else if(this.tipo == TipoUsuario.FUNCIONARIO.getCodigo()){
+				this.funcionarioBO = (FuncionarioBO) session.getAttribute("usuario");
+			}
 		}
 	}
 	
@@ -33,6 +35,23 @@ public class UsuarioBean {
 		}else{
 			return null;
 		}
+	}
+	
+	public boolean isUsuarioLogado(){
+		boolean retorno = false;
+		if(getClienteBO() != null){
+			retorno = true;
+		}else if(getFuncionarioBO() != null){
+			retorno = true;
+		}		
+		return retorno;
+	}
+	public boolean isFuncionario(){
+		boolean retorno = false;
+		if(isUsuarioLogado() && this.tipo == TipoUsuario.FUNCIONARIO.getCodigo()){
+			retorno = true;
+		}
+		return retorno;
 	}
 
 	public ClienteBO getClienteBO() {
