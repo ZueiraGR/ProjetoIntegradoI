@@ -15,7 +15,7 @@ public class CargoPO implements Serializable {
 	   
 	@Id
 	@GeneratedValue
-	private int chave;
+	private Integer chave;
 	private String nome;
 	@Column(name="nivel_acesso")
 	private char nivelAcesso;
@@ -24,11 +24,11 @@ public class CargoPO implements Serializable {
 	public CargoPO() {
 		super();
 	}   
-	public int getChave() {
+	public Integer getChave() {
 		return this.chave;
 	}
 
-	public void setChave(int chave) {
+	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
 	public String getNome() {
