@@ -9,7 +9,7 @@ public class FuncionarioBO extends UsuarioBO {
 	private CargoBO cargoBO;
 	
 	public void comporFuncionario(){
-		getFuncionarioDAO().compor(getUsusarioPO(), getFuncionarioPO());
+		this.funcionarioPO = getFuncionarioDAO().compor(getUsusarioPO());
 	}
 	
 	public FuncionarioPO getFuncionarioPO() {

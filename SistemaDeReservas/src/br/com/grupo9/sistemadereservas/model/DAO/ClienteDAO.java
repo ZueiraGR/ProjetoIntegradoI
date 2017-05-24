@@ -28,7 +28,7 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o cliente. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -41,11 +41,11 @@ public class ClienteDAO implements DAO<ClientePO> {
 				 .append("FROM ClientePO u ")
 				 .append("WHERE u.chave = :chave");
 			TypedQuery<ClientePO> typedQuery = this.manager.createQuery(query.toString(),ClientePO.class);
-				typedQuery.setParameter("chave", entidade.getChave());
+				typedQuery.setParameter("chave", entidade.getChave().intValue());
 				return (ClientePO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o cliente pela chave. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -69,7 +69,7 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o cliente. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -84,7 +84,7 @@ public class ClienteDAO implements DAO<ClientePO> {
 				return (List<ClientePO>) typedQuery.getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os cliente. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -113,7 +113,7 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}
 	}
 
-	public ClientePO compor(UsuarioPO entidade, ClientePO clientePO) {
+	public ClientePO compor(UsuarioPO entidade) {
 		try {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT p ")

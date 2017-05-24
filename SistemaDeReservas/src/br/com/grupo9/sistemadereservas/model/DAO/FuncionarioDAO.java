@@ -28,7 +28,7 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o funcionario. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -39,13 +39,14 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM FuncionarioPO u ")
-				 .append("WHERE u.chave = :chave");
+				 .append("WHERE u.chave = :chave")
+				 .append("AND u.status = :status");
 			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
 				typedQuery.setParameter("chave", entidade.getChave());
 				return (FuncionarioPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o funcionario pela chave . Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -69,7 +70,7 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o funcionario. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -83,8 +84,8 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
 				return (List<FuncionarioPO>) typedQuery.getResultList();
 		}catch (Exception e) {
-			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcionários. Causa:\n");
-//			e.printStackTrace();
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcionï¿½rios. Causa:\n");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -107,13 +108,13 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 			return true;
 		}catch (Exception e) {
 			this.manager.getTransaction().rollback();
-			System.out.println("\nOcorreu um erro ao tentar excluir o funcionário. Causa:\n");
+			System.out.println("\nOcorreu um erro ao tentar excluir o funcionÃ¡rio. Causa:\n");
 //			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public void compor(UsuarioPO usuarioPO, FuncionarioPO entidade) {
+	public FuncionarioPO compor(UsuarioPO usuarioPO) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT f ")
@@ -121,10 +122,11 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 				 .append("WHERE chave = :chave");
 			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
 				typedQuery.setParameter("chave", usuarioPO.getChaveFuncionario().intValue());
-				entidade = (FuncionarioPO) typedQuery.getSingleResult();
+				return (FuncionarioPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao compor funcionario. Causa:\n");
 			e.printStackTrace();
+			return null;
 		}
 	}
 }
