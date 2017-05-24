@@ -16,9 +16,9 @@ public class PromocaoPO implements Serializable {
 	   
 	@Id
 	@GeneratedValue
-	private int chave;
+	private Integer chave;
 	@Column(name="chave_funcionario")
-	private int chaveFuncionario;
+	private Integer chaveFuncionario;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar inicio;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -32,18 +32,18 @@ public class PromocaoPO implements Serializable {
 	public PromocaoPO() {
 		super();
 	}   
-	public int getChave() {
+	public Integer getChave() {
 		return this.chave;
 	}
 
-	public void setChave(int chave) {
+	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
-	public int getChaveFuncionario() {
+	public Integer getChaveFuncionario() {
 		return this.chaveFuncionario;
 	}
 
-	public void setChaveFuncionario(int chaveFuncionario) {
+	public void setChaveFuncionario(Integer chaveFuncionario) {
 		this.chaveFuncionario = chaveFuncionario;
 	}   
 	public Calendar getInicio() {

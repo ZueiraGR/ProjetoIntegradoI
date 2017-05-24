@@ -15,50 +15,50 @@ public class ReservaPO implements Serializable {
 	   
 	@Id
 	@GeneratedValue
-	private int chave;
+	private Integer chave;
 	@Column(name="chave_cliente")
-	private int chaveCliente;
+	private Integer chaveCliente;
 	@Column(name="chave_funcionario")
-	private int chaveFuncionario;
+	private Integer chaveFuncionario;
 	@Column(name="chave_mesa")
-	private int chaveMesa;
+	private Integer chaveMesa;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar inicio;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar fim;
 	@Column(name="qtd_pessoas")
-	private int quantidadeDePessoas;
+	private Integer quantidadeDePessoas;
 	
 
 	public ReservaPO() {
 		super();
 	}   
-	public int getChave() {
+	public Integer getChave() {
 		return this.chave;
 	}
 
-	public void setChave(int chave) {
+	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
-	public int getChaveCliente() {
+	public Integer getChaveCliente() {
 		return this.chaveCliente;
 	}
 
-	public void setChaveCliente(int chaveCliente) {
+	public void setChaveCliente(Integer chaveCliente) {
 		this.chaveCliente = chaveCliente;
 	}   
-	public int getChaveFuncionario() {
+	public Integer getChaveFuncionario() {
 		return this.chaveFuncionario;
 	}
 
-	public void setChaveFuncionario(int chaveFuncionario) {
+	public void setChaveFuncionario(Integer chaveFuncionario) {
 		this.chaveFuncionario = chaveFuncionario;
 	}   
-	public int getChaveMesa() {
+	public Integer getChaveMesa() {
 		return this.chaveMesa;
 	}
 
-	public void setChaveMesa(int chaveMesa) {
+	public void setChaveMesa(Integer chaveMesa) {
 		this.chaveMesa = chaveMesa;
 	}   
 	public Calendar getInicio() {
@@ -75,11 +75,11 @@ public class ReservaPO implements Serializable {
 	public void setFim(Calendar fim) {
 		this.fim = fim;
 	}   
-	public int getQuantidadeDePessoas() {
+	public Integer getQuantidadeDePessoas() {
 		return this.quantidadeDePessoas;
 	}
 
-	public void setQuantidadeDePessoas(int quantidadeDePessoas) {
+	public void setQuantidadeDePessoas(Integer quantidadeDePessoas) {
 		this.quantidadeDePessoas = quantidadeDePessoas;
 	}
    

@@ -15,9 +15,9 @@ public class FuncionarioPO implements Serializable {
 	   
 	@Id
 	@GeneratedValue
-	private int chave;
+	private Integer chave;
 	@Column(name="chave_cargo")
-	private int chaveCargo;
+	private Integer chaveCargo;
 	private String nome;
 	private String sobrenome;
 	private String cpf;
@@ -26,18 +26,18 @@ public class FuncionarioPO implements Serializable {
 	public FuncionarioPO() {
 		super();
 	}   
-	public int getChave() {
+	public Integer getChave() {
 		return this.chave;
 	}
 
-	public void setChave(int chave) {
+	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
-	public int getChaveCargo() {
+	public Integer getChaveCargo() {
 		return this.chaveCargo;
 	}
 
-	public void setChaveCargo(int chaveCargo) {
+	public void setChaveCargo(Integer chaveCargo) {
 		this.chaveCargo = chaveCargo;
 	}   
 	public String getNome() {

@@ -15,9 +15,9 @@ public class ParametrosAtendimentoPO implements Serializable {
 	   
 	@Id
 	@Column(name="dia_da_semana")
-	private int diaDaSemana;
+	private Integer diaDaSemana;
 	@Column(name="chave_funcionario")
-	private int chaveFuncionario;
+	private Integer chaveFuncionario;
 	@Column(name="horario_inicio", nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date horarioInicio;
@@ -25,16 +25,16 @@ public class ParametrosAtendimentoPO implements Serializable {
 	@Temporal(TemporalType.TIME)
 	private Date horarioFim;
 	  
-	public int getDiaDaSemana() {
+	public Integer getDiaDaSemana() {
 		return this.diaDaSemana;
 	}
-	public void setDiaDaSemana(int diaDaSemana) {
+	public void setDiaDaSemana(Integer diaDaSemana) {
 		this.diaDaSemana = diaDaSemana;
 	}   
-	public int getChaveFuncionario() {
+	public Integer getChaveFuncionario() {
 		return this.chaveFuncionario;
 	}
-	public void setChaveFuncionario(int chaveFuncionario) {
+	public void setChaveFuncionario(Integer chaveFuncionario) {
 		this.chaveFuncionario = chaveFuncionario;
 	}
 	public Date getHorarioInicio() {

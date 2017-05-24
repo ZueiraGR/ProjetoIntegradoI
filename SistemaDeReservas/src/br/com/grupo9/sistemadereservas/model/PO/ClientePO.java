@@ -15,18 +15,18 @@ public class ClientePO implements Serializable {
 	   
 	@Id
 	@GeneratedValue
-	private int chave;
+	private Integer chave;
 	private String nome;
 	private String sobrenome;
 	private String cpf;
 	private String telefone;
 	private String email;
 	
-	public int getChave() {
+	public Integer getChave() {
 		return this.chave;
 	}
 
-	public void setChave(int chave) {
+	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
 	public String getNome() {

@@ -15,11 +15,11 @@ public class MesaPO implements Serializable {
 	   
 	@Id
 	@GeneratedValue
-	private int chave;
+	private Integer chave;
 	@Column(unique=true)
 	private String identificacao;
 	@Column(name="qtd_cadeiras")
-	private int quantidadeDeCadeiras;
+	private Integer quantidadeDeCadeiras;
 	private String descricao;
 	private String imagem;
 	
@@ -27,11 +27,11 @@ public class MesaPO implements Serializable {
 	public MesaPO() {
 		super();
 	}   
-	public int getChave() {
+	public Integer getChave() {
 		return this.chave;
 	}
 
-	public void setChave(int chave) {
+	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
 	public String getIdentificacao() {
@@ -41,11 +41,11 @@ public class MesaPO implements Serializable {
 	public void setIdentificacao(String identificacao) {
 		this.identificacao = identificacao;
 	}   
-	public int getQuantidadeDeCadeiras() {
+	public Integer getQuantidadeDeCadeiras() {
 		return this.quantidadeDeCadeiras;
 	}
 
-	public void setQuantidadeDeCadeiras(int quantidadeDeCadeiras) {
+	public void setQuantidadeDeCadeiras(Integer quantidadeDeCadeiras) {
 		this.quantidadeDeCadeiras = quantidadeDeCadeiras;
 	}   
 	public String getDescricao() {
