@@ -15,6 +15,15 @@ public enum TipoUsuario {
 	public String getDescricao(){
 		return this.descricao;
 	}
+	public String getDescricao(char codigo){
+		String retorno = "Não definido";
+		if(TipoUsuario.CLIENTE.getCodigo() == codigo){
+			retorno = TipoUsuario.CLIENTE.getDescricao();
+		}else if(TipoUsuario.FUNCIONARIO.getCodigo() == codigo){
+			retorno = TipoUsuario.FUNCIONARIO.getDescricao();
+		}
+		return retorno;
+	}
 	public char getCodigo(){
 		return this.codigo;
 	}
