@@ -26,9 +26,8 @@ public class AdminFilter implements Filter{
          String paginaAtual = ((HttpServletRequest) request).getServletPath();
          System.out.println("Admin log acess :"+paginaAtual);
          
-         RequestDispatcher dispacher = request.getRequestDispatcher("login.do");
-         
-         dispacher.forward(request, response);
+//         RequestDispatcher dispacher = request.getRequestDispatcher("login.do");
+//         dispacher.forward(request, response);
          
          if (sess.getAttribute("currentPage") == null) {
              sess.setAttribute("lastPage", paginaAtual);
