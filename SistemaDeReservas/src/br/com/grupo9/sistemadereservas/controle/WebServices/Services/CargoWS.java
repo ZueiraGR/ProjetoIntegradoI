@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -15,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.com.grupo9.sistemadereservas.model.BO.CargoBO;
 import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 
 @RequestScoped
@@ -22,47 +24,51 @@ import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 @Produces("application/json")
 @Consumes("application/json")
 public class CargoWS {
-
+	private CargoBO cargoBO;
 	@POST
-	public Response create(final CargoPO cargopo) {
-		//TODO: process the given cargopo 
-		//you may want to use the following return statement, assuming that CargoPO#getId() or a similar method 
-		//would provide the identifier to retrieve the created CargoPO resource:
-		//return Response.created(UriBuilder.fromResource(CargoPOEndpoint.class).path(String.valueOf(cargopo.getId())).build()).build();
-		return Response.created(null).build();
-	}
-
-	@GET
-	@Path("/{id:[0-9][0-9]*}")
-	public Response findById(@PathParam("id") final Long id) {
-		//TODO: retrieve the cargopo 
-		CargoPO cargopo = null;
-		if (cargopo == null) {
-			return Response.status(Status.NOT_FOUND).build();
+	@Path("/cadastrar")
+	public ArrayList<String> cadastrar(final CargoPO cargoPO) {
+		getCargoBO().setCargoPO(cargoPO);
+		if(getCargoBO().cadastrar()){
+			return new ArrayList<>();
+		}else{
+			return getCargoBO().getMensagemErro();
 		}
-		return Response.ok(cargopo).build();
+		
+		//TODO testar a funcionalidade
 	}
 
 	@GET
-	public List<CargoPO> listAll(@QueryParam("start") final Integer startPosition,
-			@QueryParam("max") final Integer maxResult) {
-		//TODO: retrieve the cargopoes 
-		final List<CargoPO> cargopoes = null;
-		return cargopoes;
+	@Path("/capturar/{id:[0-9]*}")
+	public CargoPO capturar(@PathParam("id") final Long id) {
+		return  null;
+	}
+
+	@GET
+	@Path("/listar/{pagina:[0-9]*}/{qtdRegistros:[0-9]*}")
+	public List<CargoPO> listar(@PathParam("pagina") final Integer pagina, @PathParam("qtdRegistros") final Integer qtdRegistros) {
+		return getCargoBO().listar(pagina,qtdRegistros);
 	}
 
 	@PUT
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/update/{id:[0-9]*}")
 	public Response update(@PathParam("id") Long id, final CargoPO cargopo) {
 		//TODO: process the given cargopo 
 		return Response.noContent().build();
 	}
 
 	@DELETE
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/deletar/{id:[0-9]*}")
 	public Response deleteById(@PathParam("id") final Long id) {
 		//TODO: process the cargopo matching by the given id 
 		return Response.noContent().build();
+	}
+	
+	private CargoBO getCargoBO(){
+		if(this.cargoBO == null){
+			this.cargoBO = new CargoBO();
+		}
+		return this.cargoBO;		
 	}
 
 }

@@ -18,7 +18,7 @@ public class CargoPO implements Serializable {
 	private Integer chave;
 	private String nome;
 	@Column(name="nivel_acesso")
-	private char nivelAcesso;
+	private Character nivelAcesso;
 	
 
 	public CargoPO() {
@@ -38,11 +38,11 @@ public class CargoPO implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}   
-	public char getNivelAcesso() {
+	public Character getNivelAcesso() {
 		return this.nivelAcesso;
 	}
 
-	public void setNivelAcesso(char nivelAcesso) {
+	public void setNivelAcesso(Character nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
 	}
    
