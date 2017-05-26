@@ -92,7 +92,6 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 		}
 	}
 
-	@Override
 	public List<UsuarioPO> listar() {
 		try{
 			StringBuilder query = new StringBuilder();
@@ -130,6 +129,12 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public List<UsuarioPO> listar(Integer pagina, Integer qtdRegistros) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -10,8 +10,14 @@ import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 public class CargoBO {
 	private CargoPO cargoPO;
 	private CargoDAO cargoDAO;
-	private ArrayList<String> mensagensDeErro;
+	private List<String> mensagensDeErro;
 	
+	public CargoBO(){
+		this.mensagensDeErro = new ArrayList<>();
+	}
+	public CargoPO capturar(){
+		return getCargoDAO().capturarPorId(getCargoPO());
+	}	
 	public boolean cadastrar(){
 		if(isDadosValidosParaCadastro()){
 			return getCargoDAO().cadastrar(getCargoPO());
@@ -19,8 +25,20 @@ public class CargoBO {
 			return false;
 		}
 	}
+	public boolean atualizarNome(){
+		getCargoDAO().atualizar(getCargoPO());
+		return true;
+	}
+	public boolean atualizarPermicao(){
+		getCargoDAO().atualizar(getCargoPO());
+		return true;
+	}
+	public boolean excluir(){
+		getCargoDAO().excluir(getCargoPO());
+		return true;
+	}
 	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros){
-		return getCargoDAO().listar();
+		return getCargoDAO().listar(pagina,qtdRegistros);
 	}
 	
 	public CargoPO getCargoPO() {
@@ -74,7 +92,7 @@ public class CargoBO {
 	private void setMensagemErro(String mensagem){
 		this.mensagensDeErro.add(mensagem);
 	}
-	public ArrayList<String> getMensagemErro(){
+	public List<String> getMensagemErro(){
 		return this.mensagensDeErro;
 	}
 	

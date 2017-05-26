@@ -23,17 +23,17 @@
 	</ui:insert>
 	<div class="section">
 		<div class="container row ">
-			<div class="row s12 z-depth-2">
-				<ul class="tabs tabs-fixed-width z-depth-1">
-					<li class="tab col s16"><a href="#adm-view">FUNCIONARIOS</a></li>
-					<li class="tab col s16"><a href="#adm-add">CADASTRO DE FUNCIONARIOS</a></li>
+			<div class="row z-depth-2">
+				<ul class="tabs z-depth-1">
+					<li class="tab col l4"><a href="#adm-view">FUNCIONARIOS</a></li>
+					<li class="tab col l4"><a href="#adm-add">CADASTRO DE FUNCIONARIOS</a></li>
+					<li class="tab col l4"><a href="#adm-cargos">GERENCIAR CARGOS</a></li>
 				</ul>
 				<form action="teste.html" name="tetse">
 					<div id="adm-view" class="col s12 ">
 						<table class="bordered">
 							<thead>
 								<tr>
-									<th></th>
 									<th>Login</th>
 									<th>Nome</th>
 									<th>Cargo</th>
@@ -42,25 +42,18 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input type="checkbox" class="filled-in"
-										id="filled-in-box1" /> <label for="filled-in-box1"></label></td>
 									<td>anderson</td>
 									<td>Anderson Nougueira</td>
 									<td>Garçom</td>
 									<td>anderson@teste.com</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="filled-in"
-										id="filled-in-box2" /> <label for="filled-in-box2"></label></td>
 									<td>maria.andrade</td>
 									<td>Maria de Souza Andrade</td>
 									<td>Balconista</td>
 									<td>maria.andrade@teste.com</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="filled-in"
-										id="filled-in-box3"> <label for="filled-in-box3"></label>
-									</td>
 									<td>joao.henrique</td>
 									<td>João Henrique dos Santos</td>
 									<td>Gerente</td>
@@ -80,7 +73,7 @@
 						</div>
 					</div>
 				</form>
-				<div id="adm-add" class="col s12">
+				<div id="adm-add" class="container col s12">
 					<div class="col s12">
 						<br/>
 						<form name="CadastroDeFuncionario" action="#" method="POST">
@@ -110,8 +103,8 @@
 									<label for="login" data-error="Digite um login válido!" data-success="Ok">LOGIN</label>
 								</div>
 								<div class="input-field col s6">
-									<select class="validate" required id="cargo">
-										<option value="" disabled selected>Selecione um cargo</option>
+									<select class="validate" id="cargo">
+										<option value="" disabled="disabled" selected="selected">Selecione um cargo</option>
 										<option value="2">Balconista</option>
 										<option value="1">Garçom</option>
 										<option value="3">Gerente</option>
@@ -131,11 +124,11 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s6">
-									<input placeholder="Digite uma senha" id="senha" type="password" class="validate">
+									<input placeholder="Digite uma senha" id="senha" type="password" class="validate"/>
 									<label for="senha" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">SENHA</label>
 								</div>
 								<div class="input-field col s6">
-									<input placeholder="Repita a senha digitada" id="confirmaSenha" type="password" class="validate">
+									<input placeholder="Repita a senha digitada" id="confirmaSenha" type="password" class="validate"/>
 									<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">CONFIRME A SENHA</label>
 								</div>
 							</div>
@@ -151,6 +144,37 @@
 							</div>
 						</form>
 					</div>
+				</div>
+				<div id="adm-cargos" class="row col s12">
+					<div class="col s2"></div>
+					<div class="col s8">
+						<table class="bordered centered">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Nivel de acesso</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Garçom</td>
+									<td>Atendimento</td>
+								</tr>
+								<tr>
+									<td>Balconista</td>
+									<td>Atendimento</td>
+								</tr>
+								<tr>
+									<td>Gerente</td>
+									<td>Gerência</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<th colspan="2"></th>
+							</tfoot>
+						</table>
+					</div>
+					<div class="col s2"></div>
 				</div>
 			</div>
 		</div>

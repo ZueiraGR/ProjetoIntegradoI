@@ -73,12 +73,12 @@ public class MesaDAO implements DAO<MesaPO> {
 	}
 
 	@Override
-	public List<MesaPO> listar() {
+	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros) {
 		try {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ").append("FROM MesaPO u ");
 			TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
-			return (List<MesaPO>) typedQuery.getResultList();
+			return (List<MesaPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		} catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os usuarios. Causa:\n");
 			// e.printStackTrace();

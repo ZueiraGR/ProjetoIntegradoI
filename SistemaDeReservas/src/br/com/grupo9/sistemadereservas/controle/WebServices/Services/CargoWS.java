@@ -12,10 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
 import br.com.grupo9.sistemadereservas.model.BO.CargoBO;
 import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 
@@ -27,7 +24,7 @@ public class CargoWS {
 	private CargoBO cargoBO;
 	@POST
 	@Path("/cadastrar")
-	public ArrayList<String> cadastrar(final CargoPO cargoPO) {
+	public List<String> cadastrar(final CargoPO cargoPO) {
 		getCargoBO().setCargoPO(cargoPO);
 		if(getCargoBO().cadastrar()){
 			return new ArrayList<>();
@@ -41,7 +38,7 @@ public class CargoWS {
 	@GET
 	@Path("/capturar/{id:[0-9]*}")
 	public CargoPO capturar(@PathParam("id") final Long id) {
-		return  null;
+		return  getCargoBO().capturar();
 	}
 
 	@GET

@@ -26,11 +26,11 @@ public class Teste {
 //    	System.out.println("login: " + usuarioCadastrado.getLogin()+"\n\n");
 //    	
 //    	/*LISTANDO USUARIOS*/
-    	List<UsuarioPO> lista = usuarioDAO.listar();
+//    	List<UsuarioPO> lista = usuarioDAO.listar();
     	
-    	for(UsuarioPO usuario : lista){
-    		System.out.println(usuario.getLogin()+" - "+usuario.getSenha()+" - "+usuario.getStatus()+" - "+usuario.getTipo()+" - "+usuario.getDataCriacao().getTimeInMillis()+"\n");
-    	}
+//    	for(UsuarioPO usuario : lista){
+//    		System.out.println(usuario.getLogin()+" - "+usuario.getSenha()+" - "+usuario.getStatus()+" - "+usuario.getTipo()+" - "+usuario.getDataCriacao().getTimeInMillis()+"\n");
+//    	}
     	/*FIM LISTANDO USUARIOS*/
     }
 }

@@ -75,13 +75,13 @@ public class ClienteDAO implements DAO<ClientePO> {
 	}
 
 	@Override
-	public List<ClientePO> listar() {
+	public List<ClientePO> listar(Integer pagina, Integer qtdRegistros) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM ClientePO u ");
 			TypedQuery<ClientePO> typedQuery = this.manager.createQuery(query.toString(),ClientePO.class);
-				return (List<ClientePO>) typedQuery.getResultList();
+				return (List<ClientePO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os cliente. Causa:\n");
 			e.printStackTrace();

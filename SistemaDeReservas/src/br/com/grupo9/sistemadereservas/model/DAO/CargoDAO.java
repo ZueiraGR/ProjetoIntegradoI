@@ -72,13 +72,13 @@ public class CargoDAO implements DAO<CargoPO> {
 	}
 
 	@Override
-	public List<CargoPO> listar() {
+	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM CargoPO u ");
 			TypedQuery<CargoPO> typedQuery = this.manager.createQuery(query.toString(),CargoPO.class);
-				return (List<CargoPO>) typedQuery.getResultList();
+				return (List<CargoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os cargos. Causa:\n");
 //			e.printStackTrace();

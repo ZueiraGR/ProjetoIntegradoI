@@ -71,13 +71,13 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 	}
 
 	@Override
-	public List<PromocaoPO> listar() {
+	public List<PromocaoPO> listar(Integer pagina, Integer qtdRegistros) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM PromocaoPO u ");
 			TypedQuery<PromocaoPO> typedQuery = this.manager.createQuery(query.toString(),PromocaoPO.class);
-				return (List<PromocaoPO>) typedQuery.getResultList();
+				return (List<PromocaoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os promoções. Causa:\n");
 //			e.printStackTrace();

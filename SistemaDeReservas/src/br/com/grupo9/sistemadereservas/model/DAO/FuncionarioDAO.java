@@ -76,13 +76,13 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	}
 
 	@Override
-	public List<FuncionarioPO> listar() {
+	public List<FuncionarioPO> listar(Integer pagina, Integer qtdRegistros) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM FuncionarioPO u ");
 			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
-				return (List<FuncionarioPO>) typedQuery.getResultList();
+				return (List<FuncionarioPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcion�rios. Causa:\n");
 			e.printStackTrace();

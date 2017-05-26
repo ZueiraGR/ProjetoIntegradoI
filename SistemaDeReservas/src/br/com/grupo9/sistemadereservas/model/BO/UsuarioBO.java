@@ -1,7 +1,5 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
-import java.util.List;
-
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
 import br.com.grupo9.sistemadereservas.model.DAO.UsuarioDAO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
