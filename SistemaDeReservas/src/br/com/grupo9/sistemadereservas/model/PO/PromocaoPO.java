@@ -17,8 +17,8 @@ public class PromocaoPO implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer chave;
-	@Column(name="chave_funcionario")
-	private Integer chaveFuncionario;
+	@ManyToOne
+	private FuncionarioPO funcionario;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar inicio;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -38,14 +38,13 @@ public class PromocaoPO implements Serializable {
 
 	public void setChave(Integer chave) {
 		this.chave = chave;
-	}   
-	public Integer getChaveFuncionario() {
-		return this.chaveFuncionario;
+	}  
+	public FuncionarioPO getFuncionario() {
+		return funcionario;
 	}
-
-	public void setChaveFuncionario(Integer chaveFuncionario) {
-		this.chaveFuncionario = chaveFuncionario;
-	}   
+	public void setFuncionario(FuncionarioPO funcionario) {
+		this.funcionario = funcionario;
+	}
 	public Calendar getInicio() {
 		return this.inicio;
 	}

@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: FuncionarioPO
  *
  */
-@Entity
+@Entity(name="funcionario")
 @Table(name="funcionario")
 public class FuncionarioPO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,16 +16,16 @@ public class FuncionarioPO implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer chave;
-	@Column(name="chave_cargo")
-	private Integer chaveCargo;
+	@ManyToOne
+	@JoinColumn(name="cargo_chave", referencedColumnName="chave", nullable= false)
+	private CargoPO cargo;
 	private String nome;
 	private String sobrenome;
 	private String cpf;
-	
+	private String email;
+	@Column(nullable=false)
+	private Character status;
 
-	public FuncionarioPO() {
-		super();
-	}   
 	public Integer getChave() {
 		return this.chave;
 	}
@@ -33,13 +33,13 @@ public class FuncionarioPO implements Serializable {
 	public void setChave(Integer chave) {
 		this.chave = chave;
 	}   
-	public Integer getChaveCargo() {
-		return this.chaveCargo;
+	 
+	public CargoPO getCargo() {
+		return cargo;
 	}
-
-	public void setChaveCargo(Integer chaveCargo) {
-		this.chaveCargo = chaveCargo;
-	}   
+	public void setCargo(CargoPO cargoPO) {
+		this.cargo = cargoPO;
+	}
 	public String getNome() {
 		return this.nome;
 	}
@@ -61,5 +61,21 @@ public class FuncionarioPO implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-   
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Character getStatus() {
+		return status;
+	}
+
+	public void setStatus(Character status) {
+		this.status = status;
+	}
+
 }

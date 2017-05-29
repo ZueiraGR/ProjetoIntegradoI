@@ -16,8 +16,8 @@ public class ParametrosAtendimentoPO implements Serializable {
 	@Id
 	@Column(name="dia_da_semana")
 	private Integer diaDaSemana;
-	@Column(name="chave_funcionario")
-	private Integer chaveFuncionario;
+	@ManyToOne
+	private FuncionarioPO funcionario;
 	@Column(name="horario_inicio", nullable=false)
 	@Temporal(TemporalType.TIME)
 	private Date horarioInicio;
@@ -30,12 +30,12 @@ public class ParametrosAtendimentoPO implements Serializable {
 	}
 	public void setDiaDaSemana(Integer diaDaSemana) {
 		this.diaDaSemana = diaDaSemana;
-	}   
-	public Integer getChaveFuncionario() {
-		return this.chaveFuncionario;
 	}
-	public void setChaveFuncionario(Integer chaveFuncionario) {
-		this.chaveFuncionario = chaveFuncionario;
+	public FuncionarioPO getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(FuncionarioPO funcionario) {
+		this.funcionario = funcionario;
 	}
 	public Date getHorarioInicio() {
 		return horarioInicio;

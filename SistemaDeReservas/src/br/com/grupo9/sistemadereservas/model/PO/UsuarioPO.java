@@ -5,6 +5,8 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,7 +16,7 @@ import javax.persistence.TemporalType;
  *Estas anotações são utilizadas pelo Hibernate para identificar a tabela e os seus atributos no 
  *banco de dados.
 */
-@Entity
+@Entity(name="usuario")
 @Table(name="usuario")
 public class UsuarioPO implements Serializable {
 
@@ -22,19 +24,17 @@ public class UsuarioPO implements Serializable {
 
 	@Id
 	private String login;
-	
-	@Column(name="chave_cliente", nullable= true)
-	private Integer chaveCliente;
-	
-	@Column(name="chave_funcionario", nullable= true)
-	private Integer chaveFuncionario;
-	
+	@OneToOne
+	@JoinColumn(name="cliente_chave",referencedColumnName="chave", nullable= true, unique=true)
+	private ClientePO cliente;
+	@OneToOne
+	@JoinColumn(name="funcionario_chave",referencedColumnName="chave", nullable= true, unique=true)
+	private FuncionarioPO funcionario;
 	private String senha;
-	private char status;
-	private char tipo;
-	
+	private Character status;
+	private Character tipo;
 	@Column(name="data_criacao", nullable= false)
-        @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCriacao;
 	@Column(name="data_inativacao")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -42,8 +42,6 @@ public class UsuarioPO implements Serializable {
 	@Column(name="data_exclusao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataExclusao;
-	
-	
 	
 	public String getLogin() {
 		return login;
@@ -54,55 +52,49 @@ public class UsuarioPO implements Serializable {
 	public String getSenha() {
 		return senha;
 	}
-	public Integer getChaveCliente() {
-		return chaveCliente;
+	public ClientePO getCliente() {
+		return cliente;
 	}
-	public void setChaveCliente(Integer chaveCliente) {
-		this.chaveCliente = chaveCliente;
+	public void setCliente(ClientePO cliente) {
+		this.cliente = cliente;
 	}
-	public Integer getChaveFuncionario() {
-		return chaveFuncionario;
+	public FuncionarioPO getFuncionario() {
+		return funcionario;
 	}
-	public void setChaveFuncionario(Integer chaveFuncionario) {
-		this.chaveFuncionario = chaveFuncionario;
+	public void setFuncionario(FuncionarioPO funcionario) {
+		this.funcionario = funcionario;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public char getStatus() {
+	public Character getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(Character status) {
 		this.status = status;
 	}
-	
-	public char getTipo() {
+	public Character getTipo() {
 		return tipo;
 	}
-	public void setTipo(char tipo) {
+	public void setTipo(Character tipo) {
 		this.tipo = tipo;
 	}
-	
 	public Calendar getDataCriacao() {
 		return dataCriacao;
 	}
 	public void setDataCriacao(Calendar dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	
 	public Calendar getDataInativacao() {
 		return dataInativacao;
 	}
 	public void setDataInativacao(Calendar dataInativacao) {
 		this.dataInativacao = dataInativacao;
 	}
-	
 	public Calendar getDataExclusao() {
 		return dataExclusao;
 	}
 	public void setDataExclusao(Calendar dataExclusao) {
 		this.dataExclusao = dataExclusao;
 	}
-	
 }

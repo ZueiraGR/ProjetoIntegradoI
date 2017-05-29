@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Cliente
  *
  */
-@Entity
+@Entity(name="cliente")
 @Table(name="cliente")
 public class ClientePO implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -6,11 +6,7 @@ import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 public class ClienteBO extends UsuarioBO {
 	private ClientePO clientePO;
 	private ClienteDAO clienteDAO;
-	
-	public void comporCliente(){
-		this.clientePO = getClienteDAO().compor(getUsusarioPO());
-	}
-	
+
 	public ClientePO getClientePO() {
 		if(this.clientePO == null){
 			this.clientePO = new ClientePO();
