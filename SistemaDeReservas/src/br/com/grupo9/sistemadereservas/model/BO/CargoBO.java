@@ -1,6 +1,7 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.com.grupo9.sistemadereservas.controle.Dominio.NivelDeAcesso;
@@ -25,11 +26,7 @@ public class CargoBO {
 			return false;
 		}
 	}
-	public boolean atualizarNome(){
-		getCargoDAO().atualizar(getCargoPO());
-		return true;
-	}
-	public boolean atualizarPermicao(){
+	public boolean atualizar(){
 		getCargoDAO().atualizar(getCargoPO());
 		return true;
 	}
@@ -38,6 +35,7 @@ public class CargoBO {
 		return true;
 	}
 	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros){
+		pagina = pagina*qtdRegistros-qtdRegistros;
 		return getCargoDAO().listar(pagina,qtdRegistros);
 	}
 	

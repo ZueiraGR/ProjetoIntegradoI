@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition>
+		<!-- Modal para confirmar exclusao do cargo -->
+		<div class="modal" id="confirmarExclusaoDoCargo">
+			<form id="formExclusaoCargo">
+				<div class="modal-content">
+					<div id="mensagemDeRetornoExCargo" class="card-panel lighten-2 white-text center-align hiddendiv"></div>
+					<p class="center-align">Deseja realmente excluir o cargo <b id="labelNomeDoCargo" class="red-text"></b> ?</p>
+					<blockquote>
+			      		<b class="red-text">Observação: </b>Todos os funcionários que possuem este cargo serão inátivos.
+			    	</blockquote>
+				</div>		
+				<div class="container">
+					<div class="row">
+						<input type="hidden" value="" id="chaveCargoAExcluir"/>
+						<div class="col l6 m6 s6 center">
+							<button class="btn grey modal-close waves-effect waves-green" id="confirmarExclusao" type="submit">CONFIRMAR</button>
+						</div>
+						<div class="col l6 m6 s6 center">
+							<button class="btn grey modal-close waves-effect waves-red modal-close" id="cancelarExclusao" type="reset">CANCELAR</button>
+						</div>
+					</div>
+					<div class="row"></div>
+				</div>
+			</form>
+		</div>
+		<!-- Modal para alterar os dados do cargo -->
+		<div class="modal" id="alterarDadosDoCargo">
+			<div class="modal-content">
+				<div class="row"><h5 id="tituloFomunlarioCargo"></h5></div>
+				<div id="mensagemDeRetornoCargo" class="card-panel lighten-2 white-text center-align hiddendiv"></div>
+				<div class="col s12">
+					<form name="formularioCadastroCargo" id="formularioCadastroCargo" method="POST">
+						
+						<div class="row">
+							<input type="hidden" value="" id="acaoFormularioCargo"/>
+							<input type="hidden" value="" id="chaveDoCargo"/>
+							<div class="input-field col s6">
+								<input id="labelNomeDoCargoF" type="text" value="" class="validate" required="required" />
+								<label for="labelNomeDoCargoF" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME</label>
+							</div>
+							<div class="input-field col s6">
+								<select class="validate" id="labelNivelDeAcessoCargo" required="required">
+									<option value="1">Atendimento</option>
+									<option value="2">Gerenciamento</option>
+								</select>
+								<label for="labelNivelDeAcessoCargo" data-error="Selecione um cargo!" data-success="Ok">Nível de Acesso</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col l3"></div>
+							<div class="input-field col l3">
+								<button class="btn grey waves-effect waves-green col l12 m12 " type="submit" id="btnConfirmarCadastro">SALVAR</button>
+							</div>
+							<div class="input-field col l3">
+								<button class="btn grey waves-effect waves-red col l12 m12 modal-close"	type="reset" id="btnCancelarCadastro">CANCELAR</button>
+							</div>
+							<div class="input-field col l3"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</html>

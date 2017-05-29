@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.model.DAO;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,21 +13,19 @@ import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 public class CargoDAO implements DAO<CargoPO> {
 	private EntityManager manager;
 
-	public CargoDAO() {
-		this.manager = PersistenceUtil.getEntityManager();
-	}
-
 	@Override
 	public boolean cadastrar(CargoPO entidade) {
-		this.manager.getTransaction().begin();
+		getManager().getTransaction().begin();
 		try {
-			this.manager.persist(entidade);
-			this.manager.getTransaction().commit();
+			getManager().persist(entidade);
+			getManager().getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			this.manager.getTransaction().rollback();
-			// e.printStackTrace();
+			getManager().getTransaction().rollback();
+			 e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -35,15 +34,17 @@ public class CargoDAO implements DAO<CargoPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM CargoPO u ")
+				 .append("FROM cargo u ")
 				 .append("WHERE u.chave = :chave");
-			TypedQuery<CargoPO> typedQuery = this.manager.createQuery(query.toString(),CargoPO.class);
+			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 				typedQuery.setParameter("chave", entidade.getChave());
 				return (CargoPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o cargo pela chave. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -51,23 +52,25 @@ public class CargoDAO implements DAO<CargoPO> {
 	public boolean atualizar(CargoPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM CargoPO u")
-			 .append("WHERE u.nome = :nome");
-		TypedQuery<CargoPO> typedQuery = this.manager.createQuery(query.toString(),CargoPO.class);
-			typedQuery.setParameter("nome", entidade.getNome());
+			 .append("FROM cargo u")
+			 .append("WHERE u.chave = :chave");
+		TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
+			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			CargoPO cargo = (CargoPO)typedQuery.getSingleResult();
-			this.manager.getTransaction().begin();
+			getManager().getTransaction().begin();
 		try{
 			if(cargo != null && cargo.getNome().equals(entidade.getNome())){
-				this.manager.merge(entidade);
+				getManager().merge(entidade);
 			}
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o cargo. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -76,13 +79,15 @@ public class CargoDAO implements DAO<CargoPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM CargoPO u ");
-			TypedQuery<CargoPO> typedQuery = this.manager.createQuery(query.toString(),CargoPO.class);
+				 .append("FROM cargo u ");
+			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 				return (List<CargoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os cargos. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -90,24 +95,42 @@ public class CargoDAO implements DAO<CargoPO> {
 	public boolean excluir(CargoPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM CargoPO u ")
-			 .append("WHERE u.nome = :nome");
-		TypedQuery<CargoPO> typedQuery = this.manager.createQuery(query.toString(),CargoPO.class);
-			typedQuery.setParameter("nome", entidade.getNome());
+			 .append("FROM cargo u ")
+			 .append("WHERE u.chave = :chave");
+		TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
+			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			CargoPO cargo = (CargoPO)typedQuery.getSingleResult();
-			this.manager.getTransaction().begin();
+			getManager().getTransaction().begin();
 		try{
-			if(cargo != null && cargo.getNome().equals(entidade.getNome())){
-				this.manager.remove(entidade);
+			if(cargo != null && cargo.getChave().equals(entidade.getChave())){
+				cargo.setDataExclusao(Calendar.getInstance());
+				getManager().merge(cargo);
 			}
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar excluir o cargo. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
+		}		finally {
+			fecharManager();
 		}
 	}
 
+	@Override
+	public void fecharManager() {
+		if(this.manager.isOpen()){
+			this.manager.close();
+		}				
+	}
+	
+	private EntityManager getManager(){
+		if(this.manager == null){
+			this.manager = PersistenceUtil.getEntityManager();
+		}else if(!this.manager.isOpen()){
+			this.manager = PersistenceUtil.getEntityManager();
+		}
+		return this.manager;
+	}
 }

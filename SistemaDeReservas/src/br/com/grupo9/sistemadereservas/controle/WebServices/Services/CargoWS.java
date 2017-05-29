@@ -12,7 +12,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 import br.com.grupo9.sistemadereservas.model.BO.CargoBO;
 import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 
@@ -23,16 +22,16 @@ import br.com.grupo9.sistemadereservas.model.PO.CargoPO;
 public class CargoWS {
 	private CargoBO cargoBO;
 	@POST
-	@Path("/cadastrar")
-	public List<String> cadastrar(final CargoPO cargoPO) {
+	@Path("/cadastrar/")
+	public List<String> cadastrar(CargoPO cargoPO) {
 		getCargoBO().setCargoPO(cargoPO);
 		if(getCargoBO().cadastrar()){
-			return new ArrayList<>();
+			List<String> lista = new ArrayList<>();
+			lista.add("sucess");
+			return lista;
 		}else{
 			return getCargoBO().getMensagemErro();
 		}
-		
-		//TODO testar a funcionalidade
 	}
 
 	@GET
@@ -47,18 +46,27 @@ public class CargoWS {
 		return getCargoBO().listar(pagina,qtdRegistros);
 	}
 
-	@PUT
-	@Path("/update/{id:[0-9]*}")
-	public Response update(@PathParam("id") Long id, final CargoPO cargopo) {
-		//TODO: process the given cargopo 
-		return Response.noContent().build();
+	@POST
+	@Path("/alterar/{id:[0-9]*}")
+	public String alterar(@PathParam("id") Integer id, CargoPO cargoPO) {
+		getCargoBO().setCargoPO(cargoPO);
+		getCargoBO().getCargoPO().setChave(id);
+		if(getCargoBO().atualizar()){
+			return "sucess";
+		}else{
+			return "error";
+		}
 	}
 
-	@DELETE
+	@GET
 	@Path("/deletar/{id:[0-9]*}")
-	public Response deleteById(@PathParam("id") final Long id) {
-		//TODO: process the cargopo matching by the given id 
-		return Response.noContent().build();
+	public String deleteById(@PathParam("id") Integer id) {
+		getCargoBO().getCargoPO().setChave(id);
+		if(getCargoBO().excluir()){
+			return "sucess";
+		}else{
+			return "error";
+		}
 	}
 	
 	private CargoBO getCargoBO(){

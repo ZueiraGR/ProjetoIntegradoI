@@ -2,28 +2,28 @@ package br.com.grupo9.sistemadereservas.model.PO;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Calendar;
 import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Cargo
  *
  */
-@Entity
+@Entity(name="cargo")
 @Table(name="cargo")
 public class CargoPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	   
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer chave;
 	private String nome;
+	@Column(name="data_exclusao")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataExclusao;
+
 	@Column(name="nivel_acesso")
 	private Character nivelAcesso;
-	
-
-	public CargoPO() {
-		super();
-	}   
 	public Integer getChave() {
 		return this.chave;
 	}
@@ -44,6 +44,14 @@ public class CargoPO implements Serializable {
 
 	public void setNivelAcesso(Character nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
+	}
+
+	public Calendar getDataExclusao() {
+		return dataExclusao;
+	}
+
+	public void setDataExclusao(Calendar dataExclusao) {
+		this.dataExclusao = dataExclusao;
 	}
    
 }
