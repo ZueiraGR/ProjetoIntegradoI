@@ -1,0 +1,150 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition>
+		<!-- Modal para confirmar bloqueio ou desbloqueio do acesso do funcionario -->
+		<div class="modal" id="confirmarBloqueioOuDesbloqueioDoFuncionario">
+			<div class="modal-content" id="mesagemBloqueio"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col l6 m6 s6 center">
+						<a class="btn grey modal-close waves-effect waves-green">CONFIRMAR</a>
+					</div>
+					<div class="col l6 m6 s6 center">
+						<a class="btn grey modal-close waves-effect waves-red modal-close">CANCELAR</a>
+					</div>
+				</div>
+				<div class="row"></div>
+			</div>
+		</div>
+		<!-- Modal para confirmar exclusao do funcionario -->
+		<div class="modal" id="confirmarExclusaoDoFuncionario">
+			<div class="modal-content">
+				<p class="center-align">Deseja realmente excluir o funcionário <b id="labelNomeDoFuncionario" class="red-text"></b> ?</p>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col l6 m6 s6 center">
+						<a class="btn grey modal-close waves-effect waves-green" id="confirmarExclusao">CONFIRMAR</a>
+					</div>
+					<div class="col l6 m6 s6 center">
+						<a class="btn grey modal-close waves-effect waves-red modal-close" id="cancelarExclusao">CANCELAR</a>
+					</div>
+				</div>
+				<div class="row"></div>
+			</div>
+		</div>
+		<!-- Modal para mostrar as informações do funcionario -->
+		<div class="modal" id="informacoesDoFuncionario">
+			<div class="modal-content">
+				<div class="row center"><h5>Fomulario de alteração</h5></div>
+				<div class="container">
+					<div class="row">
+						<div class="col s6 l6 m6">
+							<b>Nome:</b> <div id="labelNomeDoFuncionario" class="red-text"></div>
+						</div>
+						<div class="col s6 l6 m6">
+							<b>Sobrenome:</b> <div id="labelSobrenomeDoFuncionario" class="red-text"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6 l6 m6">
+							<b>CPF:</b> <div id="labelCpfDoFuncionario" class="red-text"></div>
+						</div>
+						<div class="col s6 l6 m6">
+							<b>E-MAIL:</b> <div id="labelEmailDoFuncionario" class="red-text"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6 l6 m6">
+							<b>Cargo:</b> <div id="labelCargoDoFuncionario" class="red-text"></div>
+						</div>
+						<div class="col s6 l6 m6">
+							<b>Status:</b> <div id="labelStatusDoFuncionario" class="red-text"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6 l6 m6">
+							<b>Login:</b> <div id="labelLoginDoFuncionario" class="red-text"></div>
+						</div>
+						<div class="col s6 l6 m6">
+							<b>Data de cadastro:</b> <div id="labelDataCadastroDoFuncionario" class="red-text"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="row">
+					<div class="center-align modal-close waves-effect waves-red col l12 m12 s12">
+						<i class="fa fa-close" aria-hidden="true"></i>  FECHAR
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal para alterar os dados do funcionario -->
+		<div class="modal" id="alterarDadosDoFuncionario">
+			<div class="modal-content">
+				<div class="row center"><h5>Fomulario de alteração</h5></div>
+				<div class="col s12">
+					<form name="CadastroDeFuncionario" action="#" method="POST">
+						<div class="row">
+							<div class="input-field col s6">
+								<input id="labelNomeDoFuncionario" type="text"	class="validate" required="required" />
+								<label for="labelNomeDoFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="labelSobrenomeDoFuncionario" type="text" class="validate" required="required" />
+								<label for="labelSobrenomeDoFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">SOBRENOME</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input maxlength="14" id="labelCpfDoFuncionario" type="text" class="validate" required="required" />
+								<label	for="labelCpfDoFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="labelEmailDoFuncionario" type="text" class="validate" required="required" />
+								<label for="labelEmailDoFuncionario" data-error="Digite um login válido!" data-success="Ok">LOGIN</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input id="labelLoginDoFuncionario" type="text" class="validate" disabled="disabled" />
+								<label for="labelLoginDoFuncionario" data-error="Digite um login válido!" data-success="Ok">LOGIN</label>
+							</div>
+							<div class="input-field col s6">
+								<select class="validate" id="labelCargoDoFuncionario" required="required"></select>
+								<label for="labelCargoDoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite uma senha" id="senha" type="password" class="validate" />
+								<label for="senha" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">SENHA</label>
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Repita a senha digitada" id="confirmaSenha"	type="password" class="validate" />
+								<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">CONFIRME A SENHA</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col l3"></div>
+							<div class="input-field col l3">
+								<button class="btn grey waves-effect waves-green col l12 m12 " type="submit">SALVAR</button>
+							</div>
+							<div class="input-field col l3">
+								<button class="btn grey waves-effect waves-red col l12 m12 modal-close"	type="reset">CANCELAR</button>
+							</div>
+							<div class="input-field col l3"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+
+</html>

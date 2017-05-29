@@ -11,10 +11,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 
 @RequestScoped
@@ -34,21 +34,15 @@ public class FuncionarioWS {
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
-	public Response findById(@PathParam("id") final Long id) {
+	public FuncionarioPO findById(@PathParam("id") final Long id) {
 		//TODO: retrieve the funcionariopo 
 		FuncionarioPO funcionariopo = null;
-		if (funcionariopo == null) {
-			return Response.status(Status.NOT_FOUND).build();
-		}
-		return Response.ok(funcionariopo).build();
+		return funcionariopo;
 	}
-
 	@GET
-	public List<FuncionarioPO> listAll(@QueryParam("start") final Integer startPosition,
-			@QueryParam("max") final Integer maxResult) {
-		//TODO: retrieve the funcionariopoes 
-		final List<FuncionarioPO> funcionariopoes = null;
-		return funcionariopoes;
+	@Path("/listar/{pagina:[0-9]*}/{registros:[0-9]*}")
+	public List<FuncionarioPO> listAll(@PathParam("pagina") final int pagina,@PathParam("registros") final int qtdRegistros) {
+		return getFuncionarioBO().listar(pagina,qtdRegistros);
 	}
 
 	@PUT
@@ -63,6 +57,13 @@ public class FuncionarioWS {
 	public Response deleteById(@PathParam("id") final Long id) {
 		//TODO: process the funcionariopo matching by the given id 
 		return Response.noContent().build();
+	}
+	
+	private FuncionarioBO getFuncionarioBO(){
+		if(this.funcionarioBO == null){
+			this.funcionarioBO = new FuncionarioBO();
+		}
+		return this.funcionarioBO;
 	}
 
 }
