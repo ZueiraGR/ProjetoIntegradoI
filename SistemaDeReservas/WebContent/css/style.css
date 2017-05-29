@@ -82,3 +82,7 @@
 	background: rgba(240, 240, 240, 1);
 	height: 3.1em;
 }
+
+.texto-com-sombra{
+	/*text-shadow: 0.04em 0.07em #202020;*/
+}
