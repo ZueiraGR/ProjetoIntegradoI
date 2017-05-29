@@ -32,8 +32,6 @@ public class UsuarioBO {
 		return this.usuarioPO;
 	}
 	
-	
-	
 	public void setUsuarioPO(UsuarioPO usuarioPO) {
 		this.usuarioPO = usuarioPO;
 	}

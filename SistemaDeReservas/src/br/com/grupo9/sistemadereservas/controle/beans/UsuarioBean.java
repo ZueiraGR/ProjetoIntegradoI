@@ -5,61 +5,41 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.grupo9.sistemadereservas.controle.Dominio.TipoUsuario;
-import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
-import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 @ManagedBean
 public class UsuarioBean {
-	private ClienteBO clienteBO;
-	private FuncionarioBO funcionarioBO;
-	private char tipo;
+	private UsuarioPO usuario;
 	
 	public UsuarioBean(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		if(session.getAttribute("tipo") != null){
-			this.tipo = (char) session.getAttribute("tipo");
-			if(this.tipo == TipoUsuario.CLIENTE.getCodigo()){
-				this.clienteBO = (ClienteBO) session.getAttribute("usuario");
-			}else if(this.tipo == TipoUsuario.FUNCIONARIO.getCodigo()){
-				this.funcionarioBO = (FuncionarioBO) session.getAttribute("usuario");
-			}
-		}
+		this.usuario = (UsuarioPO) session.getAttribute("usuario");
 	}
 	
 	public String getNome(){
-		if(this.tipo == TipoUsuario.CLIENTE.getCodigo()){
-			return getClienteBO().getClientePO().getNome();
-		}else if(this.tipo == TipoUsuario.FUNCIONARIO.getCodigo()){
-			return getFuncionarioBO().getFuncionarioPO().getNome();
+		if(TipoUsuario.CLIENTE.equals(getUsuario().getTipo())){
+			return getUsuario().getCliente().getNome();
+		}else if(TipoUsuario.FUNCIONARIO.equals(getUsuario().getTipo())){
+			return getUsuario().getFuncionario().getNome();
 		}else{
-			return null;
+			return "";
 		}
 	}
 	
 	public boolean isUsuarioLogado(){
-		boolean retorno = false;
-		if(getClienteBO() != null){
-			retorno = true;
-		}else if(getFuncionarioBO() != null){
-			retorno = true;
-		}		
-		return retorno;
+		return usuario != null ? true : false ; 
 	}
 	public boolean isFuncionario(){
 		boolean retorno = false;
-		if(isUsuarioLogado() && this.tipo == TipoUsuario.FUNCIONARIO.getCodigo()){
-			retorno = true;
+		if(isUsuarioLogado()){
+			retorno = TipoUsuario.FUNCIONARIO.equals(getUsuario().getTipo());
 		}
 		return retorno;
 	}
 
-	public ClienteBO getClienteBO() {
-		return clienteBO;
-	}
-
-	public FuncionarioBO getFuncionarioBO() {
-		return funcionarioBO;
+	public UsuarioPO getUsuario() {
+		return usuario;
 	}
 	
 }
