@@ -12,62 +12,65 @@ import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 public class MesaDAO implements DAO<MesaPO> {
 	private EntityManager manager;
 
-	public MesaDAO() {
-		this.manager = PersistenceUtil.getEntityManager();
-	}
-
 	@Override
 	public boolean cadastrar(MesaPO entidade) {
-		this.manager.getTransaction().begin();
+		getManager().getTransaction().begin();
 		try{
-			this.manager.persist(entidade);
-			this.manager.getTransaction().commit();
+			getManager().persist(entidade);
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o usuario. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
-
 	}
 
 	@Override
 	public MesaPO capturarPorId(MesaPO entidade) {
 		try {
 			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ").append("FROM MesaPO u ").append("WHERE u.chave = :chave");
-
-			TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
-			typedQuery.setParameter("chave", entidade.getChave());
-
+			query.append("SELECT u ")
+				 .append("FROM mesa u ")
+				 .append("WHERE u.chave = :chave");
+			TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
+			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			return (MesaPO) typedQuery.getSingleResult();
 		} catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar o usuario pelo login e senha. Causa:\n");
-			// e.printStackTrace();
+			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
 	@Override
 	public boolean atualizar(MesaPO entidade) {
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ").append("FROM MesaPO u").append("WHERE u.chave = :chave");
-		TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
-		typedQuery.setParameter("chave", entidade.getChave());
+		query.append("SELECT u ")
+			 .append("FROM mesa u")
+			 .append("WHERE u.chave = :chave");
+		TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
+		typedQuery.setParameter("chave", entidade.getChave().intValue());
 		MesaPO mesa = (MesaPO) typedQuery.getSingleResult();
-		this.manager.getTransaction().begin();
+		getManager().getTransaction().begin();
 		try {
 			if (mesa != null && mesa.getChave() == entidade.getChave()) {
-				this.manager.merge(entidade);
+				getManager().merge(entidade);
 			}
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o usuario. Causa:\n");
-			// e.printStackTrace();
+			 e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 
 	}
@@ -76,34 +79,56 @@ public class MesaDAO implements DAO<MesaPO> {
 	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros) {
 		try {
 			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ").append("FROM MesaPO u ");
-			TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
+			query.append("SELECT u ")
+				 .append("FROM mesa u ");
+			TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
 			return (List<MesaPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		} catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os usuarios. Causa:\n");
-			// e.printStackTrace();
+			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
 	@Override
 	public boolean excluir(MesaPO entidade) {
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ").append("FROM MesaPO u ").append("WHERE u.chave = :chave");
-		TypedQuery<MesaPO> typedQuery = this.manager.createQuery(query.toString(), MesaPO.class);
-		typedQuery.setParameter("login", entidade.getChave());
+		query.append("SELECT u ")
+			 .append("FROM mesa u ")
+			 .append("WHERE u.chave = :chave");
+		TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
+		typedQuery.setParameter("chave", entidade.getChave().intValue());
 		MesaPO mesa = (MesaPO) typedQuery.getSingleResult();
-		this.manager.getTransaction().begin();
+		getManager().getTransaction().begin();
 		try {
 			if (mesa != null && mesa.getChave() == entidade.getChave()) {
-				this.manager.remove(entidade);
+				getManager().remove(entidade);
 			}
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
-
+	
+	@Override
+	public void fecharManager() {
+		if(this.manager.isOpen()){
+			this.manager.close();
+		}				
+	}
+	
+	private EntityManager getManager(){
+		if(this.manager == null){
+			this.manager = PersistenceUtil.getEntityManager();
+		}else if(!this.manager.isOpen()){
+			this.manager = PersistenceUtil.getEntityManager();
+		}
+		return this.manager;
+	}
 }

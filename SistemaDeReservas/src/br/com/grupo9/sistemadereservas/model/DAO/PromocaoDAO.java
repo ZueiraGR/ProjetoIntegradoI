@@ -16,16 +16,18 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 	}
 	@Override
 	public boolean cadastrar(PromocaoPO entidade) {
-		this.manager.getTransaction().begin();
 		try{
-			this.manager.persist(entidade);
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().begin();
+			getManager().persist(entidade);
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o promocao. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -34,15 +36,17 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM PromocaoPO u ")
+				 .append("FROM promocao u ")
 				 .append("WHERE u.chave = :chave");
-			TypedQuery<PromocaoPO> typedQuery = this.manager.createQuery(query.toString(),PromocaoPO.class);
-				typedQuery.setParameter("chave", entidade.getChave());
+			TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
+				typedQuery.setParameter("chave", entidade.getChave().intValue());
 				return (PromocaoPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
-			System.out.println("\nOcorreu um erro ao capturar o promoção pela chave. Causa:\n");
-//			e.printStackTrace();
+			System.out.println("\nOcorreu um erro ao capturar o promoÃ§Ã£o pela chave. Causa:\n");
+			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -50,23 +54,27 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 	public boolean atualizar(PromocaoPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM PromocaoPO u")
+			 .append("FROM promocao u")
 			 .append("WHERE u.chave = :chave");
-		TypedQuery<PromocaoPO> typedQuery = this.manager.createQuery(query.toString(),PromocaoPO.class);
-			typedQuery.setParameter("chave", entidade.getChave());
+		TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
+			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			PromocaoPO promocao = (PromocaoPO)typedQuery.getSingleResult();
-			this.manager.getTransaction().begin();
 		try{
 			if(promocao != null && promocao.getChave() == (entidade.getChave())){
-				this.manager.merge(entidade);
+				getManager().getTransaction().begin();
+				getManager().merge(entidade);
+				getManager().getTransaction().commit();
+				return true;
+			}else{
+				return false;
 			}
-			this.manager.getTransaction().commit();
-			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
-			System.out.println("\nOcorreu um erro ao tentar alterar o promoção. Causa:\n");
-//			e.printStackTrace();
+			getManager().getTransaction().rollback();
+			System.out.println("\nOcorreu um erro ao tentar alterar o promoÃ§Ã£o. Causa:\n");
+			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -75,13 +83,15 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM PromocaoPO u ");
-			TypedQuery<PromocaoPO> typedQuery = this.manager.createQuery(query.toString(),PromocaoPO.class);
+				 .append("FROM promocao u ");
+			TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
 				return (List<PromocaoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
-			System.out.println("\nOcorreu um erro ao tentar capturar todos os promoções. Causa:\n");
-//			e.printStackTrace();
+			System.out.println("\nOcorreu um erro ao tentar capturar todos as promoÃ§Ãµes. Causa:\n");
+			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -89,24 +99,42 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 	public boolean excluir(PromocaoPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM PromocaoPO u ")
+			 .append("FROM promocao u ")
 			 .append("WHERE u.chave = :chave");
-		TypedQuery<PromocaoPO> typedQuery = this.manager.createQuery(query.toString(),PromocaoPO.class);
+		TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
 			typedQuery.setParameter("chave", entidade.getChave());
 			PromocaoPO promocao = (PromocaoPO)typedQuery.getSingleResult();
-			this.manager.getTransaction().begin();
+			getManager().getTransaction().begin();
 		try{
 			if(promocao != null && promocao.getChave() == (entidade.getChave())){
-				this.manager.remove(entidade);
+				getManager().remove(entidade);
 			}
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
-			System.out.println("\nOcorreu um erro ao tentar excluir o promoção. Causa:\n");
-//			e.printStackTrace();
+			getManager().getTransaction().rollback();
+			System.out.println("\nOcorreu um erro ao tentar excluir o promoï¿½ï¿½o. Causa:\n");
+			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
+	}
+	
+	@Override
+	public void fecharManager() {
+		if(this.manager.isOpen()){
+			this.manager.close();
+		}				
+	}
+	
+	private EntityManager getManager(){
+		if(this.manager == null){
+			this.manager = PersistenceUtil.getEntityManager();
+		}else if(!this.manager.isOpen()){
+			this.manager = PersistenceUtil.getEntityManager();
+		}
+		return this.manager;
 	}
 
 }

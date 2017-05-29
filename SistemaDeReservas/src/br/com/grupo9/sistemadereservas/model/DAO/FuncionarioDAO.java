@@ -1,35 +1,31 @@
 package br.com.grupo9.sistemadereservas.model.DAO;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
-import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 
 public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	
 	private EntityManager manager;
 	
-	public FuncionarioDAO() {
-		this.manager = PersistenceUtil.getEntityManager();
-	}
-
 	@Override
 	public boolean cadastrar(FuncionarioPO entidade) {
-		this.manager.getTransaction().begin();
+		getManager().getTransaction().begin();
 		try{
-			this.manager.persist(entidade);
-			this.manager.getTransaction().commit();
+			getManager().persist(entidade);
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o funcionario. Causa:\n");
 			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -38,16 +34,18 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM FuncionarioPO u ")
+				 .append("FROM funcionario u ")
 				 .append("WHERE u.chave = :chave")
 				 .append("AND u.status = :status");
-			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
+			TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
 				typedQuery.setParameter("chave", entidade.getChave());
 				return (FuncionarioPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o funcionario pela chave . Causa:\n");
 			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -55,23 +53,25 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	public boolean atualizar(FuncionarioPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM FuncionarioPO u")
+			 .append("FROM funcionario u")
 			 .append("WHERE u.nome = :nome");
-		TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
+		TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
 			typedQuery.setParameter("nome", entidade.getNome());
 			FuncionarioPO funcionario = (FuncionarioPO)typedQuery.getSingleResult();
-			this.manager.getTransaction().begin();
+			getManager().getTransaction().begin();
 		try{
 			if(funcionario != null && funcionario.getNome().equals(entidade.getNome())){
-				this.manager.merge(entidade);
+				getManager().merge(entidade);
 			}
-			this.manager.getTransaction().commit();
+			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o funcionario. Causa:\n");
 			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -80,13 +80,31 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM FuncionarioPO u ");
-			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
+				 .append("FROM funcionario u ");
+			TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
 				return (List<FuncionarioPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
-			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcion�rios. Causa:\n");
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcionários. Causa:\n");
 			e.printStackTrace();
 			return null;
+		}finally {
+			fecharManager();
+		}
+	}
+	
+	public List<FuncionarioPO> listar(int pagina,int qtdRegistros) {
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+				 .append("FROM funcionario u");
+			TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
+				return (List<FuncionarioPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
+		}catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcionários com "+qtdRegistros+" da página "+pagina+". Causa:\n");
+			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
 		}
 	}
 
@@ -94,39 +112,44 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	public boolean excluir(FuncionarioPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM FuncionarioPO u ")
+			 .append("FROM funcionario u ")
 			 .append("WHERE u.nome = :nome");
-		TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
+		TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
 			typedQuery.setParameter("nome", entidade.getNome());
 			FuncionarioPO funcionario = (FuncionarioPO)typedQuery.getSingleResult();
-			this.manager.getTransaction().begin();
+			
 		try{
 			if(funcionario != null && funcionario.getNome().equals(entidade.getNome())){
-				this.manager.remove(entidade);
-			}
-			this.manager.getTransaction().commit();
-			return true;
+				getManager().getTransaction().begin();
+				getManager().remove(entidade);
+				getManager().getTransaction().commit();
+				return true;
+			}else{
+				return false;
+			}		
 		}catch (Exception e) {
-			this.manager.getTransaction().rollback();
+			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar excluir o funcionário. Causa:\n");
-//			e.printStackTrace();
+			e.printStackTrace();
 			return false;
+		}finally {
+			fecharManager();
 		}
 	}
-
-	public FuncionarioPO compor(UsuarioPO usuarioPO) {
-		try{
-			StringBuilder query = new StringBuilder();
-			query.append("SELECT f ")
-				 .append("FROM FuncionarioPO f ")
-				 .append("WHERE chave = :chave");
-			TypedQuery<FuncionarioPO> typedQuery = this.manager.createQuery(query.toString(),FuncionarioPO.class);
-				typedQuery.setParameter("chave", usuarioPO.getChaveFuncionario().intValue());
-				return (FuncionarioPO) typedQuery.getSingleResult();
-		}catch (Exception e) {
-			System.out.println("\nOcorreu um erro ao compor funcionario. Causa:\n");
-			e.printStackTrace();
-			return null;
+	
+	@Override
+	public void fecharManager() {
+		if(this.manager.isOpen()){
+			this.manager.close();
+		}				
+	}
+	
+	private EntityManager getManager(){
+		if(this.manager == null){
+			this.manager = PersistenceUtil.getEntityManager();
+		}else if(!this.manager.isOpen()){
+			this.manager = PersistenceUtil.getEntityManager();
 		}
+		return this.manager;
 	}
 }
