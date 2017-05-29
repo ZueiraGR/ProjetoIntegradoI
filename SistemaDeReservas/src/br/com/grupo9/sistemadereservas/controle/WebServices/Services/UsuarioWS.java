@@ -45,10 +45,9 @@ public class UsuarioWS {
 	}
 
 	@GET
-	public List<UsuarioPO> listAll(@QueryParam("start") final Integer startPosition,
-			@QueryParam("max") final Integer maxResult) {
-		//TODO: retrieve the usuariopoes 
-		final List<UsuarioPO> usuariopoes = new UsuarioDAO().listar();
+	@Path("/listar/{pagina:[0-9]*}/{qtdRegistros:[0-9]*}")
+	public List<UsuarioPO> listAll(@PathParam("pagina") final Integer pagina, @PathParam("qtdRegistros") final Integer qtdRegistros) {
+		final List<UsuarioPO> usuariopoes = new UsuarioDAO().listar(pagina,qtdRegistros);
 		return usuariopoes;
 	}
 
