@@ -15,21 +15,27 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 @RequestScoped
 @Path("/clientews")
 @Produces("application/json")
 @Consumes("application/json")
 public class ClienteWS {
-
+	
+	ClienteBO clienteBO;
+	
 	@POST
-	public Response create(final ClientePO clientepo) {
-		//TODO: process the given clientepo 
-		//you may want to use the following return statement, assuming that ClientePO#getId() or a similar method 
-		//would provide the identifier to retrieve the created ClientePO resource:
-		//return Response.created(UriBuilder.fromResource(ClienteWS.class).path(String.valueOf(clientepo.getId())).build()).build();
-		return Response.created(null).build();
+	@Path("/cadastrar/")
+	public String create(final UsuarioPO usuario) {
+		getClienteBO().setUsuarioPO(usuario);
+		if(getClienteBO().cadastrar()){
+			return "sucess";
+		}else{
+			return "error";
+		}
 	}
 
 	@GET
@@ -63,6 +69,13 @@ public class ClienteWS {
 	public Response deleteById(@PathParam("id") final Long id) {
 		//TODO: process the clientepo matching by the given id 
 		return Response.noContent().build();
+	}
+	
+	private ClienteBO getClienteBO(){
+		if(this.clienteBO == null){
+			this.clienteBO = new ClienteBO();
+		}
+		return this.clienteBO;
 	}
 
 }

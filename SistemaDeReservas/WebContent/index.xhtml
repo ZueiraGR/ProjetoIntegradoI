@@ -73,22 +73,22 @@
 						<br/>
 						<div class="row">
 							<div class="input-field col s6">
-								<input placeholder="Digite seu nome" id="nome" type="text" class="validate" required="required"/>
-								<label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+								<input placeholder="Digite seu nome" id="nome" type="text" class="validate" required="required" minlength="3"/>
+								<label for="nome" data-error="Prenchimento deste campo é obrigatório e de ser preenchido com no mínimo 3 caracteres." data-success="OK">NOME</label>
 							</div>
 							<div class="input-field col s6">
-								<input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required="required"/>
+								<input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required="required" minlength="4"/>
 								<label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input placeholder="Digite o seu cpf, exemplo: 122.345.678.-12" id="cpf" type="text" class="validate" required="required"/>
-								<label for="cpf" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+								<input placeholder="Digite o seu cpf, exemplo: 122.345.678.-12" id="cpf" type="text" class="validate" required="required" minlength="11" maxlength="11"/>
+								<label for="cpf" data-error="Digite um cpf válido!" data-success="OK">CPF</label>
 							</div>
 							<div class="input-field col s6">
-								<input placeholder="Digite um login" id="login" type="text" class="validate" required="required"/>
-								<label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+								<input placeholder="Digite o número do seu telefone, exemplo: 61988888888" id="telefone" type="text" class="validate" required="required" minlength="11" maxlength="11"/>
+								<label for="telefone" data-error="Digite um número de telefone válido!" data-success="OK">TELEFONE</label>
 							</div>
 						</div>
 						<div class="row">
@@ -103,11 +103,20 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input placeholder="Digite sua senha" id="senha" type="password" class="validate" />
+								<input placeholder="Digite um login" id="loginC" type="text" class="validate" required="required" minlength="5"/>
+								<label for="loginC" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+							</div>
+							<div class="input-field col s6">
+								<div id="retornoLogin"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite sua senha" id="senha" type="password" class="validate" minlength="8" maxlength="25"/>
 								<label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
 							</div>
 							<div class="input-field col s6">
-								<input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate" />
+								<input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate" minlength="8" maxlength="25"/>
 								<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
 							</div>
 						</div>
@@ -136,6 +145,7 @@
 		<ui:include src="/templates/js_padrao.xhtml" />
 	</ui:insert>
 	<script src="js/scriptsLogin.js"></script>
+	<script src="js/scriptsCliente.js"></script>
 </body>
 
 </html>

@@ -37,13 +37,13 @@ public class Autenticar extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter retorno = response.getWriter();
 		getUsuarioBO().setUsuarioPO(JsonUtil.converterJsonEmUsuario(request));
-		getUsuarioBO().getUsusarioPO().setSenha(SecurityUtil.getHash(getUsuarioBO().getUsusarioPO().getSenha()));
-		System.out.println(getUsuarioBO().getUsusarioPO().getSenha());
+		getUsuarioBO().getUsuarioPO().setSenha(SecurityUtil.getHash(getUsuarioBO().getUsuarioPO().getSenha()));
+		System.out.println(getUsuarioBO().getUsuarioPO().getSenha());
 		if(getUsuarioBO().capturarUsuarioValido() != null){
 			setUsuarioCapturado(getUsuarioBO().capturarUsuarioValido());
 			setSessao(request.getSession(true));
 			if(getUsuarioCapturado() != null){
-				if(getUsuarioCapturado().getSenha().equals(getUsuarioBO().getUsusarioPO().getSenha())){
+				if(getUsuarioCapturado().getSenha().equals(getUsuarioBO().getUsuarioPO().getSenha())){
 					getSessao().setAttribute("usuario", getUsuarioCapturado());
 					retorno.println("{\"loginValido\":1,\"senhaValida\":1}");
 				}else{

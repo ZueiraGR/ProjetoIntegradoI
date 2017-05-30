@@ -6,6 +6,10 @@ import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 public class ClienteBO extends UsuarioBO {
 	private ClientePO clientePO;
 	private ClienteDAO clienteDAO;
+	
+	public boolean cadastrar(){
+		return getUsuarioDAO().cadastrar(getUsuarioPO());
+	}
 
 	public ClientePO getClientePO() {
 		if(this.clientePO == null){
@@ -16,7 +20,7 @@ public class ClienteBO extends UsuarioBO {
 	public void setClientePO(ClientePO clientePO) {
 		this.clientePO = clientePO;
 	}
-	public ClienteDAO getClienteDAO() {
+	private ClienteDAO getClienteDAO() {
 		if(this.clienteDAO == null){
 			this.clienteDAO = new ClienteDAO();
 		}

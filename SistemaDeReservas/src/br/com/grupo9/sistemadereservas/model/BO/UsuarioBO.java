@@ -16,16 +16,16 @@ public class UsuarioBO {
 	
 	public UsuarioPO capturarUsuarioValido(){
 		UsuarioPO usuarioCapturado = null;
-		if(getUsuarioDAO().capturarPorId(getUsusarioPO()) != null){
-			usuarioCapturado = getUsuarioDAO().capturarPorId(getUsusarioPO());
-			if(!getUsusarioPO().getLogin().equals(usuarioCapturado.getLogin())){
+		if(getUsuarioDAO().capturarPorId(getUsuarioPO()) != null){
+			usuarioCapturado = getUsuarioDAO().capturarPorId(getUsuarioPO());
+			if(!getUsuarioPO().getLogin().equals(usuarioCapturado.getLogin())){
 				usuarioCapturado = null;
 			}
 		}
 		return usuarioCapturado;
 	}
 	
-	public UsuarioPO getUsusarioPO(){
+	public UsuarioPO getUsuarioPO(){
 		if(this.usuarioPO == null){
 			this.usuarioPO = new UsuarioPO();
 		}

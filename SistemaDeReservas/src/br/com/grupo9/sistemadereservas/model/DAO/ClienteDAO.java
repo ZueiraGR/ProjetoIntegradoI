@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
+import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 
 public class ClienteDAO implements DAO<ClientePO> {
@@ -28,6 +30,24 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}finally {
 			fecharManager();
 		}
+	}
+	public EntityManager cadastrarCliente(ClientePO entidade){
+		getManager().getTransaction().begin();
+		try{
+			getManager().persist(entidade);
+			if(entidade.getChave() != null && entidade.getChave().intValue() > 0){
+				return getManager();
+			}else{
+				getManager().getTransaction().rollback();
+				return null;
+			}
+		}catch (Exception e) {
+			getManager().getTransaction().rollback();
+			System.out.println("\nOcorreu um erro tentar cadastrar o cliente-usuario. Causa:\n");
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	@Override

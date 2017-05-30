@@ -33,6 +33,17 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 		}	
 	}
 	
+	public boolean cadastrarCliente(EntityManager manager, UsuarioPO usuarioPO){
+		try {
+			manager.persist(usuarioPO);
+			manager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			manager.getTransaction().commit();
+			return false;
+		}
+	}
+	
 	@Override
 	public boolean cadastrar(UsuarioPO entidade) {
 		getManager().getTransaction().begin();
