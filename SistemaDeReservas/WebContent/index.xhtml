@@ -69,7 +69,7 @@
 				</div>
 
 				<div id="formCadastro" class="col s12">
-					<form class="col s12" name="formularioDeCadastro" action=""	method="POST">
+					<form class="col s12" name="formularioDeCadastro" id="formularioDeCadastro"	method="POST">
 						<br/>
 						<div class="row">
 							<div class="input-field col s6">
@@ -82,6 +82,10 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite o seu cpf, exemplo: 122.345.678.-12" id="cpf" type="text" class="validate" required="required"/>
+								<label for="cpf" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+							</div>
 							<div class="input-field col s6">
 								<input placeholder="Digite um login" id="login" type="text" class="validate" required="required"/>
 								<label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
