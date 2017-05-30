@@ -63,10 +63,10 @@ public class CargoBO {
 			setMensagemErro("O nome do cargo deve conter mais de 5 caracteres.");
 		}
 		if(getCargoPO().getNivelAcesso() == null){
-			setMensagemErro("O nÌvel de acesso deve ser definido.");
+			setMensagemErro("O n√≠vel de acesso deve ser definido.");
 		}
 		if(!isNivelAcessoValido()){
-			setMensagemErro("O nÌvel de acesso informado n„o È v·lido.");
+			setMensagemErro("O n√≠vel de acesso informado n√£o √© v√°lido.");
 		}
 		
 		if(getMensagemErro().isEmpty()){
