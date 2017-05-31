@@ -31,21 +31,25 @@ public class ClienteDAO implements DAO<ClientePO> {
 			fecharManager();
 		}
 	}
-	public EntityManager cadastrarCliente(ClientePO entidade){
+	public boolean cadastrarCliente(UsuarioPO entidade){
+		ClientePO cliente = entidade.getCliente();
 		getManager().getTransaction().begin();
 		try{
-			getManager().persist(entidade);
-			if(entidade.getChave() != null && entidade.getChave().intValue() > 0){
-				return getManager();
+			getManager().persist(cliente);
+			if(cliente.getChave() != null && cliente.getChave().intValue() > 0){
+				entidade.setCliente(cliente);
+				getManager().persist(entidade);
+				getManager().getTransaction().commit();
+				return true;
 			}else{
 				getManager().getTransaction().rollback();
-				return null;
+				return false;
 			}
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o cliente-usuario. Causa:\n");
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 		
 	}

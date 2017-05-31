@@ -1,5 +1,7 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
+import java.util.Calendar;
+
 import br.com.grupo9.sistemadereservas.model.DAO.ClienteDAO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 
@@ -8,7 +10,8 @@ public class ClienteBO extends UsuarioBO {
 	private ClienteDAO clienteDAO;
 	
 	public boolean cadastrar(){
-		return getUsuarioDAO().cadastrar(getUsuarioPO());
+		getUsuarioPO().setDataCriacao(Calendar.getInstance());
+		return getClienteDAO().cadastrarCliente(getUsuarioPO());
 	}
 
 	public ClientePO getClientePO() {

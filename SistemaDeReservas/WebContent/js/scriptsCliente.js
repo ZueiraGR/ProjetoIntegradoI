@@ -44,7 +44,7 @@ function capturarDadosDoForm(){
 	var confirmaSenha = $("#confirmaSenha").val();
 	var cliente;
 	if(isDadosValidos(nome,sobrenome,cpf,telefone,login,email,confirmaEmail,senha,confirmaSenha)){
-		cliente = {"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"email":email,"senha":senha};
+		cliente = {"login":login,"senha":senha,"tipo":'C',"status":'A',"cliente":{"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":'A'}};
 	}else{
 		cliente = null;
 	}

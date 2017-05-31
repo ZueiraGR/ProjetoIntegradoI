@@ -21,6 +21,7 @@ public class ClientePO implements Serializable {
 	private String cpf;
 	private String telefone;
 	private String email;
+	private Character status;
 	
 	public Integer getChave() {
 		return this.chave;
@@ -63,6 +64,14 @@ public class ClientePO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Character getStatus() {
+		return status;
+	}
+
+	public void setStatus(Character status) {
+		this.status = status;
 	}
    
 }

@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
@@ -31,6 +32,7 @@ public class ClienteWS {
 	@Path("/cadastrar/")
 	public String create(final UsuarioPO usuario) {
 		getClienteBO().setUsuarioPO(usuario);
+		getClienteBO().getUsuarioPO().setSenha(SecurityUtil.getHash(getClienteBO().getUsuarioPO().getSenha()));		
 		if(getClienteBO().cadastrar()){
 			return "sucess";
 		}else{
