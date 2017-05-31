@@ -122,7 +122,7 @@ $("#formularioCadastroCargo").submit(function(event){
         		},2000);
         	}else{
         		$('#mensagemDeRetornoCargo').html("Houve erro ao cadastrar o cargo!");
-        		$('#mensagemDeRetornoCargo').addClass("green");
+        		$('#mensagemDeRetornoCargo').addClass("red");
         		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
         	}
         },
@@ -151,6 +151,7 @@ $("#formExclusaoCargo").submit(function(event){
         		setTimeout(function(){
         			$("#alterarDadosDoCargo").modal('close'); 
         			$("#btnCancelarCadastro").trigger( "click" );
+        			carregarCargos(paginaAtualCargos);
         			$('#mensagemDeRetornoExCargo').addClass("hiddendiv");
         		},2000);
         	}else{

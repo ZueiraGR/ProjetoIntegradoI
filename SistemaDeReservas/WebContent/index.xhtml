@@ -57,8 +57,8 @@
 			<div class="row">
 				<div class="col s12">
 					<ul class="tabs tabs-fixed-width z-depth-1">
-						<li class="tab col s6"><a class="active" href="#formLogin">LOGIN</a></li>
-						<li class="tab col s6"><a href="#formCadastro">CADASTRE-SE</a></li>
+						<li class="tab col s6"><a class="active" href="#formLogin" id="btnAcaoFormLogin">LOGIN</a></li>
+						<li class="tab col s6"><a href="#formCadastro" id="btnAcaoFormCadastro">CADASTRE-SE</a></li>
 					</ul>
 				</div>
 
@@ -123,12 +123,15 @@
 						<div class="row">
 							<div class="input-field col l3"></div>
 							<div class="input-field col l3 m12 s12 center">
-								<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">ENTRAR</button>
+								<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit" id="confirmarCadastroCliente">ENTRAR</button>
 							</div>
 							<div class="input-field col l3 m12 s12 center">
-								<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
+								<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset" id="cancelarCadastroCliente">CANCELAR</button>
 							</div>
 							<div class="input-field col l3"></div>
+						</div>
+						<div class="row">
+							<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
 						</div>
 					</form>
 				</div>

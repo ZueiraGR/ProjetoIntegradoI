@@ -11,7 +11,7 @@ public class FuncionarioBO extends UsuarioBO {
 	private FuncionarioDAO funcionarioDAO;
 	
 	public boolean cadastrar(){
-		getFuncionarioPO().setDataCriacao(Calendar.getInstance());
+		getUsuarioPO().setDataCriacao(Calendar.getInstance());;
 		return getFuncionarioDAO().cadastrar(getFuncionarioPO());
 		//TODO Thallyelson continuar aqui
 	}

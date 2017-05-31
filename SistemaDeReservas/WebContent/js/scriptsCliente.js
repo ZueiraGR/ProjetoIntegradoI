@@ -9,24 +9,11 @@ $("#formularioDeCadastro").submit(function(event){
 	        type: 'POST',
 	        data: formData,
 	        success: function (data) {
-	        	if(data == "sucess"){
-	        		$('#mensagemDeRetornoCargo').html("Cadastro realizado com sucesso!");
-	        		$('#mensagemDeRetornoCargo').addClass("green");
-	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
-	        		setTimeout(function(){
-	        			$("#alterarDadosDoCargo").modal('close'); 
-	        			$("#btnCancelarCadastro").trigger( "click" );
-	        			$('#mensagemDeRetornoCargo').addClass("hiddendiv");
-	        		},2000);
-	        	}else{
-	        		$('#mensagemDeRetornoCargo').html("Houve erro ao cadastrar!");
-	        		$('#mensagemDeRetornoCargo').addClass("green");
-	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
-	        	}
+	        	tratarRetornoServidor(data);
 	        },
 			cache: false,
 		    contentType: "application/json",
-		    processData: false
+		    processData: true
 		});
 	}
 	return false;
@@ -128,6 +115,23 @@ function apenasLetras(e){
 	}
 	if((tecla >= "48") && (tecla <= "57")){
 		return false;
+	}
+}
+
+function tratarRetornoServidor(data){
+	if(data == "sucess"){
+		$('#mensagemRetornoCadastro').html("Cadastro realizado com sucesso!");
+		$('#mensagemRetornoCadastro').addClass("green");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+		setTimeout(function(){
+			$('#btnAcaoFormLogin').trigger("click" );
+			$("#cancelarCadastroCliente").trigger("click");
+			$('#mensagemRetornoCadastro').addClass("hiddendiv");
+		},2000);
+	}else{
+		$('#mensagemRetornoCadastro').html("Houve erro ao cadastrar!");
+		$('#mensagemRetornoCadastro').addClass("red");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
 	}
 }
 
