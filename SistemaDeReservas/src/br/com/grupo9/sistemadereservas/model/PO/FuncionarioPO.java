@@ -2,6 +2,8 @@ package br.com.grupo9.sistemadereservas.model.PO;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Calendar;
+
 import javax.persistence.*;
 
 /**
@@ -77,5 +79,6 @@ public class FuncionarioPO implements Serializable {
 	public void setStatus(Character status) {
 		this.status = status;
 	}
+
 
 }
