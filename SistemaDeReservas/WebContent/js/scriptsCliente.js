@@ -125,7 +125,7 @@ function tratarRetornoServidor(data){
 		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
 		setTimeout(function(){
 			$('#btnAcaoFormLogin').trigger("click" );
-			$("#cancelarCadastroCliente").trigger("click");
+			limparCamposFormCadastro();
 			$('#mensagemRetornoCadastro').addClass("hiddendiv");
 		},2000);
 	}else{
@@ -135,5 +135,16 @@ function tratarRetornoServidor(data){
 	}
 }
 
+function limparCamposFormCadastro(){
+	$("#nome").val("");
+	$("#sobrenome").val("");
+	$("#cpf").val("");
+	$("#telefone").val("");
+	$("#loginC").val("");
+	$("#email").val("");
+	$("#confirmaEmail").val("");
+	$("#senha").val("");
+	$("#confirmaSenha").val("");
+}
 
 

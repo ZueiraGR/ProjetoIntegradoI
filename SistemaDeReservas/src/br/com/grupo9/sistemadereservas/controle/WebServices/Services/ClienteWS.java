@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -30,14 +31,16 @@ public class ClienteWS {
 	
 	@POST
 	@Path("/cadastrar/")
-	public String create(final UsuarioPO usuario) {
+	public List<String> create(final UsuarioPO usuario) {
+		List<String> retorno = new ArrayList<>();
 		getClienteBO().setUsuarioPO(usuario);
 		getClienteBO().getUsuarioPO().setSenha(SecurityUtil.getHash(getClienteBO().getUsuarioPO().getSenha()));		
 		if(getClienteBO().cadastrar()){
-			return "sucess";
+			retorno.add("sucess");
 		}else{
-			return "error";
+			retorno = getClienteBO().getMensagemErro();
 		}
+		return retorno;
 	}
 
 	@GET
