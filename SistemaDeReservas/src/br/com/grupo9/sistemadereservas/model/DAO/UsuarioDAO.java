@@ -141,6 +141,29 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 		}	
 	}
 	
+	public boolean isUsuarioJaExiste(UsuarioPO entidade){
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+				 .append("FROM usuario u ")
+				 .append("WHERE u.login LIKE :login");
+			TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
+				typedQuery.setParameter("login", entidade.getLogin());
+				 UsuarioPO usuario = (UsuarioPO) typedQuery.getSingleResult();
+				 if(usuario != null){
+					 return true;
+				 }else{
+					 return false;
+				 }
+		}catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao capturar o usuario pelo login. Causa:\n");
+			e.printStackTrace();
+			return false;
+		}finally {
+			fecharManager();
+		}	
+	}
+	
 	@Override
 	public void fecharManager() {
 		if(this.manager.isOpen()){

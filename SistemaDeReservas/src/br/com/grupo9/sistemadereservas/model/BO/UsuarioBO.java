@@ -25,6 +25,10 @@ public class UsuarioBO {
 		return usuarioCapturado;
 	}
 	
+	public boolean isUsuarioJaExiste(){
+		return ((UsuarioDAO) getUsuarioDAO()).isUsuarioJaExiste(getUsuarioPO());
+	}
+	
 	public UsuarioPO getUsuarioPO(){
 		if(this.usuarioPO == null){
 			this.usuarioPO = new UsuarioPO();

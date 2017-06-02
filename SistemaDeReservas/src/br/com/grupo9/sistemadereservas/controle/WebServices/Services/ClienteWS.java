@@ -44,14 +44,15 @@ public class ClienteWS {
 	}
 
 	@GET
-	@Path("/{id:[0-9][0-9]*}")
-	public Response findById(@PathParam("id") final Long id) {
-		//TODO: retrieve the clientepo 
-		ClientePO clientepo = null;
-		if (clientepo == null) {
-			return Response.status(Status.NOT_FOUND).build();
+	@Path("/capturar/{login}")
+	public UsuarioPO findById(@PathParam("login") final String login) {
+		getClienteBO().getUsuarioPO().setLogin(login);
+		UsuarioPO usuario = getClienteBO().capturarUsuarioValido();
+		if(usuario != null){
+			return usuario;
+		}else{
+			return null;
 		}
-		return Response.ok(clientepo).build();
 	}
 
 	@GET
@@ -74,6 +75,19 @@ public class ClienteWS {
 	public Response deleteById(@PathParam("id") final Long id) {
 		//TODO: process the clientepo matching by the given id 
 		return Response.noContent().build();
+	}
+	
+	@GET
+	@Path("/verificaSeExiste/{login}")
+	public List<String> isExisteLoginCadastrado(@PathParam("login") final String login){
+		List<String> retorno = new ArrayList<>();
+		getClienteBO().getUsuarioPO().setLogin("%"+login+"%");
+		if(getClienteBO().isUsuarioJaExiste()){
+			retorno.add("true");
+		}else{
+			retorno.add("false");
+		}
+		return retorno;
 	}
 	
 	private ClienteBO getClienteBO(){
