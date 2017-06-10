@@ -12,24 +12,11 @@ $("#CadastroDeFuncionario").submit(function(event){
 	        type: 'POST',
 	        data: formData,
 	        success: function (data) {
-	        	if(data == "sucess"){
-	        		$('#mensagemDeRetornoCargo').html("Cadastro realizado com sucesso!");
-	        		$('#mensagemDeRetornoCargo').addClass("green");
-	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
-	        		setTimeout(function(){
-	        			$("#alterarDadosDoCargo").modal('close'); 
-	        			$("#btnCancelarCadastro").trigger( "click" );
-	        			$('#mensagemDeRetornoCargo').addClass("hiddendiv");
-	        		},2000);
-	        	}else{
-	        		$('#mensagemDeRetornoCargo').html("Houve erro ao cadastrar!");
-	        		$('#mensagemDeRetornoCargo').addClass("green");
-	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
-	        	}
+	        	tratarRetornoServidor(data);
 	        },
 			cache: false,
 		    contentType: "application/json",
-		    processData: false
+		    processData: true
 		});
 	}
 	return false;
@@ -39,23 +26,23 @@ function capturarDadosDoForm(){
 	var nome = $("#nome").val();
 	var sobrenome = $("#sobrenome").val();
 	var cpf = $("#cpf").val();
-	var telefone = $("#telefone").val();
 	var cargo = $("#cargo").val();
-	var login = $("#loginC").val();
+	var login = $("#login").val();
+	var telefone = $("#telefone").val();
 	var email = $("#email").val();
 	var confirmaEmail = $("#confirmaEmail").val();
 	var senha = $("#senha").val();
 	var confirmaSenha = $("#confirmaSenha").val();
 	var funcionario;
-	if(isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,confirmaEmail,senha,confirmaSenha)){
-		funcionario = {"login":login,"senha":senha,"tipo":'F',"status":'A',"funcionario":{"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"cargo":cargo,"email":email,"status":'A'}};
+	if(isDadosValidos(nome,sobrenome,cpf,cargo,login,email,confirmaEmail,senha,confirmaSenha)){
+		funcionario = {"login":login,"senha":senha,"tipo":'F',"status":'A',"funcionario":{"nome":nome,"sobrenome":sobrenome,"telefone":telefone,"cpf":cpf,"cargo":cargo,"email":email,"status":'A'}};
 	}else{
 		funcionario = null;
 	}
 	return funcionario;
 }
 
-function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,confirmaEmail,senha,confirmaSenha){
+function isDadosValidos(nome,sobrenome,cpf,cargo,login,email,confirmaEmail,senha,confirmaSenha){
 	var mensagem;
 //	var cpfSemFormatacao;
 	var retorno = true;
@@ -65,10 +52,6 @@ function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,confirmaEm
 	}
 	if(sobrenome == null || sobrenome == ""){
 		mensagem += "<li>É obrigatório preencher o campo SOBRENOME</li>";
-		retorno = false;
-	}
-	if(crgo == null || cargo == ""){
-		mensagem += "<li>É obrigatório selecionar o campo CARGO</li>";
 		retorno = false;
 	}
 	if(cpf == null || cpf == "" || cpf.length < 11){
@@ -98,6 +81,34 @@ function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,confirmaEm
 	return retorno;
 }
 
+function tratarRetornoServidor(data){
+	if(data == "sucess"){
+		$('#mensagemRetornoCadastro').html("Cadastro realizado com sucesso!");
+		$('#mensagemRetornoCadastro').addClass("green");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+		setTimeout(function(){
+			$('#cadastrar').trigger("click" );
+			limparCamposFormCadastro();
+			$('#mensagemRetornoCadastro').addClass("hiddendiv");
+		},2000);
+	}else{
+		$('#mensagemRetornoCadastro').html("Houve erro ao cadastrar!");
+		$('#mensagemRetornoCadastro').addClass("red");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+	}
+}
+
+function limparCamposFormCadastro(){
+	$("#nome").val("");
+	$("#sobrenome").val("");
+	$("#cpf").val("");
+	$("#login").val("");
+	$("#telefone").val("");
+	$("#email").val("");
+	$("#confirmaEmail").val("");
+	$("#senha").val("");
+	$("#confirmaSenha").val("");
+}
 
 function validar(dom,tipo){
 	switch(tipo){

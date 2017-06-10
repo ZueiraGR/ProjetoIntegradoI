@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
 
 public class FuncionarioDAO implements DAO<FuncionarioPO> {
@@ -27,6 +28,23 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		}finally {
 			fecharManager();
 		}
+	}
+	public boolean cadastrarFuncionario(UsuarioPO entidade){
+		FuncionarioPO funcionario = entidade.getFuncionario();
+		getManager().getTransaction().begin();
+		try{
+			getManager().persist(funcionario);
+			entidade.setFuncionario(funcionario);
+			getManager().persist(entidade);
+			getManager().getTransaction().commit();
+			return true;
+		}catch (Exception e) {
+			getManager().getTransaction().rollback();
+			System.out.println("\nOcorreu um erro tentar cadastrar o funcionario-usuario. Causa:\n");
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	@Override

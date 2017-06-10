@@ -2,7 +2,6 @@ package br.com.grupo9.sistemadereservas.model.PO;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.util.Calendar;
 
 import javax.persistence.*;
 
@@ -18,14 +17,13 @@ public class FuncionarioPO implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer chave;
-	@ManyToOne
 	@JoinColumn(name="cargo_chave", referencedColumnName="chave", nullable= false)
 	private CargoPO cargo;
 	private String nome;
 	private String sobrenome;
+	private String telefone;
 	private String cpf;
 	private String email;
-	@Column(nullable=false)
 	private Character status;
 
 	public Integer getChave() {
@@ -39,8 +37,8 @@ public class FuncionarioPO implements Serializable {
 	public CargoPO getCargo() {
 		return cargo;
 	}
-	public void setCargo(CargoPO cargoPO) {
-		this.cargo = cargoPO;
+	public void setCargo(CargoPO cargo) {
+		this.cargo = cargo;
 	}
 	public String getNome() {
 		return this.nome;
@@ -55,7 +53,16 @@ public class FuncionarioPO implements Serializable {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
-	}   
+	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	public String getCpf() {
 		return this.cpf;
 	}

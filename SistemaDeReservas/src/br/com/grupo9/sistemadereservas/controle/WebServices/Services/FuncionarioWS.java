@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -13,8 +14,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 @RequestScoped
 @Path("/funcionariows")
@@ -25,12 +28,17 @@ public class FuncionarioWS {
 	FuncionarioBO funcionarioBO;
 	
 	@POST
-	public Response create(final FuncionarioPO funcionariopo) {
-		//TODO: process the given funcionariopo 
-		//you may want to use the following return statement, assuming that FuncionarioPO#getId() or a similar method 
-		//would provide the identifier to retrieve the created FuncionarioPO resource:
-		//return Response.created(UriBuilder.fromResource(FuncionarioWS.class).path(String.valueOf(funcionariopo.getId())).build()).build();
-		return Response.created(null).build();
+	@Path("/cadastrar/")
+	public List<String> create(final UsuarioPO usuario) {
+		List<String> retorno = new ArrayList<>();
+		getFuncionarioBO().setUsuarioPO(usuario);
+		getFuncionarioBO().getUsuarioPO().setSenha(SecurityUtil.getHash(getFuncionarioBO().getUsuarioPO().getSenha()));		
+		if(getFuncionarioBO().cadastrar()){
+			retorno.add("sucess");
+		}else{
+			retorno = getFuncionarioBO().getMensagemErro();
+		}
+		return retorno;
 	}
 
 	@GET
