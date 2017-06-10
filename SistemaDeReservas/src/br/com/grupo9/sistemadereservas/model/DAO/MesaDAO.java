@@ -21,7 +21,7 @@ public class MesaDAO implements DAO<MesaPO> {
 			return true;
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
-			System.out.println("\nOcorreu um erro tentar cadastrar o usuario. Causa:\n");
+			System.out.println("\nOcorreu um erro tentar cadastrar mesa. Causa:\n");
 			e.printStackTrace();
 			return false;
 		}finally {

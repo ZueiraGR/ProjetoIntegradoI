@@ -4,6 +4,29 @@
  * and open the template in the editor.
  */
 /*@param {objeto[chave,identificacao,qtdCadeiras,descricao,imagem]} mesa */
+$("#CadastroDeMesa").submit(function(event){
+	if(DadosDoForm() != null){
+		var formData = JSON.stringify(capturarDadosDoForm());
+		$.ajax({
+			url: "ws/mesaws/cadastrar/",
+	        type: 'POST',
+	        data: formData,
+			cache: false,
+		    contentType: "application/json",
+		    processData: true
+		});
+	}
+	return false;
+});
+
+function DadosDoForm(){
+	var numero = $("#numero").val();
+	var cadeiras = $("#cadeiras").val();
+	var descricao = $("#textarea1").val();
+}
+
+
+
 function mostrarImagemMesa(mesa){
     var html = '<img class="responsive-img" src="img/'+mesa.imagem+'" alt="Mesa '+mesa.identificacao+'">';
     $("#corpoMostrarImagemMesa").html(html);

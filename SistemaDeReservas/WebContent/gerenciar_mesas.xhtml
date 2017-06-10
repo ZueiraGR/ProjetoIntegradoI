@@ -91,7 +91,7 @@
 				</div>
 				<div id="adm-add" class="col s12">
 
-					<form class="col s12" name="CadastroDeMesa" action="" method="POST">
+					<form class="col s12" name="CadastroDeMesa" id="CadastroDeMesa" action="" method="POST">
 						<br/>
 						<div class="row">
 							<div class="input-field col s6">
@@ -109,8 +109,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea id="textarea1" class="materialize-textarea"
-									maxlength="50" required="required"/></textarea>
+								<textarea id="textarea1" class="materialize-textarea" maxlength="50" required="required"/>
 								<label for="textarea1"
 									data-error="Prenchimento deste campo é obrigatório!"
 									data-success="Ok">DESCRIÇÃO</label>
@@ -119,10 +118,10 @@
 						<div class="row">
 							<div class="file-field input-field col s12">
 								<div class="btn grey">
-									<span>SELECIONAR IMAGEM</span> <input type="file">
+									<span>SELECIONAR IMAGEM</span> <input type="file"/>
 								</div>
 								<div class="file-path-wrapper">
-									<input class="file-path validate" type="text">
+									<input class="file-path validate" type="text"/>
 								</div>
 							</div>
 						</div>
@@ -159,7 +158,7 @@
 	<div id="modalFormEdicaoMesa" class="modal">
 		<div class="modal-content" id="corpoFormEdicaoMesa">
 			<form class="col s12" name="EdicaoDeMesa" action="" method="POST">
-				<input type="hidden" name="chaveMesa" id="chaveMesa"> <br/>
+				<input type="hidden" name="chaveMesa" id="chaveMesa"/> <br/>
 				<div class="row">
 					<div class="input-field col s6">
 						<input placeholder="12" id="numeroMesa" type="text"
@@ -177,7 +176,7 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<textarea id="descricaoMesa" class="materialize-textarea"
-							maxlength="50" required="required"/></textarea>
+							maxlength="50" required="required"/>
 						<label for="descricaoMesa"
 							data-error="Prenchimento deste campo é obrigatório!"
 							data-success="Ok">DESCRIÇÃO</label>
@@ -186,10 +185,10 @@
 				<div class="row">
 					<div class="file-field input-field col s12">
 						<div class="btn grey">
-							<span>SELECIONAR IMAGEM</span> <input type="file">
+							<span>SELECIONAR IMAGEM</span> <input type="file"/>
 						</div>
 						<div class="file-path-wrapper">
-							<input class="file-path validate" type="text">
+							<input class="file-path validate" type="text"/>
 						</div>
 					</div>
 				</div>
@@ -204,7 +203,7 @@
 							class="btn grey modal-action modal-close waves-effect waves-red col l12"
 							type="reset">CANCELAR</button>
 					</div>
-					<div class="input-field col l3"></div>
+					<div class="col l3"></div>
 				</div>
 			</form>
 		</div>

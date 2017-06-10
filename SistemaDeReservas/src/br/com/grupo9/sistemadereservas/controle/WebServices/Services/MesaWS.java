@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -15,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import br.com.grupo9.sistemadereservas.model.BO.MesaBO;
 import br.com.grupo9.sistemadereservas.model.PO.MesaPO;
 
 @RequestScoped
@@ -22,14 +24,20 @@ import br.com.grupo9.sistemadereservas.model.PO.MesaPO;
 @Produces("application/json")
 @Consumes("application/json")
 public class MesaWS {
+	
+	private MesaBO mesaBO;
 
 	@POST
-	public Response create(final MesaPO mesapo) {
-		//TODO: process the given mesapo 
-		//you may want to use the following return statement, assuming that MesaPO#getId() or a similar method 
-		//would provide the identifier to retrieve the created MesaPO resource:
-		//return Response.created(UriBuilder.fromResource(MesaWS.class).path(String.valueOf(mesapo.getId())).build()).build();
-		return Response.created(null).build();
+	@Path("/cadastrar")
+	public List<String> create(final MesaPO mesa) {
+		List<String> retorno = new ArrayList<>();
+		getMesaBO().setMesaPO(mesa);		
+		if(getMesaBO().cadastrar()){
+			retorno.add("sucess");
+		}else{
+			retorno.add("erro");
+		}
+		return retorno;
 	}
 
 	@GET
@@ -63,6 +71,10 @@ public class MesaWS {
 	public Response deleteById(@PathParam("id") final Long id) {
 		//TODO: process the mesapo matching by the given id 
 		return Response.noContent().build();
+	}
+	
+	private MesaBO getMesaBO(){
+		return this.mesaBO;
 	}
 
 }
