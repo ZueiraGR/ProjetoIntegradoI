@@ -4,17 +4,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.grupo9.sistemadereservas.model.DAO.CargoDAO;
 import br.com.grupo9.sistemadereservas.model.DAO.FuncionarioDAO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 
 public class FuncionarioBO extends UsuarioBO {
-	private FuncionarioPO funcionarioPO;
 	private FuncionarioDAO funcionarioDAO;
+	private CargoDAO cargoDAO;
 	private List<String> mensagemErro;
 	
 	public boolean cadastrar(){
 		getUsuarioPO().setDataCriacao(Calendar.getInstance());
+		getUsuarioPO().getFuncionario().setCargo(getCargoDAO().capturarPorId(getUsuarioPO().getFuncionario().getCargo()));
 		return getFuncionarioDAO().cadastrarFuncionario(getUsuarioPO());
+	}
+	
+	public void compor(){
+//		getUsuarioDAO().
 	}
 	public List<String> getMensagemErro(){
 		this.mensagemErro = new ArrayList<>();
@@ -36,19 +42,16 @@ public class FuncionarioBO extends UsuarioBO {
 		pagina = pagina*qtdRegistros-qtdRegistros;
 		return getFuncionarioDAO().listar(pagina,qtdRegistros);
 	}	
-	public FuncionarioPO getFuncionarioPO() {
-		if(this.funcionarioPO == null){
-			this.funcionarioPO = new FuncionarioPO();
-		}
-		return funcionarioPO;
-	}
-	public void setFuncionarioPO(FuncionarioPO funcionarioPO) {
-		this.funcionarioPO = funcionarioPO;
-	}
 	private FuncionarioDAO getFuncionarioDAO() {
 		if(this.funcionarioDAO == null){
 			this.funcionarioDAO = new FuncionarioDAO();
 		}
 		return funcionarioDAO;
+	}
+	private CargoDAO getCargoDAO() {
+		if(this.cargoDAO == null){
+			this.cargoDAO = new CargoDAO();
+		}
+		return cargoDAO;
 	}
 }

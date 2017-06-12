@@ -17,6 +17,7 @@ public class FuncionarioPO implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer chave;
+	@ManyToOne
 	@JoinColumn(name="cargo_chave", referencedColumnName="chave", nullable= false)
 	private CargoPO cargo;
 	private String nome;
@@ -24,6 +25,7 @@ public class FuncionarioPO implements Serializable {
 	private String telefone;
 	private String cpf;
 	private String email;
+	@Column(nullable=false)
 	private Character status;
 
 	public Integer getChave() {
@@ -37,8 +39,8 @@ public class FuncionarioPO implements Serializable {
 	public CargoPO getCargo() {
 		return cargo;
 	}
-	public void setCargo(CargoPO cargo) {
-		this.cargo = cargo;
+	public void setCargo(CargoPO cargoPO) {
+		this.cargo = cargoPO;
 	}
 	public String getNome() {
 		return this.nome;

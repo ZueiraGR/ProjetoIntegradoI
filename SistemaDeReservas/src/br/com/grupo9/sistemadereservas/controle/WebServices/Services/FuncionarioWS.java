@@ -29,7 +29,7 @@ public class FuncionarioWS {
 	
 	@POST
 	@Path("/cadastrar/")
-	public List<String> create(final UsuarioPO usuario) {
+	public List<String> cadastrar(final UsuarioPO usuario) {
 		List<String> retorno = new ArrayList<>();
 		getFuncionarioBO().setUsuarioPO(usuario);
 		getFuncionarioBO().getUsuarioPO().setSenha(SecurityUtil.getHash(getFuncionarioBO().getUsuarioPO().getSenha()));		
@@ -42,11 +42,9 @@ public class FuncionarioWS {
 	}
 
 	@GET
-	@Path("/{id:[0-9][0-9]*}")
-	public FuncionarioPO findById(@PathParam("id") final Long id) {
-		//TODO: retrieve the funcionariopo 
-		FuncionarioPO funcionariopo = null;
-		return funcionariopo;
+	@Path("/capturar/{id:[0-9]*}")
+	public FuncionarioPO findById(@PathParam("id") final Integer chave) {
+		return null;
 	}
 	@GET
 	@Path("/listar/{pagina:[0-9]*}/{registros:[0-9]*}")

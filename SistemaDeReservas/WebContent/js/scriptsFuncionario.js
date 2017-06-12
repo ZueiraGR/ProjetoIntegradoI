@@ -23,26 +23,25 @@ $("#CadastroDeFuncionario").submit(function(event){
 });
 
 function capturarDadosDoForm(){
-	var nome = $("#nome").val();
-	var sobrenome = $("#sobrenome").val();
-	var cpf = $("#cpf").val();
-	var cargo = $("#cargo").val();
-	var login = $("#login").val();
-	var telefone = $("#telefone").val();
-	var email = $("#email").val();
-	var confirmaEmail = $("#confirmaEmail").val();
-	var senha = $("#senha").val();
-	var confirmaSenha = $("#confirmaSenha").val();
+	var nome = $("#nomeFuncionario").val();
+	var sobrenome = $("#sobrenomeFuncionario").val();
+	var cpf = $("#cpfFuncionario").val();
+	var cargo = $("#cargoFuncionario").val();
+	var login = $("#loginFuncionario").val();
+	var telefone = $("#telefoneFuncionario").val();
+	var email = $("#emailFuncionario").val();
+	var senha = $("#senhaFuncionario").val();
+	var confirmaSenha = $("#confirmaSenhaFuncionario").val();
 	var funcionario;
-	if(isDadosValidos(nome,sobrenome,cpf,cargo,login,email,confirmaEmail,senha,confirmaSenha)){
-		funcionario = {"login":login,"senha":senha,"tipo":'F',"status":'A',"funcionario":{"nome":nome,"sobrenome":sobrenome,"telefone":telefone,"cpf":cpf,"cargo":cargo,"email":email,"status":'A'}};
+	if(isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,senha,confirmaSenha)){
+		funcionario = {"login":login,"senha":senha,"tipo":'F',"status":'A',"funcionario":{"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"cargo":{"chave":cargo},"email":email,"status":'A'}};
 	}else{
 		funcionario = null;
 	}
 	return funcionario;
 }
 
-function isDadosValidos(nome,sobrenome,cpf,cargo,login,email,confirmaEmail,senha,confirmaSenha){
+function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,senha,confirmaSenha){
 	var mensagem;
 //	var cpfSemFormatacao;
 	var retorno = true;
@@ -52,6 +51,10 @@ function isDadosValidos(nome,sobrenome,cpf,cargo,login,email,confirmaEmail,senha
 	}
 	if(sobrenome == null || sobrenome == ""){
 		mensagem += "<li>É obrigatório preencher o campo SOBRENOME</li>";
+		retorno = false;
+	}
+	if(cargo == null || cargo == ""){
+		mensagem += "<li>É obrigatório selecionar o campo CARGO</li>";
 		retorno = false;
 	}
 	if(cpf == null || cpf == "" || cpf.length < 11){
@@ -64,10 +67,6 @@ function isDadosValidos(nome,sobrenome,cpf,cargo,login,email,confirmaEmail,senha
 	}
 	if(email == null || email == ""){
 		mensagem += "<li>É obrigatório preencher o campo EMAIL</li>";
-		retorno = false;
-	}
-	if((confirmaEmail == null || confirmaEmail == "") && email != confirmaEmail){
-		mensagem += "<li>É obrigatório preencher o campo CONFIRMAR EMAIL com o mesmo email informado no campo EMAIL</li>";
 		retorno = false;
 	}	
 	if(senha == null || senha == "" || senha.length < 8){
@@ -99,15 +98,19 @@ function tratarRetornoServidor(data){
 }
 
 function limparCamposFormCadastro(){
-	$("#nome").val("");
-	$("#sobrenome").val("");
-	$("#cpf").val("");
-	$("#login").val("");
-	$("#telefone").val("");
-	$("#email").val("");
-	$("#confirmaEmail").val("");
-	$("#senha").val("");
-	$("#confirmaSenha").val("");
+	$("#nomeFuncionario").val("");
+	$("#sobrenomeFuncionario").val("");
+	$("#cpfFuncionario").val("");
+	$("#loginFuncionario").val("");
+	$("#telefoneFuncionario").val("");
+	$("#emailFuncionario").val("");
+	$("#senhaFuncionario").val("");
+	$("#confirmaSenhaFuncionario").val("");
+	$("#cargoFuncionario").val("");
+}
+
+function carregarCargos(){
+	
 }
 
 function validar(dom,tipo){

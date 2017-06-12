@@ -34,10 +34,21 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		getManager().getTransaction().begin();
 		try{
 			getManager().persist(funcionario);
-			entidade.setFuncionario(funcionario);
-			getManager().persist(entidade);
-			getManager().getTransaction().commit();
-			return true;
+			if(funcionario.getChave() != null && funcionario.getChave().intValue() > 0){
+				entidade.setFuncionario(funcionario);
+				try{
+					getManager().persist(entidade);
+					getManager().getTransaction().commit();
+					return true;
+				}catch (Exception e) {
+					e.printStackTrace();
+					getManager().getTransaction().rollback();
+					return false;
+				}				
+			}else{
+				getManager().getTransaction().rollback();
+				return false;
+			}
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro tentar cadastrar o funcionario-usuario. Causa:\n");
