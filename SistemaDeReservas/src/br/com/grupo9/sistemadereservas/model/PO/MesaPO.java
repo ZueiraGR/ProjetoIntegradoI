@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: MesaPO
  *
  */
-@Entity
+@Entity(name="mesa")
 @Table(name="mesa")
 public class MesaPO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,15 +19,17 @@ public class MesaPO implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer chave;
-	@Column(unique=true)
+	@Column(name="identificacao")
 	private String identificacao;
 	@Column(name="qtd_cadeiras")
-	private Integer quantidadeDeCadeiras;
+	private Integer qtd_cadeiras;
+	@Column(name="descricao")
 	private String descricao;
+	@Column(name="imagem")
 	private String imagem;
 	
-	@ManyToMany(mappedBy="mesas")
-	private List<ReservaPO> reservas;
+/*	@ManyToMany(mappedBy="mesas")
+	private List<ReservaPO> reservas;*/
 	
 	public MesaPO() {
 		super();
@@ -46,13 +48,13 @@ public class MesaPO implements Serializable {
 	public void setIdentificacao(String identificacao) {
 		this.identificacao = identificacao;
 	}   
-	public Integer getQuantidadeDeCadeiras() {
-		return this.quantidadeDeCadeiras;
+	 
+	public Integer getQtd_cadeiras() {
+		return qtd_cadeiras;
 	}
-
-	public void setQuantidadeDeCadeiras(Integer quantidadeDeCadeiras) {
-		this.quantidadeDeCadeiras = quantidadeDeCadeiras;
-	}   
+	public void setQtd_cadeiras(Integer qtd_cadeiras) {
+		this.qtd_cadeiras = qtd_cadeiras;
+	}
 	public String getDescricao() {
 		return this.descricao;
 	}
@@ -67,11 +69,11 @@ public class MesaPO implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-	public List<ReservaPO> getReservas() {
+/*	public List<ReservaPO> getReservas() {
 		return reservas;
 	}
 	public void setReservas(List<ReservaPO> reservas) {
 		this.reservas = reservas;
-	}	
+	}	*/
    
 }

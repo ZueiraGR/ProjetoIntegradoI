@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*@param {objeto[chave,identificacao,qtdCadeiras,descricao,imagem]} mesa */
+/*@param {objeto[chave,identificacao,quantidadeDeCadeiras,descricao,imagem]} mesa */
 $("#CadastroDeMesa").submit(function(event){
-	if(DadosDoForm() != null){
+	if(capturarDadosDoForm() != null){
 		var formData = JSON.stringify(capturarDadosDoForm());
 		$.ajax({
 			url: "ws/mesaws/cadastrar/",
 	        type: 'POST',
 	        data: formData,
+	        /*success: function (data) {
+	        	tratarRetornoServidor(data);
+	        },*/
 			cache: false,
 		    contentType: "application/json",
 		    processData: true
@@ -19,10 +22,46 @@ $("#CadastroDeMesa").submit(function(event){
 	return false;
 });
 
-function DadosDoForm(){
-	var numero = $("#numero").val();
-	var cadeiras = $("#cadeiras").val();
-	var descricao = $("#textarea1").val();
+function capturarDadosDoForm(){
+	var identificacao = $("#identificacao").val();
+	var qtd_cadeiras = $("#qtd_cadeiras").val();
+	var descricao = $("#descricao").val();
+	var imagem = "imagem";
+	var mesa = {"identificacao":identificacao,"qtd_cadeiras":qtd_cadeiras,"descricao":descricao,"imagem":imagem};
+	if(isDadosValidos()){
+		return mesa; 
+	}
+	return mesa;
+}
+function isDadosValidos(identificacao,qtd_cadeiras,descricao,imagem){
+	var mensagem;
+	var retorno = true;
+	if(identificacao == null || identificacao == ""){
+		mensagem += "<li>É obrigatório preencher o campo IDENTIFICAÇÃO</li>";
+		retorno = false;
+	}
+	if(qtd_cadeiras == null || qtd_cadeiras == ""){
+		mensagem += "<li>É obrigatório preencher o campo QUANTIDADE DE CADEIRAS</li>";
+		retorno = false;
+	}
+	return retorno;
+}
+
+function tratarRetornoServidor(data){
+	if(data == "sucess"){
+		$('#mensagemRetornoCadastro').html("Cadastro realizado com sucesso!");
+		$('#mensagemRetornoCadastro').addClass("green");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+		setTimeout(function(){
+			$('#cadastrar').trigger("click" );
+			limparCamposFormCadastro();
+			$('#mensagemRetornoCadastro').addClass("hiddendiv");
+		},2000);
+	}else{
+		$('#mensagemRetornoCadastro').html("Houve erro ao cadastrar!");
+		$('#mensagemRetornoCadastro').addClass("red");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+	}
 }
 
 

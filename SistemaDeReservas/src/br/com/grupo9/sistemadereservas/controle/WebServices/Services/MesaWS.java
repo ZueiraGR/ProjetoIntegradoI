@@ -28,14 +28,14 @@ public class MesaWS {
 	private MesaBO mesaBO;
 
 	@POST
-	@Path("/cadastrar")
+	@Path("/cadastrar/")
 	public List<String> create(final MesaPO mesa) {
 		List<String> retorno = new ArrayList<>();
 		getMesaBO().setMesaPO(mesa);		
 		if(getMesaBO().cadastrar()){
 			retorno.add("sucess");
 		}else{
-			retorno.add("erro");
+			retorno = getMesaBO().getMensagemErro();
 		}
 		return retorno;
 	}
@@ -74,6 +74,9 @@ public class MesaWS {
 	}
 	
 	private MesaBO getMesaBO(){
+		if(this.mesaBO == null){
+			this.mesaBO = new MesaBO();
+		}
 		return this.mesaBO;
 	}
 
