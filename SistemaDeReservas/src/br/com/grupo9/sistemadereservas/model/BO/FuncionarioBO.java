@@ -29,12 +29,12 @@ public class FuncionarioBO extends UsuarioBO {
 	}
 
 	public boolean altualizar(){
-		getFuncionarioDAO().atualizar(getFuncionarioPO());
+//		getFuncionarioDAO().atualizar(getFuncionarioPO());
 		return true;
 	}
 	
 	public boolean deletar(){
-		getFuncionarioDAO().excluir(getFuncionarioPO());
+//		getFuncionarioDAO().excluir(getFuncionarioPO());
 		return true;
 	}
 	
