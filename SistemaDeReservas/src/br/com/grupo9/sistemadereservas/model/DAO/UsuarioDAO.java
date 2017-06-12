@@ -146,7 +146,7 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM usuario u ")
-				 .append("WHERE u.login LIKE :login");
+				 .append("WHERE u.login = :login");
 			TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
 				typedQuery.setParameter("login", entidade.getLogin());
 				 UsuarioPO usuario = (UsuarioPO) typedQuery.getSingleResult();
