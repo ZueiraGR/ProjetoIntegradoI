@@ -2,6 +2,20 @@
 
 var mesa;
 
+function carregarEConverterArquivo(){
+	var file = document.getElementById('imagemMesa');
+    var reader = new FileReader();
+    try{
+    	reader.readAsDataURL(file.files[0]);
+    	reader.onloadend = function(){
+    		$('#imagemMesaBase64').val(reader.result);
+    	};
+    }catch(e){
+    }
+    console.log(reader.result);
+    $('#imagemMesaBase64').val(reader.result);
+}
+
 $('#CadastroDeMesa').submit(function () {
 	getMesa();
     if(mesa.imagem != null){
@@ -11,14 +25,7 @@ $('#CadastroDeMesa').submit(function () {
 });
 
 function getImagemMesa(){
-    var file = document.getElementById('imagemMesa');
-    var reader = new FileReader();
-    try{
-    	reader.readAsDataURL(file.files[0]);
-    }catch(e){
-    }
-    console.log(reader.result);
-    return reader.result;
+	return $('#imagemMesaBase64').val();
 }
 
 function getMesa(){

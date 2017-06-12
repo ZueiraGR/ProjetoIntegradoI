@@ -91,6 +91,7 @@
 				</div>
 				<div id="adm-add" class="col s12">
 					<form class="col s12" name="CadastroDeMesa" id="CadastroDeMesa" method="POST">
+						<input type="hidden" id="imagemMesaBase64"/>
 						<div class="row">
 							<div class="input-field col s6">
 								<input placeholder="12" id="numero" type="text" class="validate" required="required"/>
@@ -111,7 +112,7 @@
 							<div class="file-field input-field col s12">
 								<div class="btn grey">
 									<span>SELECIONAR IMAGEM</span>
-									<input id="imagemMesa" name="imagemMesa" type="file"/>
+									<input id="imagemMesa" name="imagemMesa" type="file" onchange="carregarEConverterArquivo()"/>
 								</div>
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text"/>

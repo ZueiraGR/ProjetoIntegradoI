@@ -1,14 +1,13 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import br.com.grupo9.sistemadereservas.model.DAO.MesaDAO;
-import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.MesaPO;
 import br.com.grupo9.sistemadereservas.model.Util.ArquivoUtil;
 
@@ -20,7 +19,12 @@ public class MesaBO {
 	private List<String> mensagemErro;
 	
 	public MesaBO(){
-		PATH = getApplicationPath().replace("WEB-INF\\classes\\br\\com\\grupo9\\sistemadereservas\\model\\BO", "")+"img\\";
+		PATH = getApplicationPath();
+		if(PATH.contains("\\")){
+			PATH = PATH.replace("WEB-INF\\classes\\br\\com\\grupo9\\sistemadereservas\\model\\BO", "")+"img\\";
+		}else{
+			PATH = PATH.replace("WEB-INF/classes/br/com/grupo9/sistemadereservas/model/BO", "")+"img/";
+		}
 	}
 
 	public boolean cadastrar() {
@@ -28,7 +32,6 @@ public class MesaBO {
 			String nomeDoArquivo = salvarImagem(getMesaPO().getImagem());
 			if(nomeDoArquivo != null && !nomeDoArquivo.isEmpty()){
 				getMesaPO().setImagem(nomeDoArquivo);
-				System.out.println(nomeDoArquivo);
 				if (getMesaDAO().cadastrar(getMesaPO())) {
 					return true;
 				} else {
