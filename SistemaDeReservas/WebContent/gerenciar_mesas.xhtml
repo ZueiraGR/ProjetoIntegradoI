@@ -25,7 +25,7 @@
 		<div class="container row">
 			<div class="row s12 z-depth-2">
 				<div>
-					<ul class="tabs tabs-fixed-width z-depth-1">
+					<ul class="tabs z-depth-1 grey lighten-3">
 						<li class="tab col"><a href="#adm-view">MESAS</a></li>
 						<li class="tab col"><a href="#adm-add">CADASTRO DE MESAS</a></li>
 					</ul>
@@ -90,35 +90,28 @@
 					</div>
 				</div>
 				<div id="adm-add" class="col s12">
-
-					<form class="col s12" name="CadastroDeMesa" id="CadastroDeMesa" action="" method="POST">
-						<br/>
+					<form class="col s12" name="CadastroDeMesa" id="CadastroDeMesa" method="POST">
 						<div class="row">
 							<div class="input-field col s6">
-								<input placeholder="12" id="identificacao" type="text" class="validate"
-									required="required"/> <label for="identificacao"
-									data-error="Prenchimento deste campo é obrigatório!"
-									data-success="Ok">IDENTIFICAÇÃO</label>
+								<input placeholder="12" id="numero" type="text" class="validate" required="required"/>
+								<label for="numero" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">IDENTIFICAÇÃO</label>
 							</div>
 							<div class="input-field col s6">
-								<input placeholder="4" id="qtd_cadeiras" type="number"
-									class="validate" required="required"/> <label for="qtd_cadeiras"
-									data-error="Prenchimento deste campo é obrigatório!"
-									data-success="Ok">QUANTIDADE DE CADEIRAS</label>
+								<input placeholder="4" id="cadeiras" type="number" class="validate" required="required"/>
+								<label for="cadeiras" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">QUANTIDADE DE CADEIRAS</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea id="descricao" class="materialize-textarea" maxlength="50" required="required"/>
-								<label for="descricao"
-									data-error="Prenchimento deste campo é obrigatório!"
-									data-success="Ok">DESCRIÇÃO</label>
+								<textarea id="textarea1" class="materialize-textarea" maxlength="50" required="required"/>
+								<label for="textarea1" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">DESCRIÇÃO</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="file-field input-field col s12">
 								<div class="btn grey">
-									<span>SELECIONAR IMAGEM</span> <input type="file"/>
+									<span>SELECIONAR IMAGEM</span>
+									<input id="imagemMesa" name="imagemMesa" type="file"/>
 								</div>
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text"/>
@@ -128,14 +121,15 @@
 						<div class="row">
 							<div class="input-field col l3"></div>
 							<div class="input-field col l3">
-								<button id="cadastrar" class="btn grey waves-effect waves-green col l12"
-									type="submit">CADASTRAR</button>
+								<button class="btn grey waves-effect waves-green col l12" type="submit">CADASTRAR</button>
 							</div>
 							<div class="input-field col l3">
-								<button class="btn grey waves-effect waves-red col l12"
-									type="reset">CANCELAR</button>
+								<button class="btn grey waves-effect waves-red col l12" type="reset">CANCELAR</button>
 							</div>
 							<div class="input-field col l3"></div>
+						</div>
+						<div class="row">
+								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
 						</div>
 					</form>
 
@@ -161,8 +155,8 @@
 				<input type="hidden" name="chaveMesa" id="chaveMesa"/> <br/>
 				<div class="row">
 					<div class="input-field col s6">
-						<input placeholder="12" id="numeroMesa" type="text"
-							class="validate" required="required"/> <label for="numeroMesa"
+						<input placeholder="12" id="numeroMesa" type="text" class="validate" required="required"/>
+						<label for="numeroMesa"
 							data-error="Prenchimento deste campo é obrigatório!"
 							data-success="Ok">IDENTIFICAÇÃO</label>
 					</div>
@@ -185,7 +179,8 @@
 				<div class="row">
 					<div class="file-field input-field col s12">
 						<div class="btn grey">
-							<span>SELECIONAR IMAGEM</span> <input type="file"/>
+							<span>SELECIONAR IMAGEM</span>
+							<input id="imagemMesaE" name="imagemMesaE" type="file"/>
 						</div>
 						<div class="file-path-wrapper">
 							<input class="file-path validate" type="text"/>
@@ -222,43 +217,11 @@
 			<div class="row"></div>
 		</div>
 	</div>
-	<!--FIM JANELAS MODAIS =================================================-->
-	<div class="fixed-action-btn">
-		<a class="btn-floating btn-large grey" id="scrollToTop"
-			style="display: none;"> <i class="fa fa-chevron-up"></i>
-		</a>
-	</div>
-	<footer class="page-footer grey darken-1">
-		<div class="container">
-			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">Sistema de reserva</h5>
-					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
 
-
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Áreas de site</h5>
-					<ul>
-						<li><a class="white-text" href="#!">HOME</a></li>
-						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
-						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright grey darken-2">
-			<div class="container">
-				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
-			</div>
-		</div>
-	</footer>
-
-	<!--  Scripts-->
-	<script src="js/jquery-2.1.1.js"></script>
-	<script src="js/materialize.js"></script>
-	<script src="js/init.js"></script>
-	<script src="js/slide.js"></script>
+	<ui:insert>
+		<ui:include src="/templates/rodape.xhtml" />
+		<ui:include src="/templates/js_padrao.xhtml" />
+	</ui:insert>
 	<script src="js/mesaScripts.js"></script>
 
 </body>

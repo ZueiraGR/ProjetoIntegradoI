@@ -19,17 +19,15 @@ public class MesaPO implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer chave;
-	@Column(name="identificacao")
+	@Column(unique=true)
 	private String identificacao;
 	@Column(name="qtd_cadeiras")
-	private Integer qtd_cadeiras;
-	@Column(name="descricao")
+	private Integer quantidadeDeCadeiras;
 	private String descricao;
-	@Column(name="imagem")
 	private String imagem;
 	
-/*	@ManyToMany(mappedBy="mesas")
-	private List<ReservaPO> reservas;*/
+	@ManyToMany(mappedBy="mesas")
+	private List<ReservaPO> reservas;
 	
 	public MesaPO() {
 		super();
@@ -48,13 +46,13 @@ public class MesaPO implements Serializable {
 	public void setIdentificacao(String identificacao) {
 		this.identificacao = identificacao;
 	}   
-	 
-	public Integer getQtd_cadeiras() {
-		return qtd_cadeiras;
+	public Integer getQuantidadeDeCadeiras() {
+		return this.quantidadeDeCadeiras;
 	}
-	public void setQtd_cadeiras(Integer qtd_cadeiras) {
-		this.qtd_cadeiras = qtd_cadeiras;
-	}
+
+	public void setQuantidadeDeCadeiras(Integer quantidadeDeCadeiras) {
+		this.quantidadeDeCadeiras = quantidadeDeCadeiras;
+	}   
 	public String getDescricao() {
 		return this.descricao;
 	}
@@ -69,11 +67,11 @@ public class MesaPO implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-/*	public List<ReservaPO> getReservas() {
+	public List<ReservaPO> getReservas() {
 		return reservas;
 	}
 	public void setReservas(List<ReservaPO> reservas) {
 		this.reservas = reservas;
-	}	*/
+	}	
    
 }
