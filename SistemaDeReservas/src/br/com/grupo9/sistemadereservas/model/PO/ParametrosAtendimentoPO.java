@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: ParametrosAtendimentos
  *
  */
-@Entity
+@Entity(name="parametros")
 @Table(name="parametros_atendimento")
 public class ParametrosAtendimentoPO implements Serializable {
 	private static final long serialVersionUID = 1L;

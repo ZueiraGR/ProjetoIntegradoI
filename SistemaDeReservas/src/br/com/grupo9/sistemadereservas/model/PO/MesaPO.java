@@ -3,7 +3,6 @@ package br.com.grupo9.sistemadereservas.model.PO;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -17,7 +16,7 @@ public class MesaPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	   
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer chave;
 	@Column(unique=true)
 	private String identificacao;

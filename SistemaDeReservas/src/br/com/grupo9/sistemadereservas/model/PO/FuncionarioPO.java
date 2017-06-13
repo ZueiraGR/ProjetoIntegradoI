@@ -15,7 +15,7 @@ public class FuncionarioPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	   
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer chave;
 	@ManyToOne
 	@JoinColumn(name="cargo_chave", referencedColumnName="chave", nullable= false)

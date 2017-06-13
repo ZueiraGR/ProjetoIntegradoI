@@ -15,7 +15,7 @@ public class CargoPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	   
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer chave;
 	private String nome;
 	@Column(name="data_exclusao")
