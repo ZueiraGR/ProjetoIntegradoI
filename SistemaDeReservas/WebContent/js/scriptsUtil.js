@@ -20,7 +20,7 @@ function listarOpPaginas(idDaDiv,paginaAtual,qtdRegistros,qtdRegistrosObtidos,ac
 	if(qtdRegistrosObtidos < qtdRegistros){
 		if(paginaAtual >= 1 && paginaAtual < 10){
 			for(i = 1; i < 10 ; i ++){
-				html += getLinhaNumeroPagina(i,acaoSeta);
+				html += getLinhaNumeroPagina(i,acaoSeta,paginaAtual);
 			}
 		}else{
 			for(i = (paginaAtual-4); i < (paginaAtual+4) ; i ++){
@@ -29,11 +29,11 @@ function listarOpPaginas(idDaDiv,paginaAtual,qtdRegistros,qtdRegistrosObtidos,ac
 		}
 	}else{
 		for(i = primeiraPg; i < paginaAtual ; i ++){
-			html += getLinhaNumeroPagina(i,acaoSeta);
+			html += getLinhaNumeroPagina(i,acaoSeta,paginaAtual);
 		}
 		html += getLinhaNumeroPagina((paginaAtual));
 		for(i = paginaAtual+1; i < ultimaPg ; ++i){
-			html += getLinhaNumeroPagina(i,acaoSeta);
+			html += getLinhaNumeroPagina(i,acaoSeta,paginaAtual);
 		}
 	}
 	html += getSetaDireita(paginaAtual, acaoSeta, qtdRegistros, qtdRegistrosObtidos);
@@ -59,13 +59,26 @@ function getSetaDireita(paginaAtual, acaoSeta, qtdRegistros, qtdRegistrosObtidos
 	return setaDireita;
 }
 
-function getLinhaNumeroPagina(numero, acaoSeta){
+function getLinhaNumeroPagina(numero, acaoSeta, paginaAtual){
 	var linha;
-	if(numero == paginaAtualFuncionarios){
+	if(numero == paginaAtual){
 		linha = '<li class="active grey"><a href="#" onclick="'+acaoSeta+'('+numero+')">'+numero+'</a></li>';
 	}else{
 		linha = '<li class="waves-effect waves-grey"><a href="#" onclick="'+acaoSeta+'('+numero+')">'+numero+'</a></li>';
 	}
 	return linha;
+}
+
+function carregarEConverterArquivo(idInputFile,idInputHidden){
+	var file = document.getElementById(idInputFile);
+    var reader = new FileReader();
+    try{
+    	reader.readAsDataURL(file.files[0]);
+    	reader.onloadend = function(){
+    		$("#"+idInputHidden).val(reader.result);
+    	};
+    }catch(e){
+    }
+    console.log(reader.result);
 }
 
