@@ -171,11 +171,15 @@ function selectCargos(){
 		url: "ws/cargows/listar/1/10",
         type: 'GET',
         success: function (data) {
+        	$('select').material_select('destroy');
         	if(data.length > 0){
         		preencherSelectCargos(data);
         	}else{
         		$("#cargoFuncionario").html("");
         	}
+        	$(document).ready(function(){
+        		$('select').material_select();
+        	})
         }
 	});
 }
