@@ -15,7 +15,7 @@ function carregarCargos(pagina){
         	if(data.length > 0){
         		preencherTabelaCargos(data);
         	}else{
-        		$("#tabelaCargos").html("");
+        		$("#tabelaCargos").html('<tr><td colspan="5">Não há novos registros.</td></td>');
         	}
         }
 	});
