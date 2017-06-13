@@ -17,7 +17,7 @@
 </ui:insert>
 </head>
 
-<body onload="carregarFuncionarios(1) , carregarCargos(1)">
+<body onload="carregarFuncionarios(1) , carregarCargos(1) , selectCargos()">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
@@ -99,12 +99,7 @@
 								</div>
 
 								<div class="input-field col m6 s12">
-									<select class="validate" id="cargoFuncionario" required="required">
-										<option disabled="disabled" selected="selected">Selecione um cargo</option>
-										<option value="1">Gerente</option>
-										<option value="2">Garçom</option>
-										<option value="3">Balconista</option>
-									</select>
+									<select class="validate" id="cargoFuncionario" required="required"></select>
 									<label for="cargoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
 								</div>
 							</div>

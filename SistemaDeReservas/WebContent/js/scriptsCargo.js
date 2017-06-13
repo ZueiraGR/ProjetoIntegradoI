@@ -164,3 +164,30 @@ $("#formExclusaoCargo").submit(function(event){
 	});
 	return false;
 });
+
+
+function selectCargos(){
+	$.ajax({
+		url: "ws/cargows/listar/1/10",
+        type: 'GET',
+        success: function (data) {
+        	if(data.length > 0){
+        		preencherSelectCargos(data);
+        	}else{
+        		$("#cargoFuncionario").html("");
+        	}
+        }
+	});
+}
+
+function preencherSelectCargos(arrayDeCargos){
+	var html = '<option disabled="disabled" selected="selected">Selecione um cargo</option>';
+	for( i = 0; i < arrayDeCargos.length; i++){
+		html += getLinhaCargo(arrayDeCargos[i]);
+	}
+	$("#cargoFuncionario").html(html);	
+}
+
+function getLinhaCargo(cargo){
+	return '<option value="'+cargo.chave+'">'+cargo.nome+'</option>';
+}
