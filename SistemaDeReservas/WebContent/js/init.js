@@ -122,3 +122,8 @@ function agendaStart(horaInicio, horaFim) {
     });
 
 }
+
+$(document).ready(function () {
+    $('select').material_select();
+});
+
