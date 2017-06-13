@@ -2,6 +2,7 @@ package br.com.grupo9.sistemadereservas.model.PO;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -24,6 +25,9 @@ public class MesaPO implements Serializable {
 	private Integer quantidadeDeCadeiras;
 	private String descricao;
 	private String imagem;
+	@Column(name="data_exclusao",nullable=true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataExclusao;
 	
 //	@ManyToMany(mappedBy="mesas")
 //	private List<ReservaPO> reservas;
@@ -66,6 +70,14 @@ public class MesaPO implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
+	public Calendar getDataExclusao() {
+		return dataExclusao;
+	}
+	public void setDataExclusao(Calendar dataExclusao) {
+		this.dataExclusao = dataExclusao;
+	}
+	
+	
 //	public List<ReservaPO> getReservas() {
 //		return reservas;
 //	}

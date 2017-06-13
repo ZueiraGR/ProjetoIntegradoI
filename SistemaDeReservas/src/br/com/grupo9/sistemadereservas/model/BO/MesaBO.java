@@ -13,36 +13,34 @@ import br.com.grupo9.sistemadereservas.model.Util.ArquivoUtil;
 
 public class MesaBO {
 
-	private String PATH;
+	private String PATH_IMAGENS;
 	private MesaDAO mesaDAO;
 	private MesaPO mesaPO;
 	private List<String> mensagemErro;
+	private String nomeDoArquivo;
 	
 	public MesaBO(){
-		PATH = getApplicationPath();
-		if(PATH.contains("\\")){
-			PATH = PATH.replace("WEB-INF\\classes\\br\\com\\grupo9\\sistemadereservas\\model\\BO", "")+"img\\";
+		PATH_IMAGENS = getApplicationPath();
+		if(PATH_IMAGENS.contains("\\")){
+			// SERVIDOR WINDOWS
+			PATH_IMAGENS = PATH_IMAGENS.replace("WEB-INF\\classes\\br\\com\\grupo9\\sistemadereservas\\model\\BO", "")+"img\\";
 		}else{
-			PATH = PATH.replace("WEB-INF/classes/br/com/grupo9/sistemadereservas/model/BO", "")+"img/";
+			// SERVIDOR BASEADO EM UNIX(LINUX,MAC,etc.)
+			PATH_IMAGENS = PATH_IMAGENS.replace("WEB-INF/classes/br/com/grupo9/sistemadereservas/model/BO", "")+"img/";
 		}
 	}
 
 	public boolean cadastrar() {
-		try {
-			String nomeDoArquivo = salvarImagem(getMesaPO().getImagem());
-			if(nomeDoArquivo != null && !nomeDoArquivo.isEmpty()){
-				getMesaPO().setImagem(nomeDoArquivo);
-				if (getMesaDAO().cadastrar(getMesaPO())) {
-					return true;
-				} else {
-					excluirImagem(getMesaPO().getImagem());
-					return false;
-				}
-			}else{
+		gerarNomeDoArquivo();
+		if(salvarImagem()){
+			getMesaPO().setImagem(getNomeGeradoDoArquivo());
+			if (getMesaDAO().cadastrar(getMesaPO())) {
+				return true;
+			} else {
+				excluirImagem();
 				return false;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}else{
 			return false;
 		}
 	}
@@ -57,30 +55,54 @@ public class MesaBO {
 	}
 	
 	public boolean atualizar(){
-		//TODO implementar atualizacao da mesa
-		return false;
+		boolean retorno = false;
+		MesaPO mesa;
+		mesa = getMesaDAO().capturarPorId(getMesaPO());
+		if(mesa != null){
+			if(getMesaPO().getImagem() == null && !getMesaPO().getImagem().isEmpty()){
+				setNomeDoArquivo(mesa.getImagem());
+				excluirImagem();
+				gerarNomeDoArquivo();
+				salvarImagem();
+				getMesaPO().setImagem(getNomeGeradoDoArquivo());
+				retorno =  getMesaDAO().atualizar(getMesaPO());
+			}else{
+				getMesaPO().setImagem(mesa.getImagem());
+				retorno =  getMesaDAO().atualizar(getMesaPO());
+			}
+		}
+		return retorno;
 	}
 	
 	public boolean excluir(){
-		//TODO implementar exclusao da mesa
-		return false;
+		MesaPO mesa = getMesaDAO().capturarPorId(getMesaPO());
+		setNomeDoArquivo(mesa.getImagem());
+		mesa.setDataExclusao(Calendar.getInstance());
+		if(excluirImagem()){
+			return getMesaDAO().atualizar(mesa);
+		}else{
+			return false;
+		}		
 	}
 
-	private String salvarImagem(String imagemBase64) {
-		Calendar ex = Calendar.getInstance();
-		String nomeDoArquivo = "mesa" + ex.getTimeInMillis() + ".jpg";
-		if(ArquivoUtil.salvar(imagemBase64, nomeDoArquivo, PATH)){
-			return nomeDoArquivo;
-		}else{
-			return null;
-		}
+	private boolean salvarImagem() {
+		return ArquivoUtil.salvar(getMesaPO().getImagem(), getNomeGeradoDoArquivo(), PATH_IMAGENS);
 	}
 	
-	private void excluirImagem(String imagem) {
-		ArquivoUtil.excluir(imagem, PATH);		
+	private String getNomeGeradoDoArquivo(){
+		return this.nomeDoArquivo;
+	}
+	
+	private void gerarNomeDoArquivo(){
+		Calendar ex = Calendar.getInstance();
+		this.nomeDoArquivo= "mesa" + ex.getTimeInMillis() + ".jpg";
+	}
+	
+	private boolean excluirImagem() {
+		return ArquivoUtil.excluir(getNomeDoArquivo(), PATH_IMAGENS);
 	}
 
-	public String getApplicationPath() {
+	private String getApplicationPath() {
 		String url = getClass().getResource(getClass().getSimpleName() + ".class").getPath();
 		File dir = new File(url).getParentFile();
 		String path = null;
@@ -104,6 +126,14 @@ public class MesaBO {
 
 	public void setMesaPO(MesaPO mesaPO) {
 		this.mesaPO = mesaPO;
+	}
+
+	private String getNomeDoArquivo() {
+		return nomeDoArquivo;
+	}
+
+	private void setNomeDoArquivo(String nomeDoArquivo) {
+		this.nomeDoArquivo = nomeDoArquivo;
 	}
 
 	private MesaDAO getMesaDAO() {

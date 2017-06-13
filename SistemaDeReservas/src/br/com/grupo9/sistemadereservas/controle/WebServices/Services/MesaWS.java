@@ -2,16 +2,13 @@ package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 import br.com.grupo9.sistemadereservas.model.BO.MesaBO;
 import br.com.grupo9.sistemadereservas.model.PO.MesaPO;
 
@@ -53,19 +50,21 @@ public class MesaWS {
 
 	@POST
 	@Path("/atualizar/")
-	public Response update(final MesaPO mesaPO) {
+	public List<String> update(final MesaPO mesaPO) {
 		getMesaBO().setMesaPO(mesaPO);
 		getMesaBO().atualizar();
-		return Response.noContent().build();
+		//TODO IMPLEMENTAR MENSAGENS DE ERRO
+		return null;
 	}
 
 	@GET
 	@Path("/excluir/{chave:[0-9]*}")
-	public List<String> deleteById(@PathParam("chave") final Integer chave) {
+	public List<String> excluir(@PathParam("chave") final Integer chave) {
 		MesaPO mesaPO = new MesaPO();
 		mesaPO.setChave(chave);
 		getMesaBO().setMesaPO(mesaPO);
-		getMesaBO().atualizar();
+		getMesaBO().excluir();
+		//TODO IMPLEMENTAR MENSAGENS DE ERRO
 		return null;
 	}
 	
