@@ -26,6 +26,7 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 public class FuncionarioWS {
 	
 	FuncionarioBO funcionarioBO;
+	UsuarioPO usuarioPO;
 	
 	@POST
 	@Path("/cadastrar/")
@@ -59,11 +60,14 @@ public class FuncionarioWS {
 		return Response.noContent().build();
 	}
 
-	@DELETE
-	@Path("/{id:[0-9][0-9]*}")
-	public Response deleteById(@PathParam("id") final Long id) {
-		//TODO: process the funcionariopo matching by the given id 
-		return Response.noContent().build();
+	@POST
+	@Path("/excluir/{id:[0-9][0-9]*}")
+	public List<String> excluir(@PathParam("id") final Integer id) {
+		UsuarioPO usuarioPO = new UsuarioPO();
+		usuarioPO.getFuncionario().setChave(id);
+		getFuncionarioBO().setUsuarioPO(usuarioPO);
+		getFuncionarioBO().deletar();
+		return null;
 	}
 	
 	private FuncionarioBO getFuncionarioBO(){
@@ -71,6 +75,12 @@ public class FuncionarioWS {
 			this.funcionarioBO = new FuncionarioBO();
 		}
 		return this.funcionarioBO;
+	}
+	private UsuarioPO getUsuarioPO(){
+		if(this.usuarioPO == null){
+			this.usuarioPO = new UsuarioPO();
+		}
+		return this.usuarioPO;
 	}
 
 }

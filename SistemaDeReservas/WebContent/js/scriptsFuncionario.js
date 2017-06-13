@@ -220,7 +220,7 @@ function getBtnAtivarInativar(funcionario){
 }
 
 function getBtnExcluirFuncionario(funcionario){
-	var html = '<a href="#"	onclick="excluirFuncionario('+funcionario.chave+')" title="Excluir"><i class="fa fa-trash-o fa-lg orange-text text-darken-3 hoverable" aria-hidden="true"></i></a>';
+	var html = '<a href="#"	onclick="excluirFuncionario('+funcionario.id+')" title="Excluir"><i class="fa fa-trash-o fa-lg orange-text text-darken-3 hoverable" aria-hidden="true"></i></a>';
 	return html;
 }
 
@@ -236,7 +236,14 @@ function bloquearOuDesbloquearFuncionario(funcionario){
 //    $("#mesagemBloqueio").html('<p class="center-align">Deseja realmente '+acao+' o cliente Maria José Vieira?</p>');
     $("#confirmarBloqueioOuDesbloqueioDoFuncionario").modal('open');   
 }
-
-function excluirFuncionario(funcionario){
-    $("#confirmarExclusaoDoFuncionario").modal('open');  
+function excluirFuncionario(id){
+    $("#confirmarExclusaoDoFuncionario").modal('open');
+    $("#confirmarExclusao").submit(function(event){
+    	$.ajax({
+    		url: "ws/funcionariows/excluir/"+id,
+            type: 'POST',
+    	});
+    });
 }
+
+

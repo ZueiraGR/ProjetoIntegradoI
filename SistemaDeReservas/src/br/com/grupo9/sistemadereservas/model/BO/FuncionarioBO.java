@@ -7,6 +7,7 @@ import java.util.List;
 import br.com.grupo9.sistemadereservas.model.DAO.CargoDAO;
 import br.com.grupo9.sistemadereservas.model.DAO.FuncionarioDAO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
+import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 public class FuncionarioBO extends UsuarioBO {
 	private FuncionarioDAO funcionarioDAO;
@@ -34,8 +35,9 @@ public class FuncionarioBO extends UsuarioBO {
 	}
 	
 	public boolean deletar(){
-//		getFuncionarioDAO().excluir(getFuncionarioPO());
-		return true;
+		UsuarioPO usuario = getUsuarioDAO().capturarPorId(getUsuarioPO());
+		getUsuarioPO().setDataExclusao(Calendar.getInstance());
+		return getUsuarioDAO().atualizar(usuario);
 	}
 	
 	public List<FuncionarioPO> listar(Integer pagina, Integer qtdRegistros){

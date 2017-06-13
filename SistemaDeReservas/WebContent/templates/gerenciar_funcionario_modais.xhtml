@@ -26,15 +26,19 @@
 			<div class="modal-content">
 				<p class="center-align">Deseja realmente excluir o funcionário <b id="labelNomeDoFuncionario" class="red-text"></b> ?</p>
 			</div>
-			<div class="container">
+			<div class="">
+			<form method="POST" id="confirmarExclusao">
 				<div class="row">
-					<div class="col l6 m6 s6 center">
-						<a class="btn grey modal-close waves-effect waves-green" id="confirmarExclusao">CONFIRMAR</a>
+					<div class="input-field col l3"></div>
+					<div class="input-field col l3">
+						<button class="btn grey waves-effect waves-green col l12 m12" type="submit">CONFIRMAR</button>
 					</div>
-					<div class="col l6 m6 s6 center">
-						<a class="btn grey modal-close waves-effect waves-red modal-close" id="cancelarExclusao">CANCELAR</a>
+					<div class="input-field col l3">
+						<button class="btn grey waves-effect waves-red col l12 m12" type="reset">CANCELAR</button>
 					</div>
+					<div class="input-field col l3"></div>
 				</div>
+			</form>
 				<div class="row"></div>
 			</div>
 		</div>
