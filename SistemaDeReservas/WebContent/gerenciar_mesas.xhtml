@@ -42,7 +42,7 @@
 									<th>Ações</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tabelaMesas">
 								<tr>
 									<td>1A</td>
 									<td>6</td>
@@ -90,15 +90,15 @@
 					</div>
 				</div>
 				<div id="adm-add" class="col s12">
-					<form class="col s12" name="CadastroDeMesa" id="CadastroDeMesa" method="POST">
+					<form name="CadastroDeMesa" id="CadastroDeMesa" method="POST">
 						<input type="hidden" id="imagemMesaBase64"/>
 						<div class="row">
 							<div class="input-field col s6">
-								<input placeholder="12" id="numero" type="text" class="validate" required="required"/>
+								<input placeholder="12" id="numero" type="text" class="validate" required="required" maxlength="4"/>
 								<label for="numero" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">IDENTIFICAÇÃO</label>
 							</div>
 							<div class="input-field col s6">
-								<input placeholder="4" id="cadeiras" type="number" class="validate" required="required"/>
+								<input placeholder="4" id="cadeiras" type="number" class="validate" required="required" max="50"/>
 								<label for="cadeiras" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">QUANTIDADE DE CADEIRAS</label>
 							</div>
 						</div>
@@ -112,7 +112,7 @@
 							<div class="file-field input-field col s12">
 								<div class="btn grey">
 									<span>SELECIONAR IMAGEM</span>
-									<input id="imagemMesa" name="imagemMesa" type="file" onchange="carregarEConverterArquivo()"/>
+									<input id="imagemMesa" name="imagemMesa" type="file" onchange="carregarEConverterArquivo()" required="required"/>
 								</div>
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text"/>
