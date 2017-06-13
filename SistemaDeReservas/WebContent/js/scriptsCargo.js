@@ -187,11 +187,11 @@ function selectCargos(){
 function preencherSelectCargos(arrayDeCargos){
 	var html = '<option disabled="disabled" selected="selected">Selecione um cargo</option>';
 	for( i = 0; i < arrayDeCargos.length; i++){
-		html += getLinhaCargo(arrayDeCargos[i]);
+		html += getCargo(arrayDeCargos[i]);
 	}
 	$("#cargoFuncionario").html(html);	
 }
 
-function getLinhaCargo(cargo){
+function getCargo(cargo){
 	return '<option value="'+cargo.chave+'">'+cargo.nome+'</option>';
 }
