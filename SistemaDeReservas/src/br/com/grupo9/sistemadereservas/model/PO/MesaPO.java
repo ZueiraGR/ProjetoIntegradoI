@@ -25,8 +25,8 @@ public class MesaPO implements Serializable {
 	private String descricao;
 	private String imagem;
 	
-	@ManyToMany(mappedBy="mesas")
-	private List<ReservaPO> reservas;
+//	@ManyToMany(mappedBy="mesas")
+//	private List<ReservaPO> reservas;
 	
 	public MesaPO() {
 		super();
@@ -66,11 +66,11 @@ public class MesaPO implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-	public List<ReservaPO> getReservas() {
-		return reservas;
-	}
-	public void setReservas(List<ReservaPO> reservas) {
-		this.reservas = reservas;
-	}	
+//	public List<ReservaPO> getReservas() {
+//		return reservas;
+//	}
+//	public void setReservas(List<ReservaPO> reservas) {
+//		this.reservas = reservas;
+//	}	
    
 }

@@ -17,21 +17,24 @@
 	</ui:insert>
 </head>
 
-<body>
+<body onload="carregarMesas(1)">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
 	<div class="section">
-		<div class="container row">
-			<div class="row s12 z-depth-2">
-				<div>
-					<ul class="tabs z-depth-1 grey lighten-3">
-						<li class="tab col"><a href="#adm-view">MESAS</a></li>
-						<li class="tab col"><a href="#adm-add">CADASTRO DE MESAS</a></li>
-					</ul>
-				</div>
+		<div class="container">
+			<div class="row z-depth-2">
+				<ul class="tabs tabs-fixed-width z-depth-1 grey lighten-3">
+					<li class="tab col"><a href="#adm-view">MESAS</a></li>
+				</ul>
 				<div id="adm-view" class="col s12">
-					<div class="col s12">
+					<br/>
+					<div class="row">
+						<div class="col l12">
+							<a href="#" onclick="abrirModalCadastro()" class="btn"><i class="fa fa-plus" aria-hidden="true"></i> CADASTRAR MESA</a>
+						</div>
+					</div>
+					<div class="row col s12">
 						<table class="bordered responsive-table">
 							<thead>
 								<tr>
@@ -43,97 +46,32 @@
 								</tr>
 							</thead>
 							<tbody id="tabelaMesas">
-								<tr>
-									<td>1A</td>
-									<td>6</td>
-									<td>Mesa próxima ao bar.</td>
-									<td><a href="#"
-										onclick="mostrarImagemMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
-									<td><a href="#"
-										onclick="editarMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Editar"><i class="fa fa-pencil-square-o"></i></a> <a
-										href="#"
-										onclick="excluirMesa({chave: 1, identificacao: '1A', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Excluir"><i class="fa fa-trash-o"></i></a></td>
-								</tr>
-								<tr>
-									<td>1B</td>
-									<td>4</td>
-									<td>Mesa próxima ao bar.</td>
-									<td><a href="#"
-										onclick="mostrarImagemMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
-									<td><a href="#"
-										onclick="editarMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Editar"><i class="fa fa-pencil-square-o"></i></a> <a
-										href="#"
-										onclick="excluirMesa({chave: 1, identificacao: '1B', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Excluir"><i class="fa fa-trash-o"></i></a></td>
-								</tr>
-								<tr>
-									<td>1C</td>
-									<td>8</td>
-									<td>Mesa próxima ao bar.</td>
-									<td><a href="#"
-										onclick="mostrarImagemMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Imagem da Mesa 1A"><i class="fa fa-picture-o"></i></a></td>
-									<td><a href="#"
-										onclick="editarMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Editar"><i class="fa fa-pencil-square-o"></i></a> <a
-										href="#"
-										onclick="excluirMesa({chave: 1, identificacao: '1C', qtdCadeiras: 6, descricao: 'Mesa próxima ao bar.', imagem: 'mesa-proxima-bar.jpg'})"
-										title="Excluir"><i class="fa fa-trash-o"></i></a></td>
-								</tr>
 							</tbody>
+							<tfoot>
+								<tr>
+									<th colspan="5">
+										<div class="row">
+											<div class="col l3">
+												<div class="input-field">
+													<select id="qtdRegistrosMesas" name="qtdRegistrosMesas" onchange="carregarMesas(paginaAtualMesas)">
+														<option value="10" selected="selected">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+														<option value="40">40</option>
+														<option value="50">50</option>
+													</select>
+													<label for="qtdRegistrosMesas">Registros por página</label>
+												</div>
+											</div>
+											<div class="col l9 center">
+												<ul class="pagination" id="OpPaginasMesas"></ul>
+											</div>
+										</div>
+									</th>
+								</tr>
+							</tfoot>
 						</table>
 					</div>
-				</div>
-				<div id="adm-add" class="col s12">
-					<form name="CadastroDeMesa" id="CadastroDeMesa" method="POST">
-						<input type="hidden" id="imagemMesaBase64"/>
-						<div class="row">
-							<div class="input-field col s6">
-								<input placeholder="12" id="numero" type="text" class="validate" required="required" maxlength="4"/>
-								<label for="numero" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">IDENTIFICAÇÃO</label>
-							</div>
-							<div class="input-field col s6">
-								<input placeholder="4" id="cadeiras" type="number" class="validate" required="required" max="50"/>
-								<label for="cadeiras" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">QUANTIDADE DE CADEIRAS</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<textarea id="textarea1" class="materialize-textarea" maxlength="50" required="required"/>
-								<label for="textarea1" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">DESCRIÇÃO</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="file-field input-field col s12">
-								<div class="btn grey">
-									<span>SELECIONAR IMAGEM</span>
-									<input id="imagemMesa" name="imagemMesa" type="file" onchange="carregarEConverterArquivo()" required="required"/>
-								</div>
-								<div class="file-path-wrapper">
-									<input class="file-path validate" type="text"/>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col l3"></div>
-							<div class="input-field col l3">
-								<button class="btn grey waves-effect waves-green col l12" type="submit">CADASTRAR</button>
-							</div>
-							<div class="input-field col l3">
-								<button class="btn grey waves-effect waves-red col l12" type="reset">CANCELAR</button>
-							</div>
-							<div class="input-field col l3"></div>
-						</div>
-						<div class="row">
-								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
-						</div>
-					</form>
-
 				</div>
 			</div>
 		</div>
@@ -152,71 +90,75 @@
 	</div>
 	<div id="modalFormEdicaoMesa" class="modal">
 		<div class="modal-content" id="corpoFormEdicaoMesa">
-			<form class="col s12" name="EdicaoDeMesa" action="" method="POST">
-				<input type="hidden" name="chaveMesa" id="chaveMesa"/> <br/>
+			<form name="FormMesa" id="FormMesa" method="POST">
+				<input type="hidden" id="imagemMesaBase64"/>
+				<input type="hidden" id="opFormMesa"/>
+				<input type="hidden" id="chaveMesa"/>
 				<div class="row">
 					<div class="input-field col s6">
-						<input placeholder="12" id="numeroMesa" type="text" class="validate" required="required"/>
-						<label for="numeroMesa"
-							data-error="Prenchimento deste campo é obrigatório!"
-							data-success="Ok">IDENTIFICAÇÃO</label>
+						<input placeholder="12" id="numero" type="text" class="validate" required="required" maxlength="4"/>
+						<label for="numero" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">IDENTIFICAÇÃO</label>
 					</div>
 					<div class="input-field col s6">
-						<input placeholder="4" id="qtdCadeirasMesa" type="number"
-							class="validate" required="required"/> <label for="qtdCadeirasMesa"
-							data-error="Prenchimento deste campo é obrigatório!"
-							data-success="Ok">QUANTIDADE DE CADEIRAS</label>
+						<input placeholder="4" id="cadeiras" type="number" class="validate" required="required" max="50"/>
+						<label for="cadeiras" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">QUANTIDADE DE CADEIRAS</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<textarea id="descricaoMesa" class="materialize-textarea"
-							maxlength="50" required="required"/>
-						<label for="descricaoMesa"
-							data-error="Prenchimento deste campo é obrigatório!"
-							data-success="Ok">DESCRIÇÃO</label>
+						<textarea id="descricao" class="materialize-textarea" maxlength="50" required="required"/>
+						<label for="descricao" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">DESCRIÇÃO</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="file-field input-field col s12">
 						<div class="btn grey">
-							<span>SELECIONAR IMAGEM</span>
-							<input id="imagemMesaE" name="imagemMesaE" type="file"/>
+							<span id="labelBtnImagem">SELECIONAR IMAGEM</span>
+							<input id="imagemMesa" name="imagemMesa" type="file" onchange="carregarEConverterArquivo(idInputFileMesa,idInputHiddenMesa)" required="required"/>
 						</div>
 						<div class="file-path-wrapper">
-							<input class="file-path validate" type="text"/>
+							<input id="nomeArquivoImagem" class="file-path validate" type="text"/>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col l3"></div>
 					<div class="input-field col l3">
-						<button class="btn grey waves-effect waves-green col l12"
-							type="submit">SALVAR ALTERAÇÕES</button>
+						<button class="btn grey waves-effect waves-green col l12" type="submit">CADASTRAR</button>
 					</div>
 					<div class="input-field col l3">
-						<button
-							class="btn grey modal-action modal-close waves-effect waves-red col l12"
-							type="reset">CANCELAR</button>
+						<button class="btn grey waves-effect waves-red col l12 modal-close" type="reset" id="cancelarFormMesa">CANCELAR</button>
 					</div>
-					<div class="col l3"></div>
+					<div class="input-field col l3"></div>
+				</div>
+				<div class="row">
+						<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
 				</div>
 			</form>
 		</div>
 	</div>
 	<div id="modalExcluirMesa" class="modal">
-		<div class="modal-content" id="corpoExcluirMesa"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col l6 m6 s6 center">
-					<a class="btn grey modal-close waves-effect waves-green">CONFIRMAR</a>
-				</div>
-				<div class="col l6 m6 s6 center">
-					<a class="btn grey modal-close waves-effect waves-red">CANCELAR</a>
-				</div>
+		<form id="formExclusaoMesa">
+			<div class="modal-content" id="corpoExcluirMesa">
+				<div id="mensagemDeRetornoExMesa" class="card-panel lighten-2 white-text center-align hiddendiv"></div>
+				<p class="center-align">Deseja realmente excluir a Mesa <b id="labelIdentificacaoMesa" class="red-text"></b> ?</p>
+				<blockquote>
+		      		<b class="red-text">Observação: </b>Não é possível excluir uma mesa que tenha reserva ativa, para isso é necessário cancelar as reservas ou alterar a mesa na reserva.
+		    	</blockquote>
 			</div>
-			<div class="row"></div>
-		</div>
+			<div class="container">
+				<div class="row">
+					<input type="hidden" value="" id="chaveMesaAExcluir"/>
+					<div class="col l6 m6 s6 center">
+						<button class="btn grey waves-effect waves-green" type="submit">CONFIRMAR</button>
+					</div>
+					<div class="col l6 m6 s6 center">
+						<button class="btn grey modal-close waves-effect waves-red" type="reset">CANCELAR</button>
+					</div>
+				</div>
+				<div class="row"></div>
+			</div>
+		</form>
 	</div>
 
 	<ui:insert>

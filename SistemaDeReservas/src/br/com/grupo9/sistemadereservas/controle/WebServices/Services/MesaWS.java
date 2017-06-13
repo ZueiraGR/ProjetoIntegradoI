@@ -59,14 +59,14 @@ public class MesaWS {
 		return Response.noContent().build();
 	}
 
-	@DELETE
+	@GET
 	@Path("/excluir/{chave:[0-9]*}")
-	public Response deleteById(@PathParam("chave") final Integer chave) {
+	public List<String> deleteById(@PathParam("chave") final Integer chave) {
 		MesaPO mesaPO = new MesaPO();
 		mesaPO.setChave(chave);
 		getMesaBO().setMesaPO(mesaPO);
 		getMesaBO().atualizar();
-		return Response.noContent().build();
+		return null;
 	}
 	
 	private MesaBO getMesaBO(){
