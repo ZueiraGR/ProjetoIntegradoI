@@ -1,7 +1,6 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.grupo9.sistemadereservas.controle.Dominio.NivelDeAcesso;
@@ -34,9 +33,14 @@ public class CargoBO {
 		getCargoDAO().excluir(getCargoPO());
 		return true;
 	}
+	
 	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros){
 		pagina = pagina*qtdRegistros-qtdRegistros;
 		return getCargoDAO().listar(pagina,qtdRegistros);
+	}
+	
+	public List<CargoPO> listarTodos(){
+		return getCargoDAO().listaTodos();
 	}
 	
 	public CargoPO getCargoPO() {

@@ -220,7 +220,7 @@ function getBtnAtivarInativar(funcionario){
 }
 
 function getBtnExcluirFuncionario(funcionario){
-	var html = '<a href="#"	onclick="excluirFuncionario('+funcionario.id+')" title="Excluir"><i class="fa fa-trash-o fa-lg orange-text text-darken-3 hoverable" aria-hidden="true"></i></a>';
+	var html = '<a href="#"	onclick="excluirFuncionario('+funcionario.chave+')" title="Excluir"><i class="fa fa-trash-o fa-lg orange-text text-darken-3 hoverable" aria-hidden="true"></i></a>';
 	return html;
 }
 

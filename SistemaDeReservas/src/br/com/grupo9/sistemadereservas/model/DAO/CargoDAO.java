@@ -79,9 +79,27 @@ public class CargoDAO implements DAO<CargoPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM cargo u ");
+				 .append("FROM cargo u");
 			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 				return (List<CargoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
+		}catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os cargos. Causa:\n");
+			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
+		}
+	}
+	
+	public List<CargoPO> listaTodos() {
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT c ")
+				 .append("FROM cargo c ")
+				 .append("WHERE c.dataExclusao is null ")
+				 .append("ORDER BY c.nome");
+			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
+			return (List<CargoPO>) typedQuery.getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os cargos. Causa:\n");
 			e.printStackTrace();

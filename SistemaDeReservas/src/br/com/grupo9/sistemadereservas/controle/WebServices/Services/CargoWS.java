@@ -45,12 +45,17 @@ public class CargoWS {
 	public List<CargoPO> listar(@PathParam("pagina") final Integer pagina, @PathParam("qtdRegistros") final Integer qtdRegistros) {
 		return getCargoBO().listar(pagina,qtdRegistros);
 	}
+	
+	@GET
+	@Path("/listarTodos/")
+	public List<CargoPO> listarTodos() {
+		return getCargoBO().listarTodos();
+	}
 
 	@POST
-	@Path("/alterar/{id:[0-9]*}")
-	public String alterar(@PathParam("id") Integer id, CargoPO cargoPO) {
+	@Path("/alterar/")
+	public String alterar(CargoPO cargoPO) {
 		getCargoBO().setCargoPO(cargoPO);
-		getCargoBO().getCargoPO().setChave(id);
 		if(getCargoBO().atualizar()){
 			return "sucess";
 		}else{

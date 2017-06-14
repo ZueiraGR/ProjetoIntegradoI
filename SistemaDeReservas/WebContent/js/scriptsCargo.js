@@ -168,7 +168,7 @@ $("#formExclusaoCargo").submit(function(event){
 
 function selectCargos(){
 	$.ajax({
-		url: "ws/cargows/listar/1/10",
+		url: "ws/cargows/listarTodos/",
         type: 'GET',
         success: function (data) {
         	$('select').material_select('destroy');

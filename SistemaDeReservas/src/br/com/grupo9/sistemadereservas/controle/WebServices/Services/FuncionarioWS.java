@@ -26,7 +26,6 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 public class FuncionarioWS {
 	
 	FuncionarioBO funcionarioBO;
-	UsuarioPO usuarioPO;
 	
 	@POST
 	@Path("/cadastrar/")
@@ -75,12 +74,6 @@ public class FuncionarioWS {
 			this.funcionarioBO = new FuncionarioBO();
 		}
 		return this.funcionarioBO;
-	}
-	private UsuarioPO getUsuarioPO(){
-		if(this.usuarioPO == null){
-			this.usuarioPO = new UsuarioPO();
-		}
-		return this.usuarioPO;
 	}
 
 }

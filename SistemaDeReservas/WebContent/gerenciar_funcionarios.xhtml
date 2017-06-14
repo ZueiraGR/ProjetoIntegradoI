@@ -17,7 +17,7 @@
 </ui:insert>
 </head>
 
-<body onload="carregarFuncionarios(1) , carregarCargos(1) , selectCargos()">
+<body onload="carregarFuncionarios(1) , carregarCargos(1)">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
@@ -26,7 +26,7 @@
 			<div class="row z-depth-2">
 				<ul class="tabs z-depth-1 grey lighten-3">
 					<li class="tab active"><a href="#adm-view"><i class="fa fa-users" aria-hidden="true"></i> FUNCIONARIOS</a></li>
-					<li class="tab"><a href="#adm-add"><i class="fa fa-user-plus" aria-hidden="true"></i> CADASTRAR UM FUNCIONÁRIO</a></li>
+					<li class="tab"><a href="#adm-add" onclick="selectCargos()"><i class="fa fa-user-plus" aria-hidden="true"></i> CADASTRAR UM FUNCIONÁRIO</a></li>
 					<li class="tab"><a href="#adm-cargos"><i class="fa fa-id-badge" aria-hidden="true"></i>	GERENCIAR CARGOS</a></li>
 				</ul>
 				<div id="adm-view" class="col s12 ">
