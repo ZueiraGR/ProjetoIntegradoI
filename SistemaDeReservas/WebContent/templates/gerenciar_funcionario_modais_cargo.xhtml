@@ -20,7 +20,7 @@
 					<div class="row">
 						<input type="hidden" value="" id="chaveCargoAExcluir"/>
 						<div class="col l6 m6 s6 center">
-							<button class="btn grey modal-close waves-effect waves-green" id="confirmarExclusao" type="submit">CONFIRMAR</button>
+							<button class="btn grey waves-effect waves-green" id="confirmarExclusao" type="submit">CONFIRMAR</button>
 						</div>
 						<div class="col l6 m6 s6 center">
 							<button class="btn grey modal-close waves-effect waves-red modal-close" id="cancelarExclusao" type="reset">CANCELAR</button>
@@ -41,9 +41,10 @@
 						<div class="row">
 							<input type="hidden" value="" id="acaoFormularioCargo"/>
 							<input type="hidden" value="" id="chaveDoCargo"/>
+							<input type="hidden" value="F" id="isCargoJaExiste"/>
 							<div class="input-field col s6">
-								<input id="labelNomeDoCargoF" type="text" value="" class="validate" required="required" />
-								<label for="labelNomeDoCargoF" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME</label>
+								<input id="NomeDoCargoF" type="text" value="" class="validate texto-todo-maiusculo" required="required" size="4" maxlength="25" onkeyup="validar(this,'text')" onchange="verificaSeCargoJaExiste()"/>
+								<label id="labelNomeDoCargoF" for="NomeDoCargoF" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME</label>
 							</div>
 							<div class="input-field col s6">
 								<select class="validate" id="labelNivelDeAcessoCargo" required="required">
