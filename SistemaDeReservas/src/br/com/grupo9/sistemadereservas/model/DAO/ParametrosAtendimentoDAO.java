@@ -31,7 +31,7 @@ public class ParametrosAtendimentoDAO implements DAO<ParametrosAtendimentoPO> {
 	}
 
 	@Override
-	public List<ParametrosAtendimentoPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<ParametrosAtendimentoPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		// TODO Auto-generated method stub
 		return null;
 	}

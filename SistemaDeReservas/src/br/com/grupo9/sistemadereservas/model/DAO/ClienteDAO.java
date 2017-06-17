@@ -100,7 +100,7 @@ public class ClienteDAO implements DAO<ClientePO> {
 	}
 
 	@Override
-	public List<ClientePO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<ClientePO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")

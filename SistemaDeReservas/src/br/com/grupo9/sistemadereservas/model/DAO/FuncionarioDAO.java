@@ -105,7 +105,7 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	}
 
 	@Override
-	public List<FuncionarioPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<FuncionarioPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")

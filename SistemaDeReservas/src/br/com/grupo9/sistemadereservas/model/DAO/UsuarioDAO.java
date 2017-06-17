@@ -99,7 +99,7 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 	}
 
 	@Override
-	public List<UsuarioPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<UsuarioPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")

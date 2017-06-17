@@ -76,7 +76,7 @@ public class MesaDAO implements DAO<MesaPO> {
 	}
 
 	@Override
-	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")

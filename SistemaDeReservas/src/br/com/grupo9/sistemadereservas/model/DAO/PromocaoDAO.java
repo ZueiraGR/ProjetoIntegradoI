@@ -79,7 +79,7 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 	}
 
 	@Override
-	public List<PromocaoPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<PromocaoPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")

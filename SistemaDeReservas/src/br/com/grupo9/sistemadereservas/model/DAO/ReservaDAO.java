@@ -31,7 +31,7 @@ public class ReservaDAO implements DAO<ReservaPO>{
 	}
 
 	@Override
-	public List<ReservaPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<ReservaPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		// TODO Auto-generated method stub
 		return null;
 	}
