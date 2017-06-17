@@ -19,6 +19,9 @@ public class MesaBO {
 	private List<String> mensagemErro;
 	private String nomeDoArquivo;
 	
+	private final int MESAS_ATIVAS = 1;
+	private final int MESAS_EXCLUIDAS = 0;
+	
 	public MesaBO(){
 		PATH_IMAGENS = getApplicationPath();
 		if(PATH_IMAGENS.contains("\\")){
@@ -51,7 +54,7 @@ public class MesaBO {
 	
 	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros){
 		pagina = pagina*qtdRegistros-qtdRegistros;
-		return getMesaDAO().listar(pagina,qtdRegistros);
+		return getMesaDAO().listar(pagina,qtdRegistros,getFiltro(MESAS_ATIVAS));
 	}
 	
 	public boolean atualizar(){
@@ -112,6 +115,18 @@ public class MesaBO {
 		} catch (UnsupportedEncodingException e) {
 			return path.replace("%20", " ");
 		}
+	}
+	
+	private String getFiltro(int codigo){
+		String filtro;
+		switch (codigo) {
+		case MESAS_ATIVAS: filtro = "AND dataExclusao IS NULL";	
+			break;
+		case MESAS_EXCLUIDAS: filtro = "AND dataExclusao IS NOT NULL";
+			break;
+		default: filtro = "";
+		}
+		return filtro;
 	}
 	
 	public List<String> getMensagemErro(){
