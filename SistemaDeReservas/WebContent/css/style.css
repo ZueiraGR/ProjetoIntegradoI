@@ -86,3 +86,7 @@
 .texto-com-sombra{
 	/*text-shadow: 0.04em 0.07em #202020;*/
 }
+
+.texto-todo-maiusculo{
+	text-transform:uppercase;
+}
