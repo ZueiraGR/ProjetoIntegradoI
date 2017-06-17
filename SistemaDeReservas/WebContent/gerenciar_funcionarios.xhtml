@@ -17,7 +17,7 @@
 </ui:insert>
 </head>
 
-<body onload="carregarFuncionarios(1) , carregarCargos(1)">
+<body onload="carregarFuncionarios(1)">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
@@ -27,7 +27,7 @@
 				<ul class="tabs z-depth-1 grey lighten-3">
 					<li class="tab active"><a href="#adm-view"><i class="fa fa-users" aria-hidden="true"></i> FUNCIONARIOS</a></li>
 					<li class="tab"><a href="#adm-add" onclick="selectCargos()"><i class="fa fa-user-plus" aria-hidden="true"></i> CADASTRAR UM FUNCIONÁRIO</a></li>
-					<li class="tab"><a href="#adm-cargos"><i class="fa fa-id-badge" aria-hidden="true"></i>	GERENCIAR CARGOS</a></li>
+					<li class="tab"><a href="#adm-cargos" onclick="carregarCargos(1)"><i class="fa fa-id-badge" aria-hidden="true"></i>	GERENCIAR CARGOS</a></li>
 				</ul>
 				<div id="adm-view" class="col s12 ">
 					<table class="bordered responsive-table centered">
@@ -141,6 +141,7 @@
 					<div class="row">
 						<div class="col l12">
 							<a href="#" onclick="abrirFormDeCadastro()" class="btn grey white-text"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar cargo</a>
+							<a href="#" onclick="recarregarCargos()" class="btn grey white-text"><i class="fa fa-refresh" aria-hidden="true"></i> RECARREGAR</a>
 						</div>
 					</div>
 					<div class="row">
@@ -161,7 +162,7 @@
 											<div class="row">
 												<div class="col l3">
 													<div class="input-field">
-														<select id="qtdRegistrosCargos" name="qtdRegistrosCargos" onselect="carregarCargos(paginaAtualCargos)">
+														<select id="qtdRegistrosCargos" name="qtdRegistrosCargos" onchange="carregarCargos(paginaAtualCargos)">
 															<option value="10" selected="selected">10</option>
 															<option value="20">20</option>
 															<option value="30">30</option>
