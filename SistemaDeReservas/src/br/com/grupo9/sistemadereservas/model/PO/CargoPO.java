@@ -36,7 +36,7 @@ public class CargoPO implements Serializable {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}   
 	public Character getNivelAcesso() {
 		return this.nivelAcesso;

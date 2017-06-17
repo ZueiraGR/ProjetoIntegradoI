@@ -33,9 +33,9 @@ public class CargoDAO implements DAO<CargoPO> {
 	public CargoPO capturarPorId(CargoPO entidade) {
 		try{
 			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ")
-				 .append("FROM cargo u ")
-				 .append("WHERE u.chave = :chave");
+			query.append("SELECT c ")
+				 .append("FROM cargo c ")
+				 .append("WHERE c.chave = :chave");
 			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 				typedQuery.setParameter("chave", entidade.getChave());
 				return (CargoPO) typedQuery.getSingleResult();
@@ -47,19 +47,37 @@ public class CargoDAO implements DAO<CargoPO> {
 			fecharManager();
 		}
 	}
+	
+	public CargoPO capturarPorNome(CargoPO entidade){
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT c ")
+				 .append("FROM cargo c ")
+				 .append("WHERE c.nome = UPPER(:nome)");
+			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
+				typedQuery.setParameter("nome", entidade.getNome());
+				return (CargoPO) typedQuery.getSingleResult();
+		}catch (Exception e) {
+			System.out.println("\nO cargo "+entidade.getNome()+" não foi localizada no banco de dados utilizando a pesquisa por nome\n");
+//			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
+		}
+	}
 
 	@Override
 	public boolean atualizar(CargoPO entidade) {
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM cargo u")
-			 .append("WHERE u.chave = :chave");
+		query.append("SELECT c ")
+			 .append("FROM cargo c ")
+			 .append("WHERE c.chave = :chave");
 		TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			CargoPO cargo = (CargoPO)typedQuery.getSingleResult();
 			getManager().getTransaction().begin();
 		try{
-			if(cargo != null && cargo.getNome().equals(entidade.getNome())){
+			if(cargo != null && cargo.getChave() > 0){
 				getManager().merge(entidade);
 			}
 			getManager().getTransaction().commit();
@@ -75,11 +93,12 @@ public class CargoDAO implements DAO<CargoPO> {
 	}
 
 	@Override
-	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros) {
+	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try{
 			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ")
-				 .append("FROM cargo u");
+			query.append("SELECT c ")
+				 .append("FROM cargo c ")
+				 .append(filtro);
 			TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 				return (List<CargoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
@@ -112,9 +131,9 @@ public class CargoDAO implements DAO<CargoPO> {
 	@Override
 	public boolean excluir(CargoPO entidade) {
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM cargo u ")
-			 .append("WHERE u.chave = :chave");
+		query.append("SELECT c ")
+			 .append("FROM cargo c ")
+			 .append("WHERE c.chave = :chave");
 		TypedQuery<CargoPO> typedQuery = getManager().createQuery(query.toString(),CargoPO.class);
 			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			CargoPO cargo = (CargoPO)typedQuery.getSingleResult();

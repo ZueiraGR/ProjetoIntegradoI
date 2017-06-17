@@ -5,10 +5,8 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -35,9 +33,16 @@ public class CargoWS {
 	}
 
 	@GET
-	@Path("/capturar/{id:[0-9]*}")
-	public CargoPO capturar(@PathParam("id") final Long id) {
-		return  getCargoBO().capturar();
+	@Path("/capturar/{nome}")
+	public List<String> capturar(@PathParam("nome") final String nome) {
+		getCargoBO().getCargoPO().setNome(nome);
+		List<String> lista = new ArrayList<>();
+		if(getCargoBO().capturarCargoPeloNome()){
+			lista.add("sucess");
+		}else{
+			lista.add("error");
+		}
+		return lista;
 	}
 
 	@GET
@@ -54,23 +59,27 @@ public class CargoWS {
 
 	@POST
 	@Path("/alterar/")
-	public String alterar(CargoPO cargoPO) {
+	public List<String> alterar(CargoPO cargoPO) {
 		getCargoBO().setCargoPO(cargoPO);
 		if(getCargoBO().atualizar()){
-			return "sucess";
+			List<String> lista = new ArrayList<>();
+			lista.add("sucess");
+			return lista;
 		}else{
-			return "error";
+			return getCargoBO().getMensagemErro();
 		}
 	}
 
 	@GET
-	@Path("/deletar/{id:[0-9]*}")
-	public String deleteById(@PathParam("id") Integer id) {
-		getCargoBO().getCargoPO().setChave(id);
+	@Path("/deletar/{chave:[0-9]*}")
+	public List<String> deleteById(@PathParam("chave") Integer chave) {
+		getCargoBO().getCargoPO().setChave(chave);
 		if(getCargoBO().excluir()){
-			return "sucess";
+			List<String> lista = new ArrayList<>();
+			lista.add("sucess");
+			return lista;
 		}else{
-			return "error";
+			return getCargoBO().getMensagemErro();
 		}
 	}
 	

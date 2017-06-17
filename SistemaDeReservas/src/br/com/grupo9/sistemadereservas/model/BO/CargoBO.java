@@ -12,12 +12,21 @@ public class CargoBO {
 	private CargoDAO cargoDAO;
 	private List<String> mensagensDeErro;
 	
+	private final int CARGOS_ATIVOS = 1;
+	private final int CARGOS_EXCLUIDOS = 0;
+	
 	public CargoBO(){
 		this.mensagensDeErro = new ArrayList<>();
 	}
+	
 	public CargoPO capturar(){
 		return getCargoDAO().capturarPorId(getCargoPO());
-	}	
+	}
+	
+	public boolean capturarCargoPeloNome(){
+		return getCargoDAO().capturarPorNome(getCargoPO()) != null ? true : false;
+	}
+	
 	public boolean cadastrar(){
 		if(isDadosValidosParaCadastro()){
 			return getCargoDAO().cadastrar(getCargoPO());
@@ -36,7 +45,7 @@ public class CargoBO {
 	
 	public List<CargoPO> listar(Integer pagina, Integer qtdRegistros){
 		pagina = pagina*qtdRegistros-qtdRegistros;
-		return getCargoDAO().listar(pagina,qtdRegistros);
+		return getCargoDAO().listar(pagina,qtdRegistros, getFiltro(CARGOS_ATIVOS));
 	}
 	
 	public List<CargoPO> listarTodos(){
@@ -61,16 +70,16 @@ public class CargoBO {
 	
 	private boolean isDadosValidosParaCadastro(){
 		if(getCargoPO().getNome() == null || getCargoPO().getNome().isEmpty()){
-			setMensagemErro("O nome do cargo deve ser preenchido.");
+			setMensagemErro("O nome do cargo deve ser preenchido.<br/>");
 		}
 		if(getCargoPO().getNome().length() < 5){
-			setMensagemErro("O nome do cargo deve conter mais de 5 caracteres.");
+			setMensagemErro("O nome do cargo deve conter no mínimo 5 caracteres.<br/>");
 		}
 		if(getCargoPO().getNivelAcesso() == null){
-			setMensagemErro("O nível de acesso deve ser definido.");
+			setMensagemErro("O nível de acesso deve ser definido.<br/>");
 		}
 		if(!isNivelAcessoValido()){
-			setMensagemErro("O nível de acesso informado não é válido.");
+			setMensagemErro("O nível de acesso informado não é válido.<br/>");
 		}
 		
 		if(getMensagemErro().isEmpty()){
@@ -89,6 +98,17 @@ public class CargoBO {
 			}
 		}
 		return retorno;
+	}
+	
+	private String getFiltro(int codigo){
+		String filtro = "";
+		switch (codigo) {
+		case CARGOS_ATIVOS: filtro = "WHERE c.dataExclusao IS NULL ORDER BY c.nome ASC";	
+			break;
+		case CARGOS_EXCLUIDOS: filtro = "WHERE c.dataExclusao IS NOT NULL ORDER BY c.nome ASC";
+			break;
+		}
+		return filtro;
 	}
 	
 	private void setMensagemErro(String mensagem){

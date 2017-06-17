@@ -15,7 +15,11 @@ function carregarCargos(pagina){
         	if(data.length > 0){
         		preencherTabelaCargos(data);
         	}else{
-        		$("#tabelaCargos").html('<tr><td colspan="5">Não há novos registros.</td></td>');
+        		if(pagina == 1){
+        			$("#tabelaCargos").html('<tr><td colspan="5">Não há cargos cadastrados.</td></td>');
+        		}else{
+        			$("#tabelaCargos").html('<tr><td colspan="5">Não há mais cargos a serem listados.</td></td>');
+        		}
         	}
         }
 	});
@@ -62,12 +66,16 @@ function editarCargo(cargo){
 	$('#labelNivelDeAcessoCargo').find('[selected="selected"]').removeAttr("selected");
 	$('#labelNivelDeAcessoCargo').material_select('destroy');
 	$("#btnCancelarCadastro").trigger("click");
-	$("#labelNomeDoCargoF").val(cargo.nome);
-	$("#chaveDoCargoF").val(cargo.chave);
+	$("#NomeDoCargoF").val(cargo.nome);
+	$("#chaveDoCargo").val(cargo.chave);
 	$("#acaoFormularioCargo").val("A");
 	$("#btnConfirmarCadastro").html("SALVAR");
     $('#labelNivelDeAcessoCargo').find('[value="' + n + '"]').attr('selected', true);
     $('#labelNivelDeAcessoCargo').material_select(); 
+    $('#mensagemDeRetornoCargo').html("");
+	$('#mensagemDeRetornoCargo').removeClass("red");
+	$('#mensagemDeRetornoCargo').removeClass("green");
+	$('#mensagemDeRetornoCargo').addClass("hiddendiv");
     $("#alterarDadosDoCargo").modal('open');
 }
 
@@ -78,58 +86,66 @@ function excluirCargo(cargo){
 }
 
 function abrirFormDeCadastro(){
-	$('#tituloFomunlarioCargo').html("Formulário de cadastro de Cargo");
+	$('#tituloFomunlarioCargo').html("Formulário de cadastro de cargo");
 	$("#acaoFormularioCargo").val("C");
 	$("#btnCancelarCadastro").trigger( "click" );
 	$("#btnConfirmarCadastro").html("CADASTRAR");
+	$('#mensagemDeRetornoCargo').html("");
+	$('#mensagemDeRetornoCargo').removeClass("red");
+	$('#mensagemDeRetornoCargo').removeClass("green");
+	$('#mensagemDeRetornoCargo').addClass("hiddendiv");
 	$("#alterarDadosDoCargo").modal('open');  
 }
 
 $("#formularioCadastroCargo").submit(function(event){
-	$('#mensagemDeRetornoCargo').addClass("hiddendiv");
-	$('#mensagemDeRetornoCargo').removeClass("red");
-	$('#mensagemDeRetornoCargo').removeClass("green");
 	var endereco;
 	var form;
 	var acesso = parseInt($("#labelNivelDeAcessoCargo").val());
 	var nAcesso;
-	if(acesso == 1){
-		nAcesso= "A";
-	}else if(acesso == 2){
-		nAcesso= "G";
+	var isExiste = $("#isCargoJaExiste").val();
+	if(isExiste == 'F'){
+		$('#mensagemDeRetornoCargo').addClass("hiddendiv");
+		$('#mensagemDeRetornoCargo').removeClass("red");
+		$('#mensagemDeRetornoCargo').removeClass("green");
+		if(acesso == 1){
+			nAcesso= "A";
+		}else if(acesso == 2){
+			nAcesso= "G";
+		}
+		if($("#acaoFormularioCargo").val() == "C"){
+			form = {"nome":$("#NomeDoCargoF").val(),"nivelAcesso":nAcesso};
+			endereco = "ws/cargows/cadastrar/";
+		}else if($("#acaoFormularioCargo").val() == "A"){
+			form = {"chave": parseInt($("#chaveDoCargo").val()),"nome":$("#NomeDoCargoF").val(),"nivelAcesso":nAcesso};
+			endereco = "ws/cargows/alterar/";
+		}
+		var formData = JSON.stringify(form);
+		$.ajax({
+			url: endereco,
+	        type: 'POST',
+	        data: formData,
+	        success: function (data) {
+	        	if(data == "sucess"){
+	        		$('#mensagemDeRetornoCargo').html("Cargo cadastrado com sucesso!");
+	        		$('#mensagemDeRetornoCargo').addClass("green");
+	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
+	        		setTimeout(function(){
+	        			$("#alterarDadosDoCargo").modal('close'); 
+	        			carregarCargos(paginaAtualCargos);
+	        			$("#btnCancelarCadastro").trigger( "click" );
+	        			$('#mensagemDeRetornoCargo').addClass("hiddendiv");
+	        		},2000);
+	        	}else{
+	        		$('#mensagemDeRetornoCargo').html(data);
+	        		$('#mensagemDeRetornoCargo').addClass("red");
+	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
+	        	}
+	        },
+			cache: false,
+		    contentType: "application/json",
+		    processData: false
+		});
 	}
-	if($("#acaoFormularioCargo").val() == "C"){
-		form = {"nome":$("#labelNomeDoCargoF").val(),"nivelAcesso":nAcesso};
-		endereco = "ws/cargows/cadastrar/";
-	}else if($("#acaoFormularioCargo").val() == "A"){
-		form = {"nome":$("#labelNomeDoCargoF").val(),"nivelAcesso":nAcesso};
-		endereco = "ws/cargows/alterar/"+$("#chaveDoCargo").val();
-	}
-	var formData = JSON.stringify(form);	
-	$.ajax({
-		url: endereco,
-        type: 'POST',
-        data: formData,
-        success: function (data) {
-        	if(data == "sucess"){
-        		$('#mensagemDeRetornoCargo').html("Cargo cadastrado com sucesso!");
-        		$('#mensagemDeRetornoCargo').addClass("green");
-        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
-        		setTimeout(function(){
-        			$("#alterarDadosDoCargo").modal('close'); 
-        			$("#btnCancelarCadastro").trigger( "click" );
-        			$('#mensagemDeRetornoCargo').addClass("hiddendiv");
-        		},2000);
-        	}else{
-        		$('#mensagemDeRetornoCargo').html("Houve erro ao cadastrar o cargo!");
-        		$('#mensagemDeRetornoCargo').addClass("red");
-        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
-        	}
-        },
-		cache: false,
-	    contentType: "application/json",
-	    processData: false
-	});
 	return false;
 });
 
@@ -149,7 +165,7 @@ $("#formExclusaoCargo").submit(function(event){
         		$('#mensagemDeRetornoExCargo').addClass("green");
         		$('#mensagemDeRetornoExCargo').removeClass("hiddendiv");
         		setTimeout(function(){
-        			$("#alterarDadosDoCargo").modal('close'); 
+        			$("#confirmarExclusaoDoCargo").modal('close');
         			$("#btnCancelarCadastro").trigger( "click" );
         			carregarCargos(paginaAtualCargos);
         			$('#mensagemDeRetornoExCargo').addClass("hiddendiv");
@@ -194,4 +210,36 @@ function preencherSelectCargos(arrayDeCargos){
 
 function getCargo(cargo){
 	return '<option value="'+cargo.chave+'">'+cargo.nome+'</option>';
+}
+
+function verificaSeCargoJaExiste(){
+	var nome = $("#NomeDoCargoF").val();
+	if($("#acaoFormularioCargo").val() == "C"){
+		$.ajax({
+			url: "ws/cargows/capturar/"+nome,
+	        type: 'GET',
+	        data: "",
+	        success: function (data) {
+	        	if(data == "sucess"){
+	        		$('#mensagemDeRetornoCargo').html( nome.toUpperCase() +  " já está cadastrado!");
+	        		$('#mensagemDeRetornoCargo').addClass("red");
+	        		$('#mensagemDeRetornoCargo').removeClass("hiddendiv");
+	        		$("#isCargoJaExiste").val("T");
+	        	}else{
+	        		$('#mensagemDeRetornoCargo').html("");
+	        		$('#mensagemDeRetornoCargo').removeClass("red");
+	        		$('#mensagemDeRetornoCargo').addClass("hiddendiv");
+	        		$("#isCargoJaExiste").val("F");
+	        	}
+	        },
+	        contentType: "application/json",
+		});
+	}
+}
+
+function recarregarCargos(){
+	$("#qtdRegistrosCargos").val("10");
+	$("#qtdRegistrosCargos").material_select('destroy'); 
+    $("#qtdRegistrosCargos").material_select();
+    carregarCargos(1);
 }
