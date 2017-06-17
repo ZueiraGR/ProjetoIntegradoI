@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
-import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;

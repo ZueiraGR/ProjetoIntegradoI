@@ -2,8 +2,6 @@ package br.com.grupo9.sistemadereservas.interfaces;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 public interface DAO<ClassePO> {
 
 	public boolean cadastrar(ClassePO entidade);

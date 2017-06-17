@@ -13,7 +13,6 @@ import br.com.grupo9.sistemadereservas.controle.WebServices.Services.MesaWS;
 import br.com.grupo9.sistemadereservas.controle.WebServices.Services.ParametrosAtendimentoWS;
 import br.com.grupo9.sistemadereservas.controle.WebServices.Services.PromocaoWS;
 import br.com.grupo9.sistemadereservas.controle.WebServices.Services.ReservaWS;
-import br.com.grupo9.sistemadereservas.controle.WebServices.Services.UsuarioWS;
 
 
 
@@ -35,6 +34,5 @@ public class ApplicationConfig extends Application{
 		resources.add(ParametrosAtendimentoWS.class);
 		resources.add(PromocaoWS.class);
 		resources.add(ReservaWS.class);
-		resources.add(UsuarioWS.class);
 	}
 }
