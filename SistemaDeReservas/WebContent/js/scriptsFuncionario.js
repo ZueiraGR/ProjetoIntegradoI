@@ -109,51 +109,6 @@ function limparCamposFormCadastro(){
 	$("#cargoFuncionario").val("");
 }
 
-function carregarCargos(){
-	
-}
-
-function validar(dom,tipo){
-	switch(tipo){
-		case'num':var regex=/[A-Za-z]/g;break;
-		case'text':var regex=/\d/g;break;
-	}
-	dom.value=dom.value.replace(regex,'');
-}
-
-function apenasNumeros(e){
-	var tecla=new Number();
-	if(window.event) {
-		tecla = e.keyCode;
-	}
-	else if(e.which) {
-		tecla = e.which;
-	}
-	else {
-		return true;
-	}
-	if((tecla >= "97") && (tecla <= "122")){
-		return false;
-	}
-}
-
-function apenasLetras(e){
-	var tecla=new Number();
-	if(window.event) {
-		tecla = e.keyCode;
-	}
-	else if(e.which) {
-		tecla = e.which;
-	}
-	else {
-		return true;
-	}
-	if((tecla >= "48") && (tecla <= "57")){
-		return false;
-	}
-}
-
-
 function carregarFuncionarios(pagina){
 	$("#barraCarregando").removeClass("hiddendiv");
 	qtdRegistrosFuncionarios = parseInt($("#qtdRegistrosFuncionarios").val());
