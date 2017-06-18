@@ -191,14 +191,20 @@ function bloquearOuDesbloquearFuncionario(funcionario){
 //    $("#mesagemBloqueio").html('<p class="center-align">Deseja realmente '+acao+' o cliente Maria José Vieira?</p>');
     $("#confirmarBloqueioOuDesbloqueioDoFuncionario").modal('open');   
 }
-function excluirFuncionario(id){
-    $("#confirmarExclusaoDoFuncionario").modal('open');
-    $("#confirmarExclusao").submit(function(event){
-    	$.ajax({
-    		url: "ws/funcionariows/excluir/"+id,
-            type: 'POST',
-    	});
-    });
-}
 
+function excluirFuncionario(chave){
+	$("#confirmarExclusaoDoFuncionario").modal('open');
+	$("#funcionarioID").val(chave);
+}
+$("#confirmarExclusaoFuncionario").submit(function(event){
+	var chave = $("#funcionarioID").val();
+	$.ajax({
+		url: "ws/funcionariows/excluir/"+chave,
+        type: 'GET',
+        data: "",
+        contentType: "application/json"
+	});
+	$("#confirmarExclusaoDoFuncionario").modal('close');
+	return false;
+});
 

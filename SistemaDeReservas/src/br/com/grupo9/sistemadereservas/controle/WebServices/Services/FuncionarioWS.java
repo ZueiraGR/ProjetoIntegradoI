@@ -58,14 +58,17 @@ public class FuncionarioWS {
 		return Response.noContent().build();
 	}
 
-	@POST
-	@Path("/excluir/{id:[0-9][0-9]*}")
-	public List<String> excluir(@PathParam("id") final Integer id) {
-		UsuarioPO usuarioPO = new UsuarioPO();
-		usuarioPO.getFuncionario().setChave(id);
-		getFuncionarioBO().setUsuarioPO(usuarioPO);
-		getFuncionarioBO().deletar();
-		return null;
+	@GET
+	@Path("/excluir/{chave:[0-9][0-9]*}")
+	public List<String> excluir(@PathParam("chave") Integer chave) {
+		List<String> retorno = new ArrayList<>();
+		getFuncionarioBO().getUsuarioPO().getFuncionario().setChave(chave);
+		if(getFuncionarioBO().deletar()){
+			retorno.add("sucess");	
+		}else{
+			retorno.add("fail");
+		}
+		return retorno;
 	}
 	
 	private FuncionarioBO getFuncionarioBO(){

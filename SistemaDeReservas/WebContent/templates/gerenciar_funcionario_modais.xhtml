@@ -27,14 +27,15 @@
 				<p class="center-align">Deseja realmente excluir o funcionário <b id="labelNomeDoFuncionario" class="red-text"></b> ?</p>
 			</div>
 			<div class="">
-			<form method="POST" id="confirmarExclusao">
+			<form id="confirmarExclusaoFuncionario">
 				<div class="row">
+				<input type="hidden" value="" id="funcionarioID"/>
 					<div class="input-field col l3"></div>
 					<div class="input-field col l3">
 						<button class="btn grey waves-effect waves-green col l12 m12" type="submit">CONFIRMAR</button>
 					</div>
 					<div class="input-field col l3">
-						<button class="btn grey waves-effect waves-red col l12 m12" type="reset">CANCELAR</button>
+						<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset">CANCELAR</button>
 					</div>
 					<div class="input-field col l3"></div>
 				</div>

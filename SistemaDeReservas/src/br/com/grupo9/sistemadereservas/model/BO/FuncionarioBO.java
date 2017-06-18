@@ -35,9 +35,8 @@ public class FuncionarioBO extends UsuarioBO {
 	}
 	
 	public boolean deletar(){
-		UsuarioPO usuario = getUsuarioDAO().capturarPorId(getUsuarioPO());
-		getUsuarioPO().setDataExclusao(Calendar.getInstance());
-		return getUsuarioDAO().atualizar(usuario);
+		getFuncionarioDAO().excluir(getUsuarioPO().getFuncionario());
+		return true;
 	}
 	
 	public List<FuncionarioPO> listar(Integer pagina, Integer qtdRegistros){

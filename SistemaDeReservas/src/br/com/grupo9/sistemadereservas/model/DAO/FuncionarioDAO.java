@@ -1,5 +1,6 @@
 package br.com.grupo9.sistemadereservas.model.DAO;
 
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -141,21 +142,17 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	public boolean excluir(FuncionarioPO entidade) {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
-			 .append("FROM funcionario u ")
-			 .append("WHERE u.nome = :nome");
-		TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
-			typedQuery.setParameter("nome", entidade.getNome());
-			FuncionarioPO funcionario = (FuncionarioPO)typedQuery.getSingleResult();
-			
+		 	 .append("FROM usuario u ")
+		 	 .append("WHERE u.funcionario_chave = :chave");
+		TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
+		typedQuery.setParameter("chave", entidade.getChave());
+		UsuarioPO usuario = (UsuarioPO)typedQuery.getSingleResult();
+		getManager().getTransaction().begin();
 		try{
-			if(funcionario != null && funcionario.getNome().equals(entidade.getNome())){
-				getManager().getTransaction().begin();
-				getManager().remove(entidade);
-				getManager().getTransaction().commit();
-				return true;
-			}else{
-				return false;
-			}		
+			usuario.setDataExclusao(Calendar.getInstance());
+			getManager().merge(usuario);	
+			getManager().getTransaction().commit();
+			return true;
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar excluir o funcionário. Causa:\n");
