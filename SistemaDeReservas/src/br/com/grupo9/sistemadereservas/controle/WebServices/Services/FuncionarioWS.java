@@ -62,6 +62,10 @@ public class FuncionarioWS {
 	@Path("/excluir/{chave:[0-9][0-9]*}")
 	public List<String> excluir(@PathParam("chave") Integer chave) {
 		List<String> retorno = new ArrayList<>();
+		UsuarioPO usuarioPO = new UsuarioPO();
+		FuncionarioPO funcionarioPO = new FuncionarioPO();
+		getFuncionarioBO().setUsuarioPO(usuarioPO);
+		getFuncionarioBO().getUsuarioPO().setFuncionario(funcionarioPO);
 		getFuncionarioBO().getUsuarioPO().getFuncionario().setChave(chave);
 		if(getFuncionarioBO().deletar()){
 			retorno.add("sucess");	

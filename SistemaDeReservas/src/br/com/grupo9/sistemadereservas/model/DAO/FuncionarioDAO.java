@@ -143,7 +143,7 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		StringBuilder query = new StringBuilder();
 		query.append("SELECT u ")
 		 	 .append("FROM usuario u ")
-		 	 .append("WHERE u.funcionario_chave = :chave");
+		 	 .append("WHERE u.funcionario.chave = :chave");
 		TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
 		typedQuery.setParameter("chave", entidade.getChave());
 		UsuarioPO usuario = (UsuarioPO)typedQuery.getSingleResult();
