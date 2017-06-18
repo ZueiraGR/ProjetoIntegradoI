@@ -1,6 +1,5 @@
 package br.com.grupo9.sistemadereservas.model.DAO;
 
-import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -16,19 +15,7 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	
 	@Override
 	public boolean cadastrar(FuncionarioPO entidade) {
-		getManager().getTransaction().begin();
-		try{
-			getManager().persist(entidade);
-			getManager().getTransaction().commit();
-			return true;
-		}catch (Exception e) {
-			getManager().getTransaction().rollback();
-			System.out.println("\nOcorreu um erro tentar cadastrar o funcionario. Causa:\n");
-			e.printStackTrace();
-			return false;
-		}finally {
-			fecharManager();
-		}
+		return false;
 	}
 	public boolean cadastrarFuncionario(UsuarioPO entidade){
 		FuncionarioPO funcionario = entidade.getFuncionario();
@@ -65,34 +52,40 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
 				 .append("FROM funcionario u ")
-				 .append("WHERE u.chave = :chave")
-				 .append("AND u.status = :status");
+				 .append("WHERE u.chave = :chave");
 			TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
 				typedQuery.setParameter("chave", entidade.getChave());
 				return (FuncionarioPO) typedQuery.getSingleResult();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao capturar o funcionario pela chave . Causa:\n");
-			e.printStackTrace();
 			return null;
 		}finally {
 			fecharManager();
 		}
 	}
+	
+	public UsuarioPO comporUsuarioComChaveDoFuncionario(FuncionarioPO entidade){
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+			 	 .append("FROM usuario u ")
+			 	 .append("WHERE u.funcionario.chave = :chave");
+			TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
+			typedQuery.setParameter("chave", entidade.getChave().intValue());
+			return (UsuarioPO)typedQuery.getSingleResult();
+		}catch (Exception e) {
+			System.out.println("Não foi localizado um usuário com chave do funcionário :"+entidade.getChave().intValue()+"\n");
+			return null;
+		}finally {
+			getManager().close();
+		}
+	}
 
 	@Override
 	public boolean atualizar(FuncionarioPO entidade) {
-		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM funcionario u")
-			 .append("WHERE u.nome = :nome");
-		TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
-			typedQuery.setParameter("nome", entidade.getNome());
-			FuncionarioPO funcionario = (FuncionarioPO)typedQuery.getSingleResult();
-			getManager().getTransaction().begin();
 		try{
-			if(funcionario != null && funcionario.getNome().equals(entidade.getNome())){
-				getManager().merge(entidade);
-			}
+			getManager().getTransaction().begin();
+			getManager().merge(entidade);
 			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
@@ -110,7 +103,8 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM funcionario u ");
+				 .append("FROM funcionario u ")
+				 .append(filtro);
 			TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
 				return (List<FuncionarioPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
@@ -122,41 +116,21 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 		}
 	}
 	
-	public List<FuncionarioPO> listar(int pagina,int qtdRegistros) {
-		try{
-			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ")
-				 .append("FROM funcionario u");
-			TypedQuery<FuncionarioPO> typedQuery = getManager().createQuery(query.toString(),FuncionarioPO.class);
-				return (List<FuncionarioPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
-		}catch (Exception e) {
-			System.out.println("\nOcorreu um erro ao tentar capturar todos os funcionários com "+qtdRegistros+" da página "+pagina+". Causa:\n");
-			e.printStackTrace();
-			return null;
-		}finally {
-			fecharManager();
-		}
-	}
-
 	@Override
 	public boolean excluir(FuncionarioPO entidade) {
-		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-		 	 .append("FROM usuario u ")
-		 	 .append("WHERE u.funcionario.chave = :chave");
-		TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
-		typedQuery.setParameter("chave", entidade.getChave());
-		UsuarioPO usuario = (UsuarioPO)typedQuery.getSingleResult();
-		getManager().getTransaction().begin();
+		return false;
+	}
+	
+	public boolean excluir(UsuarioPO entidade){
 		try{
-			usuario.setDataExclusao(Calendar.getInstance());
-			getManager().merge(usuario);	
+			getManager().getTransaction().begin();
+			getManager().merge(entidade);
+			getManager().merge(entidade.getFuncionario());
 			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
-			System.out.println("\nOcorreu um erro ao tentar excluir o funcionário. Causa:\n");
-			e.printStackTrace();
+			System.out.println("\nOcorreu um erro ao tentar excluir o funcionário: "+entidade.getLogin()+"\n");
 			return false;
 		}finally {
 			fecharManager();

@@ -89,5 +89,4 @@ public class FuncionarioPO implements Serializable {
 		this.status = status;
 	}
 
-
 }

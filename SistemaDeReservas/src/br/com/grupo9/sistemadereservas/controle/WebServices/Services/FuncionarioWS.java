@@ -11,7 +11,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
@@ -42,8 +41,13 @@ public class FuncionarioWS {
 
 	@GET
 	@Path("/capturar/{id:[0-9]*}")
-	public FuncionarioPO findById(@PathParam("id") final Integer chave) {
-		return null;
+	public UsuarioPO capturarPorId(@PathParam("id") final Integer chave) {
+		UsuarioPO usuarioPO = new UsuarioPO();
+		FuncionarioPO funcionarioPO = new FuncionarioPO();
+		funcionarioPO.setChave(chave);
+		usuarioPO.setFuncionario(funcionarioPO);
+		getFuncionarioBO().setUsuarioPO(usuarioPO);
+		return getFuncionarioBO().capturar();
 	}
 	@GET
 	@Path("/listar/{pagina:[0-9]*}/{registros:[0-9]*}")
@@ -51,26 +55,32 @@ public class FuncionarioWS {
 		return getFuncionarioBO().listar(pagina,qtdRegistros);
 	}
 
-	@PUT
-	@Path("/{id:[0-9][0-9]*}")
-	public Response update(@PathParam("id") Long id, final FuncionarioPO funcionariopo) {
-		//TODO: process the given funcionariopo 
-		return Response.noContent().build();
+	@POST
+	@Path("/atualizar/")
+	public List<String> atualizar(final FuncionarioPO funcionarioPO) {
+		List<String> retorno = new ArrayList<>();
+		UsuarioPO usuarioPO = new UsuarioPO();
+		usuarioPO.setFuncionario(funcionarioPO);
+		if(getFuncionarioBO().altualizar()){
+			retorno.add("sucess");
+		}else{
+		}
+		return retorno;
 	}
 
 	@GET
-	@Path("/excluir/{chave:[0-9][0-9]*}")
+	@Path("/excluir/{chave:[0-9]*}")
 	public List<String> excluir(@PathParam("chave") Integer chave) {
 		List<String> retorno = new ArrayList<>();
 		UsuarioPO usuarioPO = new UsuarioPO();
 		FuncionarioPO funcionarioPO = new FuncionarioPO();
+		funcionarioPO.setChave(chave);
+		usuarioPO.setFuncionario(funcionarioPO);
 		getFuncionarioBO().setUsuarioPO(usuarioPO);
-		getFuncionarioBO().getUsuarioPO().setFuncionario(funcionarioPO);
-		getFuncionarioBO().getUsuarioPO().getFuncionario().setChave(chave);
-		if(getFuncionarioBO().deletar()){
+		if(getFuncionarioBO().excluir()){
 			retorno.add("sucess");	
 		}else{
-			retorno.add("fail");
+			retorno.add("error");
 		}
 		return retorno;
 	}
