@@ -14,7 +14,6 @@
 		<class>br.com.grupo9.sistemadereservas.model.PO.MesaPO</class>
 		<class>br.com.grupo9.sistemadereservas.model.PO.ReservaPO</class>
 		<class>br.com.grupo9.sistemadereservas.model.PO.PromocaoPO</class>
-		<class>br.com.grupo9.sistemadereservas.model.PO.ParametrosAtendimentoPO</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/reserva" />
