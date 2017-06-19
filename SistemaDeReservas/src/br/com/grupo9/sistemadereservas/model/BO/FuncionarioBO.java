@@ -31,7 +31,11 @@ public class FuncionarioBO extends UsuarioBO {
 	}
 
 	public boolean altualizar(){
-		return getFuncionarioDAO().atualizar(getUsuarioPO());
+		UsuarioPO usuario = getFuncionarioDAO().comporUsuarioComChaveDoFuncionario(getUsuarioPO().getFuncionario());
+		getUsuarioPO().getFuncionario().setCargo(usuario.getFuncionario().getCargo());
+		getUsuarioPO().getFuncionario().setStatus(usuario.getFuncionario().getStatus());
+		usuario.setFuncionario(getUsuarioPO().getFuncionario());
+		return getFuncionarioDAO().atualizar(usuario);
 	}
 	
 	public boolean excluir(){
