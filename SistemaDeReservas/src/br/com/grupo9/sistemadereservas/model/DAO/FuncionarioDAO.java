@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
-import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
@@ -84,22 +83,14 @@ public class FuncionarioDAO implements DAO<FuncionarioPO> {
 	
 	@Override
 	public boolean atualizar(FuncionarioPO entidade) {
-		// TODO Auto-generated method stub
 		return false;
 	}	
 	
 	public boolean atualizar(UsuarioPO entidade) {
-		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM usuario u ")
-			 .append("WHERE u.funcionario.chave = :chave");
-		TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
-		typedQuery.setParameter("chave", entidade.getFuncionario().getChave());
-		UsuarioPO usuario = (UsuarioPO)typedQuery.getSingleResult();
-		entidade.getFuncionario().setCargo(usuario.getFuncionario().getCargo());
-		getManager().getTransaction().begin();
 		try{
+			getManager().getTransaction().begin();
 			getManager().merge(entidade);
+			getManager().merge(entidade.getFuncionario());
 			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
