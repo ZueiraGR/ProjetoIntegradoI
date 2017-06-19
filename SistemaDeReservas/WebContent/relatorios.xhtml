@@ -22,55 +22,19 @@
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
 	<div class="section">
-		<div class="container row">
-			<div class="row s16">
-				<ul class="btn-blockdd">
-					<li class="tab col s16"><a href="">RELATÓRIO QUANTITATIVO
-							DE RESERVAS CANCELADAS</a></li>
-					<li class="tab col s16"><a href="">RELATÓRIO QUANTITATIVO
-							DE RESERVAS REALIZADAS NO MÊS</a></li>
+		<div class="col s12">
+			<div class="container z-depth-2">
+				<ul class="tabs tabs-fixed-width z-depth-1 grey lighten-3">
+					<li class="tab col s12"><a href="#adm-view">RELATÓRIOS</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-
-	<div class="section"></div>
-
-	<div class="fixed-action-btn">
-		<a class="btn-floating btn-large grey" id="scrollToTop"
-			style="display: none;"> <i class="fa fa-chevron-up"></i>
-		</a>
-	</div>
-	<footer class="page-footer grey darken-1">
-		<div class="container">
-			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">Sistema de reserva</h5>
-					<p class="grey-text text-lighten-4">Explicar alguma coisa.</p>
-
-
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Áreas de site</h5>
-					<ul>
-						<li><a class="white-text" href="#!">HOME</a></li>
-						<li><a class="white-text" href="#!">REVERVAR MESA</a></li>
-						<li><a class="white-text" href="#!">PROMOÇÕES</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright grey darken-2">
-			<div class="container">
-				Criado pelo <a class="grey-text" href="#">Grupo 9</a>
-			</div>
-		</div>
-	</footer>
-	<!--  Scripts-->
-	<script src="js/jquery-2.1.1.js"></script>
-	<script src="js/materialize.js"></script>
-	<script src="js/init.js"></script>
-	<script src="js/slide.js"></script>
+	
+	<ui:insert>
+		<ui:include src="/templates/rodape.xhtml" />
+		<ui:include src="/templates/js_padrao.xhtml" />
+	</ui:insert>
 
 </body>
 
