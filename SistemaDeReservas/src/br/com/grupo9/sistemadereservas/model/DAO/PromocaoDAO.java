@@ -94,6 +94,23 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 			fecharManager();
 		}
 	}
+	
+	public List<PromocaoPO> listar(String filtro) {
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+				 .append("FROM promocao u ")
+				 .append(filtro);
+			TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
+				return (List<PromocaoPO>) typedQuery.getResultList();
+		}catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao tentar capturar todos as promoções. Causa:\n");
+			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
+		}
+	}
 
 	@Override
 	public boolean excluir(PromocaoPO entidade) {

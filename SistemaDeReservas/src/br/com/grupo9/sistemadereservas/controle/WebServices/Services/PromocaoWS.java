@@ -1,20 +1,17 @@
 package br.com.grupo9.sistemadereservas.controle.WebServices.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
+import br.com.grupo9.sistemadereservas.model.BO.PromocaoBO;
 import br.com.grupo9.sistemadereservas.model.PO.PromocaoPO;
 
 @RequestScoped
@@ -22,47 +19,74 @@ import br.com.grupo9.sistemadereservas.model.PO.PromocaoPO;
 @Produces("application/json")
 @Consumes("application/json")
 public class PromocaoWS {
+	
+	private PromocaoBO promocaoBO;
+	
+	@POST
+	@Path("/cadastar/")
+	public List<String> cadastrar(final PromocaoPO promocaopo) {
+		List<String> retorno = new ArrayList<>();
+		getPromocaoBO().setPromocaoPO(promocaopo);
+		if(getPromocaoBO().cadastar()){
+			retorno.add("sucess");
+		}else{
+			retorno = getPromocaoBO().getMensagensDeErro();
+		}
+		return retorno;
+	}
+
+	@GET
+	@Path("/capturar/{chave:[0-9]*}")
+	public PromocaoPO capturar(@PathParam("chave") final Integer chave) {
+		PromocaoPO promocaoPO = new PromocaoPO();
+		promocaoPO.setChave(chave);
+		getPromocaoBO().setPromocaoPO(promocaoPO);
+		return getPromocaoBO().capturar();
+	}
+
+	@GET
+	@Path("/listar/{pagina:[0-9]}/{qtdRegistros:[0-9]}/{opcaoListagem}")
+	public List<PromocaoPO> listAll(@PathParam("pagina") Integer pagina, @PathParam("qtdRegistros") Integer qtdRegistros ,@PathParam("opcaoListagem") String opcaoListagem) {
+		if(opcaoListagem.equals("T")){
+			return getPromocaoBO().listarTodas(pagina, qtdRegistros);
+		}else{
+			return getPromocaoBO().listarSomentAtivas();
+		}
+	}
 
 	@POST
-	public Response create(final PromocaoPO promocaopo) {
-		//TODO: process the given promocaopo 
-		//you may want to use the following return statement, assuming that PromocaoPO#getId() or a similar method 
-		//would provide the identifier to retrieve the created PromocaoPO resource:
-		//return Response.created(UriBuilder.fromResource(PromocaoWS.class).path(String.valueOf(promocaopo.getId())).build()).build();
-		return Response.created(null).build();
-	}
-
-	@GET
-	@Path("/{id:[0-9][0-9]*}")
-	public Response findById(@PathParam("id") final Long id) {
-		//TODO: retrieve the promocaopo 
-		PromocaoPO promocaopo = null;
-		if (promocaopo == null) {
-			return Response.status(Status.NOT_FOUND).build();
+	@Path("/atualizar/")
+	public List<String> update(final PromocaoPO promocaopo) {
+		List<String> retorno = new ArrayList<>();
+		getPromocaoBO().setPromocaoPO(promocaopo);
+		if(getPromocaoBO().atualizar()){
+			retorno.add("sucess");
+		}else{
+			retorno = getPromocaoBO().getMensagensDeErro();
 		}
-		return Response.ok(promocaopo).build();
+		return retorno;
 	}
 
 	@GET
-	public List<PromocaoPO> listAll(@QueryParam("start") final Integer startPosition,
-			@QueryParam("max") final Integer maxResult) {
-		//TODO: retrieve the promocaopoes 
-		final List<PromocaoPO> promocaopoes = null;
-		return promocaopoes;
+	@Path("/excluir/{chave:[0-9]*}")
+	public List<String> deleteById(@PathParam("chave") final Integer chave) {
+		List<String> retorno = new ArrayList<>();
+		PromocaoPO promocao = new PromocaoPO();
+		promocao.setChave(chave);
+		getPromocaoBO().setPromocaoPO(promocao);
+		if(getPromocaoBO().excluir()){
+			retorno.add("sucess");
+		}else{
+			retorno = getPromocaoBO().getMensagensDeErro();
+		}
+		return retorno;
 	}
-
-	@PUT
-	@Path("/{id:[0-9][0-9]*}")
-	public Response update(@PathParam("id") Long id, final PromocaoPO promocaopo) {
-		//TODO: process the given promocaopo 
-		return Response.noContent().build();
-	}
-
-	@DELETE
-	@Path("/{id:[0-9][0-9]*}")
-	public Response deleteById(@PathParam("id") final Long id) {
-		//TODO: process the promocaopo matching by the given id 
-		return Response.noContent().build();
+	
+	private PromocaoBO getPromocaoBO(){
+		if(this.promocaoBO == null){
+			this.promocaoBO = new PromocaoBO();
+		}
+		return this.promocaoBO;
 	}
 
 }
