@@ -62,7 +62,7 @@ public class MesaBO {
 		MesaPO mesa;
 		mesa = getMesaDAO().capturarPorId(getMesaPO());
 		if(mesa != null){
-			if(getMesaPO().getImagem() == null && !getMesaPO().getImagem().isEmpty()){
+			if(getMesaPO().getImagem() != null && !getMesaPO().getImagem().isEmpty()){
 				setNomeDoArquivo(mesa.getImagem());
 				excluirImagem();
 				gerarNomeDoArquivo();
