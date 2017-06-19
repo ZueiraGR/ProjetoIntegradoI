@@ -4,7 +4,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:composite="http://java.sun.com/jsf/composite"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
 	<ui:composition>
 		<!-- Modal para confirmar bloqueio ou desbloqueio do acesso do funcionario -->
 		<div class="modal" id="confirmarBloqueioOuDesbloqueioDoFuncionario">
@@ -90,66 +89,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- Modal para alterar os dados do funcionario -->
-		<div class="modal" id="alterarDadosDoFuncionario">
-			<div class="modal-content">
-				<div class="row center"><h5>Fomulario de alteração</h5></div>
-				<div class="col s12">
-					<form name="CadastroDeFuncionario" action="#" method="POST">
-						<div class="row">
-							<div class="input-field col s6">
-								<input id="labelNomeDoFuncionario" type="text"	class="validate" required="required" />
-								<label for="labelNomeDoFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="labelSobrenomeDoFuncionario" type="text" class="validate" required="required" />
-								<label for="labelSobrenomeDoFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">SOBRENOME</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<input maxlength="14" id="labelCpfDoFuncionario" type="text" class="validate" required="required" />
-								<label	for="labelCpfDoFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="labelEmailDoFuncionario" type="text" class="validate" required="required" />
-								<label for="labelEmailDoFuncionario" data-error="Digite um login válido!" data-success="Ok">LOGIN</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<input id="labelLoginDoFuncionario" type="text" class="validate" disabled="disabled" />
-								<label for="labelLoginDoFuncionario" data-error="Digite um login válido!" data-success="Ok">LOGIN</label>
-							</div>
-							<div class="input-field col s6">
-								<select class="validate" id="labelCargoDoFuncionario" required="required"></select>
-								<label for="labelCargoDoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<input placeholder="Digite uma senha" id="senha" type="password" class="validate" />
-								<label for="senha" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">SENHA</label>
-							</div>
-							<div class="input-field col s6">
-								<input placeholder="Repita a senha digitada" id="confirmaSenha"	type="password" class="validate" />
-								<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!"	data-success="Ok">CONFIRME A SENHA</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col l3"></div>
-							<div class="input-field col l3">
-								<button class="btn grey waves-effect waves-green col l12 m12 " type="submit">SALVAR</button>
-							</div>
-							<div class="input-field col l3">
-								<button class="btn grey waves-effect waves-red col l12 m12 modal-close"	type="reset">CANCELAR</button>
-							</div>
-							<div class="input-field col l3"></div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		
 	</ui:composition>
+	
+	
 
 </html>

@@ -114,6 +114,24 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 			fecharManager();
 		}	
 	}
+	
+	public List<UsuarioPO> listarTodos() {
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT c ")
+			 	 .append("FROM usuario c ")
+			 	 .append("WHERE c.dataExclusao is null ")
+			 	 .append("ORDER BY c.nome");
+			TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
+			return (List<UsuarioPO>) typedQuery.getResultList();
+		}catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os usuarios. Causa:\n");
+			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
+		}	
+	}
 
 	@Override
 	public boolean excluir(UsuarioPO entidade) {

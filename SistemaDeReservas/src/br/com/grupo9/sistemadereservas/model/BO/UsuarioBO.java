@@ -1,6 +1,7 @@
 package br.com.grupo9.sistemadereservas.model.BO;
 
-import br.com.grupo9.sistemadereservas.interfaces.DAO;
+import java.util.List;
+
 import br.com.grupo9.sistemadereservas.model.DAO.UsuarioDAO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
@@ -11,7 +12,7 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 public class UsuarioBO {
 	private UsuarioPO usuarioPO;
-	private DAO<UsuarioPO> usuarioDAO;
+	private UsuarioDAO usuarioDAO;
 	
 	
 	public UsuarioPO capturarUsuarioValido(){
@@ -40,10 +41,14 @@ public class UsuarioBO {
 		this.usuarioPO = usuarioPO;
 	}
 
-	public DAO<UsuarioPO> getUsuarioDAO(){
+	public UsuarioDAO getUsuarioDAO(){
 		if(this.usuarioDAO == null){
 			this.usuarioDAO = new UsuarioDAO();
 		}
 		return this.usuarioDAO;
+	}
+	
+	public List<UsuarioPO> listar(){
+		return getUsuarioDAO().listarTodos();
 	}
 }

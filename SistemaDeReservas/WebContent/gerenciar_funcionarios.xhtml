@@ -25,11 +25,17 @@
 		<div class="container">
 			<div class="row z-depth-2">
 				<ul class="tabs z-depth-1 grey lighten-3">
-					<li class="tab active"><a href="#adm-view"><i class="fa fa-users" aria-hidden="true"></i> FUNCIONARIOS</a></li>
-					<li class="tab"><a href="#adm-add" onclick="selectCargos()"><i class="fa fa-user-plus" aria-hidden="true"></i> CADASTRAR UM FUNCIONÁRIO</a></li>
+					<li class="tab active"><a href="#adm-view"><i class="fa fa-users" aria-hidden="true"></i> GERENCIAR FUNCIONARIOS</a></li>
 					<li class="tab"><a href="#adm-cargos" onclick="carregarCargos(1)"><i class="fa fa-id-badge" aria-hidden="true"></i>	GERENCIAR CARGOS</a></li>
 				</ul>
 				<div id="adm-view" class="col s12 ">
+				<br/>
+					<div class="row">
+						<div class="col l12">
+							<a href="#" onclick="selectCargos() , cadastrarFuncionario() , limparFormFuncionario()" class="btn grey white-text"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar funcionário</a>
+							<a href="#" onclick="carregarFuncionarios(1)" class="btn grey white-text"><i class="fa fa-refresh" aria-hidden="true"></i> RECARREGAR</a>
+						</div>
+					</div>
 					<table class="bordered responsive-table centered">
 						<thead>
 							<tr>
@@ -66,76 +72,7 @@
 						</tfoot>
 					</table>
 				</div>
-				<div id="adm-add" class="container col s12">
-					<div class="col s1"></div>
-					<div class="col s10">
-						<br />
-						<form name="CadastroDeFuncionario" id="CadastroDeFuncionario" method="POST">
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="validate" required="required" /> 
-									<label for="nomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate" required="required" /> 
-									<label for="sobrenomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input maxlength="12" placeholder="61 98899-7755" id="telefoneFuncionario" type="tel" class="validate" required="required" /> 
-									<label for="telefoneFuncionario" data-error="Insira um telefone!" data-success="Ok">TELEFONE</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input maxlength="14" placeholder="123.123.123-12" id="cpfFuncionario" type="text" class="validate" required="required" /> 
-									<label for="cpfFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
-								</div>
-							</div>
-							<div class="row">
-
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o login do funcionario" id="loginFuncionario" type="text" class="validate" required="required" /> 
-									<label for="loginFuncionario" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
-								</div>
-
-								<div class="input-field col m6 s12">
-									<select class="validate" id="cargoFuncionario" required="required"></select>
-									<label for="cargoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o email do funcionario" id="emailFuncionario" type="email" class="validate" required="required" /> 
-									<label for="emailFuncionario" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite a senha" id="senhaFuncionario" type="password" class="validate" /> 
-									<label for="senhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Re-digite a senha" id="confirmaSenhaFuncionario" type="password" class="validate" /> 
-									<label for="confirmaSenhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col l3"></div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CADASTRAR</button>
-								</div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-red col l12 m12" type="reset" id="cancelar">CANCELAR</button>
-								</div>
-								<div class="input-field col l3"></div>
-							</div>
-							<div class="row">
-								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
-							</div>
-						</form>
-					</div>
-					<div class="col s1"></div>
-				</div>
+				
 				<div id="adm-cargos" class="row col l12">
 					<br/>
 					<div class="row">
@@ -186,6 +123,126 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal para cadastrar os dados do funcionario -->
+	<div class="modal" id="cadastrarFuncionario">
+			<div class="modal-content">
+				<div class="row center"><h5 id="tituloFomunlarioFuncionario"></h5></div>
+				<div class="col s12">
+					<form name="CadastroDeFuncionario" id="CadastroDeFuncionario" method="POST">
+					<input class="hiddendiv" id="chaveFuncionario"  />
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="validate" required="required" /> 
+									<label for="nomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+								</div>
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate" required="required" /> 
+									<label for="sobrenomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input maxlength="12" placeholder="61 98899-7755" id="telefoneFuncionario" type="tel" class="validate" required="required" /> 
+									<label for="telefoneFuncionario" data-error="Insira um telefone!" data-success="Ok">TELEFONE</label>
+								</div>
+								<div class="input-field col m6 s12">
+									<input maxlength="14" placeholder="123.123.123-12" id="cpfFuncionario" type="text" class="validate" required="required" /> 
+									<label for="cpfFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
+								</div>
+							</div>
+							<div id="">
+							<div class="row">
+
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite o login do funcionario" id="loginFuncionario" type="text" class="validate" required="required" /> 
+									<label for="loginFuncionario" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+								</div>
+
+								<div class="input-field col m6 s12">
+									<select class="validate" id="cargoFuncionario" required="required"></select>
+									<label for="cargoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite o email do funcionario" id="emailFuncionario" type="email" class="validate" required="required" /> 
+									<label for="emailFuncionario" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite a senha" id="senhaFuncionario" type="password" class="validate" /> 
+									<label for="senhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+								</div>
+								<div class="input-field col m6 s12">
+									<input placeholder="Re-digite a senha" id="confirmaSenhaFuncionario" type="password" class="validate" /> 
+									<label for="confirmaSenhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
+								</div>
+							</div>
+							</div>
+							<div class="row">
+								<div class="input-field col l3"></div>
+								<div class="input-field col l3">
+									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CADASTRAR</button>
+								</div>
+								<div class="input-field col l3">
+									<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset" id="cancelar">CANCELAR</button>
+								</div>
+								<div class="input-field col l3"></div>
+							</div>
+							<div class="row">
+								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
+							</div>
+						</form>
+				</div>
+			</div>
+		</div>
+	
+	<!-- Modal para alterar os dados do funcionario -->
+		<div class="modal" id="alterarFuncionario">
+			<div class="modal-content">
+				<div class="row center"><h5 id="">Formulário de alteração de funcionário</h5></div>
+				<div class="col s12">
+					<form name="AlterarDadosFuncionario" id="AlterarDadosFuncionario" method="POST">
+					<input class="hiddendiv" id="chaveFuncionarioA"  />
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite o nome do funcionario" id="nomeFuncionarioA" type="text" class="validate" required="required" /> 
+									<label for="nomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">NOME</label>
+								</div>
+								<div class="input-field col m6 s12">
+									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionarioA" type="text" class="validate" required="required" /> 
+									<label for="sobrenomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">SOBRENOME</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col m6 s12">
+									<input maxlength="12" placeholder="61 98899-7755" id="telefoneFuncionarioA" type="tel" class="validate" required="required" /> 
+									<label for="telefoneFuncionarioA" data-error="Insira um telefone!">TELEFONE</label>
+								</div>
+								<div class="input-field col m6 s12">
+									<input maxlength="14" placeholder="123.123.123-12" id="cpfFuncionarioA" type="text" class="validate" required="required" /> 
+									<label for="cpfFuncionarioA" data-error="Insira um cpf valido!">CPF</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col l3"></div>
+								<div class="input-field col l3">
+									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CONFIRMAR</button>
+								</div>
+								<div class="input-field col l3">
+									<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset" id="cancelar">CANCELAR</button>
+								</div>
+								<div class="input-field col l3"></div>
+							</div>
+							<div class="row">
+								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
+							</div>
+						</form>
+				</div>
+			</div>
+		</div>
 
 	<!-- Importação dos modais -->
 	<ui:insert>

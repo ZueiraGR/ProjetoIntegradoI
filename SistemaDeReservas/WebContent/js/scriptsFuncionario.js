@@ -3,6 +3,7 @@ var paginaAtualFuncionarios=1;
 var qtdRegistrosFuncionarios = 10;
 var qtdRegistrosFuncionariosObtidos = 0;
 var urlFuncionarios = "ws/funcionariows/listar/";
+var urlUsuarios = "ws/funcionariows/listarUsuarios/";
 
 $("#CadastroDeFuncionario").submit(function(event){
 	if(capturarDadosDoForm() != null){
@@ -17,8 +18,7 @@ $("#CadastroDeFuncionario").submit(function(event){
 			cache: false,
 		    contentType: "application/json",
 		    processData: true
-		});
-	}
+		});}		
 	return false;
 });
 
@@ -40,6 +40,8 @@ function capturarDadosDoForm(){
 	}
 	return funcionario;
 }
+
+
 
 function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,senha,confirmaSenha){
 	var mensagem;
@@ -160,7 +162,7 @@ function getBtnInfoFuncionario(funcionario){
 }
 
 function getBtnEditarFuncionario(funcionario){
-	var html = '<a href="#" onclick="editarFuncionario('+funcionario.chave+')" title="Editar"><i class="fa fa-pencil-square-o fa-lg indigo-text text-darken-2 hoverable" aria-hidden="true"></i></a> ';
+	var html = "<a href='#' onclick='limparFormFuncionario() , editarFuncionario("+JSON.stringify(funcionario)+")' title='Editar'><i class='fa fa-pencil-square-o fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a> ";
 	return html;
 }
 
@@ -183,8 +185,31 @@ function abrirInformacoesFuncionario(funcionario){
     $("#informacoesDoFuncionario").modal('open');    
 }
 
+function cadastrarFuncionario(){
+	$('#tituloFomunlarioFuncionario').html("Formulário de cadastro de funcionário");
+	$("#hide-alterar").show();
+    $("#cadastrarFuncionario").modal('open');
+	selectCargos();
+}
+
 function editarFuncionario(funcionario){
-    $("#alterarDadosDoFuncionario").modal('open');   
+	$("#chaveFuncionarioA").val(funcionario.chave);
+    $("#nomeFuncionarioA").val(funcionario.nome);
+    $("#sobrenomeFuncionarioA").val(funcionario.sobrenome);
+    $("#telefoneFuncionarioA").val(funcionario.telefone);
+    $("#cpfFuncionarioA").val(funcionario.cpf);
+    $("#alterarFuncionario").modal('open'); 
+}
+
+function limparFormFuncionario(){
+	$("#chaveFuncionario").val("");
+    $("#nomeFuncionario").val("");
+    $("#sobrenomeFuncionario").val("");
+    $("#telefoneFuncionario").val("");
+    $("#cpfFuncionario").val("");
+    $("#emailFuncionario").val("");
+    $("#senhaFuncionario").val("");
+    $("#confirmaSenhaFuncionario").val("");
 }
 
 function bloquearOuDesbloquearFuncionario(funcionario){
@@ -207,4 +232,59 @@ $("#confirmarExclusaoFuncionario").submit(function(event){
 	$("#confirmarExclusaoDoFuncionario").modal('close');
 	return false;
 });
+
+function selectCargos(){
+	$.ajax({
+		url: "ws/cargows/listarTodos/",
+        type: 'GET',
+        success: function (data) {
+        	$('select').material_select('destroy');
+        	if(data.length > 0){
+        		preencherSelectCargos(data);
+        	}else{
+        		$("#cargoFuncionario").html("");
+        	}
+        	$(document).ready(function(){
+        		$('select').material_select();
+        	})
+        }
+	});
+}
+
+function preencherSelectCargos(arrayDeCargos){
+	var html = '<option disabled="disabled" selected="selected">Selecione um cargo</option>';
+	for( i = 0; i < arrayDeCargos.length; i++){
+		html += getCargo(arrayDeCargos[i]);
+	}
+	$("#cargoFuncionario").html(html);	
+}
+
+function getCargo(cargo){
+	return '<option value="'+cargo.chave+'">'+cargo.nome+'</option>';
+}
+
+$("#AlterarDadosFuncionario").submit(function(event){
+	if(DadosDoFormAlterar() != null){
+		var formData = JSON.stringify(DadosDoFormAlterar());
+		$.ajax({
+			url: "ws/funcionariows/alterar/",
+	        type: 'POST',
+	        data: formData,
+			cache: false,
+		    contentType: "application/json",
+		    processData: true
+		});}		
+	return false;
+});
+
+function DadosDoFormAlterar(){
+	var chave = $("#chaveFuncionarioA").val();
+	var nome = $("#nomeFuncionarioA").val();
+	var sobrenome = $("#sobrenomeFuncionarioA").val();
+	var cpf = $("#cpfFuncionarioA").val();
+	var telefone = $("#telefoneFuncionarioA").val();
+	var	funcionario = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone};
+	return funcionario;
+}
+
 

@@ -31,12 +31,7 @@ public class FuncionarioBO extends UsuarioBO {
 	}
 
 	public boolean altualizar(){
-		FuncionarioPO funcionario = getFuncionarioDAO().capturarPorId(getUsuarioPO().getFuncionario());
-		if(funcionario != null){
-			return getFuncionarioDAO().atualizar(funcionario);
-		}else{
-			return false;
-		}
+		return getFuncionarioDAO().atualizar(getUsuarioPO());
 	}
 	
 	public boolean excluir(){

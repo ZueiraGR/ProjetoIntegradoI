@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
+import br.com.grupo9.sistemadereservas.model.BO.UsuarioBO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
@@ -23,6 +24,7 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 public class FuncionarioWS {
 	
 	FuncionarioBO funcionarioBO;
+	UsuarioBO usuarioBO;
 	
 	@POST
 	@Path("/cadastrar/")
@@ -55,16 +57,24 @@ public class FuncionarioWS {
 	}
 
 	@POST
-	@Path("/atualizar/")
-	public List<String> atualizar(final FuncionarioPO funcionarioPO) {
+	@Path("/alterar/")
+	public List<String> atualizar(final FuncionarioPO funcionario) {
 		List<String> retorno = new ArrayList<>();
 		UsuarioPO usuarioPO = new UsuarioPO();
-		usuarioPO.setFuncionario(funcionarioPO);
+		usuarioPO.setFuncionario(funcionario);
+		getFuncionarioBO().setUsuarioPO(usuarioPO);
 		if(getFuncionarioBO().altualizar()){
 			retorno.add("sucess");
 		}else{
+			retorno.add("fail");
 		}
 		return retorno;
+	}
+	
+	@GET
+	@Path("/listarUsuarios/")
+	public List<UsuarioPO> listarUsuario() {
+		return getUsuarioBO().listar();
 	}
 
 	@GET
@@ -89,6 +99,13 @@ public class FuncionarioWS {
 			this.funcionarioBO = new FuncionarioBO();
 		}
 		return this.funcionarioBO;
+	}
+	
+	private UsuarioBO getUsuarioBO(){
+		if(this.usuarioBO == null){
+			this.usuarioBO = new UsuarioBO();
+		}
+		return this.usuarioBO;
 	}
 
 }
