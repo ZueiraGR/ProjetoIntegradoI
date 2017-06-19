@@ -22,6 +22,7 @@ $("#manterHorarioAtendimentoForm").submit(function(){
         success: function (data) {
         	if(data == "sucess"){
         		 Materialize.toast('Alterado com sucesso!', 4000);
+        		 configuracoes=capturarConfiguracoesDoForm();
         	}else{
         		 Materialize.toast('correu um erro ao atualizar as configurações.', 4000);
         	}
