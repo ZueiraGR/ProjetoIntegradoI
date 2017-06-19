@@ -194,9 +194,11 @@ function cadastrarFuncionario(){
 
 function editarFuncionario(funcionario){
 	$("#chaveFuncionarioA").val(funcionario.chave);
+	$("#statusFuncionarioA").val(funcionario.status);
     $("#nomeFuncionarioA").val(funcionario.nome);
     $("#sobrenomeFuncionarioA").val(funcionario.sobrenome);
     $("#telefoneFuncionarioA").val(funcionario.telefone);
+    $("#emailFuncionarioA").val(funcionario.email);
     $("#cpfFuncionarioA").val(funcionario.cpf);
     $("#alterarFuncionario").modal('open'); 
 }
@@ -283,7 +285,9 @@ function DadosDoFormAlterar(){
 	var sobrenome = $("#sobrenomeFuncionarioA").val();
 	var cpf = $("#cpfFuncionarioA").val();
 	var telefone = $("#telefoneFuncionarioA").val();
-	var	funcionario = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone};
+	var email = $("#emailFuncionarioA").val();
+	var status = $("#statusFuncionarioA").val();
+	var	funcionario = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":status};
 	return funcionario;
 }
 
