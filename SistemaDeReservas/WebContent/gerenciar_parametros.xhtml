@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<title>Sistema de reserva</title>
+
+<ui:insert>
+	<ui:include src="/templates/css_padrao.xhtml" />
+</ui:insert>
+</head>
+
+<body onload="carregarParametros()">
+	<ui:insert name="navbar">
+		<ui:include src="/templates/menu.xhtml" />
+	</ui:insert>
+	<div class="section">
+		<form class="col s12" id="manterHorarioAtendimentoForm" name="manterHorarioAtendimentoForm" method="POST">
+			<div class="container z-depth-2">
+				<ul class="tabs z-depth-1 grey lighten-3">
+					<li class="tab col s12"><a href="#adm-horario">HORÁRIO DE FUNCIONAMENTO</a></li>
+					<li class="tab col s12"><a href="#adm-valor">VALORES</a></li>
+				</ul>
+				<div id="adm-horario" class="col s12 ">
+					<div class="row valign-wrapper">
+						<div class="col s4 center">SEGUNDA-FEIRA</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoSegunda"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioSegunda" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioSegunda" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimSegunda" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimSegunda" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row valign-wrapper">
+						<div class="col s4 center">TERÇA-FEIRA</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoTerca"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioTerca" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioTerca" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimTerca" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimTerca" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row valign-wrapper">
+						<div class="col s4 center">QUARTA-FEIRA</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoQuarta"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioQuarta" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioQuarta" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimQuarta" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimQuarta" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row valign-wrapper">
+						<div class="col s4 center">QUINTA-FEIRA</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoQuinta"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioQuinta" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioQuinta" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimQuinta" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimQuinta" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row valign-wrapper">
+						<div class="col s4 center">SEXTA-FEIRA</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoSexta"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioSexta" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioSexta" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimSexta" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimSexta" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row valign-wrapper">
+						<div class="col s4 center">SÁBADO</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoSabado"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioSabado" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioSabado" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimSabado" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimSabado" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="row valign-wrapper">
+						<div class="col s4 center">DOMINGO</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Fechado
+									<input type="checkbox" id="checkBoxAbertoDomingo"/>
+									<span class="lever"></span>
+									Aberto
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="horaInicioDomingo" placeholder="08:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaInicioDomingo" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA INICIO</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="horaFimDomingo" placeholder="20:00" type="text" value="" class="validate" required="required" maxlength="5" onkeyup="validar(this,'num')"/>
+								<label for="horaFimDomingo" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">HORA FIM</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="adm-valor" class="col s12 ">
+					<div class="row valign-wrapper">
+						<div class="col s4 center">TAXA DE RESERVA</div>
+						<div class="col s4 center">
+							<div class="switch">
+								<label> 
+									Desabilitada
+									<input type="checkbox" id="checkBoxCobrancaDeTaxaHabilitada"/>
+									<span class="lever"></span>
+									Habilitada
+								</label>
+							</div>
+						</div>
+						<div class="col s4">
+							<div class="input-field col s6">
+								<input id="valorTaxaReserva" placeholder="15,30" type="text" value="" class="validate" required="required" maxlength="6" onkeyup="validar(this,'num')"/>
+								<label for="valorTaxaReserva" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">VALOR R$</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="divider"></div>
+				<br/>
+				<div class="row col s12 m12 l12 valign-wrapper">
+						<div class="col s0 m3 l3 center"></div>
+						<div class="col s6 m3 l3 center"><button class="btn grey col s10 m12 l12 center" type="submit">SALVAR</button></div>
+						<div class="col s6 m3 l3 center"><button class="btn grey col s10 m12 l12 center" onclick="reverterAlteracoesDoForm()" type="button">CANCELAR</button></div>
+						<div class="col s0 m3 l3 center"></div>
+				</div>
+				<br/>
+			</div>
+		</form>
+	</div>
+
+	<ui:insert>
+		<ui:include src="/templates/rodape.xhtml" />
+		<ui:include src="/templates/js_padrao.xhtml" />
+	</ui:insert>
+	<script type="text/javascript" src="js/scriptsParametros.js"></script>
+
+</body>
+
+</html>
