@@ -32,4 +32,13 @@ public class ArquivoUtil {
 			return false;
 		}
 	}
+	
+	public static File abrir(String nomeDoArquivo, String path){
+		File arquivo = new File(path + nomeDoArquivo);
+		if (arquivo.exists()) {
+			return arquivo;
+		}else{
+			return null;
+		}
+	}
 }
