@@ -182,7 +182,7 @@ function getBtnExcluirFuncionario(funcionario){
 
 function abrirInformacoesFuncionario(funcionario){
 	$.ajax({
-		url: "ws/funcionariows/loginById/"+funcionario.chave,
+		url: "ws/funcionariows/capturarUsuario/"+funcionario.chave,
 	    type: 'GET',
 	    success: function (usuario) {
 	    	$("#loginFuncionarioV").html(usuario.login);
