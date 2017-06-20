@@ -90,3 +90,10 @@ function validar(dom,tipo){
 	}
 	dom.value=dom.value.replace(regex,'');
 }
+
+function converteDataStringEmDate(dataString){
+	var dia = parseInt(dataString.substring(1, 3));
+	var mes = parseInt(dataString.substring(3, 6))-1;
+	var ano = parseInt(dataString.substring(6, 11));
+	return new Date(ano,mes,dia);
+}
