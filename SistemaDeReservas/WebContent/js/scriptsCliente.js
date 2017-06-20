@@ -1,3 +1,9 @@
+var idDivPaginacaocliente = "#OpPaginasCliente";
+var paginaAtualClientes = 1;
+var qtdRegistrosClientes = 10;
+var qtdRegistrosClientesObtidos = 0;
+var urlClientes = "ws/clientews/listar/";
+
 /**
  * Cadastro de clinetes
  */
@@ -77,6 +83,142 @@ function isDadosValidos(nome,sobrenome,cpf,telefone,login,email,confirmaEmail,se
 	return retorno;
 }
 
+function carregarClientes(pagina){
+	qtdRegistrosClientes = parseInt($("#qtdRegistrosClientes").val());
+	$.ajax({
+		url: "ws/clientews/listar/"+pagina+"/"+qtdRegistrosClientes,
+        type: 'GET',
+        success: function (data) {
+        	qtdRegistrosClientesObtidos = data.length;
+        	if(data.length > 0){
+        		preencherTabelaClientes(data);
+        	}else{
+        		$("#tabelaClientes").html("");
+        	}
+        }
+	});
+	paginaAtualClientes = pagina;
+	listarOpPaginas(idDivPaginacaocliente,paginaAtualClientes,qtdRegistrosClientes,qtdRegistrosClientesObtidos,"carregarClientes");
+}
+
+function preencherTabelaClientes(arrayDeClientes){
+	var html = "";
+	for( i = 0; i < arrayDeClientes.length; i++){
+		html += getLinhaCliente(arrayDeClientes[i]);
+	}
+	$("#tabelaClientes").html(html);	
+}
+
+function getLinhaCliente(cliente){
+	linha = "<tr>";
+	linha +="<td>"+cliente.nome+"</td>";
+	linha +="<td>"+cliente.sobrenome+"</td>";
+	linha +="<td>"+cliente.cpf+"</td>";
+	linha +="<td>"+(cliente.email == null ? "" : cliente.email)+"</td>";
+	linha +="<td>"+cliente.telefone+"</td>";
+	linha +="<td>"+getAcoesCliente(cliente)+"</td>";
+	linha +="</tr>";
+	return linha;
+}
+
+function getAcoesCliente(cliente){
+	var html = getBtnInfoCliente(cliente);
+	html += getBtnEditarCliente(cliente);
+	html += getBtnAtivarCliente(cliente);
+	html += getBtnExcluirCliente(cliente);
+	return html;
+}
+
+function getBtnInfoCliente(cliente){
+	var html = '<a href="#" onclick="abrirInformacoesCliente('+cliente.chave+')" title="Mais informações"><i class="fa fa-info-circle fa-lg blue-text text-darken-1 hoverable" aria-hidden="true"></i></a> ';
+	return html;
+}
+
+function getBtnEditarCliente(cliente){
+	var html = "<a href='#' onclick='limparCamposFormCadastro() , editarCliente("+JSON.stringify(cliente)+")' title='Editar'><i class='fa fa-pencil-square-o fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a> ";
+	return html;
+}
+
+function getBtnAtivarCliente(cliente){
+	var html = "";
+	if(cliente.status != 'A'){
+		html = '<a href="#" onclick="bloquearOuDesbloquearCliente('+cliente.chave+')" title="Desbloquear"><i class="fa fa-check fa-lg green-text text-darken-1 hoverable" aria-hidden="true"></i></a> ';
+	}else{
+		html = '<a href="#" onclick="bloquearOuDesbloquearCliente('+cliente.chave+')" title="Bloquear"><i class="fa fa-ban fa-lg red-text text-darken-1 hoverable" aria-hidden="true"></i></a> ';
+	}
+	return html;
+}
+
+function getBtnExcluirCliente(cliente){
+	var html = '<a href="#"	onclick="excluirCliente('+cliente.chave+')" title="Excluir"><i class="fa fa-trash-o fa-lg orange-text text-darken-3 hoverable" aria-hidden="true"></i></a>';
+	return html;
+}
+
+function abrirInformacoesCliente(cliente){
+    $("#informacoesDoCliente").modal('open');    
+}
+
+function cadastrarCliente(){
+	$('#tituloFomunlarioCliente').html("Formulário de cadastro de cliente");
+    $("#cadastrarCliente").modal('open');
+}
+
+function editarCliente(cliente){
+	$("#chaveClienteA").val(cliente.chave);
+	$("#statusClienteA").val(cliente.status);
+    $("#nomeClienteA").val(cliente.nome);
+    $("#sobrenomeClienteA").val(cliente.sobrenome);
+    $("#telefoneClienteA").val(cliente.telefone);
+    $("#emailClienteA").val(cliente.email);
+    $("#cpfClienteA").val(cliente.cpf);
+    $("#alterarCliente").modal('open'); 
+}
+
+function bloquearOuDesbloquearCliente(cliente){
+  $("#confirmarBloqueioOuDesbloqueioDoCliente").modal('open');   
+}
+
+function excluirCliente(chave){
+	$("#confirmarExclusaoDoCliente").modal('open');
+	$("#clienteID").val(chave);
+}
+$("#confirmarExclusaoCliente").submit(function(event){
+	var chave = $("#clienteID").val();
+	$.ajax({
+		url: "ws/clientews/excluir/"+chave,
+      type: 'GET',
+      data: "",
+      contentType: "application/json"
+	});
+	$("#confirmarExclusaoDoCliente").modal('close');
+	return false;
+});
+
+$("#AlterarDadosCliente").submit(function(event){
+	if(DadosDoFormAlterar() != null){
+		var formData = JSON.stringify(DadosDoFormAlterar());
+		$.ajax({
+			url: "ws/clientews/alterar/",
+	        type: 'POST',
+	        data: formData,
+			cache: false,
+		    contentType: "application/json",
+		    processData: true
+		});}		
+	return false;
+});
+
+function DadosDoFormAlterar(){
+	var chave = $("#chaveClienteA").val();
+	var nome = $("#nomeClienteA").val();
+	var sobrenome = $("#sobrenomeClienteA").val();
+	var cpf = $("#cpfClienteA").val();
+	var telefone = $("#telefoneClienteA").val();
+	var email = $("#emailClienteA").val();
+	var status = $("#statusClienteA").val();
+	var	cliente = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":status};
+	return cliente;
+}
 
 function validar(dom,tipo){
 	switch(tipo){

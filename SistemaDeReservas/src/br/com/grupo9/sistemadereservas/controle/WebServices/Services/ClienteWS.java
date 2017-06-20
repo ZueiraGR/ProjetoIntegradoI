@@ -12,13 +12,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
+import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 @RequestScoped
@@ -56,25 +55,41 @@ public class ClienteWS {
 	}
 
 	@GET
-	public List<ClientePO> listAll(@QueryParam("start") final Integer startPosition,
-			@QueryParam("max") final Integer maxResult) {
-		//TODO: retrieve the clientepoes 
-		final List<ClientePO> clientepoes = null;
-		return clientepoes;
+	@Path("/listar/{pagina:[0-9]*}/{registros:[0-9]*}")
+	public List<ClientePO> listAll(@PathParam("pagina") final int pagina,@PathParam("registros") final int qtdRegistros) {
+		return getClienteBO().listar(pagina,qtdRegistros);
 	}
 
-	@PUT
-	@Path("/{id:[0-9][0-9]*}")
-	public Response update(@PathParam("id") Long id, final ClientePO clientepo) {
-		//TODO: process the given clientepo 
-		return Response.noContent().build();
+	@POST
+	@Path("/alterar/")
+	public List<String> atualizar(final ClientePO cliente) {
+		List<String> retorno = new ArrayList<>();
+		UsuarioPO usuarioPO = new UsuarioPO();
+		usuarioPO.setCliente(cliente);
+		getClienteBO().setUsuarioPO(usuarioPO);
+		if(getClienteBO().altualizar()){
+			retorno.add("sucess");
+		}else{
+			retorno.add("fail");
+		}
+		return retorno;
 	}
 
-	@DELETE
-	@Path("/{id:[0-9][0-9]*}")
-	public Response deleteById(@PathParam("id") final Long id) {
-		//TODO: process the clientepo matching by the given id 
-		return Response.noContent().build();
+	@GET
+	@Path("/excluir/{chave:[0-9]*}")
+	public List<String> excluir(@PathParam("chave") Integer chave) {
+		List<String> retorno = new ArrayList<>();
+		UsuarioPO usuarioPO = new UsuarioPO();
+		ClientePO clientePO = new ClientePO();
+		clientePO.setChave(chave);
+		usuarioPO.setCliente(clientePO);
+		getClienteBO().setUsuarioPO(usuarioPO);
+		if(getClienteBO().excluir()){
+			retorno.add("sucess");	
+		}else{
+			retorno.add("error");
+		}
+		return retorno;
 	}
 	
 	@GET

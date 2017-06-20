@@ -52,6 +52,23 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}
 		
 	}
+	
+	public UsuarioPO comporUsuarioComChaveDoCliente(ClientePO entidade){
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+			 	 .append("FROM usuario u ")
+			 	 .append("WHERE u.cliente.chave = :chave");
+			TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
+			typedQuery.setParameter("chave", entidade.getChave());
+			return (UsuarioPO)typedQuery.getSingleResult();
+		}catch (Exception e) {
+			System.out.println("Não foi localizado um usuário com chave do cliente :"+entidade.getChave()+"\n");
+			return null;
+		}finally {
+			getManager().close();
+		}
+	}
 
 	@Override
 	public ClientePO capturarPorId(ClientePO entidade) {
@@ -97,13 +114,30 @@ public class ClienteDAO implements DAO<ClientePO> {
 			fecharManager();
 		}
 	}
+	
+	public boolean atualizar(UsuarioPO entidade) {
+		try{
+			getManager().getTransaction().begin();
+			getManager().merge(entidade);
+			getManager().merge(entidade.getCliente());
+			getManager().getTransaction().commit();
+			return true;
+		}catch (Exception e) {
+			getManager().getTransaction().rollback();
+			System.out.println("\nOcorreu um erro ao tentar atualizar o cliente: "+entidade.getCliente().getNome()+"\n");
+			return false;
+		}finally {
+			fecharManager();
+		}
+	}
 
 	@Override
 	public List<ClientePO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM ClientePO u ");
+				 .append("FROM cliente u ")
+				 .append(filtro);
 			TypedQuery<ClientePO> typedQuery = getManager().createQuery(query.toString(),ClientePO.class);
 				return (List<ClientePO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {
@@ -114,27 +148,23 @@ public class ClienteDAO implements DAO<ClientePO> {
 			fecharManager();
 		}
 	}
-
+	
 	@Override
 	public boolean excluir(ClientePO entidade) {
-		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM ClientePO u ")
-			 .append("WHERE u.nome = :nome");
-		TypedQuery<ClientePO> typedQuery = getManager().createQuery(query.toString(),ClientePO.class);
-			typedQuery.setParameter("nome", entidade.getNome());
-			ClientePO cliente = (ClientePO)typedQuery.getSingleResult();
-			getManager().getTransaction().begin();
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean excluir(UsuarioPO entidade){
 		try{
-			if(cliente != null && cliente.getNome().equals(entidade.getNome())){
-				getManager().remove(entidade);
-			}
+			getManager().getTransaction().begin();
+			getManager().merge(entidade);
+			getManager().merge(entidade.getCliente());
 			getManager().getTransaction().commit();
 			return true;
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
-			System.out.println("\nOcorreu um erro ao tentar excluir o cliente. Causa:\n");
-			e.printStackTrace();
+			System.out.println("\nOcorreu um erro ao tentar excluir o cliente: "+entidade.getLogin()+"\n");
 			return false;
 		}finally {
 			fecharManager();
@@ -156,4 +186,5 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}
 		return this.manager;
 	}
+	
 }
