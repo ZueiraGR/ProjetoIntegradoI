@@ -5,19 +5,16 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
+import br.com.grupo9.sistemadereservas.model.BO.UsuarioBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
-import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
 @RequestScoped
@@ -27,6 +24,7 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 public class ClienteWS {
 	
 	ClienteBO clienteBO;
+	UsuarioBO usuarioBO;
 	
 	@POST
 	@Path("/cadastrar/")
@@ -52,6 +50,17 @@ public class ClienteWS {
 		}else{
 			return null;
 		}
+	}
+	
+	@GET
+	@Path("/loginById/{id:[0-9]*}")
+	public UsuarioPO loginById(@PathParam("id") final Integer id) {
+		UsuarioPO usuarioPO = new UsuarioPO();
+		ClientePO clientePO = new ClientePO();
+		clientePO.setChave(id);
+		usuarioPO.setCliente(clientePO);
+		getClienteBO().setUsuarioPO(usuarioPO);
+		return getClienteBO().loginById();
 	}
 
 	@GET
@@ -110,6 +119,12 @@ public class ClienteWS {
 			this.clienteBO = new ClienteBO();
 		}
 		return this.clienteBO;
+	}
+	private UsuarioBO getUsuarioBO(){
+		if(this.usuarioBO == null){
+			this.usuarioBO = new UsuarioBO();
+		}
+		return this.usuarioBO;
 	}
 
 }

@@ -130,7 +130,7 @@ function getAcoesCliente(cliente){
 }
 
 function getBtnInfoCliente(cliente){
-	var html = '<a href="#" onclick="abrirInformacoesCliente('+cliente.chave+')" title="Mais informações"><i class="fa fa-info-circle fa-lg blue-text text-darken-1 hoverable" aria-hidden="true"></i></a> ';
+	var html = "<a href='#' onclick='abrirInformacoesCliente("+JSON.stringify(cliente)+")' title='Mais informações'><i class='fa fa-info-circle fa-lg blue-text text-darken-1 hoverable' aria-hidden='true'></i></a> ";
 	return html;
 }
 
@@ -154,7 +154,24 @@ function getBtnExcluirCliente(cliente){
 	return html;
 }
 
+
 function abrirInformacoesCliente(cliente){
+	$.ajax({
+		url: "ws/clientews/loginById/"+cliente.chave,
+	    type: 'GET',
+	    success: function (usuario) {
+	    	$("#loginClienteV").html(usuario.login);
+        },
+	    data: "",
+	    contentType: "application/json",
+	});
+	$("#chaveClienteV").val(cliente.chave);
+	$("#statusClienteV").html(cliente.status);
+    $("#nomeClienteV").html(cliente.nome);
+    $("#sobrenomeClienteV").html(cliente.sobrenome);
+    $("#telefoneClienteV").html(cliente.telefone);
+    $("#emailClienteV").html(cliente.email);
+    $("#cpfClienteV").html(cliente.cpf);
     $("#informacoesDoCliente").modal('open');    
 }
 

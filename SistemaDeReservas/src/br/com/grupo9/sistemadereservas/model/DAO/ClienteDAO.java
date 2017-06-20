@@ -171,6 +171,24 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}
 	}
 	
+	public UsuarioPO loginById(UsuarioPO entidade) {
+		try{
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT u ")
+				 .append("FROM usuario u ")
+				 .append("WHERE u.cliente.chave = :chave");
+			TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
+			typedQuery.setParameter("chave", entidade.getCliente().getChave());
+			return (UsuarioPO)typedQuery.getSingleResult();
+		}catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os cliente. Causa:\n");
+			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
+		}
+	}
+	
 	@Override
 	public void fecharManager() {
 		if(this.manager.isOpen()){

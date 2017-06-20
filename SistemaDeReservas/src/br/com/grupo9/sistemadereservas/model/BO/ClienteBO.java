@@ -47,6 +47,10 @@ public class ClienteBO extends UsuarioBO {
 		return getClienteDAO().listar(pagina,qtdRegistros,getFiltro());
 	}
 	
+	public UsuarioPO loginById(){
+		return getClienteDAO().loginById(getUsuarioPO());
+	}
+	
 	private String getFiltro(){
 		return "WHERE u.status != '"+StatusUsuario.EXCLUIDO.getCodigo()+"'";
 	}
