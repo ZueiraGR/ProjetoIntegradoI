@@ -5,7 +5,7 @@ var qtdRegistrosClientesObtidos = 0;
 var urlClientes = "ws/clientews/listar/";
 
 /**
- * Cadastro de clinetes
+ * Cadastro de clientes
  */
 $("#formularioDeCadastro").submit(function(event){
 	if(capturarDadosDoForm() != null){
