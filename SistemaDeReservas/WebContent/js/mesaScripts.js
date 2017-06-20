@@ -27,7 +27,7 @@ function tratarRetornoMesas(data){
 	if(data.length > 0){
 		preencherTabelaMesas(data);
 	}else{
-		$("#tabelaMesas").html('<tr><td colspan="5">Não foram obtidos resultados</td></td>');
+		$("#tabelaMesas").html('<tr><td colspan="5" class="center">Não foram obtidos resultados</td></td>');
 	}
 }
 
