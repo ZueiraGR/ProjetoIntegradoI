@@ -40,7 +40,7 @@ function preencherTabelaPromocoes(arrayDePromocoes){
 
 function getLinhaPromocao(promocao){
 	linha = "<tr>";
-	linha +="<td>"+promocao.nome+"</td>";
+	linha +="<td>"+promocao.titulo+"</td>";
 	linha +="<td>"+getAcoesPromocao(promocao)+"</td>";
 	linha +="</tr>";
 	return linha;
@@ -48,22 +48,22 @@ function getLinhaPromocao(promocao){
 function getAcoesPromocao(promocao){
 	var html = getBtnVisualizarPromocao(promocao);
 	html += getBtnEditarPromocao(promocao);
-	html += getBtnEncerrarPromoca(promocao);
+	html += getBtnEncerrarPromocao(promocao);
 	html += getBtnProrrogarPromocao(promocao);
 	html += getBtnExcluirPromocao(promocao);
 	return html;
 }
 
 function getBtnVisualizarPromocao(promocao){
-	
+	return "";
 }
 
-function getBtnEncerrarPromoca(promocao){
-	
+function getBtnEncerrarPromocao(promocao){
+	return "";
 }
 
 function getBtnProrrogarPromocao(promocao){
-	
+	return "";
 }
 
 function getBtnEditarPromocao(promocao){
@@ -79,8 +79,15 @@ function getBtnExcluirPromocao(promocao){
 
 function editarPromocao(promocao){
 	$('#tituloFomunlarioPromocao').html("Formulário de alteração de Promocao");
-	$("#opcaoFormPromocoes").val("A");
 	$("#btnCancelarCadastro").trigger("click");
+	$("#opcaoFormPromocoes").val("A");
+	$("#chavePromocao").val(promocao.chave);
+	$("#titulo").val(promocao.titulo);
+	$("#dataInicio").val(coverterDateEmDataString(new Date(promocao.inicio)));
+	$("#dataFim").val(coverterDateEmDataString(new Date(promocao.fim)));
+	$("#descricao").val(promocao.descricao);
+	$("#informacao").val(promocao.informacao);
+	$("#nomeArquivoPromocao").val(promocao.imagem);
 	$("#btnConfirmarCadastro").html("SALVAR");
     $('#mensagemDeRetornoPromocao').html("");
 	$('#mensagemDeRetornoPromocao').removeClass("red");

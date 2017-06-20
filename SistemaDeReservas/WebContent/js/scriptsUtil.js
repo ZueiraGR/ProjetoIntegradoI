@@ -97,3 +97,14 @@ function converteDataStringEmDate(dataString){
 	var ano = parseInt(dataString.substring(6, 11));
 	return new Date(ano,mes,dia);
 }
+
+function coverterDateEmDataString(data){
+    var dia = data.getDate();
+    if (dia.toString().length == 1)
+      dia = "0"+dia;
+    var mes = data.getMonth()+1;
+    if (mes.toString().length == 1)
+      mes = "0"+mes;
+    var ano = data.getFullYear();  
+    return dia+"/"+mes+"/"+ano;
+}
