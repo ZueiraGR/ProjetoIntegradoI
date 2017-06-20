@@ -18,7 +18,8 @@ $("#CadastroDeFuncionario").submit(function(event){
 			cache: false,
 		    contentType: "application/json",
 		    processData: true
-		});}		
+		});
+	}
 	return false;
 });
 
@@ -40,8 +41,6 @@ function capturarDadosDoForm(){
 	}
 	return funcionario;
 }
-
-
 
 function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,senha,confirmaSenha){
 	var mensagem;
