@@ -17,6 +17,10 @@ public class UsuarioBean {
 		this.usuario = (UsuarioPO) session.getAttribute("usuario");
 	}
 	
+	public String getLogin(){
+		return getUsuario().getLogin();
+	}
+	
 	public String getNome(){
 		if(TipoUsuario.CLIENTE.equals(getUsuario().getTipo())){
 			return getUsuario().getCliente().getNome();

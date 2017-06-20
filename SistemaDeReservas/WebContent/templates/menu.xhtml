@@ -3,9 +3,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition>
+	<c:if test="#{usuarioBean.usuarioLogado}">
+		<input type="hidden" id="loginUsuario" value="#{usuarioBean.login}"/>
+	</c:if>
 	<nav class="grey darken-1" role="navigation">
 	<div class="nav-wrapper container">
 		<a href="index.do" title="Inicio"><div class="logo brand-logo"></div></a>
