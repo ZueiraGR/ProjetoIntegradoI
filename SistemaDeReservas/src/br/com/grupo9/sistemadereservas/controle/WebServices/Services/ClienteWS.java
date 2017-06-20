@@ -53,8 +53,8 @@ public class ClienteWS {
 	}
 	
 	@GET
-	@Path("/loginById/{id:[0-9]*}")
-	public UsuarioPO loginById(@PathParam("id") final Integer id) {
+	@Path("/capturarUsuario/{id:[0-9]*}")
+	public UsuarioPO capturarUsuario(@PathParam("id") final Integer id) {
 		UsuarioPO usuarioPO = new UsuarioPO();
 		ClientePO clientePO = new ClientePO();
 		clientePO.setChave(id);

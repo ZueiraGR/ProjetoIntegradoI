@@ -157,7 +157,7 @@ function getBtnExcluirCliente(cliente){
 
 function abrirInformacoesCliente(cliente){
 	$.ajax({
-		url: "ws/clientews/loginById/"+cliente.chave,
+		url: "ws/clientews/capturarUsuario/"+cliente.chave,
 	    type: 'GET',
 	    success: function (usuario) {
 	    	$("#loginClienteV").html(usuario.login);
