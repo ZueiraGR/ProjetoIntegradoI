@@ -34,6 +34,9 @@ public class ReservaPO implements Serializable {
 	@Column(name="qtd_pessoas")
 	private Integer quantidadeDePessoas;
 	
+	@ManyToOne
+	private PromocaoPO promocao;
+	
 
 	public ReservaPO() {
 		super();
@@ -80,4 +83,12 @@ public class ReservaPO implements Serializable {
 	public void setQuantidadeDePessoas(Integer quantidadeDePessoas) {
 		this.quantidadeDePessoas = quantidadeDePessoas;
 	}
+	public PromocaoPO getPromocao() {
+		return promocao;
+	}
+	public void setPromocao(PromocaoPO promocao) {
+		this.promocao = promocao;
+	}
+	
+	
 }
