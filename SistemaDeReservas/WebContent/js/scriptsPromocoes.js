@@ -55,15 +55,7 @@ function getAcoesPromocao(promocao){
 }
 
 function getBtnVisualizarPromocao(promocao){
-	return "";
-}
-
-function getBtnEncerrarPromocao(promocao){
-	return "";
-}
-
-function getBtnProrrogarPromocao(promocao){
-	return "";
+	return "<a href='#' onclick='visualizarPromocao("+JSON.stringify(promocao)+")' title='Editar'><i class='fa fa-info-circle fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a>";
 }
 
 function getBtnEditarPromocao(promocao){
@@ -74,6 +66,18 @@ function getBtnEditarPromocao(promocao){
 function getBtnExcluirPromocao(promocao){
 	var html = "<a href='#' onclick='excluirPromocao("+JSON.stringify(promocao)+")' title='Excluir'><i class='fa fa-trash-o fa-lg orange-text text-darken-3 hoverable' aria-hidden='true'></i></a>";
 	return html;
+}
+
+function visualizarPromocao(promocao){
+	
+	$("#labelTitulo").html(promocao.titulo);
+	$("#labelDataInicio").html(coverterDateEmDataString(new Date(promocao.inicio)));
+	$("#labelDataFim").html(coverterDateEmDataString(new Date(promocao.fim)));
+	$("#labelDescricao").html(promocao.descricao);
+	$("#labelInformacao").html(promocao.informacao);
+	var imagem = '<img class="responsive-img" src="img/'+promocao.imagem+'" data-caption="Mesa ' + promocao.titulo + '">';
+	$("#labelImagem").html(imagem)
+    $("#informacoesDoPromocao").modal('open');
 }
 
 
@@ -97,9 +101,9 @@ function editarPromocao(promocao){
 }
 
 function excluirPromocao(promocao){
-	$("#chavePromocaoAExcluir").val(promocao.chave);
+	$("#chaveDaPromocaoAExcluir").val(promocao.chave);
 	$("#labelNomeDoPromocao").html(promocao.nome);
-    $("#confirmarExclusaoDoPromocao").modal('open');
+    $("#confirmarExclusaoDaPromocao").modal('open');
 }
 
 function abrirFormDeCadastro(){
@@ -182,9 +186,9 @@ $("#formExclusaoPromocao").submit(function(event){
 	$('#mensagemDeRetornoExPromocao').addClass("hiddendiv");
 	$('#mensagemDeRetornoExPromocao').removeClass("red");
 	$('#mensagemDeRetornoExPromocao').removeClass("green");
-	var chave = $("#chavePromocaoAExcluir").val();
+	var chave = $("#chaveDaPromocaoAExcluir").val();
 	$.ajax({
-		url: "ws/promocaows/deletar/"+chave,
+		url: "ws/promocaows/excluir/"+chave,
         type: 'GET',
         data: "",
         success: function (data) {
@@ -200,7 +204,7 @@ $("#formExclusaoPromocao").submit(function(event){
         		},2000);
         	}else{
         		$('#mensagemDeRetornoExPromocao').html("Houve erro ao excluir a promoção!");
-        		$('#mensagemDeRetornoExPromocao').addClass("green");
+        		$('#mensagemDeRetornoExPromocao').addClass("red");
         		$('#mensagemDeRetornoExPromocao').removeClass("hiddendiv");
         	}
         },

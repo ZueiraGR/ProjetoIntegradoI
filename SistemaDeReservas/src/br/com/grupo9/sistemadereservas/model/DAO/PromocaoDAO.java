@@ -52,22 +52,11 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 
 	@Override
 	public boolean atualizar(PromocaoPO entidade) {
-		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM promocao u")
-			 .append("WHERE u.chave = :chave");
-		TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
-			typedQuery.setParameter("chave", entidade.getChave().intValue());
-			PromocaoPO promocao = (PromocaoPO)typedQuery.getSingleResult();
 		try{
-			if(promocao != null && promocao.getChave() == (entidade.getChave())){
-				getManager().getTransaction().begin();
-				getManager().merge(entidade);
-				getManager().getTransaction().commit();
-				return true;
-			}else{
-				return false;
-			}
+			getManager().getTransaction().begin();
+			getManager().merge(entidade);
+			getManager().getTransaction().commit();
+			return true;
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o promoção. Causa:\n");
