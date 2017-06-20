@@ -157,7 +157,7 @@ function getAcoesFuncionario(funcionario){
 }
 
 function getBtnInfoFuncionario(funcionario){
-	var html = '<a href="#" onclick="abrirInformacoesFuncionario('+funcionario.chave+')" title="Mais informações"><i class="fa fa-info-circle fa-lg blue-text text-darken-1 hoverable" aria-hidden="true"></i></a> ';
+	var html = "<a href='#' onclick='abrirInformacoesFuncionario("+JSON.stringify(funcionario)+")' title='Mais informações'><i class='fa fa-info-circle fa-lg blue-text text-darken-1 hoverable' aria-hidden='true'></i></a> ";
 	return html;
 }
 
@@ -182,6 +182,24 @@ function getBtnExcluirFuncionario(funcionario){
 }
 
 function abrirInformacoesFuncionario(funcionario){
+	$.ajax({
+		url: "ws/funcionariows/loginById/"+funcionario.chave,
+	    type: 'GET',
+	    success: function (usuario) {
+	    	$("#loginFuncionarioV").html(usuario.login);
+	    },
+	    data: "",
+	    contentType: "application/json",
+	});
+	
+	$("#chaveFuncionarioV").val(funcionario.chave);
+	$("#statusFuncionarioV").html(funcionario.status);
+    $("#nomeFuncionarioV").html(funcionario.nome);
+    $("#sobrenomeFuncionarioV").html(funcionario.sobrenome);
+    $("#telefoneFuncionarioV").html(funcionario.telefone);
+    $("#emailFuncionarioV").html(funcionario.email);
+    $("#cpfFuncionarioV").html(funcionario.cpf);
+    $("#cargoFuncionarioV").html(funcionario.cargo.nome);
     $("#informacoesDoFuncionario").modal('open');    
 }
 
