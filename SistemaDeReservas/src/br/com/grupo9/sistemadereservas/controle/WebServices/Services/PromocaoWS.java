@@ -23,7 +23,7 @@ public class PromocaoWS {
 	private PromocaoBO promocaoBO;
 	
 	@POST
-	@Path("/cadastar/")
+	@Path("/cadastrar/")
 	public List<String> cadastrar(final PromocaoPO promocaopo) {
 		List<String> retorno = new ArrayList<>();
 		getPromocaoBO().setPromocaoPO(promocaopo);
@@ -45,7 +45,7 @@ public class PromocaoWS {
 	}
 
 	@GET
-	@Path("/listar/{pagina:[0-9]}/{qtdRegistros:[0-9]}/{opcaoListagem}")
+	@Path("/listar/{pagina:[0-9]*}/{qtdRegistros:[0-9]*}/{opcaoListagem:[A-Z]*}")
 	public List<PromocaoPO> listAll(@PathParam("pagina") Integer pagina, @PathParam("qtdRegistros") Integer qtdRegistros ,@PathParam("opcaoListagem") String opcaoListagem) {
 		if(opcaoListagem.equals("T")){
 			return getPromocaoBO().listarTodas(pagina, qtdRegistros);

@@ -96,7 +96,7 @@ public class PromocaoBO {
 			retorno = false;
 			getMensagensDeErro().add("O campo título é obrigatório e deve conter no mínimo 5 caracteres.");
 		}
-		if(getPromocaoPO().getDescricao() == null || getPromocaoPO().getDescricao() == "" || getPromocaoPO().getDescricao().length() < 10){
+		if(getPromocaoPO().getDescricao() == null || getPromocaoPO().getDescricao() == "" || getPromocaoPO().getDescricao().length() < 2){
 			retorno = false;
 		}
 		if(getPromocaoPO().getInformacao() == null || getPromocaoPO().getInformacao() == "" || getPromocaoPO().getInformacao().length() < 25){

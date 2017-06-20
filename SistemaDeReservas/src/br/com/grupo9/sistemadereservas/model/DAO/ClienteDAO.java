@@ -204,5 +204,4 @@ public class ClienteDAO implements DAO<ClientePO> {
 		}
 		return this.manager;
 	}
-	
 }

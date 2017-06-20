@@ -3,7 +3,11 @@ package br.com.grupo9.sistemadereservas.model.PO;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.Calendar;
+import java.util.List;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
 
 /**
  * Entity implementation class for Entity: PromocaoPO
@@ -17,16 +21,16 @@ public class PromocaoPO implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer chave;
-	@ManyToOne
-	private FuncionarioPO funcionario;
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Calendar inicio;
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Calendar fim;
 	private String titulo;
 	private String descricao;
 	private String informacao;
 	private String imagem;
+//	@OneToMany(mappedBy="promocao",cascade=CascadeType.ALL)
+//	private List<ReservaPO> reservas;
 	
 
 	public PromocaoPO() {
@@ -39,12 +43,6 @@ public class PromocaoPO implements Serializable {
 	public void setChave(Integer chave) {
 		this.chave = chave;
 	}  
-	public FuncionarioPO getFuncionario() {
-		return funcionario;
-	}
-	public void setFuncionario(FuncionarioPO funcionario) {
-		this.funcionario = funcionario;
-	}
 	public Calendar getInicio() {
 		return this.inicio;
 	}
@@ -87,5 +85,13 @@ public class PromocaoPO implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
+//	public List<ReservaPO> getReservas() {
+//		return reservas;
+//	}
+//	public void setReservas(List<ReservaPO> reservas) {
+//		this.reservas = reservas;
+//	}
+	
+	
    
 }

@@ -17,105 +17,153 @@
 	</ui:insert>
 </head>
 
-<body>
+<body onload="carregarPromocoes(1)">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
 	<div class="section">
 		<div class="container row">
 			<div class="row s12 z-depth-2">
-				<ul class="tabs z-depth-1 grey lighten-3">
+				<ul class="tabs tabs-fixed-width z-depth-1 grey lighten-3">
 					<li class="tab col"><a href="#promocoes-view">PROMOÇÕES</a></li>
-					<li class="tab col"><a href="#cadastrar-promocao">CADASTRAR PROMOÇÃO</a></li>
 				</ul>
 				<div id="promocoes-view" class="col s12">
+					<br/>
+					<div class="row">
+						<div class="col l12">
+							<a href="#" onclick="abrirFormDeCadastro()" class="btn grey white-text"><i class="fa fa-plus" aria-hidden="true"></i> CADASTRAR NOVA PROMOÇÃO</a>
+							<a href="#" onclick="recarregarPromocoes()" class="btn grey white-text"><i class="fa fa-refresh" aria-hidden="true"></i> RECARREGAR</a>
+						</div>
+					</div>
 					<table class="bordered">
 						<thead>
 							<tr>
-								<th>Número da promoção</th>
 								<th>Nome da promoção</th>
-								<th>Adicional</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>PROMO 1</td>
-								<td>NOME PROMO 1</td>
-								<td>INFORMAÇÃO 1</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>PROMO 2</td>
-								<td>NOME PROMO 2</td>
-								<td>INFORMAÇÃO 2</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>PROMO 3</td>
-								<td>NOME PROMO 3</td>
-								<td>INFORMAÇÃO 3</td>
-								<td></td>
-							</tr>
+						<tbody id="tabelaPromocoes">
 						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="2">
+									<div class="row">
+										<div class="col l3">
+											<div class="input-field">
+												<select id="qtdRegistrosPromocoes" name="qtdRegistrosPromocoes" onchange="carregarPromocoes(paginaAtualPromocoes)">
+													<option value="10" selected="selected">10</option>
+													<option value="20">20</option>
+													<option value="30">30</option>
+													<option value="40">40</option>
+													<option value="50">50</option>
+												</select>
+												<label for="qtdRegistrosPromocoes">Registros por página</label>
+											</div>
+										</div>
+										<div class="col l9 center">
+											<ul class="pagination" id="OpPaginasPromocoes"></ul>
+										</div>
+									</div>
+								</th>
+							</tr>
+						</tfoot>
 					</table>
-				</div>
-				<div class="container" id="cadastrar-promocao">
-					<div class="col s12">
-						<form class="form col s12" name="CadastroDePromocoes" method="POST">
-							<br/>
-							<div class="row">
-								<div class="input-field col s6">
-									<input placeholder="12" id="numero" type="number" class="validate" required="required"/>
-									<label for="numero"	data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NUMERO DA PROMOÇÃO</label>
-								</div>
-								<div class="input-field col s6">
-									<input placeholder="SUPER COMBO" id="cadeiras" type="text" class="validate" required="required"/>
-									<label for="NOME" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">NOME DA PROMOÇÃO</label>
-								</div>
-							</div>
-			
-							<div class="row">
-								<div class="input-field col s6">
-									<input placeholder="Adicional" id="adicional" type="text" class="validate"/>
-									<label for="adicional" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">DESCRICAO</label>
-								</div>
-								<div class="input-field col s6">
-									<input placeholder="Adicional" id="adicional" type="file" class="validate"/>
-									<label for="adicional" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">IMAGEM PROMOCIONAL</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s6">
-									<input placeholder="Adicional" id="adicional" type="text" class="validate"/>
-									<label for="adicional" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">DATA INICIO DA PROMOÇÃO</label>
-								</div>
-								<div class="input-field col s6">
-									<input placeholder="Adicional" id="adicional" type="text" class="validate"/>
-									<label for="adicional" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">DATA FIM DA PROMOÇÃO</label>
-								</div>
-							</div>
-							<div class="row center">
-								<div class="input-field col l3"></div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-green col l12" type="submit">CADASTRAR</button>
-								</div>
-								<div class="input-field col l3">
-									<button	class="btn grey modal-action modal-close waves-effect waves-red col l12" type="reset">CANCELAR</button>
-								</div>
-								<div class="input-field col l3"></div>
-							</div>
-						</form>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
+	<div class="modal" id="modalFormPromocoes">
+		<div class="modal-content">
+			<div class="row"><h5 id="tituloFomunlarioPromocao"></h5></div>
+			<div id="mensagemDeRetornoPromocao" class="card-panel lighten-2 white-text center-align hiddendiv"></div>
+			<div class="col s12">
+				<form class="form col s12" name="CadastroDePromocoes" method="POST">
+					<input type="hidden" value="C" id="opcaoFormPromocoes"/>
+					<input type="hidden" value="" id="chavePromocao"/>
+					<input type="hidden" value="" id="imagemPromocaoBase64"/>
+					<input type="hidden" value="F" id="isPromocaoJaExiste"/>
+					<br/>
+					<div class="row">
+						<div class="input-field col s12">
+							<input placeholder="Digite aqui o título da promoção a ser cadastrada." id="titulo" type="text" class="validate" required="required"/>
+							<label for="titulo" data-error="Prenchimento deste campo é obrigatório!" data-success="Ok">TÍTULO DA PROMOÇÃO</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="Digite a data de inicio da promoção." id="dataInicio" type="text" class="validate"/>
+							<label for="dataInicio" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">DATA DE INICIO DA PROMOÇÃO</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="Digite a data de término da promoção." id="dataFim" type="text" class="validate"/>
+							<label for="dataFim" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">DATA DE TÉRMINO DA PROMOÇÃO</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input placeholder="Digite uma breve descrição da promoção." id="descricao" type="text" class="validate"/>
+							<label for="descricao" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">DESCRICAO</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<textarea placeholder="Digite todas as informações sobre a promoção." id="informacao" class="validate materialize-textarea"/>
+							<label for="informacao" data-error="Digite uma breve descrição para a promoção!"	data-success="Ok">INFORMAÇÃO</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="file-field input-field col s12">
+							<div class="btn grey">
+								<span id="labelBtnImagem">SELECIONAR IMAGEM</span>
+								<input id="imagemPromocao" name="imagemPromocao" type="file" onchange="carregarEConverterArquivo(idInputFilePromocao,idInputHiddenPromocao)" required="required"/>
+							</div>
+							<div class="file-path-wrapper">
+								<input id="nomeArquivoPromocao" class="file-path validate" type="text"/>
+							</div>
+						</div>
+					</div>
+					<div class="row center">
+						<div class="input-field col l3"></div>
+						<div class="input-field col l3">
+							<button class="btn grey waves-effect waves-green col l12" type="submit" id="btnConfirmarCadastro">CADASTRAR</button>
+						</div>
+						<div class="input-field col l3">
+							<button	class="btn grey modal-action modal-close waves-effect waves-red col l12" type="reset" id="btnCancelarCadastro">CANCELAR</button>
+						</div>
+						<div class="input-field col l3"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="confirmarExclusaoDaPromocao">
+			<form id="formExclusaoPromocao">
+				<div class="modal-content">
+					<div id="mensagemDeRetornoExPromocao" class="card-panel lighten-2 white-text center-align hiddendiv"></div>
+					<p class="center-align">Deseja realmente excluir o cargo <b id="labelNomeDaPromocao" class="red-text"></b> ?</p>
+				</div>		
+				<div class="container">
+					<div class="row">
+						<input type="hidden" value="" id="chaveDaPromocaoAExcluir"/>
+						<div class="col l6 m6 s6 center">
+							<button class="btn grey waves-effect waves-green" id="confirmarExclusao" type="submit">CONFIRMAR</button>
+						</div>
+						<div class="col l6 m6 s6 center">
+							<button class="btn grey modal-close waves-effect waves-red modal-close" id="cancelarExclusao" type="reset">CANCELAR</button>
+						</div>
+					</div>
+					<div class="row"></div>
+				</div>
+			</form>
+		</div>
+	
 	<ui:insert>
 		<ui:include src="/templates/rodape.xhtml" />
 		<ui:include src="/templates/js_padrao.xhtml" />
 	</ui:insert>
+	<script type="text/javascript" src="js/scriptsPromocoes.js"></script>
 
 </body>
 
