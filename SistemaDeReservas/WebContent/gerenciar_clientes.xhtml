@@ -120,7 +120,7 @@
 						<b>login</b> maria.jose
 					</div>
 				</div>
-				<div class="row">
+				<div class="row">	
 					<div class="col s6 l6 m6">
 						<b>Telefone:</b> (61)99999-9999
 					</div>
@@ -147,7 +147,9 @@
 		<div class="modal-content">
 			<div class="col s12">
 				<form class="form col s12" name="AlterarDadosCliente" id="AlterarDadosCliente" action="" method="POST">
-					<br/><input class="hiddendiv" id="chaveClienteA" />
+					<br/>
+						<input class="hiddendiv" id="chaveClienteA" />
+						<input class="hiddendiv" id="statusClienteA" />
 					<div class="row">
 						<div class="input-field col s6">
 							<input placeholder="" id="nomeClienteA" type="text" class="validate" required="required"/>
@@ -163,8 +165,8 @@
 							<input placeholder="" maxlength="12" id="telefoneClienteA"	type="tel" class="validate" required="required"/>
 								<label for="telefoneClienteA">TELEFONE</label>
 						</div>
-						<div placeholder="" class="input-field col s6">
-							<input maxlength="14" id="cpfClienteA"	type="text" class="validate" required="required"/>
+						<div class="input-field col s6">
+							<input placeholder="" maxlength="14" id="cpfClienteA"	type="text" class="validate" required="required"/>
 								<label for="cpfClienteA">CPF</label>
 						</div>
 					</div>
