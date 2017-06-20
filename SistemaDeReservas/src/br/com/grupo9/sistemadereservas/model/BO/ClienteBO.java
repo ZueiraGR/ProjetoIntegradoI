@@ -47,8 +47,8 @@ public class ClienteBO extends UsuarioBO {
 		return getClienteDAO().listar(pagina,qtdRegistros,getFiltro());
 	}
 	
-	public UsuarioPO loginById(){
-		return getClienteDAO().loginById(getUsuarioPO());
+	public UsuarioPO capturar(){
+		return getClienteDAO().comporUsuarioComChaveDoCliente(getUsuarioPO().getCliente());
 	}
 	
 	private String getFiltro(){

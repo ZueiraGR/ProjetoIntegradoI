@@ -60,7 +60,7 @@ public class ClienteWS {
 		clientePO.setChave(id);
 		usuarioPO.setCliente(clientePO);
 		getClienteBO().setUsuarioPO(usuarioPO);
-		return getClienteBO().loginById();
+		return getClienteBO().capturar();
 	}
 
 	@GET

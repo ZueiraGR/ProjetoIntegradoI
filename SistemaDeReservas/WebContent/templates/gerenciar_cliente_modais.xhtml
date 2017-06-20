@@ -4,7 +4,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:composite="http://java.sun.com/jsf/composite"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
 	<ui:composition>
 	
 	<!-- Modal para cadastrar os dados do funcionario -->
@@ -99,14 +98,14 @@
 		</div>
 		
 		<!-- Modal para confirmar exclusao do funcionario -->
-		<div class="modal" id="confirmarExclusaoDoFuncionario">
+		<div class="modal" id="confirmarExclusaoDoCliente">
 			<div class="modal-content">
-				<p class="center-align">Deseja realmente excluir o funcionário <b id="labelNomeDoFuncionario" class="red-text"></b> ?</p>
+				<p class="center-align">Deseja realmente excluir o cliente <b id="labelNomeDoCliente" class="red-text"></b> ?</p>
 			</div>
 			<div class="">
-			<form id="confirmarExclusaoFuncionario">
+			<form id="confirmarExclusaoCliente">
 				<div class="row">
-				<input type="hidden" value="" id="funcionarioID"/>
+				<input type="hidden" value="" id="clienteID"/>
 					<div class="input-field col l3"></div>
 					<div class="input-field col l3">
 						<button class="btn grey waves-effect waves-green col l12 m12" type="submit">CONFIRMAR</button>
@@ -122,105 +121,104 @@
 		</div>
 		
 		<!-- Modal para mostrar as informações do funcionario -->
-		<div class="modal" id="informacoesDoFuncionario">
-			<div class="modal-content">
-				<div class="row center"><h5>Fomulario de visualização</h5></div>
-				<div class="container">
+		<div class="modal" id="informacoesDoCliente">
+		<div class="modal-content">
+			<div class="row center"><h5>Fomulario de visualização</h5></div>
+			<div class="container">
 					<div class="row">
 						<div class="col s6 l6 m6">
-							<b>Nome:</b> <div id="nomeFuncionarioV" class="red-text"></div>
+							<b>Nome:</b> <div id="nomeClienteV" class="red-text"></div>
 						</div>
 						<div class="col s6 l6 m6">
-							<b>Sobrenome:</b> <div id="sobrenomeFuncionarioV" class="red-text"></div>
+							<b>Sobrenome:</b> <div id="sobrenomeClienteV" class="red-text"></div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s6 l6 m6">
-							<b>CPF:</b> <div id="cpfFuncionarioV" class="red-text"></div>
-						</div>
-						<div class="col s6 l6 m6">
-							<b>Cargo:</b> <div id="cargoFuncionarioV" class="red-text"></div>
-						</div>						
-					</div>
-					<div class="row">
-						<div class="col s6 l6 m6">
-							<b>E-MAIL:</b> <div id="emailFuncionarioV" class="red-text"></div>
-						</div>
-						<div class="col s6 l6 m6">
-							<b>Telefone:</b> <div id="telefoneFuncionarioV" class="red-text"></div>
+							<b>CPF:</b> <div id="cpfClienteV" class="red-text"></div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s6 l6 m6">
-							<b>Login:</b> <div id="loginFuncionarioV" class="red-text"></div>
+							<b>E-MAIL:</b> <div id="emailClienteV" class="red-text"></div>
 						</div>
+						
 						<div class="col s6 l6 m6">
-							<b>Status:</b> <div id="statusFuncionarioV" class="red-text"></div>
-						</div>						
+							<b>Telefone:</b> <div id="telefoneClienteV" class="red-text"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6 l6 m6">
+							<b>Login:</b> <div id="loginClienteV" class="red-text"></div>
+						</div>
+						
+						<div class="col s6 l6 m6">
+							<b>Status:</b> <div id="statusClienteV" class="red-text"></div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<div class="row">
-					<div class="center-align modal-close waves-effect waves-red col l12 m12 s12">
-						<i class="fa fa-close" aria-hidden="true"></i>  FECHAR
-					</div>
+		</div>
+		<div class="modal-footer">
+			<div class="row">
+				<div class="center-align modal-close waves-effect waves-red col l12 m12 s12">
+					<i class="fa fa-close" aria-hidden="true"></i>  FECHAR
 				</div>
 			</div>
 		</div>
+	</div>
 		
 		<!-- Modal para alterar os dados do funcionario -->
-		<div class="modal" id="alterarFuncionario">
-			<div class="modal-content">
-				<div class="row center"><h5 id="">Formulário de alteração de funcionário</h5></div>
-				<div class="col s12">
-					<form name="AlterarDadosFuncionario" id="AlterarDadosFuncionario" method="POST">
-					<input class="hiddendiv" id="chaveFuncionarioA"  />
-					<input class="hiddendiv" id="statusFuncionarioA"  />
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionarioA" type="text" class="validate" required="required" /> 
-									<label for="nomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">NOME</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionarioA" type="text" class="validate" required="required" /> 
-									<label for="sobrenomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">SOBRENOME</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input maxlength="12" placeholder="61 98899-7755" id="telefoneFuncionarioA" type="tel" class="validate" required="required" /> 
-									<label for="telefoneFuncionarioA" data-error="Insira um telefone!">TELEFONE</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input maxlength="14" placeholder="123.123.123-12" id="cpfFuncionarioA" type="text" class="validate" required="required" /> 
-									<label for="cpfFuncionarioA" data-error="Insira um cpf valido!">CPF</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="exemplo@email.com" id="emailFuncionarioA" type="email" class="validate" required="required" /> 
-									<label for="emailFuncionarioA" data-error="Insira um email valido!">EMAIL</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col l3"></div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CONFIRMAR</button>
-								</div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset" id="cancelar">CANCELAR</button>
-								</div>
-								<div class="input-field col l3"></div>
-							</div>
-							<div class="row">
-								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
-							</div>
-						</form>
-				</div>
+		<div class="modal" id="alterarCliente">
+		<div class="modal-content">
+		<div class="row center"><h5 id="">Formulário de alteração de cliente</h5></div>
+			<div class="col s12">
+				<form class="form col s12" name="AlterarDadosCliente" id="AlterarDadosCliente" action="" method="POST">
+					<br/>
+						<input class="hiddendiv" id="chaveClienteA" />
+						<input class="hiddendiv" id="statusClienteA" />
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="" id="nomeClienteA" type="text" class="validate" required="required"/>
+							<label for="nomeClienteA">NOME</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="" id="sobrenomeClienteA" type="text" class="validate" required="required"/>
+							<label for="sobrenomeClienteA">SOBRENOME</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="" maxlength="12" id="telefoneClienteA"	type="tel" class="validate" required="required"/>
+								<label for="telefoneClienteA">TELEFONE</label>
+						</div>
+						<div class="input-field col s6">
+							<input placeholder="" maxlength="14" id="cpfClienteA"	type="text" class="validate" required="required"/>
+								<label for="cpfClienteA">CPF</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<input placeholder="" id="emailClienteA" type="email" class="validate" required="required"/>
+							<label for="emailClienteA" data-error="Digite um e-mail válido!" data-success="Ok">EMAIL</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l3"></div>
+						<div class="input-field col l3">
+							<button	class="btn grey waves-effect waves-green col l6 modal-action modal-close col s12 l12 m12" type="submit">CONFIRMAR</button>
+						</div>
+						<div class="input-field col l3">
+							<button class="btn grey waves-effect waves-green col l6 modal-action modal-close col s12 l12 m12" type="reset">CANCELAR</button>
+						</div>
+						<div class="input-field col l3"></div>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
 		
 	</ui:composition>
+	
+	
 
 </html>

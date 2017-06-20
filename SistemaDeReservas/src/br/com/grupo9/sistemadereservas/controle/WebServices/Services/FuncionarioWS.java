@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
 import br.com.grupo9.sistemadereservas.model.BO.UsuarioBO;
+import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
@@ -54,6 +55,17 @@ public class FuncionarioWS {
 	@Path("/listar/{pagina:[0-9]*}/{registros:[0-9]*}")
 	public List<FuncionarioPO> listAll(@PathParam("pagina") final int pagina,@PathParam("registros") final int qtdRegistros) {
 		return getFuncionarioBO().listar(pagina,qtdRegistros);
+	}
+	
+	@GET
+	@Path("/loginById/{id:[0-9]*}")
+	public UsuarioPO loginById(@PathParam("id") final Integer id) {
+		UsuarioPO usuarioPO = new UsuarioPO();
+		FuncionarioPO funcionarioPO = new FuncionarioPO();
+		funcionarioPO.setChave(id);
+		usuarioPO.setFuncionario(funcionarioPO);
+		getFuncionarioBO().setUsuarioPO(usuarioPO);
+		return getFuncionarioBO().capturar();
 	}
 
 	@POST
