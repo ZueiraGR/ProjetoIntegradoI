@@ -70,24 +70,17 @@ public class UsuarioDAO implements DAO<UsuarioPO> {
 	}
 	
 	@Override
-	public boolean atualizar(UsuarioPO entidade) {
-		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM usuario u")
-			 .append("WHERE u.login = :login");
-		TypedQuery<UsuarioPO> typedQuery = getManager().createQuery(query.toString(),UsuarioPO.class);
-			typedQuery.setParameter("login", entidade.getLogin());
-			UsuarioPO usuario = (UsuarioPO)typedQuery.getSingleResult();
-			
+	public boolean atualizar(UsuarioPO entidade) {			
 		try{
-			if(usuario != null && usuario.getLogin().equals(entidade.getLogin())){
 				getManager().getTransaction().begin();
 				getManager().merge(entidade);
+				if(entidade.getCliente() != null){
+					getManager().merge(entidade.getCliente());
+				}else if(entidade.getFuncionario() != null){
+					getManager().merge(entidade.getFuncionario());
+				}
 				getManager().getTransaction().commit();
 				return true;
-			}else{
-				return false;
-			}
 		}catch (Exception e) {
 			getManager().getTransaction().rollback();
 			System.out.println("\nOcorreu um erro ao tentar alterar o usuario. Causa:\n");
