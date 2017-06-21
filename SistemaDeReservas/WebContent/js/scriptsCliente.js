@@ -4,9 +4,13 @@ var qtdRegistrosClientes = 10;
 var qtdRegistrosClientesObtidos = 0;
 var urlClientes = "ws/clientews/listar/";
 
-/**
- * Cadastro de clientes
- */
+/*CADASTRAR CLIENTE*/
+ 
+function cadastrarCliente(){
+	$('#tituloFomunlarioCliente').html("Formulário de cadastro de cliente");
+    $("#cadastrarCliente").modal('open');
+}
+
 $("#formularioDeCadastro").submit(function(event){
 	if(capturarDadosDoForm() != null){
 		var formData = JSON.stringify(capturarDadosDoForm());
@@ -83,6 +87,94 @@ function isDadosValidos(nome,sobrenome,cpf,telefone,login,email,confirmaEmail,se
 	return retorno;
 }
 
+/*EXCLUIR CLIENTE*/
+
+function excluirCliente(chave){
+	$("#confirmarExclusaoDoCliente").modal('open');
+	$("#clienteID").val(chave);
+}
+
+$("#confirmarExclusaoCliente").submit(function(event){
+	var chave = $("#clienteID").val();
+	$.ajax({
+		url: "ws/clientews/excluir/"+chave,
+      type: 'GET',
+      data: "",
+      contentType: "application/json"
+	});
+	$("#confirmarExclusaoDoCliente").modal('close');
+	return false;
+});
+
+/*ALTERAR DADOS DO CLIENTE*/
+
+function editarCliente(cliente){
+	$("#chaveClienteA").val(cliente.chave);
+	$("#statusClienteA").val(cliente.status);
+    $("#nomeClienteA").val(cliente.nome);
+    $("#sobrenomeClienteA").val(cliente.sobrenome);
+    $("#telefoneClienteA").val(cliente.telefone);
+    $("#emailClienteA").val(cliente.email);
+    $("#cpfClienteA").val(cliente.cpf);
+    $("#alterarCliente").modal('open'); 
+}
+
+$("#AlterarDadosCliente").submit(function(event){
+	if(DadosDoFormAlterar() != null){
+		var formData = JSON.stringify(DadosDoFormAlterar());
+		$.ajax({
+			url: "ws/clientews/alterar/",
+	        type: 'POST',
+	        data: formData,
+			cache: false,
+		    contentType: "application/json",
+		    processData: true
+		});}		
+	return false;
+});
+
+function DadosDoFormAlterar(){
+	var chave = $("#chaveClienteA").val();
+	var nome = $("#nomeClienteA").val();
+	var sobrenome = $("#sobrenomeClienteA").val();
+	var cpf = $("#cpfClienteA").val();
+	var telefone = $("#telefoneClienteA").val();
+	var email = $("#emailClienteA").val();
+	var status = $("#statusClienteA").val();
+	var	cliente = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":status};
+	return cliente;
+}
+
+/*ATIVAR/DESATIVAR CLIENTE*/
+
+function bloquearOuDesbloquearCliente(cliente){
+	$("#confirmarBloqueioOuDesbloqueioDoCliente").modal('open');   
+}
+
+/*INFORMAÇÕES DO CLIENTE*/
+
+function abrirInformacoesCliente(cliente){
+	$.ajax({
+		url: "ws/clientews/capturarUsuario/"+cliente.chave,
+	    type: 'GET',
+	    success: function (usuario) {
+	    	$("#loginClienteV").html(usuario.login);
+        },
+	    data: "",
+	    contentType: "application/json",
+	});
+	$("#chaveClienteV").val(cliente.chave);
+	$("#statusClienteV").html(cliente.status);
+    $("#nomeClienteV").html(cliente.nome);
+    $("#sobrenomeClienteV").html(cliente.sobrenome);
+    $("#telefoneClienteV").html(cliente.telefone);
+    $("#emailClienteV").html(cliente.email);
+    $("#cpfClienteV").html(cliente.cpf);
+    $("#informacoesDoCliente").modal('open');    
+}
+
+/*TABELA DE CLIENTES*/
+
 function carregarClientes(pagina){
 	qtdRegistrosClientes = parseInt($("#qtdRegistrosClientes").val());
 	$.ajax({
@@ -121,6 +213,8 @@ function getLinhaCliente(cliente){
 	return linha;
 }
 
+/*BOTÃO DE AÇÕES*/
+
 function getAcoesCliente(cliente){
 	var html = getBtnInfoCliente(cliente);
 	html += getBtnEditarCliente(cliente);
@@ -154,88 +248,7 @@ function getBtnExcluirCliente(cliente){
 	return html;
 }
 
-
-function abrirInformacoesCliente(cliente){
-	$.ajax({
-		url: "ws/clientews/capturarUsuario/"+cliente.chave,
-	    type: 'GET',
-	    success: function (usuario) {
-	    	$("#loginClienteV").html(usuario.login);
-        },
-	    data: "",
-	    contentType: "application/json",
-	});
-	$("#chaveClienteV").val(cliente.chave);
-	$("#statusClienteV").html(cliente.status);
-    $("#nomeClienteV").html(cliente.nome);
-    $("#sobrenomeClienteV").html(cliente.sobrenome);
-    $("#telefoneClienteV").html(cliente.telefone);
-    $("#emailClienteV").html(cliente.email);
-    $("#cpfClienteV").html(cliente.cpf);
-    $("#informacoesDoCliente").modal('open');    
-}
-
-function cadastrarCliente(){
-	$('#tituloFomunlarioCliente').html("Formulário de cadastro de cliente");
-    $("#cadastrarCliente").modal('open');
-}
-
-function editarCliente(cliente){
-	$("#chaveClienteA").val(cliente.chave);
-	$("#statusClienteA").val(cliente.status);
-    $("#nomeClienteA").val(cliente.nome);
-    $("#sobrenomeClienteA").val(cliente.sobrenome);
-    $("#telefoneClienteA").val(cliente.telefone);
-    $("#emailClienteA").val(cliente.email);
-    $("#cpfClienteA").val(cliente.cpf);
-    $("#alterarCliente").modal('open'); 
-}
-
-function bloquearOuDesbloquearCliente(cliente){
-  $("#confirmarBloqueioOuDesbloqueioDoCliente").modal('open');   
-}
-
-function excluirCliente(chave){
-	$("#confirmarExclusaoDoCliente").modal('open');
-	$("#clienteID").val(chave);
-}
-$("#confirmarExclusaoCliente").submit(function(event){
-	var chave = $("#clienteID").val();
-	$.ajax({
-		url: "ws/clientews/excluir/"+chave,
-      type: 'GET',
-      data: "",
-      contentType: "application/json"
-	});
-	$("#confirmarExclusaoDoCliente").modal('close');
-	return false;
-});
-
-$("#AlterarDadosCliente").submit(function(event){
-	if(DadosDoFormAlterar() != null){
-		var formData = JSON.stringify(DadosDoFormAlterar());
-		$.ajax({
-			url: "ws/clientews/alterar/",
-	        type: 'POST',
-	        data: formData,
-			cache: false,
-		    contentType: "application/json",
-		    processData: true
-		});}		
-	return false;
-});
-
-function DadosDoFormAlterar(){
-	var chave = $("#chaveClienteA").val();
-	var nome = $("#nomeClienteA").val();
-	var sobrenome = $("#sobrenomeClienteA").val();
-	var cpf = $("#cpfClienteA").val();
-	var telefone = $("#telefoneClienteA").val();
-	var email = $("#emailClienteA").val();
-	var status = $("#statusClienteA").val();
-	var	cliente = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":status};
-	return cliente;
-}
+/*VALIDAÇÕES E TRATAMENTOS*/
 
 function validar(dom,tipo){
 	switch(tipo){

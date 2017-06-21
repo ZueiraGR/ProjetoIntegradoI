@@ -5,6 +5,15 @@ var qtdRegistrosFuncionariosObtidos = 0;
 var urlFuncionarios = "ws/funcionariows/listar/";
 var urlUsuarios = "ws/funcionariows/listarUsuarios/";
 
+/*CADASTRAR FUNCIONARIO*/
+
+function cadastrarFuncionario(){
+	$('#tituloFomunlarioFuncionario').html("Formulário de cadastro de funcionário");
+	$("#hide-alterar").show();
+    $("#cadastrarFuncionario").modal('open');
+	selectCargos();
+}
+
 $("#CadastroDeFuncionario").submit(function(event){
 	if(capturarDadosDoForm() != null){
 		var formData = JSON.stringify(capturarDadosDoForm());
@@ -81,34 +90,130 @@ function isDadosValidos(nome,sobrenome,cpf,telefone,cargo,login,email,senha,conf
 	return retorno;
 }
 
-function tratarRetornoServidor(data){
-	if(data == "sucess"){
-		$('#mensagemRetornoCadastro').html("Cadastro realizado com sucesso!");
-		$('#mensagemRetornoCadastro').addClass("green");
-		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
-		setTimeout(function(){
-			$('#cadastrar').trigger("click" );
-			limparCamposFormCadastro();
-			$('#mensagemRetornoCadastro').addClass("hiddendiv");
-		},2000);
-	}else{
-		$('#mensagemRetornoCadastro').html("Houve erro ao cadastrar!");
-		$('#mensagemRetornoCadastro').addClass("red");
-		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
-	}
+function selectCargos(){
+	$.ajax({
+		url: "ws/cargows/listarTodos/",
+        type: 'GET',
+        success: function (data) {
+        	$('select').material_select('destroy');
+        	if(data.length > 0){
+        		preencherSelectCargos(data);
+        	}else{
+        		$("#cargoFuncionario").html("");
+        	}
+        	$(document).ready(function(){
+        		$('select').material_select();
+        	})
+        }
+	});
 }
 
-function limparCamposFormCadastro(){
-	$("#nomeFuncionario").val("");
-	$("#sobrenomeFuncionario").val("");
-	$("#cpfFuncionario").val("");
-	$("#loginFuncionario").val("");
-	$("#telefoneFuncionario").val("");
-	$("#emailFuncionario").val("");
-	$("#senhaFuncionario").val("");
-	$("#confirmaSenhaFuncionario").val("");
-	$("#cargoFuncionario").val("");
+function preencherSelectCargos(arrayDeCargos){
+	var html = '<option disabled="disabled" selected="selected">Selecione um cargo</option>';
+	for( i = 0; i < arrayDeCargos.length; i++){
+		html += getCargo(arrayDeCargos[i]);
+	}
+	$("#cargoFuncionario").html(html);	
 }
+
+function getCargo(cargo){
+	return '<option value="'+cargo.chave+'">'+cargo.nome+'</option>';
+}
+
+/*EXCLUIR FUNCIONARIO*/
+
+function excluirFuncionario(chave){
+	$("#confirmarExclusaoDoFuncionario").modal('open');
+	$("#funcionarioID").val(chave);
+}
+
+$("#confirmarExclusaoFuncionario").submit(function(event){
+	var chave = $("#funcionarioID").val();
+	$.ajax({
+		url: "ws/funcionariows/excluir/"+chave,
+        type: 'GET',
+        data: "",
+        contentType: "application/json"
+	});
+	$("#confirmarExclusaoDoFuncionario").modal('close');
+	return false;
+});
+
+/*ALTERAR DADOS DO FUNCIONARIO*/
+
+function editarFuncionario(funcionario){
+	$("#chaveFuncionarioA").val(funcionario.chave);
+	$("#statusFuncionarioA").val(funcionario.status);
+    $("#nomeFuncionarioA").val(funcionario.nome);
+    $("#sobrenomeFuncionarioA").val(funcionario.sobrenome);
+    $("#telefoneFuncionarioA").val(funcionario.telefone);
+    $("#emailFuncionarioA").val(funcionario.email);
+    $("#cpfFuncionarioA").val(funcionario.cpf);
+    $("#alterarFuncionario").modal('open'); 
+}
+
+$("#AlterarDadosFuncionario").submit(function(event){
+	if(DadosDoFormAlterar() != null){
+		var formData = JSON.stringify(DadosDoFormAlterar());
+		$.ajax({
+			url: "ws/funcionariows/alterar/",
+	        type: 'POST',
+	        data: formData,
+			cache: false,
+		    contentType: "application/json",
+		    processData: true
+		});}		
+	return false;
+});
+
+function DadosDoFormAlterar(){
+	var chave = $("#chaveFuncionarioA").val();
+	var nome = $("#nomeFuncionarioA").val();
+	var sobrenome = $("#sobrenomeFuncionarioA").val();
+	var cpf = $("#cpfFuncionarioA").val();
+	var telefone = $("#telefoneFuncionarioA").val();
+	var email = $("#emailFuncionarioA").val();
+	var status = $("#statusFuncionarioA").val();
+	var	funcionario = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":status};
+	return funcionario;
+}
+
+/*ATIVAR/DESATIVAR FUNCIONARIO*/
+
+function bloquearOuDesbloquearFuncionario(funcionario){
+//  $("#mesagemBloqueio").html('<p class="center-align">Deseja realmente '+acao+' o cliente Maria José Vieira?</p>');
+  $("#confirmarBloqueioOuDesbloqueioDoFuncionario").modal('open');   
+}
+
+/*INFORMAÇÕES DO FUNCIONARIO*/
+
+function abrirInformacoesFuncionario(funcionario){
+	$.ajax({
+		url: "ws/funcionariows/capturarUsuario/"+funcionario.chave,
+	    type: 'GET',
+	    success: function (usuario) {
+	    	$("#loginFuncionarioV").html(usuario.login);
+	    },
+	    data: "",
+	    contentType: "application/json",
+	});
+	
+	$("#chaveFuncionarioV").val(funcionario.chave);
+	$("#statusFuncionarioV").html(funcionario.status);
+    $("#nomeFuncionarioV").html(funcionario.nome);
+    $("#sobrenomeFuncionarioV").html(funcionario.sobrenome);
+    $("#telefoneFuncionarioV").html(funcionario.telefone);
+    $("#emailFuncionarioV").html(funcionario.email);
+    $("#cpfFuncionarioV").html(funcionario.cpf);
+    $("#cargoFuncionarioV").html(funcionario.cargo.nome);
+    $("#informacoesDoFuncionario").modal('open');    
+}
+
+
+
+
+
+/*TABELA DE FUNCIONARIOS*/
 
 function carregarFuncionarios(pagina){
 	$("#barraCarregando").removeClass("hiddendiv");
@@ -147,6 +252,9 @@ function getLinhaFuncionario(funcionario){
 	linha +="</tr>";
 	return linha;
 }
+
+/*BOTÃO DE AÇÕES*/
+
 function getAcoesFuncionario(funcionario){
 	var html = getBtnInfoFuncionario(funcionario);
 	html += getBtnEditarFuncionario(funcionario);
@@ -161,7 +269,7 @@ function getBtnInfoFuncionario(funcionario){
 }
 
 function getBtnEditarFuncionario(funcionario){
-	var html = "<a href='#' onclick='limparFormFuncionario() , editarFuncionario("+JSON.stringify(funcionario)+")' title='Editar'><i class='fa fa-pencil-square-o fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a> ";
+	var html = "<a href='#' onclick='limparCamposFormCadastro() , editarFuncionario("+JSON.stringify(funcionario)+")' title='Editar'><i class='fa fa-pencil-square-o fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a> ";
 	return html;
 }
 
@@ -180,132 +288,45 @@ function getBtnExcluirFuncionario(funcionario){
 	return html;
 }
 
-function abrirInformacoesFuncionario(funcionario){
-	$.ajax({
-		url: "ws/funcionariows/capturarUsuario/"+funcionario.chave,
-	    type: 'GET',
-	    success: function (usuario) {
-	    	$("#loginFuncionarioV").html(usuario.login);
-	    },
-	    data: "",
-	    contentType: "application/json",
-	});
-	
-	$("#chaveFuncionarioV").val(funcionario.chave);
-	$("#statusFuncionarioV").html(funcionario.status);
-    $("#nomeFuncionarioV").html(funcionario.nome);
-    $("#sobrenomeFuncionarioV").html(funcionario.sobrenome);
-    $("#telefoneFuncionarioV").html(funcionario.telefone);
-    $("#emailFuncionarioV").html(funcionario.email);
-    $("#cpfFuncionarioV").html(funcionario.cpf);
-    $("#cargoFuncionarioV").html(funcionario.cargo.nome);
-    $("#informacoesDoFuncionario").modal('open');    
-}
+/*VALIDAÇÕES E TRATAMENTOS*/
 
-function cadastrarFuncionario(){
-	$('#tituloFomunlarioFuncionario').html("Formulário de cadastro de funcionário");
-	$("#hide-alterar").show();
-    $("#cadastrarFuncionario").modal('open');
-	selectCargos();
-}
-
-function editarFuncionario(funcionario){
-	$("#chaveFuncionarioA").val(funcionario.chave);
-	$("#statusFuncionarioA").val(funcionario.status);
-    $("#nomeFuncionarioA").val(funcionario.nome);
-    $("#sobrenomeFuncionarioA").val(funcionario.sobrenome);
-    $("#telefoneFuncionarioA").val(funcionario.telefone);
-    $("#emailFuncionarioA").val(funcionario.email);
-    $("#cpfFuncionarioA").val(funcionario.cpf);
-    $("#alterarFuncionario").modal('open'); 
-}
-
-function limparFormFuncionario(){
-	$("#chaveFuncionario").val("");
-    $("#nomeFuncionario").val("");
-    $("#sobrenomeFuncionario").val("");
-    $("#telefoneFuncionario").val("");
-    $("#cpfFuncionario").val("");
-    $("#emailFuncionario").val("");
-    $("#senhaFuncionario").val("");
-    $("#confirmaSenhaFuncionario").val("");
-}
-
-function bloquearOuDesbloquearFuncionario(funcionario){
-//    $("#mesagemBloqueio").html('<p class="center-align">Deseja realmente '+acao+' o cliente Maria José Vieira?</p>');
-    $("#confirmarBloqueioOuDesbloqueioDoFuncionario").modal('open');   
-}
-
-function excluirFuncionario(chave){
-	$("#confirmarExclusaoDoFuncionario").modal('open');
-	$("#funcionarioID").val(chave);
-}
-$("#confirmarExclusaoFuncionario").submit(function(event){
-	var chave = $("#funcionarioID").val();
-	$.ajax({
-		url: "ws/funcionariows/excluir/"+chave,
-        type: 'GET',
-        data: "",
-        contentType: "application/json"
-	});
-	$("#confirmarExclusaoDoFuncionario").modal('close');
-	return false;
-});
-
-function selectCargos(){
-	$.ajax({
-		url: "ws/cargows/listarTodos/",
-        type: 'GET',
-        success: function (data) {
-        	$('select').material_select('destroy');
-        	if(data.length > 0){
-        		preencherSelectCargos(data);
-        	}else{
-        		$("#cargoFuncionario").html("");
-        	}
-        	$(document).ready(function(){
-        		$('select').material_select();
-        	})
-        }
-	});
-}
-
-function preencherSelectCargos(arrayDeCargos){
-	var html = '<option disabled="disabled" selected="selected">Selecione um cargo</option>';
-	for( i = 0; i < arrayDeCargos.length; i++){
-		html += getCargo(arrayDeCargos[i]);
+function validar(dom,tipo){
+	switch(tipo){
+		case'num':var regex=/[A-Za-z]/g;break;
+		case'text':var regex=/\d/g;break;
 	}
-	$("#cargoFuncionario").html(html);	
+	dom.value=dom.value.replace(regex,'');
 }
 
-function getCargo(cargo){
-	return '<option value="'+cargo.chave+'">'+cargo.nome+'</option>';
+function tratarRetornoServidor(data){
+	if(data == "sucess"){
+		$('#mensagemRetornoCadastro').html("Cadastro realizado com sucesso!");
+		$('#mensagemRetornoCadastro').addClass("green");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+		setTimeout(function(){
+			$('#cadastrar').trigger("click" );
+			limparCamposFormCadastro();
+			$('#mensagemRetornoCadastro').addClass("hiddendiv");
+		},2000);
+	}else{
+		$('#mensagemRetornoCadastro').html("Houve erro ao cadastrar!");
+		$('#mensagemRetornoCadastro').addClass("red");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
+	}
 }
 
-$("#AlterarDadosFuncionario").submit(function(event){
-	if(DadosDoFormAlterar() != null){
-		var formData = JSON.stringify(DadosDoFormAlterar());
-		$.ajax({
-			url: "ws/funcionariows/alterar/",
-	        type: 'POST',
-	        data: formData,
-			cache: false,
-		    contentType: "application/json",
-		    processData: true
-		});}		
-	return false;
-});
-
-function DadosDoFormAlterar(){
-	var chave = $("#chaveFuncionarioA").val();
-	var nome = $("#nomeFuncionarioA").val();
-	var sobrenome = $("#sobrenomeFuncionarioA").val();
-	var cpf = $("#cpfFuncionarioA").val();
-	var telefone = $("#telefoneFuncionarioA").val();
-	var email = $("#emailFuncionarioA").val();
-	var status = $("#statusFuncionarioA").val();
-	var	funcionario = {"chave":chave,"nome":nome,"sobrenome":sobrenome,"cpf":cpf,"telefone":telefone,"email":email,"status":status};
-	return funcionario;
+function limparCamposFormCadastro(){
+	$("#nomeFuncionario").val("");
+	$("#sobrenomeFuncionario").val("");
+	$("#cpfFuncionario").val("");
+	$("#loginFuncionario").val("");
+	$("#telefoneFuncionario").val("");
+	$("#emailFuncionario").val("");
+	$("#senhaFuncionario").val("");
+	$("#confirmaSenhaFuncionario").val("");
+	$("#cargoFuncionario").val("");
 }
+
+
 
 
