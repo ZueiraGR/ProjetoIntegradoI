@@ -13,24 +13,23 @@
 				<div class="row center"><h5 id="tituloFomunlarioFuncionario"></h5></div>
 				<div class="col s12">
 					<form name="CadastroDeFuncionario" id="CadastroDeFuncionario" method="POST">
-					<input class="hiddendiv" id="chaveFuncionario"  />
 							<div class="row">
 								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="validate" required="required" minlenght="4" maxlength="25" data-lenght="25" /> 
+									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="25" data-lenght="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')"/> 
 									<label for="nomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
 								</div>
 								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate" required="required" minlenght="4" maxlength="35" data-lenght="35"/> 
+									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="35" data-lenght="35" onkeyup="validar(this,'text')" onblur="validar(this,'text')" /> 
 									<label for="sobrenomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col m6 s12">
-									<input placeholder="61 98899-7755" id="telefoneFuncionario" type="text" class="validate" required="required" minlenght="11"  maxlength="11" data-lenght="11" /> 
+									<input placeholder="61 98899-7755" id="telefoneFuncionario" type="text" class="validate" required="required" minlenght="11"  maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
 									<label for="telefoneFuncionario" data-error="Insira um telefone!" data-success="Ok">TELEFONE</label>
 								</div>
 								<div class="input-field col m6 s12">
-									<input placeholder="123.123.123-12" id="cpfFuncionario" type="text" class="validate" required="required" minlenght="11"  maxlength="11" data-lenght="11" /> 
+									<input placeholder="123.123.123-12" id="cpfFuncionario" type="text" class="validate" required="required" minlenght="11"  maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
 									<label for="cpfFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
 								</div>
 							</div>
@@ -179,21 +178,21 @@
 					<input class="hiddendiv" id="statusFuncionarioA"  />
 							<div class="row">
 								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionarioA" type="text" class="validate" required="required" minlenght="4" maxlength="25" data-lenght="25" /> 
+									<input placeholder="Digite o nome do funcionario" id="nomeFuncionarioA" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="25" data-lenght="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')" /> 
 									<label for="nomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">NOME</label>
 								</div>
 								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionarioA" type="text" class="validate" required="required" minlenght="4" maxlength="25" data-lenght="25" /> 
+									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionarioA" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="25" data-lenght="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')" /> 
 									<label for="sobrenomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">SOBRENOME</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col m6 s12">
-									<input placeholder="61 98899-7755" id="telefoneFuncionarioA" type="tel" class="validate" required="required" minlenght="11" maxlength="11" data-lenght="11" /> 
+									<input placeholder="61 98899-7755" id="telefoneFuncionarioA" type="tel" class="validate" required="required" minlenght="11" maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
 									<label for="telefoneFuncionarioA" data-error="Insira um telefone!">TELEFONE</label>
 								</div>
 								<div class="input-field col m6 s12">
-									<input placeholder="123.123.123-12" id="cpfFuncionarioA" type="text" class="validate" required="required" minlenght="11" maxlength="11" data-lenght="11" /> 
+									<input placeholder="123.123.123-12" id="cpfFuncionarioA" type="text" class="validate" required="required" minlenght="11" maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
 									<label for="cpfFuncionarioA" data-error="Insira um cpf valido!">CPF</label>
 								</div>
 							</div>

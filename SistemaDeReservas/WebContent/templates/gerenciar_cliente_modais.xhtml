@@ -11,72 +11,71 @@
 			<div class="modal-content">
 				<div class="row center"><h5 id="tituloFomunlarioFuncionario"></h5></div>
 				<div class="col s12">
-					<form name="CadastroDeFuncionario" id="CadastroDeFuncionario" method="POST">
-					<input class="hiddendiv" id="chaveFuncionario"  />
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="input-text validate" required="required" maxlength="25" data-length="25" onkeyup="validar(this,'text')" /> 
-									<label for="nomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate" required="required" onkeyup="validar(this,'text')" /> 
-									<label for="sobrenomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
-								</div>
+					<form class="col s12" name="formularioDeCadastro" id="formularioDeCadastro"	method="POST">
+						<br/>
+						<div class="row">
+							<div class="input-field col s6 ">
+								<input placeholder="Digite seu nome" id="nome" type="text" class="validate texto-todo-maiusculo" required="required" minlength="3" maxlength="25" data-length="25" onkeyup="validar(this,'text')" />
+								<label for="nome" data-error="Prenchimento deste campo é obrigatório e de ser preenchido com no mínimo 3 caracteres." data-success="OK">NOME</label>
 							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input maxlength="12" placeholder="61988997755" id="telefoneFuncionario" type="tel" class="validate" required="required" onkeyup="validar(this,'num')" /> 
-									<label for="telefoneFuncionario" data-error="Insira um telefone!" data-success="Ok">TELEFONE</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input maxlength="14" placeholder="12312312312" id="cpfFuncionario" type="text" class="validate" required="required" onkeyup="validar(this,'num')" /> 
-									<label for="cpfFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
-								</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate texto-todo-maiusculo" required="required" minlength="4" maxlength="35" data-length="35" onkeyup="validar(this,'text')" />
+								<label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
 							</div>
-							<div id="">
-							<div class="row">
-
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o login do funcionario" id="loginFuncionario" type="text" class="validate" required="required" /> 
-									<label for="loginFuncionario" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
-								</div>
-
-								<div class="input-field col m6 s12">
-									<select class="validate" id="cargoFuncionario" required="required"></select>
-									<label for="cargoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
-								</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite o seu cpf, exemplo: 12234567812" id="cpf" type="text" class="validate" required="required" minlength="11" maxlength="11" data-length="11" onkeyup="validar(this,'num')" />
+								<label for="cpf" data-error="Digite um cpf válido!" data-success="OK">CPF</label>
 							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o email do funcionario" id="emailFuncionario" type="email" class="validate" required="required" /> 
-									<label for="emailFuncionario" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
-								</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite o número do seu telefone, exemplo: 61988888888" id="telefone" type="text" class="validate" required="required" minlength="11" maxlength="11" data-length="11" onkeyup="validar(this,'num')" />
+								<label for="telefone" data-error="Digite um número de telefone válido!" data-success="OK">TELEFONE</label>
 							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite a senha" id="senhaFuncionario" type="password" class="validate" /> 
-									<label for="senhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Re-digite a senha" id="confirmaSenhaFuncionario" type="password" class="validate" /> 
-									<label for="confirmaSenhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
-								</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite seu email" id="email" type="email" class="validate" required="required"/>
+								<label for="email" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
 							</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required="required"/>
+								<label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="OK">CONFIRME O EMAIL</label>
 							</div>
-							<div class="row">
-								<div class="input-field col l3"></div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CADASTRAR</button>
-								</div>
-								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset" id="cancelar">CANCELAR</button>
-								</div>
-								<div class="input-field col l3"></div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite um login" id="loginC" type="text" class="validate" required="required" minlength="5" maxlength="25" data-length="25"/>
+								<label for="loginC" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
 							</div>
-							<div class="row">
-								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
+							<div class="input-field col s6">
+								<div id="retornoLogin"></div>
 							</div>
-						</form>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input placeholder="Digite sua senha" id="senha" type="password" class="validate" minlength="8" maxlength="25" data-length="25"/>
+								<label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate" minlength="8" maxlength="25" data-length="25" />
+								<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col l3"></div>
+							<div class="input-field col l3 m12 s12 center">
+								<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit" onclick="capturarDadosDoForm()" id="confirmarCadastroCliente">ENTRAR</button>
+							</div>
+							<div class="input-field col l3 m12 s12 center">
+								<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset" id="cancelarCadastroCliente">CANCELAR</button>
+							</div>
+							<div class="input-field col l3"></div>
+						</div>
+						<div class="row">
+							<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

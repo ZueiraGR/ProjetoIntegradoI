@@ -6,22 +6,27 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition>
-	<form class="col s12" name="formularioDeCadastro" action=""	method="POST">
+	<form class="col s12" name="formularioDeCadastro" id="formularioDeCadastro"	method="POST">
 		<br/>
 		<div class="row">
-			<div class="input-field col s6">
-				<input placeholder="Digite seu nome" id="nome" type="text" class="validate" required="required"/>
-				<label for="nome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+			<div class="input-field col s6 ">
+				<input placeholder="Digite seu nome" id="nome" type="text" class="texto-todo-maiusculo" maxlength="25" data-length="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')" />
+				<label for="nome" data-error="Por favor digite o nome!">NOME</label>
+				<div class="nome"></div>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="validate" required="required"/>
+				<input placeholder="Digite seu sobrenome nome" id="sobrenome" type="text" class="texto-todo-maiusculo" maxlength="35" data-length="35" onkeyup="validar(this,'text')" onblur="validar(this,'text')" />
 				<label for="sobrenome" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Digite um login" id="login" type="text"	class="validate" required="required"/>
-				<label for="login" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+				<input placeholder="Digite o seu cpf, exemplo: 12234567812" id="cpf" type="text" class="validate" required="required" minlength="11" maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" />
+				<label for="cpf" data-error="Digite um cpf válido!" data-success="OK">CPF</label>
+			</div>
+			<div class="input-field col s6">
+				<input placeholder="Digite o número do seu telefone, exemplo: 61988888888" id="telefone" type="text" class="validate" required="required" minlength="11" maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" />
+				<label for="telefone" data-error="Digite um número de telefone válido!" data-success="OK">TELEFONE</label>
 			</div>
 		</div>
 		<div class="row">
@@ -30,31 +35,132 @@
 				<label for="email" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required="required"/>
+				<input placeholder="Digite seu email" id="confirmaEmail" type="email" class="validate" required="required" onkeyup="conferirEmail()"/>
 				<label for="confirmaEmail" data-error="Digite um e-mail válido!" data-success="OK">CONFIRME O EMAIL</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input placeholder="Digite sua senha" id="senha" type="password" class="validate" />
+				<input placeholder="Digite um login" id="loginC" type="text" class="validate" required="required" minlength="5" maxlength="25" data-length="25"/>
+				<label for="loginC" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+			</div>
+			<div class="input-field col s6">
+				<div id="retornoLogin"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input placeholder="Digite sua senha" id="senha" type="password" class="validate" minlength="8" maxlength="25" data-length="25"/>
 				<label for="email" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
 			</div>
 			<div class="input-field col s6">
-				<input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate" />
+				<input placeholder="Digite sua senha" id="confirmaSenha" type="password" class="validate" minlength="8" maxlength="25" data-length="25" />
 				<label for="confirmaSenha" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col l3"></div>
 			<div class="input-field col l3 m12 s12 center">
-				<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CADASTRAR</button>
+				<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit" id="confirmarCadastroCliente">ENTRAR</button>
 			</div>
 			<div class="input-field col l3 m12 s12 center">
-				<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12"	type="reset">CANCELAR</button>
+				<button class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset" id="cancelarCadastroCliente">CANCELAR</button>
 			</div>
 			<div class="input-field col l3"></div>
 		</div>
+		<div class="row">
+			<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
+		</div>
 	</form>
 </ui:composition>
+<SCRIPT type="text/javascript">
+$("#formularioDeCadastro").validate({
+    rules: {
+        nome: {
+            required: true,
+            minlength: 4
+        },
+        sobrenome: {
+            required: true,
+            minlenght: 4
+        },
+        cpf: {
+			required: true,
+			minlength: 11
+		},
+		telefone: {
+			required: true,
+			minlength: 11
+		},
+		login: {
+            required: true,
+            minlenght: 4
+        },
+        email: {
+			required: true,
+			email: true
+        },
+        confirmaEmail: {
+			required: true,
+			email: true,
+			equalTo: "#email"
+        },
+        senha: {
+			required: true,
+			minlength: 8
+        },
+        confirmaSenha: {
+			required: true,
+			minlength: 8,
+			equalTo: "#senha"
+        },
+    },
+    messages: {
+    	nome: {
+            required: "Por favor digite um nome.",
+            minlength: "O nome precisa ter no minimo 4 letras."
+        },
+        sobrenome: {
+            required: "Por favor digite um sobrenome.",
+            minlenght: "O sobrenome precisa ter no minimo 4 letras."
+        },
+        cpf: {
+			required: "Por favor digite um CPF valido."
+		},
+		telefone: {
+			required: "Por favor digite um telefone valido."
+		},
+		login: {
+            required: "Por favor digite um login.",
+            minlenght: "O login precisa ter no minimo 4 letras."
+        },
+        email: {
+			required: "Por favor digite um email.",
+			email: "Por favor digite um email valido."
+        },
+        confirmaEmail: {
+			required: "Por favor Re-digite o email.",
+			equalTo: "Por favor re-digite o mesmo email."
+        },
+        senha: {
+			required: "Por favor digite uma senha.",
+			minlength: "A senha precisa ter no minimo 8 caracteres."
+        },
+        confirmaSenha: {
+			required: "Por favor digite a senha.",
+			equalTo: "Por favor re-digite a mesma senha."
+        },
+    },
+    errorElement : 'label',
+    errorPlacement: function(error, element) {
+      var placement = $(element).data('error');
+      if (placement) {
+        $(placement).append(error)
+      } else {
+        error.insertAfter(element);
+      }
+    }
+ });
+</SCRIPT>
 
 </html>

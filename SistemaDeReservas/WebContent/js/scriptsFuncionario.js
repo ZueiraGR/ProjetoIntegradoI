@@ -209,10 +209,6 @@ function abrirInformacoesFuncionario(funcionario){
     $("#informacoesDoFuncionario").modal('open');    
 }
 
-
-
-
-
 /*TABELA DE FUNCIONARIOS*/
 
 function carregarFuncionarios(pagina){
@@ -292,8 +288,8 @@ function getBtnExcluirFuncionario(funcionario){
 
 function validar(dom,tipo){
 	switch(tipo){
-		case'num':var regex=/[A-Za-z]/g;break;
-		case'text':var regex=/\d/g;break;
+		case'num':var regex=/[A-Za-z]|\.|\,|\;|\:|\[|\{|\]|\}|\-|\_|\=|\+|\§|\)|\(|\*|\&|\¬|\%|\¢|\$|\£|\#|\³|\@|\²|\!|\¹|\º|\ª|\°|\~|\´|\`|\>|\<|\"|\'|\\|\||\¨+/g;break;
+		case'text':var regex=/\d|\.|\,|\;|\:|\[|\{|\]|\}|\-|\_|\=|\+|\§|\)|\(|\*|\&|\¬|\%|\¢|\$|\£|\#|\³|\@|\²|\!|\¹|\º|\ª|\°|\~|\´|\`|\>|\<|\"|\'|\\|\||\¨+/g;break;
 	}
 	dom.value=dom.value.replace(regex,'');
 }

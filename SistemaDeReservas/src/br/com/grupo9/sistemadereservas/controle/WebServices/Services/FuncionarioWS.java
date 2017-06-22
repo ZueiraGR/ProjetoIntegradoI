@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.FuncionarioBO;
 import br.com.grupo9.sistemadereservas.model.BO.UsuarioBO;
-import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 import br.com.grupo9.sistemadereservas.model.PO.FuncionarioPO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
