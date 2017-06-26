@@ -338,9 +338,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','O nome precisa ter no minimo 4 letras!')
 				$('#nomeFuncionario').addClass("invalid");
 				if($("#nomeFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 2:
 			element = document.getElementById('bsnome');
@@ -349,9 +350,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 letras!')
 				$('#sobrenomeFuncionario').addClass("invalid");
 				if($("#sobrenomeFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 3:
 			element = document.getElementById('bcpf');
@@ -360,9 +362,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','Digite um cpf valido!')
 				$('#cpfFuncionario').addClass("invalid");
 				if($("#cpfFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 4:
 			element = document.getElementById('btelefone');
@@ -371,9 +374,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','Digite um telefone valido!')
 				$('#telefoneFuncionario').addClass("invalid");
 				if($("#telefoneFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 5:
 			element = document.getElementById('blogin');
@@ -382,9 +386,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 caracteres!')
 				$('#loginFuncionario').addClass("invalid");
 				if($("#loginFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 6:
 			element = document.getElementById('bemail');
@@ -393,9 +398,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','Insira um email valido!')
 				$('#emailFuncionario').addClass("invalid");
 				if($("#emailFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 7:
 			element = document.getElementById('bsenha');
@@ -404,9 +410,10 @@ function formValidate(n){
 				element.setAttribute('data-balloon','A senha precisa ter no minimo 8 caracteres!')
 				$('#senhaFuncionario').addClass("invalid");
 				if($("#senhaFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 8:
 			element = document.getElementById('bcsenha');
@@ -416,9 +423,11 @@ function formValidate(n){
 				element.setAttribute('data-balloon','O senha de confirmação precisa ser igual a senha!')
 				$('#confirmaSenhaFuncionario').addClass("invalid");
 			}else{
-				element.removeAttribute('data-balloon-visible', '')
 				btn.setAttribute('type','submit')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;			
 	};
 }
@@ -457,9 +466,10 @@ function formAltValidate(n){
 				element.setAttribute('data-balloon','O nome precisa ter no minimo 4 letras!')
 				$('#nomeFuncionarioA').addClass("invalid");
 				if($("#nomeFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 2:
 			element = document.getElementById('asnome');
@@ -468,9 +478,10 @@ function formAltValidate(n){
 				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 letras!')
 				$('#sobrenomeFuncionarioA').addClass("invalid");
 				if($("#sobrenomeFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 3:
 			element = document.getElementById('acpf');
@@ -479,9 +490,10 @@ function formAltValidate(n){
 				element.setAttribute('data-balloon','Digite um cpf valido!')
 				$('#cpfFuncionarioA').addClass("invalid");
 				if($("#cpfFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 4:
 			element = document.getElementById('atelefone');
@@ -490,9 +502,10 @@ function formAltValidate(n){
 				element.setAttribute('data-balloon','Digite um telefone valido!')
 				$('#telefoneFuncionarioA').addClass("invalid");
 				if($("#telefoneFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;
 		case 5:
 			element = document.getElementById('aemail');
@@ -501,9 +514,10 @@ function formAltValidate(n){
 				element.setAttribute('data-balloon','Insira um email valido!')
 				$('#emailFuncionarioA').addClass("invalid");
 				if($("#emailFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
-			}else{
-				element.removeAttribute('data-balloon-visible', '')
 			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
 			break;	
 	};
 }
