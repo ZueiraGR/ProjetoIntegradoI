@@ -159,6 +159,9 @@ $("#AlterarDadosFuncionario").submit(function(event){
 			url: "ws/funcionariows/alterar/",
 	        type: 'POST',
 	        data: formData,
+	        success: function (data) {
+	        	tratarRetornoAlterar(data);
+	        },
 			cache: false,
 		    contentType: "application/json",
 		    processData: true
@@ -300,9 +303,10 @@ function tratarRetornoServidor(data){
 		$('#mensagemRetornoCadastro').addClass("green");
 		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
 		setTimeout(function(){
-			$('#cadastrar').trigger("click" );
+			$("#cadastrarFuncionario").modal('close');
 			limparCamposFormCadastro();
 			$('#mensagemRetornoCadastro').addClass("hiddendiv");
+			carregarFuncionarios(1);
 		},2000);
 	}else{
 		$('#mensagemRetornoCadastro').html("Houve erro ao cadastrar!");
@@ -322,6 +326,192 @@ function limparCamposFormCadastro(){
 	$("#confirmaSenhaFuncionario").val("");
 	$("#cargoFuncionario").val("");
 }
+
+function formValidate(n){
+	var element = '';
+	const btn = document.getElementById('confirmarCadastro');
+	switch (n)	{
+		case 1:
+			element = document.getElementById('bnome');
+			if($("#nomeFuncionario").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O nome precisa ter no minimo 4 letras!')
+				$('#nomeFuncionario').addClass("invalid");
+				if($("#nomeFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 2:
+			element = document.getElementById('bsnome');
+			if($("#sobrenomeFuncionario").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 letras!')
+				$('#sobrenomeFuncionario').addClass("invalid");
+				if($("#sobrenomeFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 3:
+			element = document.getElementById('bcpf');
+			if($("#cpfFuncionario").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um cpf valido!')
+				$('#cpfFuncionario').addClass("invalid");
+				if($("#cpfFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 4:
+			element = document.getElementById('btelefone');
+			if($("#telefoneFuncionario").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um telefone valido!')
+				$('#telefoneFuncionario').addClass("invalid");
+				if($("#telefoneFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 5:
+			element = document.getElementById('blogin');
+			if($("#loginFuncionario").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 caracteres!')
+				$('#loginFuncionario').addClass("invalid");
+				if($("#loginFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 6:
+			element = document.getElementById('bemail');
+			if(validateEmail($("#emailFuncionario").val())){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Insira um email valido!')
+				$('#emailFuncionario').addClass("invalid");
+				if($("#emailFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 7:
+			element = document.getElementById('bsenha');
+			if($("#senhaFuncionario").val().length < 8){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','A senha precisa ter no minimo 8 caracteres!')
+				$('#senhaFuncionario').addClass("invalid");
+				if($("#senhaFuncionario").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 8:
+			element = document.getElementById('bcsenha');
+			if($("#confirmaSenhaFuncionario").val() != $("#senhaFuncionario").val()){
+				btn.setAttribute('type','button')
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O senha de confirmação precisa ser igual a senha!')
+				$('#confirmaSenhaFuncionario').addClass("invalid");
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+				btn.setAttribute('type','submit')
+			}
+			break;			
+	};
+}
+function validateEmail(email){
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(email)){
+    	return false;
+    }else {return true}
+}
+
+function tratarRetornoAlterar(data){
+	if(data == "sucess"){
+		$('#mensagemRetornoAlteracao').html("Alteração realizado com sucesso!");
+		$('#mensagemRetornoAlteracao').addClass("green");
+		$('#mensagemRetornoAlteracao').removeClass("hiddendiv");
+		setTimeout(function(){
+			$("#alterarFuncionario").modal('close');
+			$('#mensagemRetornoAlteracao').addClass("hiddendiv");
+			carregarFuncionarios(1);
+		},2000);
+	}else{
+		$('#mensagemRetornoAlteracao').html("Houve erro ao alterar!");
+		$('#mensagemRetornoAlteracao').addClass("red");
+		$('#mensagemRetornoAlteracao').removeClass("hiddendiv");
+	}
+}
+
+function formAltValidate(n){
+	var element = '';
+	const btn = document.getElementById('confirmarAlteracao');
+	switch (n)	{
+		case 1:
+			element = document.getElementById('anome');
+			if($("#nomeFuncionarioA").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O nome precisa ter no minimo 4 letras!')
+				$('#nomeFuncionarioA').addClass("invalid");
+				if($("#nomeFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 2:
+			element = document.getElementById('asnome');
+			if($("#sobrenomeFuncionarioA").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 letras!')
+				$('#sobrenomeFuncionarioA').addClass("invalid");
+				if($("#sobrenomeFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 3:
+			element = document.getElementById('acpf');
+			if($("#cpfFuncionarioA").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um cpf valido!')
+				$('#cpfFuncionarioA').addClass("invalid");
+				if($("#cpfFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 4:
+			element = document.getElementById('atelefone');
+			if($("#telefoneFuncionarioA").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um telefone valido!')
+				$('#telefoneFuncionarioA').addClass("invalid");
+				if($("#telefoneFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 5:
+			element = document.getElementById('aemail');
+			if(validateEmail($("#emailFuncionarioA").val())){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Insira um email valido!')
+				$('#emailFuncionarioA').addClass("invalid");
+				if($("#emailFuncionarioA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;	
+	};
+}
+
+
+
+
+
 
 
 

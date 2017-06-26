@@ -14,59 +14,58 @@
 				<div class="col s12">
 					<form name="CadastroDeFuncionario" id="CadastroDeFuncionario" method="POST">
 							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="25" data-lenght="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')"/> 
-									<label for="nomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">NOME</label>
+								<div class="input-field col m6 s12" id="bnome" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Digite o nome do funcionario" id="nomeFuncionario" type="text" class="validate texto-todo-maiusculo" minlength="4" maxlength="25" data-length="25" onkeyup="validar(this,'text')" onblur="validar(this,'text'), formValidate(1)"/> 
+									<label for="nomeFuncionario">NOME</label>
 								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="35" data-lenght="35" onkeyup="validar(this,'text')" onblur="validar(this,'text')" /> 
-									<label for="sobrenomeFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SOBRENOME</label>
+								<div class="input-field col m6 s12" id="bsnome" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionario" type="text" class="validate texto-todo-maiusculo" minlength="4" maxlength="35" data-length="35" onkeyup="validar(this,'text')" onblur="validar(this,'text'), formValidate(2)" /> 
+									<label for="sobrenomeFuncionario">SOBRENOME</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="61 98899-7755" id="telefoneFuncionario" type="text" class="validate" required="required" minlenght="11"  maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
-									<label for="telefoneFuncionario" data-error="Insira um telefone!" data-success="Ok">TELEFONE</label>
+								<div class="input-field col m6 s12" id="btelefone" data-balloon="" data-balloon-pos="up">
+									<input placeholder="61 98899-7755" id="telefoneFuncionario" type="text" class="validate" minlength="11"  maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num'), formValidate(4)" /> 
+									<label for="telefoneFuncionario">TELEFONE</label>
 								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="123.123.123-12" id="cpfFuncionario" type="text" class="validate" required="required" minlenght="11"  maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
-									<label for="cpfFuncionario" data-error="Insira um cpf valido!" data-success="Ok">CPF</label>
+								<div class="input-field col m6 s12" id="bcpf" data-balloon="" data-balloon-pos="up">
+									<input placeholder="123.123.123-12" id="cpfFuncionario" type="text" class="validate" minlength="11"  maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num'), formValidate(3)" /> 
+									<label for="cpfFuncionario">CPF</label>
 								</div>
 							</div>
 							<div id="">
 							<div class="row">
-
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o login do funcionario" id="loginFuncionario" type="text" class="validate" required="required" minlenght="4" maxlength="25" data-lenght="25" /> 
-									<label for="loginFuncionario" data-error="Digite um login válido!" data-success="OK">LOGIN</label>
+								<div class="input-field col m6 s12" id="blogin" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Digite o login do funcionario" id="loginFuncionario" type="text" class="validate" minlength="4" maxlength="25" data-length="25" onblur="formValidate(5)" /> 
+									<label for="loginFuncionario">LOGIN</label>
 								</div>
 
 								<div class="input-field col m6 s12">
 									<select class="validate" id="cargoFuncionario" required="required"></select>
-									<label for="cargoFuncionario" data-error="Selecione um cargo!" data-success="Ok">CARGO</label>
+									<label for="cargoFuncionario">CARGO</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o email do funcionario" id="emailFuncionario" type="email" class="validate" required="required" /> 
-									<label for="emailFuncionario" data-error="Digite um e-mail válido!" data-success="OK">EMAIL</label>
+								<div class="input-field col m6 s12" id="bemail" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Digite o email do funcionario" id="emailFuncionario" type="email" class="validate" onblur="formValidate(6)" /> 
+									<label for="emailFuncionario" >EMAIL</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite a senha" id="senhaFuncionario" type="password" class="validate" minlenght="4" maxlength="25" data-lenght="25" /> 
-									<label for="senhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">SENHA</label>
+								<div class="input-field col m6 s12" id="bsenha" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Digite a senha" id="senhaFuncionario" type="password" class="validate" minlength="8" maxlength="25" data-length="25" onblur="formValidate(7)" /> 
+									<label for="senhaFuncionario">SENHA</label>
 								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Re-digite a senha" id="confirmaSenhaFuncionario" type="password" class="validate" minlenght="4" maxlength="25" data-lenght="25" /> 
-									<label for="confirmaSenhaFuncionario" data-error="Prenchimento deste campo é obrigatório!" data-success="OK">CONFIRME A SENHA</label>
+								<div class="input-field col m6 s12" id="bcsenha" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Re-digite a senha" id="confirmaSenhaFuncionario" type="password" class="validate" minlength="8" maxlength="25" data-length="25" onblur="formValidate(8)" /> 
+									<label for="confirmaSenhaFuncionario">CONFIRME A SENHA</label>
 								</div>
 							</div>
 							</div>
 							<div class="row">
 								<div class="input-field col l3"></div>
 								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CADASTRAR</button>
+									<button class="btn grey waves-effect waves-green col l12 m12" type="button" id="confirmarCadastro">CADASTRAR</button>
 								</div>
 								<div class="input-field col l3">
 									<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset" id="cancelar">CANCELAR</button>
@@ -114,6 +113,9 @@
 						<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset">CANCELAR</button>
 					</div>
 					<div class="input-field col l3"></div>
+				</div>
+				<div class="row">
+					<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
 				</div>
 			</form>
 				<div class="row"></div>
@@ -177,35 +179,35 @@
 					<input class="hiddendiv" id="chaveFuncionarioA"  />
 					<input class="hiddendiv" id="statusFuncionarioA"  />
 							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o nome do funcionario" id="nomeFuncionarioA" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="25" data-lenght="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')" /> 
-									<label for="nomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">NOME</label>
+								<div class="input-field col m6 s12" id="anome" data-balloon="" data-balloon-pos="up">
+									<input placeholder="Digite o nome do funcionario" id="nomeFuncionarioA" type="text" class="validate texto-todo-maiusculo" required="required" minlength="4" maxlength="25" data-length="25" onkeyup="validar(this,'text')" onblur="validar(this,'text'), formAltValidate(1)" /> 
+									<label for="nomeFuncionarioA">NOME</label>
 								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionarioA" type="text" class="validate texto-todo-maiusculo" required="required" minlenght="4" maxlength="25" data-lenght="25" onkeyup="validar(this,'text')" onblur="validar(this,'text')" /> 
-									<label for="sobrenomeFuncionarioA" data-error="Prenchimento deste campo é obrigatório!">SOBRENOME</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="61 98899-7755" id="telefoneFuncionarioA" type="tel" class="validate" required="required" minlenght="11" maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
-									<label for="telefoneFuncionarioA" data-error="Insira um telefone!">TELEFONE</label>
-								</div>
-								<div class="input-field col m6 s12">
-									<input placeholder="123.123.123-12" id="cpfFuncionarioA" type="text" class="validate" required="required" minlenght="11" maxlength="11" data-lenght="11" onkeyup="validar(this,'num')" onblur="validar(this,'num')" /> 
-									<label for="cpfFuncionarioA" data-error="Insira um cpf valido!">CPF</label>
+								<div class="input-field col m6 s12" id="asnome" data-balloon="" data-balloon-pos="up"> 
+									<input placeholder="Digite o sobrenome do funcionario" id="sobrenomeFuncionarioA" type="text" class="validate texto-todo-maiusculo" minlength="4" maxlength="25" data-length="25" onkeyup="validar(this,'text')" onblur="validar(this,'text'), formAltValidate(2)" /> 
+									<label for="sobrenomeFuncionarioA">SOBRENOME</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col m6 s12">
-									<input placeholder="exemplo@email.com" id="emailFuncionarioA" type="email" class="validate" required="required" /> 
-									<label for="emailFuncionarioA" data-error="Insira um email valido!">EMAIL</label>
+								<div class="input-field col m6 s12" id="atelefone" data-balloon="" data-balloon-pos="up">
+									<input placeholder="61 98899-7755" id="telefoneFuncionarioA" type="tel" class="validate" minlength="11" maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num'), formAltValidate(3)" /> 
+									<label for="telefoneFuncionarioA">TELEFONE</label>
+								</div>
+								<div class="input-field col m6 s12" id="acpf" data-balloon="" data-balloon-pos="up">
+									<input placeholder="123.123.123-12" id="cpfFuncionarioA" type="text" class="validate" minlength="11" maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num'), formAltValidate(4)" /> 
+									<label for="cpfFuncionarioA">CPF</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col m6 s12" id="aemail" data-balloon="" data-balloon-pos="up">
+									<input placeholder="exemplo@email.com" id="emailFuncionarioA" type="email" class="validate" onblur="formAltValidate(5)" /> 
+									<label for="emailFuncionarioA">EMAIL</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col l3"></div>
 								<div class="input-field col l3">
-									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarCadastroCliente">CONFIRMAR</button>
+									<button class="btn grey waves-effect waves-green col l12 m12" type="submit" id="confirmarAlteracao">CONFIRMAR</button>
 								</div>
 								<div class="input-field col l3">
 									<button class="btn grey waves-effect waves-red col l12 m12 modal-close" type="reset" id="cancelar">CANCELAR</button>
@@ -213,7 +215,7 @@
 								<div class="input-field col l3"></div>
 							</div>
 							<div class="row">
-								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoCadastro"></div>
+								<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoAlteracao"></div>
 							</div>
 						</form>
 				</div>
