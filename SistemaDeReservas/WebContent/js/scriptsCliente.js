@@ -36,12 +36,10 @@ function capturarDadosDoForm() {
 	var telefone = $("#telefone").val();
 	var login = $("#loginC").val();
 	var email = $("#email").val();
-	var confirmaEmail = $("#confirmaEmail").val();
 	var senha = $("#senha").val();
 	var confirmaSenha = $("#confirmaSenha").val();
 	var cliente;
-	if (isDadosValidos(nome, sobrenome, cpf, telefone, login, email,
-			confirmaEmail, senha, confirmaSenha)) {
+	if (isDadosValidos(nome, sobrenome, cpf, telefone, login, email, senha, confirmaSenha)) {
 		cliente = {
 			"login" : login,
 			"senha" : senha,
@@ -62,8 +60,7 @@ function capturarDadosDoForm() {
 	return cliente;
 }
 
-function isDadosValidos(nome, sobrenome, cpf, telefone, login, email,
-		confirmaEmail, senha, confirmaSenha) {
+function isDadosValidos(nome, sobrenome, cpf, telefone, login, email, senha, confirmaSenha) {
 	var mensagem;
 	// var cpfSemFormatacao;
 	var retorno = true;
@@ -87,11 +84,6 @@ function isDadosValidos(nome, sobrenome, cpf, telefone, login, email,
 		mensagem += "<li>É obrigatório preencher o campo EMAIL</li>";
 		retorno = false;
 	}
-	if ((confirmaEmail == null || confirmaEmail == "")
-			&& email != confirmaEmail) {
-		mensagem += "<li>É obrigatório preencher o campo CONFIRMAR EMAIL com o mesmo email informado no campo EMAIL</li>";
-		retorno = false;
-	}
 	if (senha == null || senha == "" || senha.length < 8) {
 		mensagem += "<li>É obrigatório preenche o campo SENHA com no mínimo 8 caracteres alfanuméricos</li>";
 		retorno = false;
@@ -102,18 +94,6 @@ function isDadosValidos(nome, sobrenome, cpf, telefone, login, email,
 		retorno = false;
 	}
 	return retorno;
-}
-
-function conferirEmail() {
-	var email = $("#email").val();
-	var confirmarEmail = $("#confirmaEmail").val();
-
-	if ((confirmaEmail == null || confirmaEmail == "")
-			&& email != confirmaEmail) {
-		mensagem += "<li>É obrigatório preencher o campo CONFIRMAR EMAIL com o mesmo email informado no campo EMAIL</li>";
-		retorno = false;
-	}
-
 }
 
 /* EXCLUIR CLIENTE */
@@ -365,90 +345,97 @@ function limparCamposFormCadastro() {
 	$("#confirmaSenha").val("");
 }
 
-$("#formularioDeCadastro").validate({
-    rules: {
-        nome: {
-            required: true,
-            minlength: 4
-        },
-        sobrenome: {
-            required: true,
-            minlenght: 4
-        },
-        cpf: {
-			required: true,
-			minlength: 11
-		},
-		telefone: {
-			required: true,
-			minlength: 11
-		},
-		login: {
-            required: true,
-            minlenght: 4
-        },
-        email: {
-			required: true,
-			email: true
-        },
-        confirmaEmail: {
-			required: true,
-			email: true,
-			equalTo: "#email"
-        },
-        senha: {
-			required: true,
-			minlength: 8
-        },
-        confirmaSenha: {
-			required: true,
-			minlength: 8,
-			equalTo: "#senha"
-        },
-    },
-    messages: {
-    	nome: {
-            required: "Por favor digite um nome.",
-            minlength: "O nome precisa ter no minimo 4 letras."
-        },
-        sobrenome: {
-            required: "Por favor digite um sobrenome.",
-            minlenght: "O sobrenome precisa ter no minimo 4 letras."
-        },
-        cpf: {
-			required: "Por favor digite um CPF valido."
-		},
-		telefone: {
-			required: "Por favor digite um telefone valido."
-		},
-		login: {
-            required: "Por favor digite um login.",
-            minlenght: "O login precisa ter no minimo 4 letras."
-        },
-        email: {
-			required: "Por favor digite um email.",
-			email: "Por favor digite um email valido."
-        },
-        confirmaEmail: {
-			required: "Por favor Re-digite o email.",
-			equalTo: "Por favor re-digite o mesmo email."
-        },
-        senha: {
-			required: "Por favor digite uma senha.",
-			minlength: "A senha precisa ter no minimo 8 caracteres."
-        },
-        confirmaSenha: {
-			required: "Por favor digite a senha.",
-			equalTo: "Por favor re-digite a mesma senha."
-        },
-    },
-    errorElement : 'label',
-    errorPlacement: function(error, element) {
-      var placement = $(element).data('error');
-      if (placement) {
-        $(placement).append(error)
-      } else {
-        error.insertAfter(element);
-      }
-    }
- });
+function formValidate(n){
+	var element = '';
+	const btn = document.getElementById('confirmarCadastro');
+	switch (n)	{
+		case 1:
+			element = document.getElementById('bnome');
+			if($("#nome").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O nome precisa ter no minimo 4 letras!')
+				if($("#nome").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 2:
+			element = document.getElementById('bsnome');
+			if($("#sobrenome").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 letras!')
+				if($("#sobrenome").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 3:
+			element = document.getElementById('bcpf');
+			if($("#cpf").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um cpf valido!')
+				if($("#cpf").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 4:
+			element = document.getElementById('btelefone');
+			if($("#telefone").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um telefone valido!')
+				if($("#telefone").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 5:
+			element = document.getElementById('blogin');
+			if($("#loginC").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 caracteres!')
+				if($("#loginC").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 6:
+			element = document.getElementById('bemail');
+			if(validateEmail($("#email").val())){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Insira um email valido!')
+				if($("#email").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 7:
+			element = document.getElementById('bsenha');
+			if($("#senha").val().length < 8){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','A senha precisa ter no minimo 8 caracteres!')
+				if($("#senha").val() == ''){element.setAttribute('data-balloon','Prenchimento deste campo é obrigatório!')}
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+			}
+			break;
+		case 8:
+			element = document.getElementById('bcsenha');
+			if($("#confirmaSenha").val() != $("#senha").val()){
+				btn.setAttribute('type','button')
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O senha de confirmação precisa ser igual a senha!')
+			}else{
+				element.removeAttribute('data-balloon-visible', '')
+				btn.setAttribute('type','submit')
+			}
+			break;			
+	};
+}
+function validateEmail(email){
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(email)){
+    	return false;
+    }else {return true}
+}
+
