@@ -21,4 +21,8 @@ public class JsonUtil {
         Gson gson = new Gson();
         return gson.fromJson(json, UsuarioPO.class);
 	}
+	
+	public static String converterObjetoEmJson(Object objeto){
+		return new Gson().toJson(objeto);
+	}
 }
