@@ -226,7 +226,11 @@ function carregarFuncionarios(pagina){
         	if(data.length > 0){
         		preencherTabelaFuncionarios(data);
         	}else{
-        		$("#tabelaFuncionarios").html("");
+        		if(pagina == 1){
+        			$("#tabelaFuncionarios").html('<tr><td colspan="5">Não há funcionários cadastrados.</td></td>');
+        		}else{
+        			$("#tabelaFuncionarios").html('<tr><td colspan="5">Não há mais funcionários a serem listados.</td></td>');
+        		}
         	}
         }
 	});
