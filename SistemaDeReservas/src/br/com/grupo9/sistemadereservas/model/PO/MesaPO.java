@@ -3,7 +3,6 @@ package br.com.grupo9.sistemadereservas.model.PO;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -28,6 +27,7 @@ public class MesaPO implements Serializable {
 	@Column(name="data_exclusao",nullable=true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataExclusao;
+	private Character status;
 	
 //	@ManyToMany(mappedBy="mesas")
 //	private List<ReservaPO> reservas;
@@ -47,7 +47,7 @@ public class MesaPO implements Serializable {
 	}
 
 	public void setIdentificacao(String identificacao) {
-		this.identificacao = identificacao;
+		this.identificacao = identificacao.toUpperCase();
 	}   
 	public Integer getQuantidadeDeCadeiras() {
 		return this.quantidadeDeCadeiras;
@@ -75,6 +75,12 @@ public class MesaPO implements Serializable {
 	}
 	public void setDataExclusao(Calendar dataExclusao) {
 		this.dataExclusao = dataExclusao;
+	}
+	public Character getStatus() {
+		return status;
+	}
+	public void setStatus(Character status) {
+		this.status = status;
 	}
 	
 	

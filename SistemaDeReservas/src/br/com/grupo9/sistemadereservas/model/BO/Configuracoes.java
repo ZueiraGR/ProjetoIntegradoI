@@ -5,6 +5,7 @@ import java.util.List;
 public class Configuracoes {
 	private ValorDeCobranca valorTaxaReserva;
 	private List<Dia> horariosDeFuncionamento;
+	private String tempoMinimoDePermanencia;
 	public ValorDeCobranca getValorTaxaReserva() {
 		return valorTaxaReserva;
 	}
@@ -17,5 +18,13 @@ public class Configuracoes {
 	public void setHorariosDeFuncionamento(List<Dia> horariosDeFuncionamento) {
 		this.horariosDeFuncionamento = horariosDeFuncionamento;
 	}
+	public String getTempoMinimoDePermanencia() {
+		return tempoMinimoDePermanencia;
+	}
+	public void setTempoMinimoDePermanencia(String tempoMinimoDePermanencia) {
+		this.tempoMinimoDePermanencia = tempoMinimoDePermanencia;
+	}
+	
+	
 	
 }

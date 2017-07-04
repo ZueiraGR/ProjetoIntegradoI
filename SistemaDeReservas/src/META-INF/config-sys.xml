@@ -49,4 +49,5 @@
       <horaFim>22:00</horaFim>
     </Dia>
   </horariosDeFuncionamento>
+  <tempoMinimoDePermanencia>30</tempoMinimoDePermanencia>
 </Configuracao>

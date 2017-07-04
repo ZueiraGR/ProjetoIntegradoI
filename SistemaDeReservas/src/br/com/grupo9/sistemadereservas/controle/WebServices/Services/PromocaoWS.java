@@ -53,6 +53,12 @@ public class PromocaoWS {
 			return getPromocaoBO().listarSomentAtivas();
 		}
 	}
+	
+	@GET
+	@Path("/listarTodos/")
+	public List<PromocaoPO> listAll() {
+		return getPromocaoBO().listarSomentAtivas();
+	}
 
 	@POST
 	@Path("/atualizar/")

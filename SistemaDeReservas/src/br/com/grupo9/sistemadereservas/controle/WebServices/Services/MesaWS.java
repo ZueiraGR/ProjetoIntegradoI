@@ -44,8 +44,14 @@ public class MesaWS {
 
 	@GET
 	@Path("/listar/{pagina:[0-9]*}/{registros:[0-9]*}")
-	public List<MesaPO> listAll(@PathParam("pagina") final int pagina,@PathParam("registros") final int qtdRegistros) {
+	public List<MesaPO> listar(@PathParam("pagina") final int pagina,@PathParam("registros") final int qtdRegistros) {
 		return getMesaBO().listar(pagina, qtdRegistros);
+	}
+	
+	@GET
+	@Path("/listarTodas/")
+	public List<MesaPO> listarTodas() {
+		return getMesaBO().listar();
 	}
 
 	@POST

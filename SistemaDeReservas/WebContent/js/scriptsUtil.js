@@ -119,7 +119,9 @@ function getDateTime(data,horaString){
 }
 
 function getUsuarioDaSessao(){
-	return JSON.parse($("#usuarioDaSessao").val());
+	var usuario = JSON.parse($("#usuarioDaSessao").val());
+	usuario.dataCriacao = converteDataStringEmDate(usuario.dataCriacao.dayOfMonth+"/"+usuario.dataCriacao.month+"/"+usuario.dataCriacao.year).getTime();
+	return usuario;
 }
 //Utilizar onkeyup passando a string com a #id e a variavel event
 function validaHora(idCampo, event){

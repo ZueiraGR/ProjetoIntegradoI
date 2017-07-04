@@ -10,8 +10,14 @@ public class ReservaBO {
 	
 	private ReservaDAO reservaDAO;
 	private ReservaPO reservaPO;
+	private static int CONVERTE_MINUTOS_EM_MILIS = 60*1000;
 	
 	public boolean cadastrar(){
+		Calendar fim = (Calendar) getReservaPO().getInicio().clone();
+		ParametrosAtendimentoBO parametrosAtendimentoBO = new ParametrosAtendimentoBO();
+		parametrosAtendimentoBO.abrirConfiguracoes();
+		fim.setTimeInMillis(fim.getTimeInMillis()+Integer.valueOf(parametrosAtendimentoBO.getConfig().getTempoMinimoDePermanencia())*CONVERTE_MINUTOS_EM_MILIS);
+		getReservaPO().setFim(fim);
 		return getReservaDAO().cadastrar(getReservaPO());
 	}
 	

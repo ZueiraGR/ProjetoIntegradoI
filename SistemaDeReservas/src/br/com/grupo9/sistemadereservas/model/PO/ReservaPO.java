@@ -18,23 +18,23 @@ public class ReservaPO implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer chave;
-	@ManyToOne
-	private ClientePO cliente;
-	@ManyToOne
-	private FuncionarioPO funcionario;
-	@ManyToMany
+	@ManyToOne(optional=false)
+	private UsuarioPO usuario;
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="mesa_reservada",
 			joinColumns = @JoinColumn(name="reserva_chave"),
 			inverseJoinColumns= @JoinColumn(name="mesa_chave"))
 	private List<MesaPO> mesas;
+	@Column(name="inicio")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar inicio;
+	@Column(name="fim")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar fim;
 	@Column(name="qtd_pessoas")
 	private Integer quantidadeDePessoas;
 	
-	@ManyToOne
+	@ManyToOne(optional=true)
 	private PromocaoPO promocao;
 	
 
@@ -47,17 +47,11 @@ public class ReservaPO implements Serializable {
 	public void setChave(Integer chave) {
 		this.chave = chave;
 	}
-	public ClientePO getCliente() {
-		return cliente;
+	public UsuarioPO getUsuario() {
+		return usuario;
 	}
-	public void setCliente(ClientePO cliente) {
-		this.cliente = cliente;
-	}
-	public FuncionarioPO getFuncionario() {
-		return funcionario;
-	}
-	public void setFuncionario(FuncionarioPO funcionario) {
-		this.funcionario = funcionario;
+	public void setUsuario(UsuarioPO usuario) {
+		this.usuario = usuario;
 	}
 	public List<MesaPO> getMesas() {
 		return mesas;

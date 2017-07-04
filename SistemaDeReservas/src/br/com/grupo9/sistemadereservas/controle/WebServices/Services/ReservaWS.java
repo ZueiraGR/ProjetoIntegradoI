@@ -81,7 +81,7 @@ public class ReservaWS {
 	}
 	
 	private ReservaBO getReservaBO(){
-		if(this.reservaBO != null){
+		if(this.reservaBO == null){
 			this.reservaBO = new ReservaBO();
 		}
 		return this.reservaBO;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.grupo9.sistemadereservas.controle.Dominio.StatusMesa;
 import br.com.grupo9.sistemadereservas.model.DAO.MesaDAO;
 import br.com.grupo9.sistemadereservas.model.PO.MesaPO;
 import br.com.grupo9.sistemadereservas.model.Util.ArquivoUtil;
@@ -37,6 +38,7 @@ public class MesaBO {
 		gerarNomeDoArquivo();
 		if(salvarImagem()){
 			getMesaPO().setImagem(getNomeGeradoDoArquivo());
+			getMesaPO().setStatus(new Character(StatusMesa.LIVRE.getCodigo()));
 			if (getMesaDAO().cadastrar(getMesaPO())) {
 				return true;
 			} else {
@@ -55,6 +57,10 @@ public class MesaBO {
 	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros){
 		pagina = pagina*qtdRegistros-qtdRegistros;
 		return getMesaDAO().listar(pagina,qtdRegistros,getFiltro(MESAS_ATIVAS));
+	}
+	
+	public List<MesaPO> listar(){
+		return getMesaDAO().listar();
 	}
 	
 	public boolean atualizar(){
@@ -120,9 +126,9 @@ public class MesaBO {
 	private String getFiltro(int codigo){
 		String filtro;
 		switch (codigo) {
-		case MESAS_ATIVAS: filtro = "AND dataExclusao IS NULL";	
+		case MESAS_ATIVAS: filtro = "WHERE m.dataExclusao IS NULL AND m.status != 'E'";	
 			break;
-		case MESAS_EXCLUIDAS: filtro = "AND dataExclusao IS NOT NULL";
+		case MESAS_EXCLUIDAS: filtro = "WHERE m.dataExclusao IS NOT NULL AND m.status == 'E'";
 			break;
 		default: filtro = "";
 		}
