@@ -12,6 +12,7 @@ function cadastrarCliente() {
 }
 
 $("#formularioDeCadastro").submit(function(event) {
+	$('#mensagemRetornoCadastro').addClass("hiddendiv");
 	if (capturarDadosDoForm() != null) {
 		var formData = JSON.stringify(capturarDadosDoForm());
 		$.ajax({
@@ -25,6 +26,9 @@ $("#formularioDeCadastro").submit(function(event) {
 			contentType : "application/json",
 			processData : true
 		});
+	}else{
+		$('#mensagemRetornoCadastro').addClass("red");
+		$('#mensagemRetornoCadastro').removeClass("hiddendiv");
 	}
 	return false;
 });
@@ -61,36 +65,46 @@ function capturarDadosDoForm() {
 }
 
 function isDadosValidos(nome, sobrenome, cpf, telefone, login, email, senha, confirmaSenha) {
-	var mensagem;
-	// var cpfSemFormatacao;
+	var mensagem = "";
 	var retorno = true;
-	if (nome == null || nome == "") {
-		mensagem += "<li>É obrigatório preencher o campo NOME</li>";
+	if(nome == null || nome == "" || nome.length < 4){
+		mensagem += "<li>É obrigatório preencher o campo NOME corretamente com no minimo 4 letras</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
 		retorno = false;
 	}
-	if (sobrenome == null || sobrenome == "") {
-		mensagem += "<li>É obrigatório preencher o campo SOBRENOME</li>";
+	if(sobrenome == null || sobrenome == "" || sobrenome.length < 4){
+		mensagem += "<li>É obrigatório preencher o campo SOBRENOME corretamente com no minimo 4 letras</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
 		retorno = false;
 	}
-	if (cpf == null || cpf == "" || cpf.length < 11) {
+	if(cpf == null || cpf == "" || cpf.length < 11){
 		mensagem += "<li>É obrigatório preencher o campo CPF com 11 caracteres numéricos</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
 		retorno = false;
 	}
-	if (login == null || login == "" || login.length < 5) {
-		mensagem += "<li>É obrigatório preencher o campo LOGIN com no mínimo 5 caracteres alfanuméricos</li>";
+	if(telefone == null || telefone == "" || telefone.length < 11){
+		mensagem += "<li>É obrigatório preencher o campo TELEFONE com 11 caracteres numéricos</li>";
+		$('#mensagemRetornoAlteracao').html(mensagem);
 		retorno = false;
 	}
-	if (email == null || email == "") {
-		mensagem += "<li>É obrigatório preencher o campo EMAIL</li>";
+	if(login == null || login == "" || login.length < 4 ){
+		mensagem += "<li>É obrigatório preencher o campo LOGIN com no mínimo 4 caracteres alfanuméricos</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
 		retorno = false;
 	}
-	if (senha == null || senha == "" || senha.length < 8) {
+	if(email == null || email == "" || validateEmail(email)){
+		mensagem += "<li>É obrigatório preencher o campo EMAIL com o seguinte formato 'exemplo@email.com'</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
+		retorno = false;
+	}	
+	if(senha == null || senha == "" || senha.length < 8){
 		mensagem += "<li>É obrigatório preenche o campo SENHA com no mínimo 8 caracteres alfanuméricos</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
 		retorno = false;
 	}
-	if ((confirmaSenha == null || confirmaSenha == "" || confirmaSenha.length < 8)
-			&& confirmaSenha != senha) {
+	if((confirmaSenha == null || confirmaSenha == "" || confirmaSenha.length < 8) || confirmaSenha != senha){
 		mensagem += "<li>É obrigatório preencher o campo CONFIRMAR SENHA com a mesma senha informada no campo SENHA</li>";
+		$('#mensagemRetornoCadastro').html(mensagem);
 		retorno = false;
 	}
 	return retorno;
@@ -126,20 +140,27 @@ function editarCliente(cliente) {
 	$("#emailClienteA").val(cliente.email);
 	$("#cpfClienteA").val(cliente.cpf);
 	$("#alterarCliente").modal('open');
+	$('#mensagemRetornoAlteracao').addClass("hiddendiv");
 }
 
 $("#AlterarDadosCliente").submit(function(event) {
+	$('#mensagemRetornoAlteracao').addClass("hiddendiv");
 	if (DadosDoFormAlterar() != null) {
 		var formData = JSON.stringify(DadosDoFormAlterar());
 		$.ajax({
 			url : "ws/clientews/alterar/",
 			type : 'POST',
 			data : formData,
+			success: function (data) {
+	        	tratarRetornoAlterar(data);
+	        },
 			cache : false,
 			contentType : "application/json",
 			processData : true
-		});
-	}
+		});}else{
+			$('#mensagemRetornoAlteracao').addClass("red");
+			$('#mensagemRetornoAlteracao').removeClass("hiddendiv");
+		}
 	return false;
 });
 
@@ -151,16 +172,44 @@ function DadosDoFormAlterar() {
 	var telefone = $("#telefoneClienteA").val();
 	var email = $("#emailClienteA").val();
 	var status = $("#statusClienteA").val();
-	var cliente = {
-		"chave" : chave,
-		"nome" : nome,
-		"sobrenome" : sobrenome,
-		"cpf" : cpf,
-		"telefone" : telefone,
-		"email" : email,
-		"status" : status
-	};
+	var cliente = "";
+	if(isDadosAlterValidos(nome,sobrenome,cpf,telefone,email)){	
+		cliente = {"chave" : chave,"nome" : nome,"sobrenome" : sobrenome,"cpf" : cpf,"telefone" : telefone,"email" : email,"status" : status};
+	}else{
+		cliente = null;
+	}
 	return cliente;
+}
+
+function isDadosAlterValidos(nome,sobrenome,cpf,telefone,email){
+	var mensagem = "";
+	var retorno = true;
+	if(nome == null || nome == "" || nome.length < 4){
+		mensagem += "<li>É obrigatório preencher o campo NOME corretamente</li>";
+		$('#mensagemRetornoAlteracao').html(mensagem);
+		retorno = false;
+	}
+	if(sobrenome == null || sobrenome == "" || sobrenome.length < 4){
+		mensagem += "<li>É obrigatório preencher o campo SOBRENOME corretamente</li>";
+		$('#mensagemRetornoAlteracao').html(mensagem);
+		retorno = false;
+	}
+	if(telefone == null || telefone == "" || telefone.length < 11){
+		mensagem += "<li>É obrigatório preencher o campo TELEFONE com 11 caracteres numéricos</li>";
+		$('#mensagemRetornoAlteracao').html(mensagem);
+		retorno = false;
+	}
+	if(cpf == null || cpf == "" || cpf.length < 11){
+		mensagem += "<li>É obrigatório preencher o campo CPF com 11 caracteres numéricos</li>";
+		$('#mensagemRetornoAlteracao').html(mensagem);
+		retorno = false;
+	}
+	if(email == null || email == "" || validateEmail(email)){
+		mensagem += "<li>É obrigatório preencher o campo EMAIL com o seguinte formato 'exemplo@email.com'</li>";
+		$('#mensagemRetornoAlteracao').html(mensagem);
+		retorno = false;
+	}	
+	return retorno;
 }
 
 /* ATIVAR/DESATIVAR CLIENTE */
@@ -435,12 +484,9 @@ function formValidate(n){
 		case 8:
 			element = document.getElementById('bcsenha');
 			if($("#confirmaSenha").val() != $("#senha").val()){
-				btn.setAttribute('type','button')
 				element.setAttribute('data-balloon-visible', '')
 				element.setAttribute('data-balloon','O senha de confirmação precisa ser igual a senha!')
 				$('#confirmaSenha').addClass("invalid");
-			}else{
-				btn.setAttribute('type','submit')
 			}
 			setTimeout(function(){
 				element.removeAttribute('data-balloon-visible', '')
@@ -453,5 +499,89 @@ function validateEmail(email){
     if(re.test(email)){
     	return false;
     }else {return true}
+}
+
+function tratarRetornoAlterar(data){
+	if(data == "sucess"){
+		$('#mensagemRetornoAlteracao').html("Alteração realizado com sucesso!");
+		$('#mensagemRetornoAlteracao').addClass("green");
+		$('#mensagemRetornoAlteracao').removeClass("hiddendiv");
+		setTimeout(function(){
+			$("#alterarCliente").modal('close');
+			$('#mensagemRetornoAlteracao').addClass("hiddendiv");
+			carregarClientes(1);
+		},2000);
+	}else{
+		$('#mensagemRetornoAlteracao').html("Houve erro ao alterar!");
+		$('#mensagemRetornoAlteracao').addClass("red");
+		$('#mensagemRetornoAlteracao').removeClass("hiddendiv");
+	}
+}
+
+function formAltValidate(n){
+	var element = '';
+	const btn = document.getElementById('confirmarAlteracao');
+	switch (n)	{
+		case 1:
+			element = document.getElementById('anome');
+			if($("#nomeClienteA").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O nome precisa ter no minimo 4 letras!')
+				$('#nomeClienteA').addClass("invalid");
+				if($("#nomeClienteA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
+			break;
+		case 2:
+			element = document.getElementById('asnome');
+			if($("#sobrenomeClienteA").val().length < 4){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','O sobrenome precisa ter no minimo 4 letras!')
+				$('#sobrenomeClienteA').addClass("invalid");
+				if($("#sobrenomeClienteA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
+			break;
+		case 4:
+			element = document.getElementById('acpf');
+			if($("#cpfClienteA").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um cpf valido!')
+				$('#cpfClienteA').addClass("invalid");
+				if($("#cpfClienteA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
+			break;
+		case 3:
+			element = document.getElementById('atelefone');
+			if($("#telefoneClienteA").val().length < 11){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Digite um telefone valido!')
+				$('#telefoneClienteA').addClass("invalid");
+				if($("#telefoneClienteA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
+			break;
+		case 5:
+			element = document.getElementById('aemail');
+			if(validateEmail($("#emailClienteA").val())){
+				element.setAttribute('data-balloon-visible', '')
+				element.setAttribute('data-balloon','Insira um email valido!')
+				$('#emailClienteA').addClass("invalid");
+				if($("#emailClienteA").val() == ''){element.setAttribute('data-balloon','Preenchimento deste campo é obrigatório!')}
+			}
+			setTimeout(function(){
+				element.removeAttribute('data-balloon-visible', '')
+			},3000);
+			break;	
+	};
 }
 

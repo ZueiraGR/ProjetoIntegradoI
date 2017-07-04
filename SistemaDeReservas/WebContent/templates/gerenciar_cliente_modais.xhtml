@@ -176,40 +176,43 @@
 						<input class="hiddendiv" id="chaveClienteA" />
 						<input class="hiddendiv" id="statusClienteA" />
 					<div class="row">
-						<div class="input-field col s6">
-							<input placeholder="" id="nomeClienteA" type="text" class="validate" required="required" onkeyup="validar(this,'text')"/>
+						<div class="input-field col s6" id="anome" data-balloon="" data-balloon-pos="up">
+							<input placeholder="" id="nomeClienteA" type="text" class="validate texto-todo-maiusculo" required="required" maxlength="25" data-length="25" onkeyup="validar(this,'text')" onblur="validar(this,'text'), formAltValidate(1)"/>
 							<label for="nomeClienteA">NOME</label>
 						</div>
-						<div class="input-field col s6">
-							<input placeholder="" id="sobrenomeClienteA" type="text" class="validate" required="required" onkeyup="validar(this,'text')"/>
+						<div class="input-field col s6" id="asnome" data-balloon="" data-balloon-pos="up">
+							<input placeholder="" id="sobrenomeClienteA" type="text" class="validate texto-todo-maiusculo" required="required" maxlength="25" data-length="25" onkeyup="validar(this,'text')" onblur="validar(this,'text'), formAltValidate(2)"/>
 							<label for="sobrenomeClienteA">SOBRENOME</label>
 						</div>
 					</div>
 					<div class="row">
-						<div class="input-field col s6">
-							<input placeholder="" maxlength="12" id="telefoneClienteA"	type="tel" class="validate" required="required" onkeyup="validar(this,'num')"/>
+						<div class="input-field col s6" id="atelefone" data-balloon="" data-balloon-pos="up">
+							<input placeholder="" id="telefoneClienteA"	type="text" class="validate" required="required" maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num'), formAltValidate(3)"/>
 								<label for="telefoneClienteA">TELEFONE</label>
 						</div>
-						<div class="input-field col s6">
-							<input placeholder="" maxlength="14" id="cpfClienteA"	type="text" class="validate" required="required" onkeyup="validar(this,'num')"/>
+						<div class="input-field col s6" id="acpf" data-balloon="" data-balloon-pos="up">
+							<input placeholder="" id="cpfClienteA"	type="text" class="validate" required="required" maxlength="11" data-length="11" onkeyup="validar(this,'num')" onblur="validar(this,'num'), formAltValidate(4)"/>
 								<label for="cpfClienteA">CPF</label>
 						</div>
 					</div>
 					<div class="row">
-						<div class="input-field col s6">
-							<input placeholder="" id="emailClienteA" type="email" class="validate" required="required"/>
-							<label for="emailClienteA" data-error="Digite um e-mail válido!" data-success="Ok">EMAIL</label>
+						<div class="input-field col s6" id="aemail" data-balloon="" data-balloon-pos="up">
+							<input placeholder="" id="emailClienteA" type="text" class="validate" required="required" onblur="formAltValidate(5)"/>
+							<label for="emailClienteA">EMAIL</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col l3"></div>
 						<div class="input-field col l3">
-							<button	class="btn grey waves-effect waves-green col l6 modal-action modal-close col s12 l12 m12" type="submit">CONFIRMAR</button>
+							<button	class="btn grey waves-effect waves-green col l6 modal-action col s12 l12 m12" type="submit">CONFIRMAR</button>
 						</div>
 						<div class="input-field col l3">
 							<button class="btn grey waves-effect waves-green col l6 modal-action modal-close col s12 l12 m12" type="reset">CANCELAR</button>
 						</div>
 						<div class="input-field col l3"></div>
+					</div>
+					<div class="row">
+						<div class="card-panel lighten-2 white-text center-align hiddendiv" id="mensagemRetornoAlteracao"></div>
 					</div>
 				</form>
 			</div>

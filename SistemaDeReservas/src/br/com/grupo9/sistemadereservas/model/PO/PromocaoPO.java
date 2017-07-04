@@ -26,6 +26,7 @@ public class PromocaoPO implements Serializable {
 	private String descricao;
 	private String informacao;
 	private String imagem;
+	private String status;
 //	@OneToMany(mappedBy="promocao",cascade=CascadeType.ALL)
 //	private List<ReservaPO> reservas;
 	
@@ -88,6 +89,12 @@ public class PromocaoPO implements Serializable {
 //	public void setReservas(List<ReservaPO> reservas) {
 //		this.reservas = reservas;
 //	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 	
    

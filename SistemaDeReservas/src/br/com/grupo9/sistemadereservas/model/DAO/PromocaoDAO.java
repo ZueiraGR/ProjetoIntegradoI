@@ -72,7 +72,7 @@ public class PromocaoDAO implements DAO<PromocaoPO> {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT u ")
-				 .append("FROM promocao u ");
+				 .append("FROM promocao u WHERE u.status = null");
 			TypedQuery<PromocaoPO> typedQuery = getManager().createQuery(query.toString(),PromocaoPO.class);
 				return (List<PromocaoPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
 		}catch (Exception e) {

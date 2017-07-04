@@ -82,6 +82,7 @@ public class PromocaoBO {
 		PromocaoPO promocao = getPromocaoDAO().capturarPorId(getPromocaoPO());
 		setNomeDoArquivo(promocao.getImagem());
 		promocao.setFim(Calendar.getInstance());
+		promocao.setStatus("e");
 		if(excluirImagem()){
 			return getPromocaoDAO().atualizar(promocao);
 		}else{
