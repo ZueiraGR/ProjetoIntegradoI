@@ -108,3 +108,64 @@ function coverterDateEmDataString(data){
     var ano = data.getFullYear();  
     return dia+"/"+mes+"/"+ano;
 }
+
+function getDateTime(data,horaString){
+	var dia = parseInt(data.substring(1, 3));
+	var mes = parseInt(data.substring(3, 6))-1;
+	var ano = parseInt(data.substring(6, 11));
+	var hora = parseInt(horaString.substring(1,3));
+	var minuto= parseInt(horaString.substring(3,6));
+	return new Date(ano,mes,dia,hora,minuto,0,0);
+}
+
+function getUsuarioDaSessao(){
+	return JSON.parse($("#usuarioDaSessao").val());
+}
+//Utilizar onkeyup passando a string com a #id e a variavel event
+function validaHora(idCampo, event){
+    var horaCapturada = $(idCampo).val();
+    var hora;
+    var minuto;
+    var teclaPressionada = event.keyCode;
+    if (horaCapturada !== null && horaCapturada !== "" && horaCapturada.length > 0) {
+    	if (horaCapturada.length === 2) {
+            hora = parseInt(horaCapturada.substring(0, 2));
+            if ((hora >= 0 && hora < 24) && teclaPressionada !== 8) {
+                $(idCampo).val(horaCapturada + ':');
+            } else {
+                $(idCampo).val("");
+                Materialize.toast('Favor preencher a hora corretamente!' +
+                        '<br>O campo deve ser preenchido dentro do intervalo 00:00 até 23:59.', 4000);
+            }
+        }
+        if (horaCapturada.length > 3) {
+            hora = parseInt(horaCapturada.substring(0, 2));
+            meio = horaCapturada.substring(2, 3);
+            minuto = parseInt(horaCapturada.substring(3, 5));
+            if(meio != ":"){
+            	$(idCampo).val("");
+                $(idCampo).focus();
+                Materialize.toast('Favor preencher a hora corretamente!' +
+                        '<br>O campo deve ser preenchido dentro do intervalo 00:00 até 23:59.', 4000);
+            }
+            if(minuto.length == 1 && minuto >= 6){
+            	$(idCampo).val("");
+                $(idCampo).focus();
+                Materialize.toast('Favor preencher a hora corretamente!' +
+                        '<br>O campo deve ser preenchido dentro do intervalo 00:00 até 23:59.', 4000);
+            }
+            if (!(hora >= 0 && hora < 24)) {
+                $(idCampo).val("");
+                $(idCampo).focus();
+                Materialize.toast('Favor preencher a hora corretamente!' +
+                        '<br>O campo deve ser preenchido dentro do intervalo 00:00 até 23:59.', 4000);
+            }
+            if (!(minuto > 0 && minuto < 60)) {
+                $(idCampo).val("");
+                $(idCampo).focus();
+                Materialize.toast('Favor preencher a hora corretamente!' +
+                        '<br>O campo deve ser preenchido dentro do intervalo 00:00 até 23:59.', 4000);
+            }
+        }
+    }
+}
