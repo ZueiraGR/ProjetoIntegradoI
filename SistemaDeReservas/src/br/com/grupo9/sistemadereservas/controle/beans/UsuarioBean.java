@@ -5,7 +5,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.grupo9.sistemadereservas.controle.Dominio.TipoUsuario;
+import br.com.grupo9.sistemadereservas.controle.Util.JsonUtil;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 
 @ManagedBean
 public class UsuarioBean {
@@ -17,8 +19,8 @@ public class UsuarioBean {
 		this.usuario = (UsuarioPO) session.getAttribute("usuario");
 	}
 	
-	public String getLogin(){
-		return getUsuario().getLogin();
+	public String getUsuarioDaSessao(){
+		return JsonUtil.converterObjetoEmJson(getUsuario());
 	}
 	
 	public String getNome(){

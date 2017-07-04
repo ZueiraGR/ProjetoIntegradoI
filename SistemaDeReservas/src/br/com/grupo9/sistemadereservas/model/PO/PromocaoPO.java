@@ -3,11 +3,8 @@ package br.com.grupo9.sistemadereservas.model.PO;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.*;
-
-import org.hibernate.annotations.Cascade;
 
 /**
  * Entity implementation class for Entity: PromocaoPO

@@ -13,7 +13,6 @@ import javax.ws.rs.Produces;
 
 import br.com.grupo9.sistemadereservas.controle.Util.SecurityUtil;
 import br.com.grupo9.sistemadereservas.model.BO.ClienteBO;
-import br.com.grupo9.sistemadereservas.model.BO.UsuarioBO;
 import br.com.grupo9.sistemadereservas.model.PO.ClientePO;
 import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 
@@ -24,7 +23,6 @@ import br.com.grupo9.sistemadereservas.model.PO.UsuarioPO;
 public class ClienteWS {
 	
 	ClienteBO clienteBO;
-	UsuarioBO usuarioBO;
 	
 	@POST
 	@Path("/cadastrar/")
@@ -120,11 +118,4 @@ public class ClienteWS {
 		}
 		return this.clienteBO;
 	}
-	private UsuarioBO getUsuarioBO(){
-		if(this.usuarioBO == null){
-			this.usuarioBO = new UsuarioBO();
-		}
-		return this.usuarioBO;
-	}
-
 }

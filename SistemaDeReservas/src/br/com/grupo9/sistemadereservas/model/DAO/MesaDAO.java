@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.com.grupo9.sistemadereservas.controle.Dominio.StatusMesa;
 import br.com.grupo9.sistemadereservas.interfaces.DAO;
 import br.com.grupo9.sistemadereservas.model.PO.MesaPO;
 import br.com.grupo9.sistemadereservas.model.Util.PersistenceUtil;
@@ -33,9 +34,9 @@ public class MesaDAO implements DAO<MesaPO> {
 	public MesaPO capturarPorId(MesaPO entidade) {
 		try {
 			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ")
-				 .append("FROM mesa u ")
-				 .append("WHERE u.chave = :chave");
+			query.append("SELECT m ")
+				 .append("FROM mesa m ")
+				 .append("WHERE m.chave = :chave");
 			TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
 			typedQuery.setParameter("chave", entidade.getChave().intValue());
 			return (MesaPO) typedQuery.getSingleResult();
@@ -51,9 +52,9 @@ public class MesaDAO implements DAO<MesaPO> {
 	@Override
 	public boolean atualizar(MesaPO entidade) {
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM mesa u")
-			 .append("WHERE u.chave = :chave");
+		query.append("SELECT m ")
+			 .append("FROM mesa m ")
+			 .append("WHERE m.chave = :chave");
 		TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
 		typedQuery.setParameter("chave", entidade.getChave().intValue());
 		MesaPO mesa = (MesaPO) typedQuery.getSingleResult();
@@ -79,10 +80,30 @@ public class MesaDAO implements DAO<MesaPO> {
 	public List<MesaPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
 		try {
 			StringBuilder query = new StringBuilder();
-			query.append("SELECT u ")
-				 .append("FROM mesa u ");
+			query.append("SELECT m ")
+				 .append("FROM mesa m ")
+				 .append(filtro);
 			TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
 			return (List<MesaPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
+		} catch (Exception e) {
+			System.out.println("\nOcorreu um erro ao tentar capturar todos os usuarios. Causa:\n");
+			e.printStackTrace();
+			return null;
+		}finally {
+			fecharManager();
+		}
+	}
+	
+	public List<MesaPO> listar(){
+		try {
+			StringBuilder query = new StringBuilder();
+			query.append("SELECT m ")
+				 .append("FROM mesa m ")
+				 .append("WHERE m.status != :status ")
+				 .append("AND m.dataExclusao IS NULL");
+			TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
+			typedQuery.setParameter("status", StatusMesa.EXCLUIDA.getCodigo());
+			return (List<MesaPO>) typedQuery.getResultList();
 		} catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos os usuarios. Causa:\n");
 			e.printStackTrace();
@@ -95,9 +116,9 @@ public class MesaDAO implements DAO<MesaPO> {
 	@Override
 	public boolean excluir(MesaPO entidade) {
 		StringBuilder query = new StringBuilder();
-		query.append("SELECT u ")
-			 .append("FROM mesa u ")
-			 .append("WHERE u.chave = :chave");
+		query.append("SELECT m ")
+			 .append("FROM mesa m ")
+			 .append("WHERE m.chave = :chave");
 		TypedQuery<MesaPO> typedQuery = getManager().createQuery(query.toString(), MesaPO.class);
 		typedQuery.setParameter("chave", entidade.getChave().intValue());
 		MesaPO mesa = (MesaPO) typedQuery.getSingleResult();

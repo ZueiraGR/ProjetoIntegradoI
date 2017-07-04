@@ -47,14 +47,14 @@ public class FuncionarioPO implements Serializable {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}   
 	public String getSobrenome() {
 		return this.sobrenome;
 	}
 
 	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+		this.sobrenome = sobrenome.toUpperCase();
 	}
 	
 	public String getTelefone() {
@@ -78,7 +78,7 @@ public class FuncionarioPO implements Serializable {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 
 	public Character getStatus() {

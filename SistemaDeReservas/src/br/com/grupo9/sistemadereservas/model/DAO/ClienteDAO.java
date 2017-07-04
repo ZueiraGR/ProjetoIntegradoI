@@ -151,7 +151,6 @@ public class ClienteDAO implements DAO<ClientePO> {
 	
 	@Override
 	public boolean excluir(ClientePO entidade) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

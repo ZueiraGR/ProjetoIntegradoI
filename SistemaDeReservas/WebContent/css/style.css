@@ -90,3 +90,7 @@
 .texto-todo-maiusculo{
 	text-transform:uppercase;
 }
+
+.texto-todo-minusculo{
+	text-transform:lowercase;
+}

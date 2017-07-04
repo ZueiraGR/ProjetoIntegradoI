@@ -1,8 +1,8 @@
 package br.com.grupo9.sistemadereservas.controle.Dominio;
 
 public enum TipoUsuario {
-	CLIENTE('C',"Cliente"),
-	FUNCIONARIO('F',"Funcionario");
+	CLIENTE('C',"CLIENTE"),
+	FUNCIONARIO('F',"FUNCIONÁRIO");
 	
 	private char codigo;
 	private String descricao;
@@ -16,7 +16,7 @@ public enum TipoUsuario {
 		return this.descricao;
 	}
 	public static String getDescricao(char codigo){
-		String retorno = "Não definido";
+		String retorno = "NÃO DEFINIDO";
 		if(TipoUsuario.CLIENTE.getCodigo() == codigo){
 			retorno = TipoUsuario.CLIENTE.getDescricao();
 		}else if(TipoUsuario.FUNCIONARIO.getCodigo() == codigo){

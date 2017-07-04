@@ -340,7 +340,6 @@ function limparCamposFormCadastro() {
 	$("#telefone").val("");
 	$("#loginC").val("");
 	$("#email").val("");
-	$("#confirmaEmail").val("");
 	$("#senha").val("");
 	$("#confirmaSenha").val("");
 }

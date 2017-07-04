@@ -1,5 +1,3 @@
-//TODO identificar o motivo de não setar a imagem codificada no objeto mesa 
-
 var idInputFileMesa = "imagemMesa";
 var idInputHiddenMesa = "imagemMesaBase64";
 var idDivPaginacaoMesas = "#OpPaginasMesas";
@@ -107,7 +105,7 @@ function getMesa(){
 	var chave = parseInt($("#chaveMesa").val());
     var identificacao = $('#numero').val();
     var cadeiras = $('#cadeiras').val();
-    var descricao = $('#textarea1').val();
+    var descricao = $('#descricao').val();
     var arquivoBase64 = $('#imagemMesaBase64').val();
     if(chave != null && chave > 0){
         mesa = { "chave": chave, "identificacao": identificacao, "quantidadeDeCadeiras": cadeiras, "descricao": descricao, "imagem": arquivoBase64};

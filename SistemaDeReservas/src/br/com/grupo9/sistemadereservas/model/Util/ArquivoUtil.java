@@ -27,7 +27,6 @@ public class ArquivoUtil {
 		File arquivo = new File(path + nomeDoArquivo);
 		if (arquivo.exists()) {
 			arquivo.delete();
-			System.out.println("Excluindo arquivo: "+nomeDoArquivo);
 			return true;
 		}else{
 			return false;
