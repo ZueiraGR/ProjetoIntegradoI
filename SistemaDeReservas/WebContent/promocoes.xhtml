@@ -17,90 +17,36 @@
 </ui:insert>
 </head>
 
-<body>
+<body onload="carregarSlidePromocoes(1)">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
+	
 	<br />
-	<div class="row container center">
-
-		<div class="l12 m12 s12 row z-depth-2 white-text" style="background: url(img/promo1.jpg), no-repeat, center; background-size: 100% 100%; height: 400px;">
-			<br/>
-			<div class="container-text promo">
-				<h4>Jantar Romântico</h4>
-				<p class="">Promoção especial para surpreender a sua amada.</p>
-			</div>
-			<a class="waves-effect waves-light btn" style="bottom: -14em;" data-target="promo">SAIBA MAIS</a>
-		</div>
-		<div class="l12 m12 s12 row z-depth-2 white-text" style="background: url(img/promo2.jpg), no-repeat, center; background-size: 100% 100%; height: 400px;">
-			<br/>
-			<div class="container-text promo">
-				<h4>Almoço de negócios</h4>
-				<p class="">Promoção válida por tempo limitado.</p>
-			</div>
-			<a class="waves-effect waves-light btn" style="bottom: -14em;" data-target="promo">SAIBA MAIS</a>
-		</div>
-		<div class="l12 m12 s12 row z-depth-2 white-text" style="background: url(img/promo3.jpg), no-repeat, center; background-size: 100% 100%; height: 400px;">
-			<br/>
-			<div class="container-text promo">
-				<h4>Jantar tamanho família</h4>
-				<p class=" ">Promoção para reunir toda a família.</p>
-			</div>
-			<a class="waves-effect waves-light btn " style="bottom: -14em;" data-target="promo">SAIBA MAIS</a>
-		</div>
-	</div>
+	
+	<div class="row container center" id="paginaPromocoes" />
 
 	<div class="modal" id="promo">
-		<ul class="row tabs tabs-fixed-width z-depth-1 ">
-			<li class="tab col "><a>PROMOCÕES</a></li>
-		</ul>
-		<div class="row center ">
-			<br /> Coloque aqui o detalhamento da promoção...
+		<div class="row tabs tabs-fixed-width z-depth-1 ">
+			<div class="tab"><a>INFORMAÇÃO</a></div>
 		</div>
-
-		<ul class="collapsible " style="margin-bottom: 0px"	data-collapsible="accordion ">
-			<li>
-				<div class="collapsible-header center ">
-					<a>Reserva rápida</a>
-				</div>
-				<div class="collapsible-body ">
-					<form id="agendamentoRapidoForm" name="agendamentoRapidoForm"
-						method="POST" enctype="multipart/form-data">
-						<div class="row ">
-							<div class="input-field col s12 l6 m6 ">
-								<input placeholder="1" id="qtdCadeiras" type="number" max="20" min="1" value="1" required="required"/>
-								<label for="qtdCadeiras">QUANTIDADE	DE CADEIRAS</label>
-							</div>
-							<div class="input-field col s12 l6 m6 ">
-								<input placeholder="Digite aqui o código token fornecido pelo atendente." id="token" type="text" maxlength="10" minlength="10" class="validate" required="required"/>
-								<label for="qtdCadeiras" data-sucess='OK' data-error='Este campo deve ser preenchido com o código de 10 dígitos fornecido pelo atendente.'>TOKEN</label>
-							</div>
-						</div>
-						<div class="row hiddendiv" id="campoHoraInicio">
-							<div class="input-field col s12 l6 m6 ">
-								<input type="checkbox" id="horarioDefinido" name="horarioDefinido"/>
-								<label for="horarioDefinido">HORÁRIO DEFINIDO</label>
-							</div>
-							<div class="input-field col s12 l6 m6 ">
-								<input placeholder="hh:mm" id="horaInicio" name="horaInicio" type="text" maxlength="5" onchange="validaHora()"/>
-								<label for="horaInicio">HORA</label>
-							</div>
-						</div>
-						<div class="row ">
-							<div class="input-field col l3 "></div>
-							<div class="input-field col l3 m12 s12 center ">
-								<button class="btn grey waves-effect waves-green col l12 m12 s12" type="submit">CONFIRMAR</button>
-							</div>
-							<div class="input-field col l3 m12 s12 center ">
-								<button	class="btn grey modal-close waves-effect waves-red col l12 m12 s12" type="reset">CANCELAR</button>
-							</div>
-							<div class="input-field col l3 "></div>
-						</div>
-					</form>
-				</div>
-			</li>
-		</ul>
+		<div class="row center ">
+			<div class="col s12 l12 m12">
+				<p id="descricaoPromo" class=""/>
+			</div>
+		</div>
+		<div class="row l12">
+			<div class="col center l6">
+				<label for="descricaoPromoDI">Data Inicio:</label>
+				<STRONG id="descricaoPromoDI"/>					
+			</div>
+			<div class="col center l6">
+				<label for="descricaoPromoDF">Data Fim:</label>
+				<STRONG id="descricaoPromoDF"/>					
+			</div>
+		</div>
 	</div>
+	
 	<!-- Modal estrutura -->
 	<div id="modal1" class="modal">
 		<div class="modal-content">
@@ -136,6 +82,7 @@
 		<ui:include src="/templates/rodape.xhtml" />
 		<ui:include src="/templates/js_padrao.xhtml" />
 	</ui:insert>
+	<script src="js/scriptsPromocoes.js"></script>
 </body>
 
 </html>

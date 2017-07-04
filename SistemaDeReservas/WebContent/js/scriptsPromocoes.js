@@ -48,14 +48,13 @@ function getLinhaPromocao(promocao){
 function getAcoesPromocao(promocao){
 	var html = getBtnVisualizarPromocao(promocao);
 	html += getBtnEditarPromocao(promocao);
-	html += getBtnEncerrarPromocao(promocao);
-	html += getBtnProrrogarPromocao(promocao);
 	html += getBtnExcluirPromocao(promocao);
 	return html;
 }
 
 function getBtnVisualizarPromocao(promocao){
-	return "<a href='#' onclick='visualizarPromocao("+JSON.stringify(promocao)+")' title='Editar'><i class='fa fa-info-circle fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a>";
+	var html = "<a href='#' onclick='visualizarPromocao("+JSON.stringify(promocao)+")' title='Editar'><i class='fa fa-info-circle fa-lg indigo-text text-darken-2 hoverable' aria-hidden='true'></i></a>";
+	return html;
 }
 
 function getBtnEditarPromocao(promocao){
@@ -243,4 +242,55 @@ function recarregarPromocoes(){
 	$("#qtdRegistrosPromocoes").material_select('destroy'); 
     $("#qtdRegistrosPromocoes").material_select();
     carregarPromocoes(1);
+}
+
+
+function carregarSlidePromocoes(pagina){
+	$.ajax({
+		url: "ws/promocaows/listar/"+pagina+"/5/T",
+        type: 'GET',
+        success: function (data) {
+        	preencherSlidePromocoes(data);
+        }
+	});
+}
+
+function preencherSlidePromocoes(arrayDePromocoes){
+	var html = "";
+	var html2 = "";
+	for( i = 0; i < arrayDePromocoes.length; i++){
+		html += getPromocao1(arrayDePromocoes[i]);
+		html2 += getPromocao2(arrayDePromocoes[i]);
+	}
+	$("#slidePromocoes").html(html);	
+	$("#paginaPromocoes").html(html2);
+}
+
+function getPromocao1(promocao){
+	linha = '<div class="carousel-item" style="background: url(img/'+promocao.imagem+'), no-repeat, center; background-size: 100% 100%;">' +
+				'<div class="promo">' +
+					'<h2>'+promocao.titulo+'</h2>' +
+					'<p>'+promocao.descricao+'</p>' +
+				'</div>' +
+			'</div>';
+	return linha;
+}
+
+
+
+function getPromocao2(promocao){
+	linha = "<div class='l12 m12 s12 row z-depth-2 white-text' style='background: url(img/"+promocao.imagem+"), no-repeat, center; background-size: 100% 100%; height: 400px;'>" +
+				"<br>"+
+				"<div class='container-text promo'>"+
+					"<h4>"+promocao.titulo+"</h4>"+
+					"<p>"+promocao.descricao+"</p>"+
+				"</div>"+
+				"<a class='waves-effect waves-light btn' style='bottom: -14em;' data-target='promo' onclick='descricaoPromocao("+JSON.stringify(promocao)+")'>SAIBA MAIS</a>"+
+			"</div>";
+	return linha;
+}
+function descricaoPromocao(promocao){
+	$("#descricaoPromo").html(promocao.informacao);
+	$("#descricaoPromoDI").html(coverterDateEmDataString(new Date(promocao.inicio)));
+	$("#descricaoPromoDF").html(coverterDateEmDataString(new Date(promocao.fim)));
 }
