@@ -10,22 +10,22 @@
 	<c:if test="#{usuarioBean.usuarioLogado}">
 		<input type="hidden" id="usuarioDaSessao" value='#{usuarioBean.usuarioDaSessao}'/>
 	</c:if>
-	<nav class="grey darken-1" role="navigation">
-	<div class="nav-wrapper container">
-		<a href="index.do" title="Inicio"><div class="logo brand-logo"></div></a>
-		<ul class="right hide-on-med-and-down">
-			<ui:insert>
-				<ui:include src="/templates/menu_itens.xhtml" />
-			</ui:insert>
-		</ul>
-
-		<ul id="nav-mobile" class="side-nav">
-			<ui:insert>
-				<ui:include src="/templates/menu_itens_m.xhtml" />
-			</ui:insert>
-		</ul>
-		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-	</div>
+	<nav class="grey darken-1" style="height: 65px" role="navigation">
+		<div class="nav-wrapper container">
+			<a href="index.do" title="Inicio"><div class="logo brand-logo"></div></a>
+			<ul class="right hide-on-med-and-down">
+				<ui:insert>
+					<ui:include src="/templates/menu_itens.xhtml" />
+				</ui:insert>
+			</ul>
+	
+			<ul id="nav-mobile" class="side-nav">
+				<ui:insert>
+					<ui:include src="/templates/menu_itens_m.xhtml" />
+				</ui:insert>
+			</ul>
+			<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		</div>
 	</nav>
 </ui:composition>
 

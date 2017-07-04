@@ -14,42 +14,12 @@
 	</ui:insert>
 </head>
 
-<body>
-
+<body onload="carregarSlidePromocoes(1)">
 	<ui:insert name="navbar">
 		<ui:include src="/templates/menu.xhtml" />
 	</ui:insert>
 	
-	<div class="section no-pad-bot" id="index-banner">
-		<div class="container">
-			<div class="row center">
-				<div class="carousel carousel-slider center z-depth-2 white-text"
-					data-indicators="true">
-					<div class="carousel-fixed-item center">
-						<a class="btn" href="promocoes.html">PROMOÇÕES</a>
-					</div>
-					<div class="carousel-item" style="background: url(img/promo1.jpg), no-repeat, center; background-size: 100% 100%;">
-						<div class="promo">
-							<h2>Jantar Romântico</h2>
-							<p class="">Promoção especial para surpreender a sua amada.</p>
-						</div>
-					</div>
-					<div class="carousel-item" style="background: url(img/promo2.jpg), no-repeat, center; background-size: 100% 100%;">
-						<div class="promo">
-							<h2>Almoço de negócios</h2>
-							<p class="">Promoção válida por tempo limitado.</p>
-						</div>
-					</div>
-					<div class="carousel-item" style="background: url(img/promo3.jpg), no-repeat, center; background-size: 100% 100%;">
-						<div class="promo">
-							<h2>Jantar tamanho família</h2>
-							<p class="">Promoção para reunir toda a família.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="" id="slidePromocoes"/>
 
 	<!-- Modal estrutura -->
 	<div id="modal1" class="modal">
@@ -87,6 +57,7 @@
 	</ui:insert>
 	<script src="js/scriptsLogin.js"></script>
 	<script src="js/scriptsCliente.js"></script>
+	<script src="js/scriptsPromocoes.js"></script>
 </body>
 
 </html>

@@ -246,11 +246,37 @@ function recarregarPromocoes(){
 
 
 function carregarSlidePromocoes(pagina){
+	var html = "";
+	var html2 = "";
 	$.ajax({
 		url: "ws/promocaows/listar/"+pagina+"/5/T",
         type: 'GET',
         success: function (data) {
-        	preencherSlidePromocoes(data);
+        	if(data.length > 0){
+        		preencherSlidePromocoes(data);
+        	}else{
+        		html = "<div class='parallax-container'>" +
+        			"<div class='parallax'><img src='img/sem-promo.png'></div>" +
+        			"</div>" +
+        			"<div class='section white z-depth-1'>" +
+        			"<div class='row container'>" +
+        			"<h2 class='header'>Sem promoções no momento</h2>" +
+        			"</div>" +
+        			"</div>";
+        		$("#slidePromocoes").html(html);
+        		
+        		html2 = "<div class='l12 m12 s12 row z-depth-2 white-text' style='background: url(img/sem-promo.png), no-repeat, center; background-size: 100% 100%; height: 400px;'>" +
+						"<br>"+
+						"<div class='container-text promo'>"+
+						"<h4>Sem promoções</h4>"+
+						"<p>Desculpe estamos sem promoções no momento.</p>"+
+						"</div>"+
+						"</div>";
+        		$("#paginaPromocoes").html(html2);
+        	}
+        	$(document).ready(function(){
+        		$('.parallax').parallax();
+        	});
         }
 	});
 }
@@ -266,17 +292,28 @@ function preencherSlidePromocoes(arrayDePromocoes){
 	$("#paginaPromocoes").html(html2);
 }
 
+/*function getPromocao1(promocao){
+	linha = "<div class='carousel-item' style='background: url(img/"+promocao.imagem+"), no-repeat, center; background-size: 100% 100%;'>" +
+				"<div class='promo'>" +
+					"<h2>"+promocao.titulo+"</h2>" +
+					"<p>"+promocao.descricao+"</p>" +
+				"</div>" +
+			"</div>";
+	return linha;
+}*/
+
 function getPromocao1(promocao){
-	linha = '<div class="carousel-item" style="background: url(img/'+promocao.imagem+'), no-repeat, center; background-size: 100% 100%;">' +
-				'<div class="promo">' +
-					'<h2>'+promocao.titulo+'</h2>' +
-					'<p>'+promocao.descricao+'</p>' +
-				'</div>' +
-			'</div>';
+	linha = "<div class='parallax-container'>"+
+				"<div class='parallax'><img src='img/"+promocao.imagem+"'></div>"+
+			"</div>"+
+			"<div class='section white z-depth-1'>"+
+				"<div class='row container'>"+
+					"<h2 class='header'>"+promocao.titulo+"</h2>"+
+					"<p class='grey-text text-darken-3 lighten-3'>"+promocao.descricao+"</p><a href='promocoes.do' class='right waves-effect waves-light btn'>SAIBA MAIS</a>" +
+				"</div>"+
+			"</div>";
 	return linha;
 }
-
-
 
 function getPromocao2(promocao){
 	linha = "<div class='l12 m12 s12 row z-depth-2 white-text' style='background: url(img/"+promocao.imagem+"), no-repeat, center; background-size: 100% 100%; height: 400px;'>" +
@@ -289,6 +326,7 @@ function getPromocao2(promocao){
 			"</div>";
 	return linha;
 }
+
 function descricaoPromocao(promocao){
 	$("#descricaoPromo").html(promocao.informacao);
 	$("#descricaoPromoDI").html(coverterDateEmDataString(new Date(promocao.inicio)));
