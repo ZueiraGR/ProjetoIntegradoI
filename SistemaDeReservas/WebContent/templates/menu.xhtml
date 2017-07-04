@@ -8,7 +8,7 @@
 
 <ui:composition>
 	<c:if test="#{usuarioBean.usuarioLogado}">
-		<input type="hidden" id="loginUsuario" value="#{usuarioBean.login}"/>
+		<input type="hidden" id="usuarioDaSessao" value='#{usuarioBean.usuarioDaSessao}'/>
 	</c:if>
 	<nav class="grey darken-1" role="navigation">
 	<div class="nav-wrapper container">

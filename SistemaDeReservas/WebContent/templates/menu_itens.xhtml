@@ -20,7 +20,7 @@
 					<li class="divider"></li>
 					<li><a href="gerenciar_funcionarios.do"><i class="fa fa-address-card-o" aria-hidden="true"></i> FUNCIONÁRIOS</a></li>
 					<li class="divider"></li>
-					<li><a href="gerenciar_parametros.do"><i class="fa fa-building" aria-hidden="true"></i> PARÂMETROS DE ATENDIMENTO</a></li>
+					<li><a href="gerenciar_parametros.do" title="HORÁRIO DE FUNCIONAMENTO"><i class="fa fa-building" aria-hidden="true"></i> HORÁRIO DE FUNC.</a></li>
 					<li class="divider"></li>
 					<li><a href="gerenciar_mesas.do"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> MESAS</a></li>
 					<li class="divider"></li>
@@ -30,7 +30,7 @@
 		<li><a class="center-align" href="relatorios.do"><i class="fa fa-bar-chart" aria-hidden="true"></i> RELATÓRIOS</a></li>
 		</c:if>
 		<c:if test="#{usuarioBean.usuarioLogado}">
-			<li><a class="dropdown-button center-align" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i><h:outputText value="#{usuarioBean.nome}" /></a>
+			<li><a class="dropdown-button center-align" href="#!" data-activates="dropdown-usuario"><i class="fa fa-user-circle" aria-hidden="true"></i><h:outputText value=" #{usuarioBean.nome}" /></a>
 				<ul id="dropdown-usuario" class="dropdown-content">
 					<li><a href="perfil.do"><i class="fa fa-id-card-o" aria-hidden="true"></i> Perfil</a></li>
 					<li class="divider"></li>
