@@ -18,23 +18,20 @@ import br.com.grupo9.sistemadereservas.model.BO.ParametrosAtendimentoBO;
 @Produces("application/json")
 @Consumes("application/json")
 public class ParametrosAtendimentoWS {
-	
-	private ParametrosAtendimentoBO parametrosAtendimentoBO;
-	
+		
 	@GET
 	@Path("/capturar/")
 	public Configuracoes capturarConfiguracoes() {
-		getParametrosAtendimentoBO().abrirConfiguracoes();
-		return getParametrosAtendimentoBO().getConfig();
+		return ParametrosAtendimentoBO.getConfig();
 	}
 
 
 	@POST
 	@Path("/atualizar/")
 	public List<String> atualizarConfiguracoes(final Configuracoes configuracoes) {
-		getParametrosAtendimentoBO().setConfig(configuracoes);
+		ParametrosAtendimentoBO.setConfig(configuracoes);
 		List<String> retorno = new ArrayList<>();
-		if(getParametrosAtendimentoBO().salvarConfiguracoes()){
+		if(ParametrosAtendimentoBO.salvarConfiguracoes()){
 			retorno.add("sucess");
 		}else{
 			retorno.add("error");
@@ -42,11 +39,5 @@ public class ParametrosAtendimentoWS {
 		return retorno;
 	}
 	
-	private ParametrosAtendimentoBO getParametrosAtendimentoBO(){
-		if(this.parametrosAtendimentoBO == null){
-			this.parametrosAtendimentoBO = new ParametrosAtendimentoBO();
-		}
-		return this.parametrosAtendimentoBO;
-	}
 
 }

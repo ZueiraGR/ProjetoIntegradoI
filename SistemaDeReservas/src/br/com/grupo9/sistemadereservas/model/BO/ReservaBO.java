@@ -14,9 +14,7 @@ public class ReservaBO {
 	
 	public boolean cadastrar(){
 		Calendar fim = (Calendar) getReservaPO().getInicio().clone();
-		ParametrosAtendimentoBO parametrosAtendimentoBO = new ParametrosAtendimentoBO();
-		parametrosAtendimentoBO.abrirConfiguracoes();
-		fim.setTimeInMillis(fim.getTimeInMillis()+Integer.valueOf(parametrosAtendimentoBO.getConfig().getTempoMinimoDePermanencia())*CONVERTE_MINUTOS_EM_MILIS);
+		fim.setTimeInMillis(fim.getTimeInMillis()+Integer.valueOf(ParametrosAtendimentoBO.getConfig().getTempoMinimoDePermanencia())*CONVERTE_MINUTOS_EM_MILIS);
 		getReservaPO().setFim(fim);
 		return getReservaDAO().cadastrar(getReservaPO());
 	}

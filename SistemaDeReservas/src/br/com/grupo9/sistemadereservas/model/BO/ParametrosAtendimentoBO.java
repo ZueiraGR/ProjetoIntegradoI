@@ -13,13 +13,13 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import br.com.grupo9.sistemadereservas.model.Util.ArquivoUtil;
 
 public class ParametrosAtendimentoBO {
-	private Configuracoes config;
-	private String stringXML;
-	private String PATH_ARQUIVO;
-	private final String nomeArquivo = "config-sys.xml";
+	private static Configuracoes CONFIG;
+	private static String stringXML;
+	private static String PATH_ARQUIVO;
+	private static final String nomeArquivo = "config-sys.xml";
 	
-	public ParametrosAtendimentoBO(){
-		PATH_ARQUIVO = getApplicationPath();
+	static{
+		PATH_ARQUIVO = new ParametrosAtendimentoBO().getApplicationPath();
 		if(PATH_ARQUIVO.contains("\\")){
 			// SERVIDOR WINDOWS
 			PATH_ARQUIVO = PATH_ARQUIVO.replace("br\\com\\grupo9\\sistemadereservas\\model\\BO", "")+"META-INF\\";
@@ -28,9 +28,12 @@ public class ParametrosAtendimentoBO {
 			PATH_ARQUIVO = PATH_ARQUIVO.replace("br/com/grupo9/sistemadereservas/model/BO", "")+"META-INF/";
 		}
 		System.out.println(PATH_ARQUIVO);
+		if(CONFIG == null){
+			abrirConfiguracoes();
+		}
 	}
 	
-	public void abrirConfiguracoes(){
+	private static void abrirConfiguracoes(){
 		try {
 			FileReader arquivo = new FileReader(ArquivoUtil.abrir(nomeArquivo, PATH_ARQUIVO));
 			XStream xStream = new XStream( new DomDriver());
@@ -43,7 +46,7 @@ public class ParametrosAtendimentoBO {
 		}
 	}
 	
-	public void gerarStringXML(){
+	private static void gerarStringXML(){
 		XStream xStream = new XStream( new DomDriver());
 		xStream.alias("Configuracao", Configuracoes.class);
 		xStream.alias("ValorDeCobranca", ValorDeCobranca.class);
@@ -51,7 +54,7 @@ public class ParametrosAtendimentoBO {
 		setStringXML(xStream.toXML(getConfig()));
 	}
 	
-	public boolean salvarConfiguracoes(){
+	public static boolean salvarConfiguracoes(){
 		gerarStringXML();
 		try {
 			PrintWriter escreve = new PrintWriter(ArquivoUtil.abrir(nomeArquivo, PATH_ARQUIVO));
@@ -77,22 +80,22 @@ public class ParametrosAtendimentoBO {
 		}
 	}
 	
-	private String getStringXML(){
-		return this.stringXML;
+	private static String getStringXML(){
+		return stringXML;
 	}
 	
-	private void setStringXML(String string){
-		this.stringXML = string; 
+	private static void setStringXML(String string){
+		stringXML = string; 
 	}
 	
-	public void setConfig(Configuracoes configuracoes){
-		this.config = configuracoes;
+	public static void setConfig(Configuracoes configuracoes){
+		CONFIG = configuracoes;
 	}
 	
-	public Configuracoes getConfig(){
-		if(this.config == null){
-			this.config = new Configuracoes();
+	public static Configuracoes getConfig(){
+		if(CONFIG == null){
+			CONFIG = new Configuracoes();
 		}
-		return this.config;
+		return CONFIG;
 	}
 }
