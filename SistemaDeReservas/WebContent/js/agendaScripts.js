@@ -1,7 +1,9 @@
+
 var mesaSelecionada;
 
 function abrirAgenda(mesa) {
     mesaSelecionada = mesa;
+    agendaStart("08:00", "22:00", mesaSelecionada);
     $("#mesas").addClass("hiddendiv");
     $("#mudar").addClass("hiddendiv");
     $("#agenda").removeClass("hiddendiv");

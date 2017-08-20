@@ -122,40 +122,11 @@ function getPromocao(promocao) {
 			+ '</option>';
 }
 /* =================================================================================== */
-var eventos = [
-		{
-			id : 1,
-			title : 'Nome do cliente: Adriano da Silva Santos \nTelefone:(61) 9999-9999',
-			start : '2017-04-16T11:00:00',
-			end : '2017-04-16T13:00:00'
-		},
-		{
-			id : 2,
-			title : 'Nome do cliente: Kleber Silveira Santos \nTelefone:(61) 9999-9999',
-			start : '2017-04-16T13:00:00',
-			end : '2017-04-16T14:00:00'
-		},
-		{
-			id : 3,
-			title : 'Nome do cliente: Maria Cristina da Silva \nTelefone:(61) 9999-9999',
-			start : '2017-04-16T14:00:00',
-			end : '2017-04-16T14:45:00'
-		},
-		{
-			id : 3,
-			title : 'Nome do cliente: José Antonio da Costa \nTelefone:(61) 9999-9999',
-			start : '2017-04-18T19:00:00',
-			end : '2017-04-18T20:30:00'
-		},
-		{
-			title : 'Nome do cliente: Carlos Eduardo Pinheiro \nTelefone:(61) 9999-9999',
-			start : '2017-04-18T20:30:00',
-			end : '2017-04-18T21:30:00'
-		} ];
+var eventos;
 
-function agendaStart(horaInicio, horaFim) {
+function agendaStart(horaInicio, horaFim, mesa) {
 	var initialLocaleCode = "pt-br";
-
+	carregarReservas(mesa);
 	$('#calendario')
 			.fullCalendar(
 					{
@@ -308,26 +279,25 @@ function limparCamposFormCadastro() {
 	$("#cargoReserva").val("");
 }
 
-function carregarReservas(pagina) {
-	$("#barraCarregando").removeClass("hiddendiv");
-	qtdRegistrosReservas = parseInt($("#qtdRegistrosReservas").val());
+function carregarReservas(mesa) {
 	$.ajax({
-		url : "ws/reservaws/listar/" + pagina + "/" + qtdRegistrosReservas,
+		url : "ws/reservaws/listar/"+mesa.chave,
 		type : 'GET',
 		success : function(data) {
-			qtdRegistrosReservasObtidos = data.length;
-			$("#barraCarregando").addClass("hiddendiv");
 			if (data.length > 0) {
-				preencherTabelaReservas(data);
-			} else {
-				$("#tabelaReservas").html("");
+				eventos= getEventos(data);
 			}
 		}
 	});
-	paginaAtualReservas = pagina;
-	listarOpPaginas(idDivPaginacaofuncioanrio, paginaAtualReservas,
-			qtdRegistrosReservas, qtdRegistrosReservasObtidos,
-			"carregarReservas");
+}
+
+function getEventos(reservas){
+	var arrayEventos;
+	for(var i = 0; i < reservas.length; i++){
+		var evento = {"id":reservas[i].chave,"title":reservas[i].usuario.login,"start":reservas[i].inicio,"end":reservas[i].fim};
+		arrayEventos[i]=evento;
+	}
+	return arrayEventos;
 }
 
 function preencherTabelaReservas(arrayDeReservas) {
@@ -463,35 +433,6 @@ $("#confirmarExclusaoReserva").submit(function(event) {
 	return false;
 });
 
-function selectCargos() {
-	$.ajax({
-		url : "ws/cargows/listarTodos/",
-		type : 'GET',
-		success : function(data) {
-			$('select').material_select('destroy');
-			if (data.length > 0) {
-				preencherSelectCargos(data);
-			} else {
-				$("#cargoReserva").html("");
-			}
-			$(document).ready(function() {
-				$('select').material_select();
-			})
-		}
-	});
-}
-
-function preencherSelectCargos(arrayDeCargos) {
-	var html = '<option disabled="disabled" selected="selected">Selecione um cargo</option>';
-	for (i = 0; i < arrayDeCargos.length; i++) {
-		html += getCargo(arrayDeCargos[i]);
-	}
-	$("#cargoReserva").html(html);
-}
-
-function getCargo(cargo) {
-	return '<option value="' + cargo.chave + '">' + cargo.nome + '</option>';
-}
 
 $("#AlterarDadosReserva").submit(function(event) {
 	if (DadosDoFormAlterar() != null) {

@@ -42,8 +42,8 @@ public class ReservaBO {
 		}
 	}
 	
-	public List<ReservaPO> listar(Integer pagina, Integer qtdRegistros){
-		return getReservaDAO().listar(pagina, qtdRegistros, getFiltro());
+	public List<ReservaPO> listar(int chaveMesa){
+		return getReservaDAO().listar(chaveMesa);
 	}
 	
 	public String getFiltro(){

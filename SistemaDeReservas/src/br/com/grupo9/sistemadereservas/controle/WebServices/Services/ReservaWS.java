@@ -47,9 +47,9 @@ public class ReservaWS {
 	}
 
 	@GET
-	@Path("/listar/{pagina:[0-9]*}/{qtdRegistros:[0-9]*}")
-	public List<ReservaPO> listar(@PathParam("pagina") Integer pagina, @PathParam("qtdRegistros") Integer qtdRegistros) {
-		return getReservaBO().listar(pagina, qtdRegistros);
+	@Path("/listar/{chaveMesa:[0-9]*}")
+	public List<ReservaPO> listar(@PathParam("chaveMesa") Integer chave) {
+		return getReservaBO().listar(chave);
 	}
 
 	@PUT

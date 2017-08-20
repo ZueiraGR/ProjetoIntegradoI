@@ -64,13 +64,16 @@ public class ReservaDAO implements DAO<ReservaPO>{
 
 	@Override
 	public List<ReservaPO> listar(Integer pagina, Integer qtdRegistros, String filtro) {
+		return null;
+	}
+	
+	public List<ReservaPO> listar(int chaveReserva) {
 		try{
 			StringBuilder query = new StringBuilder();
 			query.append("SELECT r ")
-				 .append("FROM reserva r ")
-				 .append(filtro);
+				 .append("FROM reserva r ");
 			TypedQuery<ReservaPO> typedQuery = getManager().createQuery(query.toString(),ReservaPO.class);
-				return (List<ReservaPO>) typedQuery.setFirstResult(pagina).setMaxResults(qtdRegistros).getResultList();
+				return (List<ReservaPO>) typedQuery.getResultList();
 		}catch (Exception e) {
 			System.out.println("\nOcorreu um erro ao tentar capturar todos as promoções. Causa:\n");
 			e.printStackTrace();

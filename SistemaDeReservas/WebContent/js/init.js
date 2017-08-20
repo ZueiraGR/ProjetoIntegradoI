@@ -10,6 +10,9 @@ $(document).ready(function () {
     $('.modal').modal();
 });
 
+$( document ).ready(function(){$(".button-collapse").sideNav();});
+
+
 //Scroll up
 $(document).ready(function(){
 	$(window).scroll(function(){
